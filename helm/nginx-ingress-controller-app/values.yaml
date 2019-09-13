@@ -1,0 +1,111 @@
+# Default values for nginx-ingress-controller-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+namespace: kube-system
+
+# configmap contains settings that can be overridden with a custom values
+# configmap.
+configmap:
+  disable-access-log: "false"
+  enable-vts-status: "true"
+  error-log-level: "error"
+  hsts: "false"
+  server-name-hash-bucket-size: "1024"
+  server-name-hash-max-size: "1024"
+  server-tokens: "false"
+  worker-processes: "4"
+  use-forwarded-headers: "true"
+
+  # optional settings that can be set.
+  enable-underscores-in-headers: ""
+  large-client-header-buffers: ""
+  log-format-upstream: ""
+  proxy-buffers-size: ""
+  proxy-buffers: ""
+  use-proxy-protocol: ""
+  vts-default-filter-key: ""
+  
+  # optional hpa settings
+  hpa-enabled: false
+  hpa-min-replicas: 2
+  hpa-max-replicas: 11
+  hpa-target-cpu-utilization-percentage: 50
+  hpa-target-memory-utilization-percentage: 50
+
+  # command args options
+  annotations-prefix: nginx.ingress.kubernetes.io
+  default-ssl-certificate: ""
+
+controller:
+  name: nginx-ingress-controller
+  k8sAppLabel: nginx-ingress-controller
+  metricsPort: 10254
+
+  replicas: 3
+  maxUnavailable: 1
+
+  configmap:
+    name: ingress-nginx
+
+  image:
+    repository: giantswarm/nginx-ingress-controller
+    tag: 0.25.1
+
+  rbac:
+
+  role:
+    name: nginx-ingress-role
+
+  # Sets the NodePorts that maps to the Ingress' ports 80 (http) and 443 (https).
+  service:
+    enabled: true
+    nodePorts:
+      http: 30010
+      https: 30011
+
+  resources:
+    requests:
+      cpu: 500m
+      memory: 600Mi
+
+  userID: 33
+  groupID: 33
+
+defaultBackend:
+  name: default-http-backend
+  k8sAppLabel: default-http-backend
+  port: 8080
+
+  replicas: 2
+
+  image:
+    repository: giantswarm/defaultbackend
+    tag: 1.2
+
+  resources:
+    limits:
+      cpu: 10m
+      memory: 20Mi
+    requests:
+      cpu: 10m
+      memory: 20Mi
+
+  userID: 33
+  groupID: 33
+
+image:
+  registry: quay.io
+
+global:
+  controller:
+    tempReplicas: 2
+    useProxyProtocol: false
+  migration:
+    enabled: false
+
+test:
+  image:
+    registry: quay.io
+    repository: giantswarm/alpine-testing
+    tag: 0.1.0
