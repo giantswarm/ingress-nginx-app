@@ -6,7 +6,7 @@ metadata:
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
-  name: {{ .Values.controller.name }}-external-lb
+  name: {{ .Values.controller.name }}-internal-lb
   namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Values.controller.name }}
