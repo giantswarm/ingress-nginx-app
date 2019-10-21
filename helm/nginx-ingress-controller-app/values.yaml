@@ -5,7 +5,7 @@
 namespace: kube-system
 
 # default provider is bare-metal kvm
-provider: kvm
+provider: aws
 
 # configmap contains settings that can be overridden with a custom values
 # configmap.

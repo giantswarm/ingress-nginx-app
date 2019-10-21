@@ -9,6 +9,6 @@ The following table lists the configurable parameters of the nginx-ingress-contr
 
 Parameter | Description | Default
 --- | --- | ---
-`provider` | `aws`/`azure`/`kvm`. Taken from application catalog configuration. Can't be modified on chart level | `kvm`
+`provider` | `aws`/`azure`/`kvm`. Taken from application catalog configuration. `values.yaml` value used only outside application catalog scope | `kvm`
 `controller.service.enabled` | If true, create service | `true`
 `controller.service.type` | Applied only for `provider=aws` (`external`/`internal`) | `external`
