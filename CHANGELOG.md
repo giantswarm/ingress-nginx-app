@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.11.2]
+
+### Changed
+
+- Add option for setting `http2-max-field-size` via values.yaml.
+- Add optional http snippet parameter to extend nginx http configuration.
 
 ## [0.11.1]
 
