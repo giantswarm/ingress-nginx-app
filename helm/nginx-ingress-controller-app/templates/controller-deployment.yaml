@@ -57,6 +57,7 @@ spec:
         {{- end}}
         - --enable-ssl-chain-completion=false
         - --enable-dynamic-certificates=true
+        - --publish-service={{ .Values.namespace }}/{{ .Values.controller.name }}
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:
