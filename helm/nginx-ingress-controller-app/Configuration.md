@@ -9,6 +9,7 @@ The following table lists the configurable parameters of the nginx-ingress-contr
 
 Parameter | Description | Default
 --- | --- | ---
+`baseDomain` | Cluster base domain. Dynamically calculated during cluster creation. Manual change doesn't affect this value | 'aws'
 `provider` | Provider identifier (`aws`/`azure`/`kvm`) | 'kvm'
 `controller.service.enabled` | If true, create service | `true`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
