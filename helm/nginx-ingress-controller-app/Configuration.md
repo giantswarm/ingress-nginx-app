@@ -9,8 +9,6 @@ The following table lists the configurable parameters of the nginx-ingress-contr
 
 Parameter | Description | Default
 --- | --- | ---
-`baseDomain` | Cluster base domain. `external-dns` applies only to `aws` privder | 'aws'
-`clusterID` | Cluster identifier. Applies only to Giant Swarm managed clusters | 'testid'
-`provider` | Provider identifier (`aws`/`azure`/`kvm`). `external-dns` applies only to `aws`/`azure` providers | 'kvm'
+`provider` | Provider identifier (`aws`/`azure`/`kvm`) | 'kvm'
 `controller.service.enabled` | If true, create service | `true`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
