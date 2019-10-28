@@ -6,7 +6,7 @@ namespace: kube-system
 
 namespace: kube-system
 
-# baseDomain is dynamic environment value, which comes from application catalog configuration
+# baseDomain is a dynamic value, it comes from the cluster values configmap and applies only to Giant Swarm clusters.
 # applies only to Giant Swarm clusters
 baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
 # clusterID is dynamic environment value, calculated after cluster creation
