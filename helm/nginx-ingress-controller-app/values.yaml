@@ -4,7 +4,16 @@
 
 namespace: kube-system
 
-# default provider is bare-metal kvm
+namespace: kube-system
+
+# baseDomain is dynamic environment value, which comes from application catalog configuration
+# applies only to Giant Swarm clusters
+baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
+# clusterID is dynamic environment value, calculated after cluster creation
+# applies only to Giant Swarm clusters
+clusterID: uun5a
+# provider is dynamic environment value, which comes from application catalog configuration
+# applies only to Giant Swarm clusters
 provider: kvm
 
 # configmap contains settings that can be overridden with a custom values
