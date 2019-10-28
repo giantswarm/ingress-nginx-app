@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ .Values.controller.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
@@ -57,6 +57,7 @@ spec:
         {{- end}}
         - --enable-ssl-chain-completion=false
         - --enable-dynamic-certificates=true
+        - --publish-service={{ .Release.Namespace }}/{{ .Values.controller.name }}
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:

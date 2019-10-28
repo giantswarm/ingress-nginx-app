@@ -1,8 +1,11 @@
-# Default values for nginx-ingress-controller-chart.
+# Default values for nginx-ingress-controller-app.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 namespace: kube-system
+
+# default provider is bare-metal kvm
+provider: kvm
 
 # configmap contains settings that can be overridden with a custom values
 # configmap.
@@ -59,9 +62,15 @@ controller:
   role:
     name: nginx-ingress-role
 
-  # Sets the NodePorts that maps to the Ingress' ports 80 (http) and 443 (https).
   service:
     enabled: true
+    # type applies only to AWS provider:
+    # - external (default)
+    # - internal
+    # ...
+    type: external
+    # Sets the NodePorts that maps to the Ingress' ports 80 (http) and 443 (https).
+    # nodePort service type is not created for AWS provider as LoadBalancer is used there.
     nodePorts:
       http: 30010
       https: 30011

@@ -28,13 +28,19 @@ Provide a custom `values.yaml`:
 $ helm install nginx-ingress-controller-app -f values.yaml
 ```
 
- ## Release Process
+Deployment to Tenant Clusters is handled by [app-operator](https://github.com/giantswarm/app-operator).
+
+## Configuration
+
+Configuration options are documented in [Configuration.md](helm/nginx-ingress-controller-app/Configuration.md) document.
+
+## Release Process
 
 * Ensure CHANGELOG.md is up to date.
 * Create a new GitHub release with the version e.g. `v0.1.0` and link the
 changelog entry.
 * This will push a new git tag and trigger a new tarball to be pushed to the
-[giantswarm-catalog].  
+[giantswarm-catalog].
 * Update [cluster-operator] with the new version.
 
 [app-operator]: https://github.com/giantswarm/app-operator
