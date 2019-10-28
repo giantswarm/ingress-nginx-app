@@ -9,7 +9,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.controller.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: {{ .Values.controller.name }}
@@ -19,7 +19,7 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: {{ .Values.controller.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
@@ -27,7 +27,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.controller.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: Role
   name: {{ .Values.controller.role.name }}
@@ -37,7 +37,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: {{ .Values.controller.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
@@ -96,7 +96,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
   name: {{ .Values.controller.role.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
@@ -169,7 +169,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.controller.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
   name: {{ .Values.controller.name }}-psp-user

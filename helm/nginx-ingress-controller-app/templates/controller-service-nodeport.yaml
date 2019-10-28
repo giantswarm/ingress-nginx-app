@@ -9,7 +9,7 @@ metadata:
     prometheus.io/scrape: "true"
     prometheus.io/port: "10254"
   name: {{ .Values.controller.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.controller.name }}-nodeport
     giantswarm.io/service-type: "managed"

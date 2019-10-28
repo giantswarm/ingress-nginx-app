@@ -10,7 +10,7 @@ metadata:
     {{ end }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
   name: {{ .Values.controller.name }}
-  namespace: {{ .Values.namespace }}
+  namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
