@@ -50,6 +50,7 @@ configmap:
   # command args options
   annotations-prefix: nginx.ingress.kubernetes.io
   default-ssl-certificate: ""
+  ingress-class: nginx
 
 controller:
   name: nginx-ingress-controller
