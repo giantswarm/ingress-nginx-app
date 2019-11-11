@@ -40,11 +40,13 @@ Configuration options are documented in [Configuration.md](helm/nginx-ingress-co
 * Create a new GitHub release with the version e.g. `v0.1.0` and link the
 changelog entry.
 * This will push a new git tag and trigger a new tarball to be pushed to the
-[giantswarm-catalog].
+[giantswarm-catalog] and [default-catalog].
 * Update [cluster-operator] with the new version.
 
 [app-operator]: https://github.com/giantswarm/app-operator
 [cluster-operator]: https://github.com/giantswarm/cluster-operator
 [giantswarm-catalog]: https://github.com/giantswarm/giantswarm-catalog
 [giantswarm-test-catalog]: https://github.com/giantswarm/giantswarm-test-catalog
+[default-catalog]: https://github.com/giantswarm/default-catalog
+[default-test-catalog]: https://github.com/giantswarm/default-test-catalog
 [nginx ingress controller]: https://github.com/kubernetes/ingress-nginx
