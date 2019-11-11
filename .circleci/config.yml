@@ -14,3 +14,12 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+      - architect/push-to-app-catalog:
+          name: "package and push nginx-ingress-controller-app chart"
+          app_catalog: "default-catalog"
+          app_catalog_test: "default-test-catalog"
+          chart: "nginx-ingress-controller-app"
+          # Trigger job on git tag.
+          filters:
+            tags:
+              only: /^v.*/
