@@ -11,5 +11,6 @@ Parameter | Description | Default
 --- | --- | ---
 `baseDomain` | Cluster base domain. Dynamically calculated during cluster creation. Manual change doesn't affect this value | 'aws'
 `provider` | Provider identifier (`aws`/`azure`/`kvm`) | 'kvm'
+`configmap.ingress-class` | Ingress class, which controller processes | `nginx`
 `controller.service.enabled` | If true, create service | `true`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
