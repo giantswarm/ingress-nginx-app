@@ -9,8 +9,8 @@ Helm Chart for Nginx Ingress Controller in Tenant Clusters.
 ## Deployment
 
 * Managed by [app-operator].
-* Production releases are stored in the [giantswarm-catalog].
-* WIP releases are stored in the [giantswarm-test-catalog].
+* Production releases are stored in the [giantswarm-catalog] and [default-catalog].
+* WIP releases are stored in the [giantswarm-test-catalog] and [default-test-catalog].
 
 ## Installing the Chart
 
