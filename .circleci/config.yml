@@ -5,10 +5,19 @@ orbs:
 workflows:
   package-and-push-chart-on-tag:
     jobs:
-      - architect/push-to-app-catalog:
+      - architect/push-to-giantswarm-catalog:
           name: "package and push nginx-ingress-controller-app chart"
           app_catalog: "giantswarm-catalog"
           app_catalog_test: "giantswarm-test-catalog"
+          chart: "nginx-ingress-controller-app"
+          # Trigger job on git tag.
+          filters:
+            tags:
+              only: /^v.*/
+      - architect/push-to-default-catalog:
+          name: "package and push nginx-ingress-controller-app chart"
+          app_catalog: "default-catalog"
+          app_catalog_test: "default-test-catalog"
           chart: "nginx-ingress-controller-app"
           # Trigger job on git tag.
           filters:
