@@ -15,6 +15,10 @@ clusterID: uun5a
 # provider is dynamic environment value, which comes from application catalog configuration
 # applies only to Giant Swarm clusters
 provider: kvm
+# ingressController is dynamic environment value, which comes from application catalog configuration
+# applies only to Giant Swarm clusters
+ingressController:
+  replicas: 3
 
 # configmap contains settings that can be overridden with a custom values
 # configmap.
@@ -57,7 +61,6 @@ controller:
   k8sAppLabel: nginx-ingress-controller
   metricsPort: 10254
 
-  replicas: 3
   maxUnavailable: 1
 
   configmap:
