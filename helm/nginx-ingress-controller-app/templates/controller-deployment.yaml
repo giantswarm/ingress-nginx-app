@@ -58,7 +58,9 @@ spec:
         - --enable-ssl-chain-completion=false
         - --enable-dynamic-certificates=true
         - --ingress-class={{ index .Values.configmap "ingress-class" }}
+        {{- if not .Values.ingressController.legacy }}
         - --publish-service={{ .Release.Namespace }}/{{ .Values.controller.name }}
+        {{- end }}
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:

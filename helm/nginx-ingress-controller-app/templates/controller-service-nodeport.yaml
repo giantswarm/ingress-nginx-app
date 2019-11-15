@@ -1,5 +1,5 @@
 {{- if .Values.controller.service.enabled }}
-{{- if ne .Values.provider "aws" }}
+{{- if .Values.ingressController.legacy }}
 
 apiVersion: v1
 kind: Service

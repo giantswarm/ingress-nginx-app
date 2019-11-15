@@ -18,6 +18,7 @@ provider: kvm
 # ingressController is dynamic environment value, which comes from application catalog configuration
 # applies only to Giant Swarm clusters
 ingressController:
+  legacy: false
   replicas: 3
 
 # configmap contains settings that can be overridden with a custom values
