@@ -1,5 +1,5 @@
 {{- if .Values.provider }}
-{{- if not .Values.ingressController.legacy }}
+{{- if and (not .Values.ingressController.legacy) ( eq .Values.provider "aws" ) }}
 apiVersion: v1
 kind: Service
 metadata:
