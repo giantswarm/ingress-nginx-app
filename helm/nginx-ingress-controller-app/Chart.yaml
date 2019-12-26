@@ -3,4 +3,5 @@ appVersion: v0.26.1
 description: A Helm chart for the nginx ingress-controller
 home: https://github.com/giantswarm/nginx-ingress-controller-app
 name: nginx-ingress-controller-app
+namespace: kube-system
 version: [[ .Version ]]
