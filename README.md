@@ -50,3 +50,4 @@ changelog entry.
 [default-catalog]: https://github.com/giantswarm/default-catalog
 [default-test-catalog]: https://github.com/giantswarm/default-test-catalog
 [nginx ingress controller]: https://github.com/kubernetes/ingress-nginx
+
