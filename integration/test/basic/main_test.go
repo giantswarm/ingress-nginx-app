@@ -97,6 +97,7 @@ func init() {
 				Name:            chartName,
 				Namespace:       metav1.NamespaceSystem,
 				RunReleaseTests: true,
+				URL:             tarballURL,
 			},
 			ChartResources: basicapp.ChartResources{
 				Deployments: []basicapp.Deployment{
