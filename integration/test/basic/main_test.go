@@ -101,7 +101,7 @@ func init() {
 				RunReleaseTests: true,
 			},
 			ChartResources: basicapp.ChartResources{
-				Deployments: []managedservices.Deployment{
+				Deployments: []basicapp.Deployment{
 					{
 						Name:      chartName,
 						Namespace: metav1.NamespaceSystem,
