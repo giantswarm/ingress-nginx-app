@@ -118,7 +118,6 @@ func init() {
 							"giantswarm.io/service-type": "managed",
 							"k8s-app":                    controllerName,
 						},
-						Replicas: 3,
 					},
 				},
 			},
