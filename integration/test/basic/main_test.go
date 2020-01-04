@@ -15,6 +15,8 @@ import (
 	"github.com/giantswarm/k8sclient"
 	"github.com/giantswarm/micrologger"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+
+	"github.com/giantswarm/nginx-ingress-controller-app/integration/templates"
 )
 
 const (
@@ -94,6 +96,7 @@ func init() {
 			Logger:     l,
 
 			App: basicapp.Chart{
+				ChartValues:     templates.IngressControllerValues,
 				Name:            chartName,
 				Namespace:       metav1.NamespaceSystem,
 				RunReleaseTests: true,
