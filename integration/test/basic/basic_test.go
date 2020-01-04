@@ -8,7 +8,7 @@ import (
 )
 
 func TestHelm(t *testing.T) {
-	err := ms.Test(context.Background())
+	err := ba.Test(context.Background())
 	if err != nil {
 		t.Fatalf("%#v", err)
 	}
