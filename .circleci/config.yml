@@ -28,7 +28,7 @@ e2eTest: &e2eTest
           docker run --rm --network host \
             -v $(pwd)/${E2E_TEST_DIR}:/e2e \
             -v $(pwd):/go/src/github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} \
-            -e E2E_TARBALL_URL=https://giantswarm.github.io/default-test-catalog/external-dns-app-$(./architect project version).tgz \
+            -e E2E_TARBALL_URL=https://giantswarm.github.io/default-test-catalog/nginx-ingress-controller-app-$(./architect project version).tgz \
             -e E2E_KUBECONFIG=/e2e/kubeconfig \
             -e CIRCLE_SHA1=${CIRCLE_SHA1} \
             -w /go/src/github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} \
