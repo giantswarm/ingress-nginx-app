@@ -8,14 +8,12 @@ import (
 	"os"
 	"testing"
 
-	"github.com/giantswarm/apprclient"
 	e2esetup "github.com/giantswarm/e2esetup/chart"
 	"github.com/giantswarm/e2esetup/chart/env"
 	"github.com/giantswarm/e2etests/basicapp"
 	"github.com/giantswarm/helmclient"
 	"github.com/giantswarm/k8sclient"
 	"github.com/giantswarm/micrologger"
-	"github.com/spf13/afero"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -27,7 +25,7 @@ const (
 var (
 	ba         *basicapp.BasicApp
 	helmClient *helmclient.Client
-	k8sSetup   *k8s.Setup
+	k8sSetup   *k8sclient.Setup
 	l          micrologger.Logger
 	tarballURL string
 )
@@ -79,7 +77,7 @@ func init() {
 		c := helmclient.Config{
 			Logger:     l,
 			K8sClient:  k8sClients.K8sClient(),
-			RestConfig: k8sClients.RestConfig(),
+			RestConfig: k8sClients.RESTConfig(),
 
 			TillerNamespace: "giantswarm",
 		}
@@ -106,17 +104,17 @@ func init() {
 						Name:      chartName,
 						Namespace: metav1.NamespaceSystem,
 						DeploymentLabels: map[string]string{
-							"app":                        controllerName,
+							"app":                        chartName,
 							"giantswarm.io/service-type": "managed",
-							"k8s-app":                    controllerName,
+							"k8s-app":                    chartName,
 						},
 						MatchLabels: map[string]string{
-							"k8s-app": controllerName,
+							"k8s-app": chartName,
 						},
 						PodLabels: map[string]string{
-							"app":                        controllerName,
+							"app":                        chartName,
 							"giantswarm.io/service-type": "managed",
-							"k8s-app":                    controllerName,
+							"k8s-app":                    chartName,
 						},
 					},
 				},
