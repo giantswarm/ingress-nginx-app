@@ -42,6 +42,8 @@ configmap:
   proxy-buffers: ""
   use-proxy-protocol: ""
   vts-default-filter-key: ""
+  # Enable the specified protocols (cf. http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_protocols for the list of valid protocols)
+  ssl-protocols: ""
   
   # optional hpa settings
   hpa-enabled: false
