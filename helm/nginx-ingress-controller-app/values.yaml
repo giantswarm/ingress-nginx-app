@@ -4,7 +4,7 @@
 
 namespace: kube-system
 
-# baseDomain is a dynamic value, it comes from the cluster values configmap and applies only to Giant Swarm clusters.
+# baseDomain is a dynamic value, it comes from the cluster values configmap
 # applies only to Giant Swarm clusters
 baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
 # clusterID is dynamic environment value, calculated after cluster creation
@@ -67,7 +67,7 @@ controller:
 
   image:
     repository: giantswarm/nginx-ingress-controller
-    tag: 0.26.1
+    tag: 0.27.0
 
   rbac:
 
