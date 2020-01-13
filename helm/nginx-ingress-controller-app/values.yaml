@@ -92,8 +92,8 @@ controller:
       cpu: 500m
       memory: 600Mi
 
-  userID: 33
-  groupID: 33
+  userID: 101
+  groupID: 101
 
 image:
   registry: quay.io
