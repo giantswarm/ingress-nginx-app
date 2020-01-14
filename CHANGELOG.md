@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Upgrade to nginx-ingress-controller 0.27.0.
+- Upgrade to nginx-ingress-controller 0.27.0. ([#18](https://github.com/giantswarm/nginx-ingress-controller-app/pull/18))
 
 ## [v1.1.1] 2020-01-04
 
