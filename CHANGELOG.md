@@ -15,7 +15,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Updated manifests for Kubernetes 1.16.
+- Updated manifests for Kubernetes 1.16. ([#16](https://github.com/giantswarm/nginx-ingress-controller-app/pull/16))
 
 ## [v1.1.0]
 
@@ -28,4 +28,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[v1.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/pull/16
+[v1.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.2.0
+[v1.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.1.1
+[v1.1.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.1.0
