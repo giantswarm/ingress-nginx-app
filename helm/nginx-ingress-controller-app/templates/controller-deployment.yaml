@@ -8,7 +8,7 @@ metadata:
     giantswarm.io/service-type: "managed"
     k8s-app: {{ .Values.controller.k8sAppLabel }}
   annotations:
-    prometheus.io/port: '{{ .Values.controller.metricsPort }}'
+    prometheus.io/port: '{{ .Values.controller.metrics.port }}'
     prometheus.io/scrape: 'true'
 spec:
   replicas: {{ .Values.ingressController.replicas }}
@@ -82,14 +82,14 @@ spec:
         readinessProbe:
           httpGet:
             path: /healthz
-            port: {{ .Values.controller.metricsPort }}
+            port: {{ .Values.controller.metrics.port }}
             scheme: HTTP
         resources:
 {{ toYaml .Values.controller.resources | indent 10 }}
         livenessProbe:
           httpGet:
             path: /healthz
-            port: {{ .Values.controller.metricsPort }}
+            port: {{ .Values.controller.metrics.port }}
             scheme: HTTP
           initialDelaySeconds: 10
           timeoutSeconds: 1
@@ -107,3 +107,8 @@ spec:
         - name: https
           containerPort: 443
           protocol: TCP
+        {{- if .Values.controller.metrics.enabled }}
+        - name: metrics
+          containerPort: {{ .Values.controller.metrics.port }}
+          protocol: TCP
+        {{- end }}
