@@ -67,3 +67,7 @@ data:
   {{- if index .Values.configmap "vts-default-filter-key" }}
   vts-default-filter-key: "{{ index .Values.configmap "vts-default-filter-key" }}"
   {{- end }}
+
+  {{- if index .Values.configmap "ssl-protocols" }}
+  ssl-protocols: "{{ index .Values.configmap "ssl-protocols" }}"
+  {{- end }}
