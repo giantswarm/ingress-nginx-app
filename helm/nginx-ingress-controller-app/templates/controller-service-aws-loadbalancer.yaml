@@ -9,7 +9,7 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
     {{ end }}
     {{ if index .Values.configmap "use-proxy-protocol" }}
-    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: ‘*’
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
     {{ end }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
   name: {{ .Values.controller.name }}
