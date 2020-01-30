@@ -68,7 +68,7 @@ controller:
 
   image:
     repository: giantswarm/nginx-ingress-controller
-    tag: 0.27.1
+    tag: 0.28.0
 
   rbac:
 
