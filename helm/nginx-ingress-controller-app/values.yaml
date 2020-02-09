@@ -2,8 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-namespace: kube-system
-
 # baseDomain is a dynamic value, it comes from the cluster values configmap
 # applies only to Giant Swarm clusters
 baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
@@ -19,43 +17,17 @@ ingressController:
   legacy: false
   replicas: 3
 
-# configmap contains settings that can be overridden with a custom values
-# configmap.
+# for all the nginx configmap config options see https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
-  disable-access-log: "false"
-  enable-vts-status: "true"
   error-log-level: "error"
+  # Disables setting a 'Strict-Transport-Security' header, which can be harmful.
+  # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
+  # Increase hash table size to allow more server names for stability reasons
   server-name-hash-bucket-size: "1024"
-  server-name-hash-max-size: "1024"
   server-tokens: "false"
   worker-processes: "4"
   use-forwarded-headers: "true"
-
-  # optional settings that can be set.
-  enable-underscores-in-headers: ""
-  http-snippet: ""
-  http2-max-field-size: ""
-  large-client-header-buffers: ""
-  log-format-upstream: ""
-  proxy-buffers-size: ""
-  proxy-buffers: ""
-  use-proxy-protocol: ""
-  vts-default-filter-key: ""
-  # Enable the specified protocols (cf. http://nginx.org/en/docs/http/ngx_http_ssl_module.html#ssl_protocols for the list of valid protocols)
-  ssl-protocols: ""
-  
-  # optional hpa settings
-  hpa-enabled: false
-  hpa-min-replicas: 2
-  hpa-max-replicas: 11
-  hpa-target-cpu-utilization-percentage: 50
-  hpa-target-memory-utilization-percentage: 50
-
-  # command args options
-  annotations-prefix: nginx.ingress.kubernetes.io
-  default-ssl-certificate: ""
-  ingress-class: nginx
 
 controller:
   name: nginx-ingress-controller
@@ -100,18 +72,24 @@ controller:
       cpu: 500m
       memory: 600Mi
 
+  # optional hpa settings
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 20
+    targetCPUUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 50
+
+  # command args options
+  annotationsPrefix: nginx.ingress.kubernetes.io
+  defaultSSLCertificate: ""
+  ingressClass: nginx
+
   userID: 101
   groupID: 101
 
 image:
   registry: quay.io
-
-global:
-  controller:
-    tempReplicas: 2
-    useProxyProtocol: false
-  migration:
-    enabled: false
 
 test:
   image:
