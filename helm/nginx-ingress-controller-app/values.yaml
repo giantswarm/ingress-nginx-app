@@ -40,6 +40,7 @@ controller:
 
   image:
     repository: giantswarm/nginx-ingress-controller
+    # when updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: 0.28.0
 
   rbac:
@@ -85,6 +86,7 @@ controller:
   defaultSSLCertificate: ""
   ingressClass: nginx
 
+  # www-data -> uid 101
   userID: 101
   groupID: 101
 
