@@ -1,0 +1,15 @@
+{{- if or (and .Values.controller.autoscaling.enabled (gt (.Values.controller.autoscaling.minReplicas | int) 1)) (gt (.Values.controller.replicaCount | int) 1) }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  labels:
+    app: {{ .Values.controller.name }}
+    giantswarm.io/service-type: "managed"
+    k8s-app: {{ .Values.controller.k8sAppLabel }}
+  name: {{ .Values.controller.name }}
+spec:
+  selector:
+    matchLabels:
+      k8s-app: {{ .Values.controller.k8sAppLabel }}
+  maxUnavailable: {{ .Values.controller.maxUnavailable }}
+{{- end }}

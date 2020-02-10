@@ -15,21 +15,21 @@ Parameter | Description | Default
 `configmap.hsts` | Enables or disables the HTTP Strict Transport Security (HSTS) header in servers running SSL. | "false"
 `configmap.server-name-hash-bucket-size` | Sets the size of the bucket for the server names hash tables. | "1024"
 `configmap.server-tokens` | Controlls whether to send NGINX Server header in responses and display NGINX version in error pages. | "false"
-`configmap.worker-processes` | Sets the number of worker processes. | "4"
+`configmap.worker-processes` | Sets the number of worker processes. | "1"
 `configmap.use-forwarded-headers` | If true, NGINX passes the incoming `X-Forwarded-*` headers to upstreams. | "true"
 `controller.annotationsPrefix` | Prefix of the Ingress annotations specific to the NGINX controller. | `nginx.ingress.kubernetes.io`
-`controller.autoscaling.enabled` | Enables or disables Horizontal Pod Autoscaler (HPA) for NGINX Ingress Controller Deployment. | `false`
-`controller.autoscaling.minReplicas` | Configures HPA min replicas. | `1`
+`controller.autoscaling.enabled` | Enables or disables Horizontal Pod Autoscaler (HPA) for NGINX Ingress Controller Deployment. | `true`
+`controller.autoscaling.minReplicas` | Configures HPA min replicas. | `2`
 `controller.autoscaling.maxReplicas` | Configures HPA max replicas. | `20`
 `controller.autoscaling.targetCPUUtilizationPercentage` | Configures HPA target CPU utilization percentage. | `50`
 `controller.autoscaling.targetMemoryUtilizationPercentage` | Configures HPA target memory utilization percentage. | `50`
 `controller.defaultSSLCertificate` | The Secret referred to by this flag contains the default certificate to be used when accessing the catch-all server. If this flag is not provided NGINX will use a self-signed certificate. Example value: "default/foo-tls" | ""
 `controller.ingressController.legacy` | Legacy or node pools cluster. On aws provider node pool clusters LoadBalancer service gets created. Dynamically calculated during cluster creation. | `false`
-`controller.ingressController.replicas` | Number of NGINX Ingress Controller Deployment replicas. Dynamically calculated during cluster creation. | `3`
 `controller.ingressClass` | Ingress class, which controller processes | `nginx`
 `controller.metrics.enabled` | If true, create metrics Service for prometheus-operator support. | `false`
 `controller.metrics.port` | Configures container metrics port to be exposed. | `10254`
 `controller.metrics.service.servicePort` | Configures metrics Service port. | `9913`
+`controller.replicaCount` | Number of initial NGINX Ingress Controller Deployment replicas. | `2`
 `controller.service.enabled` | If true, create NodePort Service. Dynamically calculated during cluster creation. | `false`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
 `provider` | Provider identifier (`aws`/`azure`/`kvm`) | `kvm`

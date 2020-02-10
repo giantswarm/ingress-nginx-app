@@ -5,12 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v1.6.0] 2020-02-26
+
+### Changed
+
+- Enabled HorizontalPodAutoscaler by default.
+- Based on HPA trials done so far, following settings have been adjusted to better fit actual observed usage profiles:
+  - CPU resource requests have been adjusted from 500m to 2 CPU
+    - 0.5 CPU was not enough for all the processes NGINX Ingress Controller starts
+  - Memory requests changed from 600Mi to 2.5GB
+    - Scaling out does not shard Ingress definitions and other configurations stored in memory of every nginx-ingress-controller replica
+    - Memory usage spikes during configuration reloads
+    - It improves the HPA stability
+  - Default number of nginx worker processes was changed from 4 to 1
+    - This reduced memory usage of each replica
+    - It didn't affect request handling capacity
+    - Better defaults considering CPU requests and number of processes running on every nginx-ingress-controller replica.
+- To avoid cluster-operator and HPA collision and nginx service disruption, this release also breaks with cluster-operator controllable nginx Deployment replicas count
+  - `ingressController.replicas` which was previously dynamically set buy cluster-operator is now removed
+  - New `controller.replicaCount` config property is introduced, default replica count is set to 2, and then by default enabled HPA takes it over from there
+  - If HPA gets disabled on-demand, replica count will stay static if not manually or automatically changed by some third party.
+
+See PR ([#27](https://github.com/giantswarm/nginx-ingress-controller-app/pull/27)
+
 ## [v1.5.0] 2020-02-18
 
 ### Changed
 
 - Disable nginx NodePort Service by default, having legacy cluster-operator enable it for legacy Azure only. ([#29](https://github.com/giantswarm/nginx-ingress-controller-app/pull/29))
-- Upgrade to nginx-ingress-controller 0.29.0. ([#30](https://github.com/giantswarm/nginx-ingress-controller-app/pull/30))
+- Upgrade to nginx-ingress-controller 0.29.0. ([#30](https://github.com/giantswarm/nginx-ingress-controller-app/pull/30)))
 
 ## [v1.4.0] 2020-02-10
 
@@ -55,6 +78,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
+[v1.6.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.0
 [v1.5.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.5.0
 [v1.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.4.0
 [v1.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.3.0

@@ -15,7 +15,6 @@ provider: kvm
 # applies only to Giant Swarm clusters
 ingressController:
   legacy: false
-  replicas: 3
 
 # for all the nginx configmap config options see https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
@@ -26,12 +25,14 @@ configmap:
   # Increase hash table size to allow more server names for stability reasons
   server-name-hash-bucket-size: "1024"
   server-tokens: "false"
-  worker-processes: "4"
+  worker-processes: "1"
   use-forwarded-headers: "true"
 
 controller:
   name: nginx-ingress-controller
   k8sAppLabel: nginx-ingress-controller
+
+  replicaCount: 2
 
   maxUnavailable: 1
 
@@ -70,12 +71,12 @@ controller:
 
   resources:
     requests:
-      cpu: 500m
-      memory: 600Mi
+      cpu: 2
+      memory: 2.5Gi
 
   # optional hpa settings
   autoscaling:
-    enabled: false
+    enabled: true
     minReplicas: 2
     maxReplicas: 20
     targetCPUUtilizationPercentage: 50
