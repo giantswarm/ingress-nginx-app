@@ -1,6 +1,4 @@
 {{- if .Values.controller.service.enabled }}
-{{- if .Values.ingressController.legacy }}
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,5 +27,4 @@ spec:
     targetPort: 443
   selector:
     k8s-app: {{ .Values.controller.k8sAppLabel }}
-{{-  end }}
 {{-  end }}

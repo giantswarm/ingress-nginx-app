@@ -49,7 +49,7 @@ controller:
     name: nginx-ingress-role
 
   service:
-    enabled: true
+    enabled: false
     # type applies only to AWS provider:
     # - external (default)
     # - internal

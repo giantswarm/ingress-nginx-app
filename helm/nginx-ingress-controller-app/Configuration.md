@@ -30,6 +30,6 @@ Parameter | Description | Default
 `controller.metrics.enabled` | If true, create metrics Service for prometheus-operator support. | `false`
 `controller.metrics.port` | Configures container metrics port to be exposed. | `10254`
 `controller.metrics.service.servicePort` | Configures metrics Service port. | `9913`
-`controller.service.enabled` | If true, create NodePort service. Applies only to legacy clusters. | `true`
+`controller.service.enabled` | If true, create NodePort Service. Dynamically calculated during cluster creation. | `false`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
 `provider` | Provider identifier (`aws`/`azure`/`kvm`) | `kvm`
