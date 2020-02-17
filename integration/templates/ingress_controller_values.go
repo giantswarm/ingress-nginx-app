@@ -2,8 +2,8 @@
 
 package templates
 
-// IngressControllerValues sets legacy to true so the controller service uses
-// node ports.
-const IngressControllerValues = `ingressController:
-  legacy: true
+// IngressControllerValues defines value overrides to use in e2e test.
+const IngressControllerValues = `controller:
+  service:
+    enabled: true
 `

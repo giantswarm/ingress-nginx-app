@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [v1.5.0] 2020-02-18
+
+### Changed
+
+- Disable nginx NodePort Service by default, having legacy cluster-operator enable it for legacy Azure only. ([#28](https://github.com/giantswarm/nginx-ingress-controller-app/pull/28))
+
 ## [v1.4.0] 2020-02-10
 
 ### Changed
@@ -48,6 +54,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
+[v1.5.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.5.0
 [v1.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.4.0
 [v1.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.3.0
 [v1.2.1]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.2.1
