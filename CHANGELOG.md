@@ -9,7 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Disable nginx NodePort Service by default, having legacy cluster-operator enable it for legacy Azure only. ([#28](https://github.com/giantswarm/nginx-ingress-controller-app/pull/28))
+- Disable nginx NodePort Service by default, having legacy cluster-operator enable it for legacy Azure only. ([#29](https://github.com/giantswarm/nginx-ingress-controller-app/pull/29))
+- Upgrade to nginx-ingress-controller 0.29.0. ([#30](https://github.com/giantswarm/nginx-ingress-controller-app/pull/30))
 
 ## [v1.4.0] 2020-02-10
 
