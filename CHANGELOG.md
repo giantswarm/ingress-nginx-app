@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Upgrade to nginx-ingress-controller 0.30.0. ([#31](https://github.com/giantswarm/nginx-ingress-controller-app/pull/31))
+- Configured app icon. ([#32](https://github.com/giantswarm/nginx-ingress-controller-app/pull/32))
 - Enabled HorizontalPodAutoscaler by default.
 - Based on HPA trials done so far, following settings have been adjusted to better fit actual observed usage profiles:
   - CPU resource requests have been adjusted from 500m to 2 CPU
