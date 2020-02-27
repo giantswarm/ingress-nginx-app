@@ -21,9 +21,9 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     - This reduced memory usage of each replica
     - It didn't affect request handling capacity
     - Better defaults considering CPU requests and number of processes running on every nginx-ingress-controller replica.
-- To avoid cluster-operator and HPA collision and nginx service disruption, this release also breaks with cluster-operator controllable nginx Deployment replicas count
+- To avoid cluster-operator and HPA collision and nginx service disruption, this release also breaks with cluster-operator controllable nginx ingress controller Deployment replicas count
   - `ingressController.replicas` which was previously dynamically set by cluster-operator is now removed
-  - New `controller.replicaCount` config property is introduced, default replica count is set to 2, and then by default enabled HPA takes it over from there
+  - New `controller.replicaCount` config property is introduced, default replica count is set to 1, and then by default enabled HPA takes it over from there, by default scaling the Deployment in range of 1 to 20 replicas
   - If HPA gets disabled on-demand, replica count will stay static if not manually or automatically changed by some third party.
 
 See PR ([#27](https://github.com/giantswarm/nginx-ingress-controller-app/pull/27)

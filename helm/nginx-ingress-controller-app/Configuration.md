@@ -19,7 +19,7 @@ Parameter | Description | Default
 `configmap.use-forwarded-headers` | If true, NGINX passes the incoming `X-Forwarded-*` headers to upstreams. | "true"
 `controller.annotationsPrefix` | Prefix of the Ingress annotations specific to the NGINX controller. | `nginx.ingress.kubernetes.io`
 `controller.autoscaling.enabled` | Enables or disables Horizontal Pod Autoscaler (HPA) for NGINX Ingress Controller Deployment. | `true`
-`controller.autoscaling.minReplicas` | Configures HPA min replicas. | `2`
+`controller.autoscaling.minReplicas` | Configures HPA min replicas. | `1`
 `controller.autoscaling.maxReplicas` | Configures HPA max replicas. | `20`
 `controller.autoscaling.targetCPUUtilizationPercentage` | Configures HPA target CPU utilization percentage. | `50`
 `controller.autoscaling.targetMemoryUtilizationPercentage` | Configures HPA target memory utilization percentage. | `50`
@@ -29,7 +29,7 @@ Parameter | Description | Default
 `controller.metrics.enabled` | If true, create metrics Service for prometheus-operator support. | `false`
 `controller.metrics.port` | Configures container metrics port to be exposed. | `10254`
 `controller.metrics.service.servicePort` | Configures metrics Service port. | `9913`
-`controller.replicaCount` | Number of initial NGINX Ingress Controller Deployment replicas. | `2`
+`controller.replicaCount` | Number of initial NGINX Ingress Controller Deployment replicas. | `1`
 `controller.service.enabled` | If true, create NodePort Service. Dynamically calculated during cluster creation. | `false`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
 `provider` | Provider identifier (`aws`/`azure`/`kvm`) | `kvm`
