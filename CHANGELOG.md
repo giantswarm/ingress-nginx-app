@@ -5,10 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [v1.6.0] 2020-02-26
+## [v1.6.0] 2020-02-28
 
 ### Changed
 
+- Upgrade to nginx-ingress-controller 0.30.0. ([#31](https://github.com/giantswarm/nginx-ingress-controller-app/pull/31))
 - Enabled HorizontalPodAutoscaler by default.
 - Based on HPA trials done so far, following settings have been adjusted to better fit actual observed usage profiles:
   - CPU resource requests have been adjusted from 500m to 2 CPU
@@ -33,7 +34,7 @@ See PR ([#27](https://github.com/giantswarm/nginx-ingress-controller-app/pull/27
 ### Changed
 
 - Disable nginx NodePort Service by default, having legacy cluster-operator enable it for legacy Azure only. ([#29](https://github.com/giantswarm/nginx-ingress-controller-app/pull/29))
-- Upgrade to nginx-ingress-controller 0.29.0. ([#30](https://github.com/giantswarm/nginx-ingress-controller-app/pull/30)))
+- Upgrade to nginx-ingress-controller 0.29.0. ([#30](https://github.com/giantswarm/nginx-ingress-controller-app/pull/30))
 
 ## [v1.4.0] 2020-02-10
 

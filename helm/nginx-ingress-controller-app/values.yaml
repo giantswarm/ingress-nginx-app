@@ -42,7 +42,7 @@ controller:
   image:
     repository: giantswarm/nginx-ingress-controller
     # when updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: 0.29.0
+    tag: 0.30.0
 
   rbac:
 
