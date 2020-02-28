@@ -11,7 +11,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Upgrade to nginx-ingress-controller 0.30.0. ([#31](https://github.com/giantswarm/nginx-ingress-controller-app/pull/31))
 - Configured app icon. ([#32](https://github.com/giantswarm/nginx-ingress-controller-app/pull/32))
-- Enabled HorizontalPodAutoscaler by default.
+- Enabled HorizontalPodAutoscaler by default. ([#27](https://github.com/giantswarm/nginx-ingress-controller-app/pull/27)
 - Based on HPA trials done so far, following settings have been adjusted to better fit actual observed usage profiles:
   - CPU resource requests have been adjusted from 500m to 2 CPU
     - 0.5 CPU was not enough for all the processes NGINX Ingress Controller starts
@@ -27,8 +27,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - `ingressController.replicas` which was previously dynamically set by cluster-operator is now removed
   - New `controller.replicaCount` config property is introduced, default replica count is set to 1, and then by default enabled HPA takes it over from there, by default scaling the Deployment in range of 1 to 20 replicas
   - If HPA gets disabled on-demand, replica count will stay static if not manually or automatically changed by some third party.
-
-See PR ([#27](https://github.com/giantswarm/nginx-ingress-controller-app/pull/27)
 
 ## [v1.5.0] 2020-02-18
 
