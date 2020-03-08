@@ -1,3 +1,4 @@
+{{- if not ( eq .Values.cluster.profile "XS" ) }}
 {{- if .Values.controller.autoscaling.enabled }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
@@ -27,5 +28,6 @@ spec:
       resource:
         name: memory
         targetAverageUtilization: {{ . }}
+{{- end }}
 {{- end }}
 {{- end }}

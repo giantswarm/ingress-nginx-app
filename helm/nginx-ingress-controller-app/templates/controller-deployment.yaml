@@ -84,8 +84,10 @@ spec:
             path: /healthz
             port: {{ .Values.controller.metrics.port }}
             scheme: HTTP
+{{- if not ( eq .Values.cluster.profile "XS" ) }}
         resources:
 {{ toYaml .Values.controller.resources | indent 10 }}
+{{- end }}
         livenessProbe:
           httpGet:
             path: /healthz
