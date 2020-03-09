@@ -10,7 +10,7 @@ Parameter | Description | Default
 --- | --- | ---
 `baseDomain` | Cluster base domain. Dynamically calculated during cluster creation. Manual change doesn't affect this value | 'uun5a.k8s.ginger.eu-central-1.aws.gigantic.io'
 `clusterID` | Cluster ID. Dynamically calculated during cluster creation. Manual change doesn't affect this value | 'uun5a'
-`cluster.profile` | Cluster usage profile. Dynamically calculated during cluster creation. Supported values are `null` for undefined, and `1` for extra small. HPA is disabled and resource requests unset for extra small clusters. | `null`
+`cluster.profile` | Cluster usage profile. Dynamically calculated during cluster creation. Supported values are `1` for extra small, and currently any value higher than 1 when actual cluster profile is unknown. HPA and PDB are disabled, and resource requests unset for extra small clusters. | `2`
 `configmap` | Sets the nginx configmap configuration overrides. | See official docs for nginx [configmap configuration options](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configuration-options) and their defaults. Built-in overrides are covered below.
 `configmap.error-log-level` | Configures the logging level of errors. | "error"
 `configmap.hsts` | Enables or disables the HTTP Strict Transport Security (HSTS) header in servers running SSL. | "false"

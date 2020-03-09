@@ -1,4 +1,4 @@
-{{- if or (not .Values.cluster.profile) (gt .Values.cluster.profile 1) }}
+{{- if gt .Values.cluster.profile 1 }}
 {{- if .Values.controller.autoscaling.enabled }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
