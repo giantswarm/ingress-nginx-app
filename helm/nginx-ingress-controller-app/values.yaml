@@ -14,7 +14,7 @@ provider: kvm
 # cluster.profile is a dynamic value, it comes from the cluster values configmap
 # applies only to Giant Swarm clusters
 cluster:
-  profile: ""
+  profile: 0
 # ingressController is dynamic environment value, which comes from application catalog configuration
 # applies only to Giant Swarm clusters
 ingressController:
