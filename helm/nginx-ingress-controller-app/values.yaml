@@ -11,6 +11,10 @@ clusterID: uun5a
 # provider is dynamic environment value, which comes from application catalog configuration
 # applies only to Giant Swarm clusters
 provider: kvm
+# cluster.profile is a dynamic value, it comes from the cluster values configmap
+# applies only to Giant Swarm clusters
+cluster:
+  profile: 2
 # ingressController is dynamic environment value, which comes from application catalog configuration
 # applies only to Giant Swarm clusters
 ingressController:
@@ -77,7 +81,7 @@ controller:
   # optional hpa settings
   autoscaling:
     enabled: true
-    minReplicas: 1
+    minReplicas: 2
     maxReplicas: 20
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
