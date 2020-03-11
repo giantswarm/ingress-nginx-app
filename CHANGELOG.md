@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Changed
+
+- Reintroduced config properties which should have been just deprecated but got dropped prematurely in v1.4.0 ([#35](https://github.com/giantswarm/nginx-ingress-controller-app/pull/35))
+  - `configmap.annotations-prefix`
+  - `configmap.default-ssl-certificate`
+  - `configmap.hpa-enabled`
+  - `configmap.hpa-max-replicas`
+  - `configmap.hpa-min-replicas`
+  - `configmap.hpa-target-cpu-utilization-percentage`
+  - `configmap.hpa-target-memory-utilization-percentage`
+  - `configmap.ingress-class`
+
 ## [v1.6.1] 2020-03-10
 
 ### Changed
