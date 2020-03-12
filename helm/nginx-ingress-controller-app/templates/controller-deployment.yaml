@@ -51,13 +51,23 @@ spec:
         args:
         - /nginx-ingress-controller
         - --configmap=$(POD_NAMESPACE)/{{ .Values.controller.configmap.name }}
+        {{- if index .Values.configmap "annotations-prefix" }}
+        - --annotations-prefix={{ index .Values.configmap "annotations-prefix" }}
+        {{- else if .Values.controller.annotationsPrefix }}
         - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
-        {{- if .Values.controller.defaultSSLCertificate }}
+        {{- end}}
+        {{- if index .Values.configmap "default-ssl-certificate" }}
+        - --default-ssl-certificate={{ index .Values.configmap "default-ssl-certificate" }}
+        {{- else if .Values.controller.defaultSSLCertificate }}
         - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
         {{- end}}
         - --enable-ssl-chain-completion=false
         - --enable-dynamic-certificates=true
+        {{- if index .Values.configmap "ingress-class" }}
+        - --ingress-class={{ index .Values.configmap "ingress-class" }}
+        {{- else if .Values.controller.ingressClass }}
         - --ingress-class={{ .Values.controller.ingressClass }}
+        {{- end}}
         {{- if not .Values.ingressController.legacy }}
         - --publish-service={{ .Release.Namespace }}/{{ .Values.controller.name }}
         {{- end }}
