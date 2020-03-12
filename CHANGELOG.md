@@ -5,11 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## Unreleased
+## [v1.6.2] 2020-03-12
 
 ### Changed
 
-- Reintroduced config properties which should have been just deprecated but got dropped prematurely in v1.4.0 ([#35](https://github.com/giantswarm/nginx-ingress-controller-app/pull/35))
+- Reintroduced config properties which should have been just deprecated but got dropped prematurely in v1.4.0 ([#36](https://github.com/giantswarm/nginx-ingress-controller-app/pull/36))
   - `configmap.annotations-prefix`
   - `configmap.default-ssl-certificate`
   - `configmap.hpa-enabled`
@@ -98,6 +98,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
+[v1.6.2]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.2
 [v1.6.1]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.1
 [v1.6.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.0
 [v1.5.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.5.0
