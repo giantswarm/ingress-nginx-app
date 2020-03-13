@@ -1,4 +1,4 @@
-{{- if .Values.cluster.profile 2 }}
+{{- if gt (.Values.cluster.profile | int) 2 }}
 {{- if index .Values.configmap "hpa-enabled" }}
 {{- if eq (index .Values.configmap "hpa-enabled") "true" }}
 apiVersion: autoscaling/v2beta1
