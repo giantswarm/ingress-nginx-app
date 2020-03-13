@@ -14,7 +14,7 @@ provider: kvm
 # cluster.profile is a dynamic value, it comes from the cluster values configmap
 # applies only to Giant Swarm clusters
 cluster:
-  profile: 2
+  profile: 3
 # ingressController is dynamic environment value, which comes from application catalog configuration
 # applies only to Giant Swarm clusters
 ingressController:
@@ -74,9 +74,17 @@ controller:
       servicePort: 9913
 
   resources:
+    # these are default resource requests when cluster profile is not known/determined or when cluster is larger than small
     requests:
       cpu: 2
       memory: 2.5Gi
+  profile:
+    # extra small (1) cluster profile - 1 worker node only - resource requests are not being set
+    #small (2) cluster profile - 2-3 worker nodes, max CPU < 4
+    small:
+      resources:
+        cpu: 500m
+        memory: 600Mi
 
   # optional hpa settings
   autoscaling:
