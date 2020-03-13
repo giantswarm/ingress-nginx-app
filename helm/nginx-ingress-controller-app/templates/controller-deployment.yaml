@@ -95,7 +95,7 @@ spec:
             port: {{ .Values.controller.metrics.port }}
             scheme: HTTP
         {{- if .Values.cluster.profile }}
-        {{- if gt .Values.cluster.profile 1 }}
+        {{- if gt (.Values.cluster.profile | int) 1 }}
         resources:
           {{- if eq (.Values.cluster.profile | quote) "2" }}
 {{ toYaml .Values.controller.profile.small.resources | indent 10 }}
