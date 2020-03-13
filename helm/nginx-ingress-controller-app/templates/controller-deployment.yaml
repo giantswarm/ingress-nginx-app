@@ -98,9 +98,9 @@ spec:
         {{- if (gt (.Values.cluster.profile | int) 1) }}
         resources:
           {{- if eq (.Values.cluster.profile | int) 2 }}
-            {{ toYaml .Values.controller.profile.small.resources | indent 10 }}
+{{ toYaml .Values.controller.profile.small.resources | indent 10 }}
           {{- else }}
-            {{ toYaml .Values.controller.resources | indent 10 }}
+{{ toYaml .Values.controller.resources | indent 10 }}
           {{- end }}
         {{- end }}
         {{- end }}
