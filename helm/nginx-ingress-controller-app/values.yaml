@@ -80,7 +80,7 @@ controller:
       memory: 2.5Gi
   profile:
     # extra small (1) cluster profile - 1 worker node only - resource requests are not being set
-    #small (2) cluster profile - 2-3 worker nodes, max CPU < 4
+    # small (2) cluster profile - 2-3 worker nodes, max CPU < 4
     small:
       resources:
         cpu: 500m
