@@ -81,7 +81,7 @@ controller:
   profile:
     # xxs (1) cluster profile - 1 worker node only - resource requests are not being set
     # xs (2) cluster profile - 2-3 worker nodes, max CPU < 4 - resource requests are not being set
-    # small (3) cluster profile - >4 worker nodes, max CPU still < 4
+    # small (3) cluster profile - > 3 worker nodes, max CPU still < 4
     small:
       resources:
         cpu: 500m
