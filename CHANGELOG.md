@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
+
+### Changed
+
+- Adjust resource requests, HPA and PDB depending on determined cluster profile; supported cluster profiles include xxs, xs, small, and larger than small or unknown. ([#38](https://github.com/giantswarm/nginx-ingress-controller-app/pull/38))
+
+  By default, for nginx on:
+  - xxs clusters - clear resource requests, HPA and PDB are disabled
+  - xs clusters - clear resource requests, enabled HPA and PDB
+  - small clusters - have some resource requests, HPA and PDB are enabled
+  - clusters larger than small or unknown - have decent resource requests i.e. capacity out-of-the-box, and HPA and PDB are enabled.
+
 ## [v1.6.2] 2020-03-12
 
 ### Changed
