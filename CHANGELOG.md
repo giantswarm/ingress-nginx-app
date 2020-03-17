@@ -12,8 +12,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Adjust resource requests, HPA and PDB depending on determined cluster profile; supported cluster profiles include xxs, xs, small, and larger than small or unknown. ([#38](https://github.com/giantswarm/nginx-ingress-controller-app/pull/38))
 
   By default, for nginx on:
-  - xxs clusters - clear resource requests, HPA and PDB are disabled
-  - xs clusters - clear resource requests, enabled HPA and PDB
+  - xxs clusters - single replica, resource requests cleared, HPA and PDB are disabled
+  - xs clusters - single replica, have some resource requests, HPA and PDB are disabled
   - small clusters - have some resource requests, HPA and PDB are enabled
   - clusters larger than small or unknown - have decent resource requests i.e. capacity out-of-the-box, and HPA and PDB are enabled.
 
