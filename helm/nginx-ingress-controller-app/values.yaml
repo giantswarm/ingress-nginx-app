@@ -85,8 +85,9 @@ controller:
     # small (3) cluster profile - > 3 worker nodes, max CPU still < 4
     small:
       resources:
-        cpu: 500m
-        memory: 600Mi
+        requests:
+          cpu: 500m
+          memory: 600Mi
 
   # optional hpa settings
   autoscaling:
