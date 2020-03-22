@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Fix small cluster profile resource requests. ([#42](https://github.com/giantswarm/nginx-ingress-controller-app/pull/42))
+
 ## [v1.6.4] 2020-03-17
 
 ### Changed
@@ -115,6 +121,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.4...master
 [v1.6.4]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.4
 [v1.6.3]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.3
 [v1.6.2]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.2
