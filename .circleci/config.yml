@@ -48,8 +48,8 @@ workflows:
               only: /^v.*/
 
       - architect/integration-test:
-        name: basic-integration-test
-        test-dir: "integration/test/basic"
+          name: basic-integration-test
+          test-dir: "integration/test/basic"
           requires:
             - build
             - push-to-default-app-catalog
