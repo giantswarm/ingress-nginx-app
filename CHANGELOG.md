@@ -9,6 +9,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Change deployment to use release revision not time for Helm 3 support.
+
+### Changed
+
 ## [v1.6.5] 2020-03-23
 
 ### Changed
