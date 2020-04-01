@@ -27,7 +27,7 @@ spec:
         giantswarm.io/service-type: "managed"
         k8s-app: {{ .Values.controller.k8sAppLabel }}
       annotations:
-        releasetime: {{ $.Release.Time }}
+        releaseRevision: {{ $.Release.Revision | quote }}
         scheduler.alpha.kubernetes.io/critical-pod: ''
         cluster-autoscaler.kubernetes.io/safe-to-evict: 'true'
     spec:
