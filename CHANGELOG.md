@@ -9,6 +9,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+## [v1.6.6] 2020-04-01
+
+### Changed
+
 - Change deployment to use release revision not time for Helm 3 support.
 
 ## [v1.6.5] 2020-03-23
@@ -127,7 +131,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.5...master
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.6...master
+[v1.6.6]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.6
 [v1.6.5]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.5
 [v1.6.4]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.4
 [v1.6.3]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.3
