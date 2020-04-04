@@ -37,10 +37,12 @@ Parameter | Description | Default
 `controller.ingressController.legacy` | Legacy or node pools cluster. On aws provider node pool clusters LoadBalancer service gets created. Dynamically calculated during cluster creation. | `false`
 `controller.ingressClass` | Ingress class, which controller handles. This is a replacement for deprecated `configmap.ingress-class` configuration property; if both are configured, `configmap.ingress-class` has precedence. | `nginx`
 `controller.lifecycle` | Configures NGINX controller container lifecycle hooks. | By default configured to run `/wait-shutdown` as controller container preStop hook.
+`controller.maxUnavailable` | Configures maximum unavailable replicas count for NGINX controller Deployment rolling upgrade strategy. | `1`
 `controller.metrics.enabled` | If true, create metrics Service for prometheus-operator support. | `false`
 `controller.metrics.port` | Configures container metrics port to be exposed. | `10254`
 `controller.metrics.service.servicePort` | Configures metrics Service port. | `9913`
-`controller.replicaCount` | Number of initial NGINX Ingress Controller Deployment replicas. | `1`
+`controller.minReadySeconds` | Configures minimum amount of time that NGINX IC Deployment replica has to be ready before rolling upgrade can proceed with the next replica. | `0`
+`controller.replicaCount` | Number of initial NGINX IC Deployment replicas. | `1`
 `controller.service.enabled` | If true, create NodePort Service. Dynamically calculated during cluster creation. | `false`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
 `controller.terminationGracePeriodSeconds` | Maximum amount of time NGINX Deployment replica is given to gracefully terminate. This should not be lower than `configmap.worker-shutdown-timeout`. | 300

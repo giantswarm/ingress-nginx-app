@@ -41,6 +41,8 @@ controller:
   replicaCount: 1
 
   maxUnavailable: 1
+  # minReadySeconds to avoid killing pods before we are ready
+  minReadySeconds: 0
 
   configmap:
     name: ingress-nginx

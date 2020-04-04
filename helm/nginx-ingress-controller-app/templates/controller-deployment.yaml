@@ -20,6 +20,7 @@ spec:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: {{ .Values.controller.maxUnavailable }}
+  minReadySeconds: {{ .Values.controller.minReadySeconds }}
   template:
     metadata:
       labels:
