@@ -25,6 +25,7 @@ Parameter | Description | Default
 `configmap.server-name-hash-bucket-size` | Sets the size of the bucket for the server names hash tables. | "1024"
 `configmap.server-tokens` | Controlls whether to send NGINX Server header in responses and display NGINX version in error pages. | "false"
 `configmap.worker-processes` | Sets the number of worker processes. | "1"
+`configmap.worker-shutdown-timeout` | Maximum amount of time NGINX worker processes should give active connections to drain. This should not be higher than `controller.terminationGracePeriodSeconds` | "240s"
 `configmap.use-forwarded-headers` | If true, NGINX passes the incoming `X-Forwarded-*` headers to upstreams. | "true"
 `controller.annotationsPrefix` | Prefix of the Ingress annotations specific to the NGINX controller. This is a replacement for deprecated `configmap.annotations-prefix` configuration property; if both are configured, `configmap.annotations-prefix` has precedence. | `nginx.ingress.kubernetes.io`
 `controller.autoscaling.enabled` | Enables or disables Horizontal Pod Autoscaler (HPA) for NGINX Ingress Controller Deployment. This is a replacement for deprecated `configmap.hpa-enabled` configuration property; if both are configured, `configmap.hpa-enabled` has precedence. | `true`
@@ -35,10 +36,12 @@ Parameter | Description | Default
 `controller.defaultSSLCertificate` | The Secret referred to by this flag contains the default certificate to be used when accessing the catch-all server. If this flag is not provided NGINX will use a self-signed certificate. Example value: "default/foo-tls". This is a replacement for deprecated `configmap.default-ssl-certificate` configuration property; if both are configured, `configmap.default-ssl-certificate` has precedence. | ""
 `controller.ingressController.legacy` | Legacy or node pools cluster. On aws provider node pool clusters LoadBalancer service gets created. Dynamically calculated during cluster creation. | `false`
 `controller.ingressClass` | Ingress class, which controller handles. This is a replacement for deprecated `configmap.ingress-class` configuration property; if both are configured, `configmap.ingress-class` has precedence. | `nginx`
+`controller.lifecycle` | Configures NGINX controller container lifecycle hooks. | By default configured to run `/wait-shutdown` as controller container preStop hook.
 `controller.metrics.enabled` | If true, create metrics Service for prometheus-operator support. | `false`
 `controller.metrics.port` | Configures container metrics port to be exposed. | `10254`
 `controller.metrics.service.servicePort` | Configures metrics Service port. | `9913`
 `controller.replicaCount` | Number of initial NGINX Ingress Controller Deployment replicas. | `1`
 `controller.service.enabled` | If true, create NodePort Service. Dynamically calculated during cluster creation. | `false`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
+`controller.terminationGracePeriodSeconds` | Maximum amount of time NGINX Deployment replica is given to gracefully terminate. This should not be lower than `configmap.worker-shutdown-timeout`. | 300
 `provider` | Provider identifier (`aws`/`azure`/`kvm`) | `kvm`

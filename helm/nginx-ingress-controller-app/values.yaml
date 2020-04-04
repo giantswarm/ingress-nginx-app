@@ -31,6 +31,8 @@ configmap:
   server-tokens: "false"
   worker-processes: "1"
   use-forwarded-headers: "true"
+  # value of worker-shutdown-timeout should not be higher than configured `controller.terminationGracePeriodSeconds`
+  worker-shutdown-timeout: "240s"
 
 controller:
   name: nginx-ingress-controller
@@ -88,6 +90,18 @@ controller:
         requests:
           cpu: 500m
           memory: 600Mi
+
+  # allow the draining of connections up to five minutes
+  # this should not be lower than configmap.worker-shutdown-timeout
+  # for more info see https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554
+  # and important note in https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0
+  terminationGracePeriodSeconds: 300
+  lifecycle:
+    # Enable graceful shutdowns and rolling updates with zero-downtime
+    preStop:
+      exec:
+        command:
+        - /wait-shutdown
 
   # optional hpa settings
   autoscaling:

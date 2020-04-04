@@ -45,6 +45,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       serviceAccountName: {{ .Values.controller.name }}
       priorityClassName: system-cluster-critical
+      terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       containers:
       - name: {{ .Values.controller.name }}
         image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
@@ -112,12 +113,7 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 1
         lifecycle:
-          # Enable graceful shutdowns and rolling updates with zero-downtime
-          preStop:
-            exec:
-              command:
-              - sleep
-              - "60"
+{{ toYaml .Values.controller.lifecycle | indent 10 }}
         ports:
         - name: http
           containerPort: 80
