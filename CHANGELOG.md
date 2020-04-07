@@ -9,6 +9,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+## [v1.6.7] 2020-04-08
+
+### Changed
+
 - Align graceful termination configuration with changes made in upstream ingress-nginx 0.26.0 (see [related PR #4487](https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554) and important section in [0.26.0 release notes](https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0)).
   - Make NGINX IC Deployment's `terminationGracePeriodSeconds` configurable and align its default with `configmap.worker-shutdown-timeout`
   - Make NGINX IC controller container lifecycle hooks configurable, and change from `sleep 60` to using `/wait-shutdown` as preStop hook.
@@ -136,7 +140,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.6...master
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.7...master
+[v1.6.7]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.7
 [v1.6.6]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.6
 [v1.6.5]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.5
 [v1.6.4]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.4
