@@ -9,6 +9,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Align graceful termination configuration with changes made in upstream ingress-nginx 0.26.0 (see [related PR #4487](https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554) and important section in [0.26.0 release notes](https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0)).
+  - Make NGINX IC Deployment's `terminationGracePeriodSeconds` configurable and align its default with `configmap.worker-shutdown-timeout`
+  - Make NGINX IC controller container lifecycle hooks configurable, and change from `sleep 60` to using `/wait-shutdown` as preStop hook.
+- Make `controller.minReadySeconds` configurable.
+
 ## [v1.6.6] 2020-04-01
 
 ### Changed
