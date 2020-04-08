@@ -7,4 +7,4 @@ name: nginx-ingress-controller-app
 namespace: kube-system
 version: [[ .Version ]]
 sources:
-  - https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v1.6.7/README.md
+  - https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/[[ .Version ]]/README.md
