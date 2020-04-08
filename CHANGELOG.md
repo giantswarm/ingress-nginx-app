@@ -9,6 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Added a link to the README in the sources of Chart.yaml
+
 ## [v1.6.7] 2020-04-08
 
 ### Changed
