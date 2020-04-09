@@ -22,6 +22,8 @@ Parameter | Description | Default
 `configmap.ingress-class` | This configuration property is deprecated and will be removed in the future, please migrate to `controller.ingressClass`. | not configured by default
 `configmap.error-log-level` | Configures the logging level of errors. | "notice"
 `configmap.hsts` | Enables or disables the HTTP Strict Transport Security (HSTS) header in servers running SSL. | "false"
+`configmap.max-worker-connections` | Sets the maximum number of simultaneous connections that can be opened by each worker process. 0 will use the value of `max-worker-open-files`. | "0"
+`configmap.max-worker-open-files` | Sets the maximum number of files that can be opened by each worker process. The default of 0 means "max open files (system's limit) / worker-processes - 1024". | "0"
 `configmap.server-name-hash-bucket-size` | Sets the size of the bucket for the server names hash tables. | "1024"
 `configmap.server-tokens` | Controlls whether to send NGINX Server header in responses and display NGINX version in error pages. | "false"
 `configmap.worker-processes` | Sets the number of worker processes. | "1"
@@ -32,7 +34,7 @@ Parameter | Description | Default
 `controller.autoscaling.maxReplicas` | Configures HPA max replicas. This is a replacement for deprecated `configmap.hpa-max-replicas` configuration property; if both are configured, `configmap.hpa-max-replicas` has precedence. | `20`
 `controller.autoscaling.minReplicas` | Configures HPA min replicas. This is a replacement for deprecated `configmap.hpa-min-replicas` configuration property; if both are configured, `configmap.hpa-min-replicas` has precedence. | `2`
 `controller.autoscaling.targetCPUUtilizationPercentage` | Configures HPA target CPU utilization percentage. This is a replacement for deprecated `configmap.hpa-target-cpu-utilization-percentage` configuration property; if both are configured, `configmap.hpa-target-cpu-utilization-percentage` has precedence. | `50`
-`controller.autoscaling.targetMemoryUtilizationPercentage` | Configures HPA target memory utilization percentage. This is a replacement for deprecated `configmap.hpa-target-memory-utilization-percentage` configuration property; if both are configured, `configmap.hpa-target-memory-utilization-percentage` has precedence. | `50`
+`controller.autoscaling.targetMemoryUtilizationPercentage` | Configures HPA target memory utilization percentage. This is a replacement for deprecated `configmap.hpa-target-memory-utilization-percentage` configuration property; if both are configured, `configmap.hpa-target-memory-utilization-percentage` has precedence. | `80`
 `controller.defaultSSLCertificate` | The Secret referred to by this flag contains the default certificate to be used when accessing the catch-all server. If this flag is not provided NGINX will use a self-signed certificate. Example value: "default/foo-tls". This is a replacement for deprecated `configmap.default-ssl-certificate` configuration property; if both are configured, `configmap.default-ssl-certificate` has precedence. | ""
 `controller.ingressController.legacy` | Legacy or node pools cluster. On aws provider node pool clusters LoadBalancer service gets created. Dynamically calculated during cluster creation. | `false`
 `controller.ingressClass` | Ingress class, which controller handles. This is a replacement for deprecated `configmap.ingress-class` configuration property; if both are configured, `configmap.ingress-class` has precedence. | `nginx`
