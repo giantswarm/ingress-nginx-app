@@ -9,6 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Default `max-worker-connections` to 0, making it same as `max-worker-open-files` i.e. `max open files (system's limit) / worker-processes - 1024`.
+  This optimizes for high load conditions where it improves performance at the cost of increasing RAM utilization (even on idle).
 - Remove use of `enable-dynamic-certificates` CLI flag, it has been deprecated since [ingress-nginx 0.26.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0260) via [ingress-nginx PR #4356](https://github.com/kubernetes/ingress-nginx/pull/4356)
 
 ## [v1.6.7] 2020-04-08
