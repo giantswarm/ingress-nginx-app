@@ -22,7 +22,7 @@ ingressController:
 
 # for all the nginx configmap config options see https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
-  error-log-level: "error"
+  error-log-level: "notice"
   # Disables setting a 'Strict-Transport-Security' header, which can be harmful.
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"

@@ -13,6 +13,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   This optimizes for high load conditions where it improves performance at the cost of increasing RAM utilization (even on idle).
 - HorizontalPodAutoscaler was tuned to use `targetMemoryUtilizationPercentage` of `80` due to increased RAM utilization with new default for `max-worker-connections` of `0`.
 - Removed use of `enable-dynamic-certificates` CLI flag, it has been deprecated since [ingress-nginx 0.26.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0260) via [ingress-nginx PR #4356](https://github.com/kubernetes/ingress-nginx/pull/4356)
+- Changed default `error-log-level` from `error` to `notice`.
 - Added a link to the README in the sources of Chart.yaml
 
 ## [v1.6.7] 2020-04-08

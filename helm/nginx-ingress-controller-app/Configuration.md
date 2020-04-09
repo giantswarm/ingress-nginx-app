@@ -20,7 +20,7 @@ Parameter | Description | Default
 `configmap.hpa-target-cpu-utilization-percentage` | This configuration property is deprecated and will be removed in the future, please migrate to `controller.autoscaling.targetCPUUtilizationPercentage`. | not configured by default
 `configmap.hpa-target-memory-utilization-percentage` | This configuration property is deprecated and will be removed in the future, please migrate to `controller.autoscaling.targetMemoryUtilizationPercentage`. | not configured by default
 `configmap.ingress-class` | This configuration property is deprecated and will be removed in the future, please migrate to `controller.ingressClass`. | not configured by default
-`configmap.error-log-level` | Configures the logging level of errors. | "error"
+`configmap.error-log-level` | Configures the logging level of errors. | "notice"
 `configmap.hsts` | Enables or disables the HTTP Strict Transport Security (HSTS) header in servers running SSL. | "false"
 `configmap.max-worker-connections` | Sets the maximum number of simultaneous connections that can be opened by each worker process. 0 will use the value of `max-worker-open-files`. | "0"
 `configmap.max-worker-open-files` | Sets the maximum number of files that can be opened by each worker process. The default of 0 means "max open files (system's limit) / worker-processes - 1024". | "0"
