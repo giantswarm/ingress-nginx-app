@@ -20,7 +20,7 @@ Parameter | Description | Default
 `configmap.hpa-target-cpu-utilization-percentage` | This configuration property is deprecated and will be removed in the future, please migrate to `controller.autoscaling.targetCPUUtilizationPercentage`. | not configured by default
 `configmap.hpa-target-memory-utilization-percentage` | This configuration property is deprecated and will be removed in the future, please migrate to `controller.autoscaling.targetMemoryUtilizationPercentage`. | not configured by default
 `configmap.ingress-class` | This configuration property is deprecated and will be removed in the future, please migrate to `controller.ingressClass`. | not configured by default
-`configmap.error-log-level` | Configures the logging level of errors. | "error"
+`configmap.error-log-level` | Configures the logging level of errors. | "notice"
 `configmap.hsts` | Enables or disables the HTTP Strict Transport Security (HSTS) header in servers running SSL. | "false"
 `configmap.server-name-hash-bucket-size` | Sets the size of the bucket for the server names hash tables. | "1024"
 `configmap.server-tokens` | Controlls whether to send NGINX Server header in responses and display NGINX version in error pages. | "false"
