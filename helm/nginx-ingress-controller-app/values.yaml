@@ -113,7 +113,7 @@ controller:
     minReplicas: 2
     maxReplicas: 20
     targetCPUUtilizationPercentage: 50
-    targetMemoryUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 80
 
   # command args options
   annotationsPrefix: nginx.ingress.kubernetes.io
