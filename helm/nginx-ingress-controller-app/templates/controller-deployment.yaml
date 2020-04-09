@@ -64,7 +64,6 @@ spec:
         - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
         {{- end}}
         - --enable-ssl-chain-completion=false
-        - --enable-dynamic-certificates=true
         {{- if index .Values.configmap "ingress-class" }}
         - --ingress-class={{ index .Values.configmap "ingress-class" }}
         {{- else if .Values.controller.ingressClass }}
