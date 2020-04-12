@@ -107,6 +107,10 @@ controller:
         command:
         - /wait-shutdown
 
+  # Enable mimalloc as a drop-in replacement for malloc.
+  # ref: https://github.com/microsoft/mimalloc
+  enableMimalloc: true
+
   # optional hpa settings
   autoscaling:
     enabled: true
