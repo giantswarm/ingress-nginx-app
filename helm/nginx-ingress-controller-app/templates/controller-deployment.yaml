@@ -94,6 +94,9 @@ spec:
         - name: LD_PRELOAD
           value: /usr/local/lib/libmimalloc.so
         {{- end }}
+        {{- if .Values.controller.extraEnvs }}
+          {{- toYaml .Values.controller.extraEnvs | nindent 8 }}
+        {{- end }}
         readinessProbe:
           httpGet:
             path: /healthz
