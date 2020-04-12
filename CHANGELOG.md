@@ -9,6 +9,9 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Support and enable by default [mimalloc](https://github.com/microsoft/mimalloc) as a drop-in malloc replacement to reduce nginx memory utilization.
+- Support configuring additional environment variables for NGINX Ingress Controller container to support configuring additional mimalloc [options](https://github.com/microsoft/mimalloc#environment-options).
+
 ## [v1.6.8] 2020-04-09
 
 ### Changed
