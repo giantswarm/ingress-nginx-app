@@ -14,7 +14,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Tune `net.core.somaxconn` to `32768` via an initContainer with privilege escalation.
 - Use `4` worker processes by default.
 - Use upstream default of max-worker-connections of `16384`.
-- Adjust README for display in the web interface context.
+- Ignore NGINX IC Deployment replica count configuration when HorizontalPodAutoscaler is enabled. - Adjust README for display in the web interface context.
 
 ## [v1.6.8] 2020-04-09
 
