@@ -9,6 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Configured NGINX IC container sysctls for performance improvements (see [ingress-nginx#1939](https://github.com/kubernetes/ingress-nginx/issues/1939)).
+
 ## [v1.6.8] 2020-04-09
 
 ### Changed

@@ -47,5 +47,6 @@ Parameter | Description | Default
 `controller.replicaCount` | Number of initial NGINX IC Deployment replicas. | `1`
 `controller.service.enabled` | If true, create NodePort Service. Dynamically calculated during cluster creation. | `false`
 `controller.service.type` | Applies only to `provider=aws` (`external`/`internal`) | `external`
+`controller.sysctls` | Configures sysctls for the NGINX IC. | Performance improvements from https://github.com/kubernetes/ingress-nginx/issues/1939
 `controller.terminationGracePeriodSeconds` | Maximum amount of time NGINX Deployment replica is given to gracefully terminate. This should not be lower than `configmap.worker-shutdown-timeout`. | 300
 `provider` | Provider identifier (`aws`/`azure`/`kvm`) | `kvm`

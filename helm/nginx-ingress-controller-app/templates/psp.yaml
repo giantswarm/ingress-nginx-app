@@ -11,6 +11,8 @@ spec:
   privileged: false
   allowedCapabilities:
   - NET_BIND_SERVICE
+  allowedUnsafeSysctls:
+  - net.core.somaxconn
   runAsUser:
     rule: MustRunAsNonRoot
   seLinux:

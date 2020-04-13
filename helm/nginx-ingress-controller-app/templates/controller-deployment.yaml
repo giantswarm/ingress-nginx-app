@@ -81,6 +81,10 @@ spec:
               - NET_BIND_SERVICE
           runAsUser: {{ .Values.controller.userID }}
           runAsGroup: {{ .Values.controller.groupID }}
+          {{- if .Values.controller.sysctls }}
+          sysctls:
+            {{- toYaml .Values.controller.sysctls | nindent 12 }}
+          {{- end }}
         env:
         - name: POD_NAME
           valueFrom:
