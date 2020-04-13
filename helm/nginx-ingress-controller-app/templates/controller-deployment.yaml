@@ -129,5 +129,5 @@ spec:
       {{- if .Values.controller.sysctls }}
       securityContext:
         sysctls:
-          {{- toYaml .Values.controller.sysctls | nindent 12 }}
+        {{- toYaml .Values.controller.sysctls | nindent 8 }}
       {{- end }}
