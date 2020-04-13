@@ -41,10 +41,9 @@ Configuration options are documented in [Configuration.md](helm/nginx-ingress-co
 changelog entry.
 * This will push a new git tag and trigger a new tarball to be pushed to the
 [giantswarm-catalog] and [default-catalog].
-* Update [cluster-operator] with the new version.
+* Use, test and ship the release across supported channels in new or existing WIP platform releases which have nginx IC pre-installed.
 
 [app-operator]: https://github.com/giantswarm/app-operator
-[cluster-operator]: https://github.com/giantswarm/cluster-operator
 [giantswarm-catalog]: https://github.com/giantswarm/giantswarm-catalog
 [giantswarm-test-catalog]: https://github.com/giantswarm/giantswarm-test-catalog
 [default-catalog]: https://github.com/giantswarm/default-catalog
