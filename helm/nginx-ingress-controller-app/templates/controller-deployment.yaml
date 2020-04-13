@@ -126,3 +126,13 @@ spec:
           containerPort: {{ .Values.controller.metrics.port }}
           protocol: TCP
         {{- end }}
+        volumeMounts:
+        # mount host /proc to get nginx perf improvement settings https://github.com/kubernetes/ingress-nginx/issues/1939 set on host propagated to nginx 
+        - mountPath: /proc
+          mountPropagation: HostToContainer
+          name: proc
+          readOnly: true
+      volumes:
+      - hostPath:
+        path: /proc
+        name: proc
