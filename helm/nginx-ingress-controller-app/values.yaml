@@ -128,7 +128,7 @@ controller:
     # Ingress controller performance improvements
     # See https://github.com/kubernetes/ingress-nginx/issues/1939
     - name: net.ipv4.ip_local_port_range
-      value: "'1024 65000'" # default '32768	60999', we set it on host to '1024 65535'
+      value: "1024 65000" # default '32768	60999', we set it on host to '1024 65535'
     - name: net.core.somaxconn # this is unsafe, has to be allowed on kubelet with https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/kubelet/config/v1beta1/types.go#L757
       value: "32768" # default 128, we set it on host to '32768'
 
