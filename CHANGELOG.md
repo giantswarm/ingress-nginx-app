@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+- Adjust README for display in the web interface context
+
 ### Changed
 
 ## [v1.6.8] 2020-04-09
