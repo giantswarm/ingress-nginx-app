@@ -9,6 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Remove NodePort Service for Azure.
+
 ## [v1.6.9] 2020-04-22
 
 ### Changed
