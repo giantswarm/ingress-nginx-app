@@ -130,7 +130,7 @@ spec:
         # mount host /proc to get nginx perf improvement settings https://github.com/kubernetes/ingress-nginx/issues/1939 set on host propagated to nginx 
         - name: proc
           mountPath: /proc
-          readOnly: true
+          mountPropagation: HostToContainer
       volumes:
       - name: proc
         hostPath:
