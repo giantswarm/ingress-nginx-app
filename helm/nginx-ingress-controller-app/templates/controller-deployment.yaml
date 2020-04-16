@@ -127,11 +127,12 @@ spec:
           protocol: TCP
         {{- end }}
         volumeMounts:
-        # mount host somaxconn to get nginx perf improvement settings https://github.com/kubernetes/ingress-nginx/issues/1939 set on host propagated to nginx 
-        - name: somaxconn
-          mountPath: /proc/sys/net/core/somaxconn
+        # mount host /proc to get nginx perf improvement settings https://github.com/kubernetes/ingress-nginx/issues/1939 set on host propagated to nginx 
+        - name: proc
+          mountPath: /proc
+          mountPropagation: HostToContainer
+          readOnly: true
       volumes:
-      - name: somaxconn
+      - name: proc
         hostPath:
-          path: /proc/sys/net/core/somaxconn
-          type: File
+          path: /proc
