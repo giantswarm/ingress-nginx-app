@@ -70,7 +70,8 @@ spec:
         securityContext:
           privileged: true
           runAsUser: {{ .Values.initContainer.userID }}
-          runAsGroup: {{ .Values.initContainer.groupID }}      containers:
+          runAsGroup: {{ .Values.initContainer.groupID }}
+      containers:
       - name: {{ .Values.controller.name }}
         image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         args:
