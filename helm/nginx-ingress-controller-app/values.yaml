@@ -127,6 +127,14 @@ controller:
 image:
   registry: quay.io
 
+initContainer:
+  name: sysctl
+  image:
+    repository: giantswarm/alpine
+    tag: 3.11.5-giantswarm
+  userID: 1000
+  groupID: 1000
+
 test:
   image:
     registry: quay.io

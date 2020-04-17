@@ -47,7 +47,30 @@ spec:
       serviceAccountName: {{ .Values.controller.name }}
       priorityClassName: system-cluster-critical
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
-      containers:
+      initContainers:
+      # Overall performance improvements
+      # See https://github.com/kubernetes/ingress-nginx/issues/1939
+      - name: {{ .Values.initContainer.name }}
+        command:
+        - sh
+        - -c
+        - |
+          set -o errexit
+          set -o xtrace
+          until sudo sysctl -w net.core.somaxconn=32768
+          do
+            sleep 60s
+          done
+          until sudo sysctl -w net.ipv4.ip_local_port_range="1024 65535"
+          do
+            sleep 60s
+          done
+        image: "{{ .Values.image.registry }}/{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+          runAsUser: {{ .Values.initContainer.userID }}
+          runAsGroup: {{ .Values.initContainer.groupID }}      containers:
       - name: {{ .Values.controller.name }}
         image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         args:
