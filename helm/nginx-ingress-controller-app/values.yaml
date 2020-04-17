@@ -9,12 +9,12 @@ baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
 
 # clusterID
 # The id of the cluster that this app is installed on.
-# This value is set automatically. It is not possible to override this value.
+# This value is set automatically. It is not possible to override.
 clusterID: uun5a
 
 # provider (aws|kvm|azure)
 # The provider that the cluster is running on.
-# This value is set automatically, it is not possible to override this value.
+# This value is set automatically, it is not possible to override.
 provider: kvm
 
 # cluster
@@ -22,21 +22,31 @@ provider: kvm
 cluster:
 
   # cluster.profile
-  # TODO: Explain what this does.
-  # This value is set automatically, it is not recommended that you override this value.
+  # Supported values are 1 for extra extra small, 2 for extra small, 3 for small,
+  # and currently any value higher than 3 when actual cluster profile is larger
+  # than small or unknown. By default HPA and PDB are disabled, and resource
+  # requests unset for extra extra small clusters and extra small clusters.
+  # On small clusters some small resource requests are made, HPA and PDB are
+  # enabled by default. On larger than small clusters HPA and PDB are enabled by
+  # default, and non-trivial resource requests set for some out-of-the-box
+  # guaranteed capacity.
+  # This value is set automatically, it is not possible to override.
   profile: 4
 
 # ingressController
 ingressController:
 
   # ingressController.legacy
-  # TODO: Explain what this does.
+  # Legacy or node pools cluster. On aws provider node pool clusters LoadBalancer
+  # service gets created. Dynamically calculated during cluster creation.
   # This value is set automatically, it is not recommended that you override this value.
   legacy: false
 
 # configmap
-# These values get applied directly to a configmap which configures the nginx-ingress-controller
-# For all the nginx configmap config options see  https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
+# These values get applied directly to a configmap which configures the
+# nginx-ingress-controller
+# For all the nginx configmap config options see:
+# https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
 
   # configmap.error-log-level
@@ -46,55 +56,72 @@ configmap:
   error-log-level: "notice"
 
   # configmap.hsts
-  # Disables setting a 'Strict-Transport-Security' header, which can be harmful.
+  # Enables or disables the HTTP Strict Transport Security (HSTS) header in
+  # servers running SSL.
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
 
   # configmap.max-worker-connections
+  # Sets the maximum number of simultaneous connections that can be opened by
+  # each worker process. 0 will use the value of max-worker-open-files.
   max-worker-connections: "0"
 
   # configmap.max-worker-open-files
+  # Sets the maximum number of files that can be opened by each worker process.
+  # The default of 0 means "max open files (system's limit) / worker-processes - 1024".
   max-worker-open-files: "0"
 
   # configmap.server-name-hash-bucket-size
+  # Sets the size of the bucket for the server names hash tables.
   # Increase hash table size to allow more server names for stability reasons
   server-name-hash-bucket-size: "1024"
 
   # configmap.server-tokens
+  # Controls whether to send NGINX Server header in responses and display NGINX
+  # version in error pages.
   server-tokens: "false"
 
   # configmap.worker-processes
+  # Sets the number of worker processes.
   worker-processes: "1"
 
   # configmap.worker-shutdown-timeout
-  # value of worker-shutdown-timeout should not be higher than configured `controller.terminationGracePeriodSeconds`
+  # Maximum amount of time NGINX worker processes should give active connections to drain.
+  # This should not be higher than controller.terminationGracePeriodSeconds
   worker-shutdown-timeout: "240s"
 
   # configmap.use-forwarded-headers
+  # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
   use-forwarded-headers: "true"
 
 # controller
-# TODO: Explain what this does.
+# Contains mostly configuration values that get applied to the kubernetes
+# resources that make up the ingress controller.
 controller:
 
   # controller.name
-  # TODO: Explain what this is for
+  # Gets applied to most metadata.name fields in the various resources that this
+  # chart creates.
   name: nginx-ingress-controller
 
   # controller.k8sAppLabel
-  # TODO: Explain what this is for
+  # Gets applied to the `app` label in the metadata.labels of the various resources
+  # that this chart creates.
   k8sAppLabel: nginx-ingress-controller
 
   # controller.replicaCount
-  # TODO: Explain what this is for
+  # Number of initial NGINX IC Deployment replicas.
   replicaCount: 1
 
   # controller.maxUnavailable
-  # TODO: Explain what this is for
+  # Configures maximum number of unavailable replicas while doing a
+  # rolling upgrade.
   maxUnavailable: 1
 
   # controller.minReadySeconds
   # minReadySeconds to avoid killing pods before we are ready
+  # Configures the minimum amount of time that a replica has to be
+  # ready before a rolling upgrade can proceed with the next replica.
   minReadySeconds: 0
 
   # controller.configmap
@@ -102,15 +129,15 @@ controller:
   configmap:
 
     # controller.configmap.name
-    # TODO: Explain what this is for
+    # The name that the configuration configmap will get. This is the configmap
+    # that gets filled with values from the `configmap` field in this values
+    # file.
     name: ingress-nginx
 
   # controller.image
-  # TODO: Explain what this is for
   image:
 
     # controller.image.repository
-    # TODO: Explain what this is for
     repository: giantswarm/nginx-ingress-controller
 
     # controller.image.tag
@@ -126,23 +153,19 @@ controller:
   role:
 
     # controller.role.name
-    # TODO: Explain what this is for
+    # The name tha the RBAC role will get.
     name: nginx-ingress-role
 
   # controller.service
-  # TODO: Explain what this is for
   service:
 
     # controller.service.aws
-    # TODO: Explain what this is for
+    # If true, create NodePort Service. Dynamically calculated during cluster creation.
     enabled: false
 
     # controller.service.type
-    # type applies only to AWS provider:
-    # - external (default)
-    # - internal
-    # ...
-    # TODO: Explain what this is for better
+    # Applies only to clusters running on AWS.
+    # Valid values: external, internal
     type: external
 
     # controller.service.nodePorts
@@ -157,15 +180,14 @@ controller:
       https: 30011
 
   # controller.metrics
-  # TODO: Explain what this is for
   metrics:
 
     # controller.metrics.enabled
-    # TODO: Explain what this is for
+    # If true, create the metrics Service for prometheus-operator support.
     enabled: false
 
     # controller.metrics.port
-    # TODO: Explain what this is for
+    # The port on which the metrics container is exposed.
     port: 10254
 
     # controller.metrics.service
@@ -173,21 +195,25 @@ controller:
     service:
 
       # controller.metrics.service.servicePort
-      # TODO: Explain what this is for
+      # Configures the port that the metrics service is listening on.
       servicePort: 9913
 
   # controller.resources
-  # TODO: Explain what this is for
   resources:
 
     # controller.resources.requests
-    # These are default resource requests when cluster profile is not known/determined or when cluster is larger than small
+    # These are default resource requests when the cluster profile is not
+    # known or when the cluster is larger than "small"
     requests:
       cpu: 2
       memory: 2.5Gi
 
   # controller.profile
-  # TODO: Explain what this is for
+  # Contains resource request profiles that could get selected based on the
+  # value of cluster.profile.
+  # A profile is a set of preconfigured values for the
+  # "spec.template.spec.containers.resources.requests" field of the Deployment
+  # resource.
   profile:
     # xxs (1) cluster profile - 1 worker node only - resource requests are not being set
     # xs (2) cluster profile - 2-3 worker nodes, max CPU < 4 - resource requests are not being set
@@ -200,13 +226,16 @@ controller:
           memory: 600Mi
 
   # controller.terminationGracePeriodSeconds
-  # allow the draining of connections up to five minutes
-  # this should not be lower than configmap.worker-shutdown-timeout
+  # The maximum amount of time NGINX Deployment replica is given to gracefully
+  # terminate. This should not be lower than configmap.worker-shutdown-timeout.
+  # The default value of 300 allows the draining of connections for up to
+  # five minutes
   # for more info see https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554
   # and important note in https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0
   terminationGracePeriodSeconds: 300
 
   # controller.lifecycle
+  # Configures NGINX controller container lifecycle hooks.
   lifecycle:
     # Enable graceful shutdowns and rolling updates with zero-downtime
     preStop:
@@ -215,7 +244,7 @@ controller:
         - /wait-shutdown
 
   # controller.autoscaling
-  # optional hpa settings
+  # Contains optional horizontal-pod-autoscaler (hpa) settings
   autoscaling:
     enabled: true
     minReplicas: 2
@@ -224,19 +253,32 @@ controller:
     targetMemoryUtilizationPercentage: 80
 
   # controller.annotationsPrefix
+  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
+  # container
   annotationsPrefix: nginx.ingress.kubernetes.io
 
   # controller.defaultSSLCertificate
+  # The Secret referred to by this flag contains the default certificate to be
+  # used when accessing the catch-all server. If this flag is not provided NGINX
+  # will use a self-signed certificate.
+  # Example value: "default/foo-tls".
+  # This is a replacement for deprecated configmap.default-ssl-certificate
+  # configuration property; if both are configured,
+  # configmap.default-ssl-certificate has precedence.
   defaultSSLCertificate: ""
 
   # controller.ingressClass
+  # The Ingress class, which the controller handles. This is a replacement for the
+  # deprecated configmap.ingress-class configuration property; if both are
+  # configured, configmap.ingress-class has precedence.
   ingressClass: nginx
 
   # controller.userID
-  # www-data -> uid 101
+  # The userID that the container will run as. 101 is the www-data user.
   userID: 101
 
   # controller.groupID
+  # The groupID that the container will run as.
   groupID: 101
 
 # image
@@ -244,11 +286,9 @@ image:
   registry: quay.io
 
 # test
-# TODO: Explain what this is for
 test:
 
   # test.image
-  # TODO: Explain what this is for
   image:
     registry: quay.io
     repository: giantswarm/alpine-testing
