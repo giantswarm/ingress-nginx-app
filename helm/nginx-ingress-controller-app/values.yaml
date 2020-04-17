@@ -1,89 +1,193 @@
 # Default values for nginx-ingress-controller-app.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# You can override some of these values by setting your own values when creating
+# your app. See https://docs.giantswarm.io/reference/app-configuration/
 
-# baseDomain is a dynamic value, it comes from the cluster values configmap
-# applies only to Giant Swarm clusters
+# baseDomain
+# The base domain for this ingress.
+# This value is set automatically. It is not possible to override this value.
 baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
-# clusterID is dynamic environment value, calculated after cluster creation
-# applies only to Giant Swarm clusters
+
+# clusterID
+# The id of the cluster that this app is installed on.
+# This value is set automatically. It is not possible to override this value.
 clusterID: uun5a
-# provider is dynamic environment value, which comes from application catalog configuration
-# applies only to Giant Swarm clusters
+
+# provider (aws|kvm|azure)
+# The provider that the cluster is running on.
+# This value is set automatically, it is not possible to override this value.
 provider: kvm
-# cluster.profile is a dynamic value, it comes from the cluster values configmap
-# applies only to Giant Swarm clusters
+
+# cluster
+# TODO: Contains values that are important for WHAT
 cluster:
+
+  # cluster.profile
+  # TODO: Explain what this does.
+  # This value is set automatically, it is not recommended that you override this value.
   profile: 4
-# ingressController is dynamic environment value, which comes from application catalog configuration
-# applies only to Giant Swarm clusters
+
+# ingressController
 ingressController:
+
+  # ingressController.legacy
+  # TODO: Explain what this does.
+  # This value is set automatically, it is not recommended that you override this value.
   legacy: false
 
-# for all the nginx configmap config options see https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
+# configmap
+# These values get applied directly to a configmap which configures the nginx-ingress-controller
+# For all the nginx configmap config options see  https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
+
+  # configmap.error-log-level
+  # Configures the logging level of errors.
+  # Valid values: debug, info, notice, warn, error, crit, alert, or emerg
+  # References: http://nginx.org/en/docs/ngx_core_module.html#error_log
   error-log-level: "notice"
+
+  # configmap.hsts
   # Disables setting a 'Strict-Transport-Security' header, which can be harmful.
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
+
+  # configmap.max-worker-connections
   max-worker-connections: "0"
+
+  # configmap.max-worker-open-files
   max-worker-open-files: "0"
+
+  # configmap.server-name-hash-bucket-size
   # Increase hash table size to allow more server names for stability reasons
   server-name-hash-bucket-size: "1024"
+
+  # configmap.server-tokens
   server-tokens: "false"
+
+  # configmap.worker-processes
   worker-processes: "1"
+
+  # configmap.worker-shutdown-timeout
   # value of worker-shutdown-timeout should not be higher than configured `controller.terminationGracePeriodSeconds`
   worker-shutdown-timeout: "240s"
+
+  # configmap.use-forwarded-headers
   use-forwarded-headers: "true"
 
+# controller
+# TODO: Explain what this does.
 controller:
+
+  # controller.name
+  # TODO: Explain what this is for
   name: nginx-ingress-controller
+
+  # controller.k8sAppLabel
+  # TODO: Explain what this is for
   k8sAppLabel: nginx-ingress-controller
 
+  # controller.replicaCount
+  # TODO: Explain what this is for
   replicaCount: 1
 
+  # controller.maxUnavailable
+  # TODO: Explain what this is for
   maxUnavailable: 1
+
+  # controller.minReadySeconds
   # minReadySeconds to avoid killing pods before we are ready
   minReadySeconds: 0
 
+  # controller.configmap
+  # TODO: Explain what this is for
   configmap:
+
+    # controller.configmap.name
+    # TODO: Explain what this is for
     name: ingress-nginx
 
+  # controller.image
+  # TODO: Explain what this is for
   image:
+
+    # controller.image.repository
+    # TODO: Explain what this is for
     repository: giantswarm/nginx-ingress-controller
-    # when updating tag make sure to also keep appVersion in Chart.yaml in sync
+
+    # controller.image.tag
+    # When updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: 0.30.0
 
+  # controller.rbac
+  # TODO: Explain what this is for
   rbac:
 
+  # controller.role
+  # TODO: Explain what this is for
   role:
+
+    # controller.role.name
+    # TODO: Explain what this is for
     name: nginx-ingress-role
 
+  # controller.service
+  # TODO: Explain what this is for
   service:
+
+    # controller.service.aws
+    # TODO: Explain what this is for
     enabled: false
+
+    # controller.service.type
     # type applies only to AWS provider:
     # - external (default)
     # - internal
     # ...
+    # TODO: Explain what this is for better
     type: external
+
+    # controller.service.nodePorts
     # Sets the NodePorts that maps to the Ingress' ports 80 (http) and 443 (https).
     # nodePort service type is not created for AWS provider as LoadBalancer is used there.
     nodePorts:
+
+      # controller.service.nodePorts.http
       http: 30010
+
+      # controller.service.nodePorts.https
       https: 30011
 
+  # controller.metrics
+  # TODO: Explain what this is for
   metrics:
+
+    # controller.metrics.enabled
+    # TODO: Explain what this is for
     enabled: false
+
+    # controller.metrics.port
+    # TODO: Explain what this is for
     port: 10254
 
+    # controller.metrics.service
+    # TODO: Explain what this is for
     service:
+
+      # controller.metrics.service.servicePort
+      # TODO: Explain what this is for
       servicePort: 9913
 
+  # controller.resources
+  # TODO: Explain what this is for
   resources:
-    # these are default resource requests when cluster profile is not known/determined or when cluster is larger than small
+
+    # controller.resources.requests
+    # These are default resource requests when cluster profile is not known/determined or when cluster is larger than small
     requests:
       cpu: 2
       memory: 2.5Gi
+
+  # controller.profile
+  # TODO: Explain what this is for
   profile:
     # xxs (1) cluster profile - 1 worker node only - resource requests are not being set
     # xs (2) cluster profile - 2-3 worker nodes, max CPU < 4 - resource requests are not being set
@@ -95,11 +199,14 @@ controller:
           cpu: 500m
           memory: 600Mi
 
+  # controller.terminationGracePeriodSeconds
   # allow the draining of connections up to five minutes
   # this should not be lower than configmap.worker-shutdown-timeout
   # for more info see https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554
   # and important note in https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0
   terminationGracePeriodSeconds: 300
+
+  # controller.lifecycle
   lifecycle:
     # Enable graceful shutdowns and rolling updates with zero-downtime
     preStop:
@@ -107,6 +214,7 @@ controller:
         command:
         - /wait-shutdown
 
+  # controller.autoscaling
   # optional hpa settings
   autoscaling:
     enabled: true
@@ -115,19 +223,32 @@ controller:
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 80
 
-  # command args options
+  # controller.annotationsPrefix
   annotationsPrefix: nginx.ingress.kubernetes.io
+
+  # controller.defaultSSLCertificate
   defaultSSLCertificate: ""
+
+  # controller.ingressClass
   ingressClass: nginx
 
+  # controller.userID
   # www-data -> uid 101
   userID: 101
+
+  # controller.groupID
   groupID: 101
 
+# image
 image:
   registry: quay.io
 
+# test
+# TODO: Explain what this is for
 test:
+
+  # test.image
+  # TODO: Explain what this is for
   image:
     registry: quay.io
     repository: giantswarm/alpine-testing
