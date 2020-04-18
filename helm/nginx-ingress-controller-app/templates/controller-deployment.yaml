@@ -55,16 +55,9 @@ spec:
         - sh
         - -c
         - |
-          set -o errexit
-          set -o xtrace
-          until sudo sysctl -w net.core.somaxconn=32768
-          do
-            sleep 60s
-          done
-          until sudo sysctl -w net.ipv4.ip_local_port_range="1024 65535"
-          do
-            sleep 60s
-          done
+          set -o errexit ; set -o xtrace ; set -o nounset
+
+          sudo sysctl -w net.ipv4.ip_local_port_range="1024 65535"
         image: "{{ .Values.image.registry }}/{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
         imagePullPolicy: IfNotPresent
         securityContext:
