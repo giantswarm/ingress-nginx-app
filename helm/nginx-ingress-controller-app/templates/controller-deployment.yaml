@@ -57,7 +57,7 @@ spec:
         - |
           set -o errexit ; set -o xtrace ; set -o nounset
 
-          sudo sysctl -w net.ipv4.ip_local_port_range="1024 65535"
+          sudo sysctl -w net.core.somaxconn=32768
         image: "{{ .Values.image.registry }}/{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
         imagePullPolicy: IfNotPresent
         securityContext:
