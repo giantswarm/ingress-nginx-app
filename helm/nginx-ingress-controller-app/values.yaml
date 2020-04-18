@@ -131,7 +131,7 @@ initContainer:
   name: sysctl
   image:
     repository: giantswarm/alpine
-    tag: 3.9-giantswarm-sysctl
+    tag: 3.10-giantswarm-sysctl
   userID: 1000
   groupID: 1000
 
