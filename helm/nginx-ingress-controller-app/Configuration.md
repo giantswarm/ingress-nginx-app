@@ -22,11 +22,9 @@ Parameter | Description | Default
 `configmap.ingress-class` | This configuration property is deprecated and will be removed in the future, please migrate to `controller.ingressClass`. | not configured by default
 `configmap.error-log-level` | Configures the logging level of errors. | "notice"
 `configmap.hsts` | Enables or disables the HTTP Strict Transport Security (HSTS) header in servers running SSL. | "false"
-`configmap.max-worker-connections` | Sets the maximum number of simultaneous connections that can be opened by each worker process. 0 will use the value of `max-worker-open-files`. | "0"
-`configmap.max-worker-open-files` | Sets the maximum number of files that can be opened by each worker process. The default of 0 means "max open files (system's limit) / worker-processes - 1024". | "0"
 `configmap.server-name-hash-bucket-size` | Sets the size of the bucket for the server names hash tables. | "1024"
 `configmap.server-tokens` | Controlls whether to send NGINX Server header in responses and display NGINX version in error pages. | "false"
-`configmap.worker-processes` | Sets the number of worker processes. | "1"
+`configmap.worker-processes` | Sets the number of worker processes. | "4"
 `configmap.worker-shutdown-timeout` | Maximum amount of time NGINX worker processes should give active connections to drain. This should not be higher than `controller.terminationGracePeriodSeconds` | "240s"
 `configmap.use-forwarded-headers` | If true, NGINX passes the incoming `X-Forwarded-*` headers to upstreams. | "true"
 `controller.annotationsPrefix` | Prefix of the Ingress annotations specific to the NGINX controller. This is a replacement for deprecated `configmap.annotations-prefix` configuration property; if both are configured, `configmap.annotations-prefix` has precedence. | `nginx.ingress.kubernetes.io`

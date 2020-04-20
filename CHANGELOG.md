@@ -9,6 +9,9 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Use `4` worker processes by default.
+- Use upstream default of max-worker-connections of `16384`.
+
 ## [v1.6.8] 2020-04-09
 
 ### Changed
