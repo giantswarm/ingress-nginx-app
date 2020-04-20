@@ -115,16 +115,6 @@ spec:
       namespace: abc12
 ```
 
-## Important note about required cluster level config
-
-The `ingress-controller-values` ConfigMap referenced in the `spec.config` field of the App CR
-is required for the ingress controller to work properly.
-
-`ingress-controller-values` is created by our operators and it helps set values unique to your tenant cluster. When creating this App using our web interface or our API,
-`spec.config` will be set automatically, but if you are creating the App CR
-yourself you must remember to do this. We are working on a kubectl plugin to
-facilitate this process.
-
 ```
 # user-values-configmap.yaml
 
@@ -150,6 +140,16 @@ command: `kubectl apply foldername`, to deploy this app to a tenant cluster
 with id `abc12`.
 
 See our [full reference page on how to configure applications](https://docs.giantswarm.io/reference/app-configuration/) for more details.
+
+## Important note about required cluster level config
+
+The `ingress-controller-values` ConfigMap referenced in the `spec.config` field of the App CR
+is required for the ingress controller to work properly.
+
+`ingress-controller-values` is created by our operators and it helps set values unique to your tenant cluster. When creating this App using our web interface or our API,
+`spec.config` will be set automatically, but if you are creating the App CR
+yourself you must remember to do this. We are working on a kubectl plugin to
+facilitate this process.
 
 # Configuration Options
 
