@@ -12,19 +12,24 @@ Read more in: [What is this repo?](#what-is-this-repo)
 
 This App installs the [nginx ingress controller] onto your tenant cluster.
 
-Its job is to satisfy external requests to services running in the cluster. See the [kubernetes ingress docs] for more higher level details.
+Its job is to satisfy external requests to services running in the cluster.
+See the [kubernetes ingress docs] for more higher level details.
 
-Some of our clusters do not come with an ingress controller installed by default, that way you can pick one of the implementations that best suits your needs. This is one of the more popular ingress controllers.
+Some of our clusters do not come with an ingress controller installed by default,
+that way you can pick one of the implementations that best suits your needs.
+This is one of the more popular ingress controllers.
 
-Ingress controllers watch the kubernetes api server's `/ingresses` endpoint for updates to the Ingress resource.
+Ingress controllers watch the kubernetes api server's `/ingresses` endpoint for
+updates to the Ingress resource.
 
 **Table of Contents:**
 
 - [nginx Ingress Controller App](#nginx-ingress-controller-app)
-- [Usage](#usage)
-  - [Sample values files](#sample-values-files)
-  - [Sample App CR and ConfigMap](#sample-app-cr-and-configmap)
-- [Configuration](#configuration)
+- [Installing](#installing)
+  - [Sample values files for the web interface and API](#sample-values-files-for-the-web-interface-and-api)
+  - [Sample App CR and ConfigMap for the Control Plane](#sample-app-cr-and-configmap-for-the-control-plane)
+  - [Important note about required cluster level config](#important-note-about-required-cluster-level-config)
+- [Configuration Options](#configuration-options)
 - [Limitations](#limitations)
 - [For developers](#for-developers)
   - [Installing the Chart locally](#installing-the-chart-locally)
@@ -32,65 +37,134 @@ Ingress controllers watch the kubernetes api server's `/ingresses` endpoint for 
 - [What is this repo?](#what-is-this-repo)
 
 
-# Usage
+# Installing
 
+There are 3 ways to install this app onto a tenant cluster.
 
+1. [Using our web interface](https://docs.giantswarm.io/reference/web-interface/app-catalog/)
+2. [Using our API](https://docs.giantswarm.io/api/#operation/createClusterAppV5)
+3. Directly creating the App custom resource on the Control Plane.
 
-## Sample values files
+## Sample values files for the web interface and API
 
 This is an example of the values file you could upload using our web interface.
 
 ```
 # values.yaml
 
-app: hello
-yolo: bolo
+configmap:
+  error-log-level: info
 ```
 
-If you are not using the web interface, our (deprecated) API takes the same structure but formatted as JSON:
+If you are not using the web interface, our (deprecated) API takes the same
+structure but formatted as JSON:
 
 ```
 # values.json
 
 {
-  "app": "hello",
-  "yolo": "bolo",
+  "configmap": {
+    "error-log-level": "info"
+  }
 }
 ```
 
-## Sample App CR and ConfigMap
+## Sample App CR and ConfigMap for the Control Plane
 
-If you have access to the Kubernetes API on the Control Plane, you could create the App CR and ConfigMap directly. Here is an example:
+If you have access to the Kubernetes API on the Control Plane, you could create
+the App CR and ConfigMap directly. Here is an example:
 
 ```
 # appCR.yaml
+apiVersion: application.giantswarm.io/v1alpha1
+kind: App
+metadata:
+  labels:
+    app-operator.giantswarm.io/version: 1.0.0
+  name: nginx-ingress-controller-app
+  namespace: abc12
 
-WIP
+spec:
+  name: nginx-ingress-controller-app
+  namespace: kube-system
+  catalog: giantswarm
+  version: 1.6.8
+
+  userConfig:
+    configMap:
+      name: nginx-ingress-controller-user-values
+      namespace: abc12
+    secret:
+      name: ""
+      namespace: ""
+
+  config:
+    configMap:
+      name: ingress-controller-values
+      namespace: abc12
+    secret:
+      name: ""
+      namespace: ""
+
+  kubeConfig:
+    context:
+      name: abc12-kubeconfig
+    inCluster: false
+    secret:
+      name: abc12-kubeconfig
+      namespace: abc12
 ```
+
+## Important note about required cluster level config
+
+The `ingress-controller-values` ConfigMap referenced in the `spec.config` field of the App CR
+is required for the ingress controller to work properly.
+
+`ingress-controller-values` is created by our operators and it helps set values unique to your tenant cluster. When creating this App using our web interface or our API,
+`spec.config` will be set automatically, but if you are creating the App CR
+yourself you must remember to do this. We are working on a kubectl plugin to
+facilitate this process.
 
 ```
 # user-values-configmap.yaml
 
-WIP
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: nginx-ingress-controller-user-values
+  namespace: abc12
+
+data:
+  values: |
+    configmap:
+      error-log-level: info
 ```
 
-If you feel like any of the configuration values need to be encrypted at rest, you can also provide a secret. For this app we don't think there are any configuration values that need to be encrypted.
+If you feel like any of the configuration values need to be encrypted at rest,
+you can also provide a secret. For this app we don't think there are any
+configuration values that need to be encrypted.
 
-If you place these files in a folder called `foldername`, you could use the command: `kubectl apply foldername`, to deploy this app to a tenant cluster with id `s4mpl`.
+If you place these files in a folder called `foldername`, you could use the
+command: `kubectl apply foldername`, to deploy this app to a tenant cluster
+with id `abc12`.
 
 See our [full reference page on how to configure applications](https://docs.giantswarm.io/reference/app-configuration/) for more details.
 
-# Configuration
+# Configuration Options
 
 All configuration options are documented in the [values.yaml](/helm/nginx-ingress-controller-app/values.yaml) file.
 
 # Limitations
 
-Some of our apps have certain restrictions on how they can be deployed. Not following these limitations will most likely result in a broken deployment.
+Some of our apps have certain restrictions on how they can be deployed.
+Not following these limitations will most likely result in a broken deployment.
 
 - This app _must_ be installed in the `kube-system` namespace.
 
 - This app _must_ not be installed more than once.
+
+- This app _must_ reference the `ingress-controller-values` ConfigMap in its `spec.config` field.
 
 # For developers
 
@@ -122,12 +196,15 @@ changelog entry.
 # What is this repo?
 
 This repo contains a helm chart for the [Giant Swarm App Platform].
+While it is _just a Helm chart_, there might be some Giant Swarm App Platform
+specific values in the templates.
 
-This helm chart is available as an `App` in the `giantswarm-catalog` and `giantswarm-test-catalog`.
+It is available as an `App` in the `giantswarm-catalog` and `giantswarm-test-catalog`.
 
-It is also availabe in the `default-catalog` and the `default-test-catalog`
-
-While it is _just a Helm chart_, there might be some Giant Swarm App Platform specific values in the templates.
+You will also find it in the `default-catalog` and the `default-test-catalog`,
+those catalogs are not visible in our web interface. This is to support the
+platforms and cluster versions where the nginx ingress controller is still a
+default app (i.e. it gets installed automatically during cluster creation)
 
 [app-operator]: https://github.com/giantswarm/app-operator
 [cluster-operator]: https://github.com/giantswarm/cluster-operator
