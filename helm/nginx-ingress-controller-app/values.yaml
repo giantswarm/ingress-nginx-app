@@ -262,6 +262,7 @@ image:
   registry: quay.io
 
 #initContainer
+# TODO: Explain and determine if this is a user level config or not.
 initContainer:
   name: sysctl
   image:
