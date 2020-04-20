@@ -13,7 +13,7 @@ Read more in: [What is this repo?](#what-is-this-repo)
 This App installs the [nginx ingress controller] onto your tenant cluster.
 
 Its job is to satisfy external requests to services running in the cluster.
-See the [kubernetes ingress docs] for more higher level details.
+See the [kubernetes ingress docs] for a higher level overview.
 
 Some of our clusters do not come with an ingress controller installed by default,
 that way you can pick one of the implementations that best suits your needs.
@@ -72,7 +72,10 @@ structure but formatted as JSON:
 ## Sample App CR and ConfigMap for the Control Plane
 
 If you have access to the Kubernetes API on the Control Plane, you could create
-the App CR and ConfigMap directly. Here is an example:
+the App CR and ConfigMap directly.
+
+Here is an example that would install the nginx-ingress-controller-app to
+tenant cluster `abc12`:
 
 ```
 # appCR.yaml
@@ -82,6 +85,9 @@ metadata:
   labels:
     app-operator.giantswarm.io/version: 1.0.0
   name: nginx-ingress-controller-app
+
+  # Tenant cluster resources live in a namespace with the same ID as the
+  # tenant cluster.
   namespace: abc12
 
 spec:
@@ -146,8 +152,9 @@ See our [full reference page on how to configure applications](https://docs.gian
 The `ingress-controller-values` ConfigMap referenced in the `spec.config` field of the App CR
 is required for the ingress controller to work properly.
 
-`ingress-controller-values` is created by our operators and it helps set values unique to your tenant cluster. When creating this App using our web interface or our API,
-`spec.config` will be set automatically, but if you are creating the App CR
+`ingress-controller-values` is created by our operators and it helps set values
+unique to your tenant cluster. When creating this App using our web interface or
+our API, `spec.config` will be set automatically, but if you are creating the App CR
 yourself you must remember to do this. We are working on a kubectl plugin to
 facilitate this process.
 
