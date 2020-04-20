@@ -9,6 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Restrict PodSecurityPolicy volumes to only those required (removes wildcard).
+
 ## [v1.6.8] 2020-04-09
 
 ### Changed
