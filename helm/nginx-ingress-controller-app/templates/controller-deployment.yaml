@@ -20,6 +20,7 @@ spec:
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: {{ .Values.controller.maxUnavailable }}
+  minReadySeconds: {{ .Values.controller.minReadySeconds }}
   template:
     metadata:
       labels:
@@ -27,7 +28,7 @@ spec:
         giantswarm.io/service-type: "managed"
         k8s-app: {{ .Values.controller.k8sAppLabel }}
       annotations:
-        releasetime: {{ $.Release.Time }}
+        releaseRevision: {{ $.Release.Revision | quote }}
         scheduler.alpha.kubernetes.io/critical-pod: ''
         cluster-autoscaler.kubernetes.io/safe-to-evict: 'true'
     spec:
@@ -45,6 +46,24 @@ spec:
               topologyKey: kubernetes.io/hostname
       serviceAccountName: {{ .Values.controller.name }}
       priorityClassName: system-cluster-critical
+      terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
+      initContainers:
+      # Overall performance improvements
+      # See https://github.com/kubernetes/ingress-nginx/issues/1939
+      - name: {{ .Values.initContainer.name }}
+        command:
+        - sh
+        - -c
+        - |
+          set -o errexit ; set -o xtrace ; set -o nounset
+
+          sudo sysctl -w net.core.somaxconn=32768
+        image: "{{ .Values.image.registry }}/{{ .Values.initContainer.image.repository }}:{{ .Values.initContainer.image.tag }}"
+        imagePullPolicy: IfNotPresent
+        securityContext:
+          privileged: true
+          runAsUser: {{ .Values.initContainer.userID }}
+          runAsGroup: {{ .Values.initContainer.groupID }}
       containers:
       - name: {{ .Values.controller.name }}
         image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
@@ -62,7 +81,6 @@ spec:
         - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
         {{- end}}
         - --enable-ssl-chain-completion=false
-        - --enable-dynamic-certificates=true
         {{- if index .Values.configmap "ingress-class" }}
         - --ingress-class={{ index .Values.configmap "ingress-class" }}
         {{- else if .Values.controller.ingressClass }}
@@ -80,6 +98,9 @@ spec:
               - NET_BIND_SERVICE
           runAsUser: {{ .Values.controller.userID }}
           runAsGroup: {{ .Values.controller.groupID }}
+          sysctl:
+          - name: net.ipv4.ip_local_port_range
+            value: "1024 65535"
         env:
         - name: POD_NAME
           valueFrom:
@@ -112,12 +133,7 @@ spec:
           initialDelaySeconds: 10
           timeoutSeconds: 1
         lifecycle:
-          # Enable graceful shutdowns and rolling updates with zero-downtime
-          preStop:
-            exec:
-              command:
-              - sleep
-              - "60"
+{{ toYaml .Values.controller.lifecycle | indent 10 }}
         ports:
         - name: http
           containerPort: 80

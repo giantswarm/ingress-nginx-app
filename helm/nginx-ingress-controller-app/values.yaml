@@ -22,14 +22,18 @@ ingressController:
 
 # for all the nginx configmap config options see https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
-  error-log-level: "error"
+  error-log-level: "notice"
   # Disables setting a 'Strict-Transport-Security' header, which can be harmful.
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
+  max-worker-connections: "0"
+  max-worker-open-files: "0"
   # Increase hash table size to allow more server names for stability reasons
   server-name-hash-bucket-size: "1024"
   server-tokens: "false"
   worker-processes: "1"
+  # value of worker-shutdown-timeout should not be higher than configured `controller.terminationGracePeriodSeconds`
+  worker-shutdown-timeout: "240s"
   use-forwarded-headers: "true"
 
 controller:
@@ -39,6 +43,8 @@ controller:
   replicaCount: 1
 
   maxUnavailable: 1
+  # minReadySeconds to avoid killing pods before we are ready
+  minReadySeconds: 0
 
   configmap:
     name: ingress-nginx
@@ -89,13 +95,25 @@ controller:
           cpu: 500m
           memory: 600Mi
 
+  # allow the draining of connections up to five minutes
+  # this should not be lower than configmap.worker-shutdown-timeout
+  # for more info see https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554
+  # and important note in https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0
+  terminationGracePeriodSeconds: 300
+  lifecycle:
+    # Enable graceful shutdowns and rolling updates with zero-downtime
+    preStop:
+      exec:
+        command:
+        - /wait-shutdown
+
   # optional hpa settings
   autoscaling:
     enabled: true
     minReplicas: 2
     maxReplicas: 20
     targetCPUUtilizationPercentage: 50
-    targetMemoryUtilizationPercentage: 50
+    targetMemoryUtilizationPercentage: 80
 
   # command args options
   annotationsPrefix: nginx.ingress.kubernetes.io
@@ -108,6 +126,14 @@ controller:
 
 image:
   registry: quay.io
+
+initContainer:
+  name: sysctl
+  image:
+    repository: giantswarm/alpine
+    tag: 3.10-giantswarm-sysctl
+  userID: 1000
+  groupID: 1000
 
 test:
   image:
