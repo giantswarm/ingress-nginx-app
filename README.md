@@ -198,7 +198,7 @@ $ helm install nginx-ingress-controller-app -f values.yaml
 changelog entry.
 * This will push a new git tag and trigger a new tarball to be pushed to the
 [giantswarm-catalog] and [default-catalog].
-* Update [cluster-operator] with the new version.
+* Test and verify the ingress controller release across supported environments in a new or existing WIP platform release.
 
 # What is this repo?
 
@@ -214,7 +214,6 @@ platforms and cluster versions where the nginx ingress controller is still a
 default app (i.e. it gets installed automatically during cluster creation)
 
 [app-operator]: https://github.com/giantswarm/app-operator
-[cluster-operator]: https://github.com/giantswarm/cluster-operator
 [giantswarm-catalog]: https://github.com/giantswarm/giantswarm-catalog
 [giantswarm-test-catalog]: https://github.com/giantswarm/giantswarm-test-catalog
 [default-catalog]: https://github.com/giantswarm/default-catalog
