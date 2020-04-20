@@ -9,6 +9,9 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Restrict PodSecurityPolicy volumes to only those required (removes wildcard).
+- Tune `net.ipv4.ip_local_port_range` to `1024 65535` as a safe sysctl.
+- Tune `net.core.somaxconn` to `32768` via an initContainer with privilege escalation.
 - Use `4` worker processes by default.
 - Use upstream default of max-worker-connections of `16384`.
 
