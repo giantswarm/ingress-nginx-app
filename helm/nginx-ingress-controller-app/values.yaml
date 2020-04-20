@@ -1,9 +1,30 @@
-# Default values for nginx-ingress-controller-app.
-# You can override some of these values by setting your own values when creating
+# Default values for the nginx-ingress-controller-app.
+# You can set some of these values by supplying your own values when creating
 # your app. See https://docs.giantswarm.io/reference/app-configuration/
+
+# -----------------------------------------------------------------------------#
 
 # DO NOT copy this entire file and use it as your values file. This will impede
 # upgrading and our own ability to correct issues with the base configuration.
+
+# -----------------------------------------------------------------------------#
+
+# Deprecations
+# Various values in the `configmap` key have been moved to the `controller`
+# key instead. These values are thus deprecated and it is recommended that you
+# use the alternative. When the value is still present in the `configmap` key,
+# then it will take presedence.
+
+# configmap.annotations-prefix                       -> controller.annotationsPrefix
+# configmap.default-ssl-certificate                  -> controller.defaultSSLCertificate
+# configmap.hpa-enabled                              -> controller.autoscaling.enabled
+# configmap.hpa-max-replicas                         -> controller.autoscaling.maxReplicas
+# configmap.hpa-min-replicas                         -> controller.autoscaling.minReplicas
+# configmap.hpa-target-cpu-utilization-percentage    -> controller.autoscaling.targetCPUUtilizationPercentage
+# configmap.hpa-target-memory-utilization-percentage -> controller.autoscaling.targetMemoryUtilizationPercentage
+# configmap.ingress-class                            -> controller.ingressClass
+
+# -----------------------------------------------------------------------------#
 
 # configmap
 # These values get applied directly to a configmap which configures the
@@ -213,11 +234,16 @@ controller:
     minReplicas: 2
     maxReplicas: 20
     targetCPUUtilizationPercentage: 50
+
+    # Configures HPA target memory utilization percentage.
+    # This is a replacement for deprecated configmap.hpa-target-memory-utilization-percentage
+    # configuration property; if both are configured,
+    # configmap.hpa-target-memory-utilization-percentage has precedence.
     targetMemoryUtilizationPercentage: 80
 
   # controller.annotationsPrefix
   # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
-  # container
+  # container.
   annotationsPrefix: nginx.ingress.kubernetes.io
 
   # controller.defaultSSLCertificate
@@ -225,15 +251,10 @@ controller:
   # used when accessing the catch-all server. If this flag is not provided NGINX
   # will use a self-signed certificate.
   # Example value: "default/foo-tls".
-  # This is a replacement for deprecated configmap.default-ssl-certificate
-  # configuration property; if both are configured,
-  # configmap.default-ssl-certificate has precedence.
   defaultSSLCertificate: ""
 
   # controller.ingressClass
-  # The Ingress class, which the controller handles. This is a replacement for the
-  # deprecated configmap.ingress-class configuration property; if both are
-  # configured, configmap.ingress-class has precedence.
+  # The Ingress class, which the controller handles.
   ingressClass: nginx
 
   # controller.userID
