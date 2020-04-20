@@ -26,12 +26,10 @@ configmap:
   # Disables setting a 'Strict-Transport-Security' header, which can be harmful.
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
-  max-worker-connections: "0"
-  max-worker-open-files: "0"
   # Increase hash table size to allow more server names for stability reasons
   server-name-hash-bucket-size: "1024"
   server-tokens: "false"
-  worker-processes: "1"
+  worker-processes: "4"
   # value of worker-shutdown-timeout should not be higher than configured `controller.terminationGracePeriodSeconds`
   worker-shutdown-timeout: "240s"
   use-forwarded-headers: "true"
