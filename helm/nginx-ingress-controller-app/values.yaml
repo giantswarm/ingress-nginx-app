@@ -1,87 +1,170 @@
-# Default values for nginx-ingress-controller-app.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
+# Default values for the nginx-ingress-controller-app.
+# You can set some of these values by supplying your own values when creating
+# your app. See https://docs.giantswarm.io/reference/app-configuration/
 
-# baseDomain is a dynamic value, it comes from the cluster values configmap
-# applies only to Giant Swarm clusters
-baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
-# clusterID is dynamic environment value, calculated after cluster creation
-# applies only to Giant Swarm clusters
-clusterID: uun5a
-# provider is dynamic environment value, which comes from application catalog configuration
-# applies only to Giant Swarm clusters
-provider: kvm
-# cluster.profile is a dynamic value, it comes from the cluster values configmap
-# applies only to Giant Swarm clusters
-cluster:
-  profile: 4
-# ingressController is dynamic environment value, which comes from application catalog configuration
-# applies only to Giant Swarm clusters
-ingressController:
-  legacy: false
+# -----------------------------------------------------------------------------#
 
-# for all the nginx configmap config options see https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
+# DO NOT copy this entire file and use it as your values file. This will impede
+# upgrading and our own ability to correct issues with the base configuration.
+
+# -----------------------------------------------------------------------------#
+
+# Deprecations
+# Various values in the `configmap` key have been moved to the `controller`
+# key instead. These values are thus deprecated and it is recommended that you
+# use the alternative. When the value is still present in the `configmap` key,
+# then it will take presedence.
+
+# configmap.annotations-prefix                       -> controller.annotationsPrefix
+# configmap.default-ssl-certificate                  -> controller.defaultSSLCertificate
+# configmap.hpa-enabled                              -> controller.autoscaling.enabled
+# configmap.hpa-max-replicas                         -> controller.autoscaling.maxReplicas
+# configmap.hpa-min-replicas                         -> controller.autoscaling.minReplicas
+# configmap.hpa-target-cpu-utilization-percentage    -> controller.autoscaling.targetCPUUtilizationPercentage
+# configmap.hpa-target-memory-utilization-percentage -> controller.autoscaling.targetMemoryUtilizationPercentage
+# configmap.ingress-class                            -> controller.ingressClass
+
+# -----------------------------------------------------------------------------#
+
+# configmap
+# These values get applied directly to a configmap which configures the
+# nginx-ingress-controller
+# For all the nginx configmap config options see:
+# https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
+
+  # configmap.error-log-level
+  # Configures the logging level of errors.
+  # Valid values: debug, info, notice, warn, error, crit, alert, or emerg
+  # References: http://nginx.org/en/docs/ngx_core_module.html#error_log
   error-log-level: "notice"
-  # Disables setting a 'Strict-Transport-Security' header, which can be harmful.
+
+  # configmap.hsts
+  # Enables or disables the HTTP Strict Transport Security (HSTS) header in
+  # servers running SSL.
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
+
+  # configmap.server-name-hash-bucket-size
+  # Sets the size of the bucket for the server names hash tables.
   # Increase hash table size to allow more server names for stability reasons
   server-name-hash-bucket-size: "1024"
+
+  # configmap.server-tokens
+  # Controls whether to send NGINX Server header in responses and display NGINX
+  # version in error pages.
   server-tokens: "false"
+
+  # configmap.worker-processes
+  # Sets the number of worker processes.
   worker-processes: "4"
-  # value of worker-shutdown-timeout should not be higher than configured `controller.terminationGracePeriodSeconds`
+
+  # configmap.worker-shutdown-timeout
+  # Maximum amount of time NGINX worker processes should give active connections to drain.
+  # This should not be higher than controller.terminationGracePeriodSeconds
   worker-shutdown-timeout: "240s"
+
+  # configmap.use-forwarded-headers
+  # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
   use-forwarded-headers: "true"
 
+# controller
+# Contains mostly configuration values that get applied to the kubernetes
+# resources that make up the ingress controller.
 controller:
+
+  # controller.name
+  # Gets applied to most metadata.name fields in the various resources that this
+  # chart creates.
   name: nginx-ingress-controller
+
+  # controller.k8sAppLabel
+  # Gets applied to the `app` label in the metadata.labels of the various resources
+  # that this chart creates.
   k8sAppLabel: nginx-ingress-controller
 
+  # controller.replicaCount
+  # Number of initial NGINX IC Deployment replicas.
   replicaCount: 1
 
+  # controller.maxUnavailable
+  # Configures maximum number of unavailable replicas while doing a
+  # rolling upgrade.
   maxUnavailable: 1
+
+  # controller.minReadySeconds
   # minReadySeconds to avoid killing pods before we are ready
+  # Configures the minimum amount of time that a replica has to be
+  # ready before a rolling upgrade can proceed with the next replica.
   minReadySeconds: 0
 
+  # controller.configmap
+  # TODO: Explain what this is for
   configmap:
+
+    # controller.configmap.name
+    # The name that the configuration configmap will get. This is the configmap
+    # that gets filled with values from the `configmap` field in this values
+    # file.
     name: ingress-nginx
 
+  # controller.image
   image:
+
+    # controller.image.repository
     repository: giantswarm/nginx-ingress-controller
-    # when updating tag make sure to also keep appVersion in Chart.yaml in sync
+
+    # controller.image.tag
+    # When updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: 0.30.0
 
+  # controller.rbac
+  # TODO: Explain what this is for
   rbac:
 
+  # controller.role
+  # TODO: Explain what this is for
   role:
+
+    # controller.role.name
+    # The name tha the RBAC role will get.
     name: nginx-ingress-role
 
-  service:
-    enabled: false
-    # type applies only to AWS provider:
-    # - external (default)
-    # - internal
-    # ...
-    type: external
-    # Sets the NodePorts that maps to the Ingress' ports 80 (http) and 443 (https).
-    # nodePort service type is not created for AWS provider as LoadBalancer is used there.
-    nodePorts:
-      http: 30010
-      https: 30011
-
+  # controller.metrics
   metrics:
+
+    # controller.metrics.enabled
+    # If true, create the metrics Service for prometheus-operator support.
     enabled: false
+
+    # controller.metrics.port
+    # The port on which the metrics container is exposed.
     port: 10254
 
+    # controller.metrics.service
+    # TODO: Explain what this is for
     service:
+
+      # controller.metrics.service.servicePort
+      # Configures the port that the metrics service is listening on.
       servicePort: 9913
 
+  # controller.resources
   resources:
-    # these are default resource requests when cluster profile is not known/determined or when cluster is larger than small
+
+    # controller.resources.requests
+    # These are default resource requests when the cluster profile is not
+    # known or when the cluster is larger than "small"
     requests:
       cpu: 2
       memory: 2.5Gi
+
+  # controller.profile
+  # Contains resource request profiles that could get selected based on the
+  # value of cluster.profile.
+  # A profile is a set of preconfigured values for the
+  # "spec.template.spec.containers.resources.requests" field of the Deployment
+  # resource.
   profile:
     # xxs (1) cluster profile - 1 worker node only - resource requests are not being set
     # xs (2) cluster profile - 2-3 worker nodes, max CPU < 4 - resource requests are not being set
@@ -93,11 +176,17 @@ controller:
           cpu: 500m
           memory: 600Mi
 
-  # allow the draining of connections up to five minutes
-  # this should not be lower than configmap.worker-shutdown-timeout
+  # controller.terminationGracePeriodSeconds
+  # The maximum amount of time NGINX Deployment replica is given to gracefully
+  # terminate. This should not be lower than configmap.worker-shutdown-timeout.
+  # The default value of 300 allows the draining of connections for up to
+  # five minutes
   # for more info see https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554
   # and important note in https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0
   terminationGracePeriodSeconds: 300
+
+  # controller.lifecycle
+  # Configures NGINX controller container lifecycle hooks.
   lifecycle:
     # Enable graceful shutdowns and rolling updates with zero-downtime
     preStop:
@@ -105,26 +194,75 @@ controller:
         command:
         - /wait-shutdown
 
-  # optional hpa settings
+  # controller.autoscaling
+  # Contains optional horizontal-pod-autoscaler (hpa) settings
   autoscaling:
     enabled: true
     minReplicas: 2
     maxReplicas: 20
     targetCPUUtilizationPercentage: 50
+
+    # Configures HPA target memory utilization percentage.
+    # This is a replacement for deprecated configmap.hpa-target-memory-utilization-percentage
+    # configuration property; if both are configured,
+    # configmap.hpa-target-memory-utilization-percentage has precedence.
     targetMemoryUtilizationPercentage: 80
 
-  # command args options
+  # controller.annotationsPrefix
+  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
+  # container.
   annotationsPrefix: nginx.ingress.kubernetes.io
+
+  # controller.defaultSSLCertificate
+  # The Secret referred to by this flag contains the default certificate to be
+  # used when accessing the catch-all server. If this flag is not provided NGINX
+  # will use a self-signed certificate.
+  # Example value: "default/foo-tls".
   defaultSSLCertificate: ""
+
+  # controller.ingressClass
+  # The Ingress class, which the controller handles.
   ingressClass: nginx
 
-  # www-data -> uid 101
+  # controller.userID
+  # The userID that the container will run as. 101 is the www-data user.
   userID: 101
+
+  # controller.groupID
+  # The groupID that the container will run as.
   groupID: 101
 
+  # controller.service
+  service:
+
+    # controller.service.enabled
+    # If true, create NodePort Service. Dynamically calculated during cluster creation.
+    # Do not overwrite this value.
+    enabled: false
+
+    # controller.service.type
+    # Applies only to clusters running on AWS.
+    # Valid values: external, internal
+    type: external
+
+    # controller.service.nodePorts
+    # Sets the NodePorts that maps to the Ingress' ports 80 (http) and 443 (https).
+    # nodePort service type is not created for AWS provider as LoadBalancer is used there.
+    # Do not overwrite these values.
+    nodePorts:
+
+      # controller.service.nodePorts.http
+      http: 30010
+
+      # controller.service.nodePorts.https
+      https: 30011
+
+# image
 image:
   registry: quay.io
 
+#initContainer
+# TODO: Explain and determine if this is a user level config or not.
 initContainer:
   name: sysctl
   image:
@@ -133,8 +271,53 @@ initContainer:
   userID: 1000
   groupID: 1000
 
+# test
 test:
+
+  # test.image
   image:
     registry: quay.io
     repository: giantswarm/alpine-testing
     tag: 0.1.0
+
+
+# Below are configuration values that you should not overwrite or set yourself.
+
+# baseDomain
+# The base domain for this ingress.
+# This value is set automatically. Do not overwrite this value.
+baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
+
+# clusterID
+# The id of the cluster that this app is installed on.
+# This value is set automatically. Do not overwrite this value.
+clusterID: uun5a
+
+# provider (aws|kvm|azure)
+# The provider that the cluster is running on.
+# This value is set automatically, Do not overwrite this value.
+provider: kvm
+
+# cluster
+cluster:
+
+  # cluster.profile
+  # Supported values are 1 for extra extra small, 2 for extra small, 3 for small,
+  # and currently any value higher than 3 when actual cluster profile is larger
+  # than small or unknown. By default HPA and PDB are disabled, and resource
+  # requests unset for extra extra small clusters and extra small clusters.
+  # On small clusters some small resource requests are made, HPA and PDB are
+  # enabled by default. On larger than small clusters HPA and PDB are enabled by
+  # default, and non-trivial resource requests set for some out-of-the-box
+  # guaranteed capacity.
+  # This value is set automatically. Do not overwrite this value.
+  profile: 4
+
+# ingressController
+ingressController:
+
+  # ingressController.legacy
+  # Legacy or node pools cluster. On aws provider node pool clusters LoadBalancer
+  # service gets created. Dynamically calculated during cluster creation.
+  # This value is set automatically. Do not overwrite this value.
+  legacy: false
