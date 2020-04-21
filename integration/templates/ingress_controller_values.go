@@ -6,6 +6,8 @@ package templates
 const IngressControllerValues = `cluster:
   profile: 3
 controller:
+  autoscaling:
+    enabled: false
   replicaCount: 2
   service:
     enabled: true
