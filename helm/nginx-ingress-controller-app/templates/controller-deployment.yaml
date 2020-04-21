@@ -98,7 +98,7 @@ spec:
               - NET_BIND_SERVICE
           runAsUser: {{ .Values.controller.userID }}
           runAsGroup: {{ .Values.controller.groupID }}
-          sysctl:
+          sysctls:
           - name: net.ipv4.ip_local_port_range
             value: "1024 65535"
         env:
