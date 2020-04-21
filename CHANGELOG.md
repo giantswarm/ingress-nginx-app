@@ -15,7 +15,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Use `4` worker processes by default.
 - Use upstream default of max-worker-connections of `16384`.
 - Ignore NGINX IC Deployment replica count configuration when HorizontalPodAutoscaler is enabled.
-- Drop unnecessary Helm release revision annotation from NGINX IC Deployment. - Adjust README for display in the web interface context.
+- Drop unnecessary Helm release revision annotation from NGINX IC Deployment.
+- Adjust README for display in the web interface context.
 
 ## [v1.6.8] 2020-04-09
 
