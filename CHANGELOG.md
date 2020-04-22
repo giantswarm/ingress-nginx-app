@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project's packages adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [v1.6.9] 2020-04-22
 
 ### Changed
 
@@ -160,7 +160,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.8...master
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.9...master
+[v1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.9
 [v1.6.8]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.8
 [v1.6.7]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.7
 [v1.6.6]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.6
