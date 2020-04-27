@@ -9,6 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Make NGINX IC Service `externalTrafficPolicy` configurable and default to `Local`.
+
 ## [v1.6.9] 2020-04-22
 
 ### Changed
