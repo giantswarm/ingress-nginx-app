@@ -9,6 +9,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+## [v1.6.10] 2020-04-29
+
+### Changed
+
 - Make NGINX IC Service `externalTrafficPolicy` configurable and default to `Local`.
 
 ## [v1.6.9] 2020-04-22
@@ -166,7 +170,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.9...master
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.10...master
+[v1.6.10]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.10
 [v1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.9
 [v1.6.8]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.8
 [v1.6.7]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.7
