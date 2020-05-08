@@ -235,6 +235,11 @@ controller:
   # controller.service
   service:
 
+    # controller.service.enabled
+    # If true, create NodePort Service. Dynamically calculated during cluster creation.
+    # Do not overwrite this value.
+    enabled: false
+
     # controller.service.externalTrafficPolicy
     # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
     #   Local - kube-proxy only proxies requests to local endpoints (does not forward traffic to other nodes), source IP preserved
