@@ -31,7 +31,7 @@ spec:
     targetPort: 443
   selector:
     k8s-app: {{ .Values.controller.k8sAppLabel }}
-  {{- if eq .Values.controller.service.externalTrafficPolicy }}
+  {{- if .Values.controller.service.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.controller.service.externalTrafficPolicy }}
   {{- end }}
 {{- end }}
