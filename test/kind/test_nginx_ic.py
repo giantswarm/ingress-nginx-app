@@ -1,4 +1,5 @@
 from pykube import *
+from typing import Iterator, Callable
 import pykube.objects
 import pytest
 
@@ -6,9 +7,9 @@ import pytest
 class GiantSwarmAppPlatformCRs:
     def __init__(self, kube_client: pykube.HTTPClient):
         super().__init__()
-        self.app = pykube.objects.object_factory(
+        self.app_cr_factory = pykube.objects.object_factory(
             kube_client, "application.giantswarm.io/v1alpha1", "App")
-        self.app_catalog = pykube.objects.object_factory(
+        self.app_catalog_cr_factory = pykube.objects.object_factory(
             kube_client, "application.giantswarm.io/v1alpha1", "AppCatalog")
 
 
@@ -33,25 +34,33 @@ def get_app_catalog_obj(catalog_name, catalog_uri: str,
         }
     }
     crs = GiantSwarmAppPlatformCRs(kube_client)
-    return crs.app_catalog(kube_client, app_catalog_cr)
+    return crs.app_catalog_cr_factory(kube_client, app_catalog_cr)
 
 
 @pytest.fixture(scope="module")
-def app_catalog_default(request, kube_client: pykube.HTTPClient) -> str:
-    name = "default"
-    api_obj = get_app_catalog_obj(
-        name, "https://giantswarm.github.io/default-catalog/", kube_client)
-    print("Creating default AppCatalog")
-    api_obj.create()
-    yield name
-    print("Deleting default AppCatalog")
-    api_obj.delete()
+def app_catalog_factory(kube_client: pykube.HTTPClient) -> Iterator[Callable[[str, str], pykube.objects.APIObject]]:
+    created_catalogs = []
+
+    def _app_catalog_factory(name: str, url: str = None) -> pykube.objects.APIObject:
+        if url is None:
+            url = "https://giantswarm.github.io/{}-catalog/".format(name)
+        api_obj = get_app_catalog_obj(name, url, kube_client)
+        created_catalogs.append(api_obj)
+        print("Creating {} AppCatalog".format(name))
+        api_obj.create()
+        return api_obj
+
+    yield _app_catalog_factory
+    for catalog in created_catalogs:
+        print("Deleting {} AppCatalog".format(catalog.metadata["name"]))
+        catalog.delete()
 
 
 @pytest.fixture(scope="module")
-def load_app(kube_client: pykube.HTTPClient, app_catalog_default: str):
-    app_name = "load-test"
+def load_app(kube_client: pykube.HTTPClient, app_catalog_factory: Callable[[str, str], pykube.objects.APIObject]):
+    app_name = "loadtest-app"
     api_version = "application.giantswarm.io/v1alpha1"
+    default_catalog = app_catalog_factory("default")
     kind = "App"
     load_app = {
         "apiVersion": api_version,
@@ -65,7 +74,7 @@ def load_app(kube_client: pykube.HTTPClient, app_catalog_default: str):
             },
         },
         "spec": {
-            "catalog": app_catalog_default,
+            "catalog": default_catalog.metadata["name"],
             "version": "0.1.1",
             "kubeConfig": {
                 "inCluster": True
