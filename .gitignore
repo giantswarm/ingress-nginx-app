@@ -15,3 +15,4 @@
 test-results/
 test/kind/.vscode/
 test/kind/__pycache__/
+nginx-ingress-controller-app-*.tgz
