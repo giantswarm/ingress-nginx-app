@@ -21,6 +21,7 @@ def get_app_catalog_obj(catalog_name, catalog_uri: str,
         "metadata": {
             "labels": {
                 "app-operator.giantswarm.io/version": "1.0.0",
+                "application.giantswarm.io/catalog-type": "",
             },
             "name": catalog_name,
         },
@@ -59,15 +60,18 @@ def app_catalog_factory(kube_client: pykube.HTTPClient) -> Iterator[Callable[[st
 @pytest.fixture(scope="module")
 def load_app(kube_client: pykube.HTTPClient, app_catalog_factory: Callable[[str, str], pykube.objects.APIObject]):
     app_name = "loadtest-app"
+    app_cm_name = "{}-testing-user-config".format(app_name)
     api_version = "application.giantswarm.io/v1alpha1"
     default_catalog = app_catalog_factory("default")
     kind = "App"
+    namespace = "giantswarm"
+
     load_app = {
         "apiVersion": api_version,
         "kind": kind,
         "metadata": {
             "name": app_name,
-            "namespace": "giantswarm",
+            "namespace": namespace,
             "labels": {
                 "app": app_name,
                 "app-operator.giantswarm.io/version": "1.0.0"
@@ -80,18 +84,72 @@ def load_app(kube_client: pykube.HTTPClient, app_catalog_factory: Callable[[str,
                 "inCluster": True
             },
             "name": app_name,
-            "namespace": "default"
+            "namespace": "default",
+            "configMap": {
+                "name": app_cm_name,
+                "namespace": namespace,
+            }
         }
     }
+    app_cm = {
+        "apiVersion": "v1",
+        "kind": "ConfigMap",
+        "metadata": {
+            "name": app_cm_name,
+            "namespace": namespace,
+        },
+        "data": {
+            "values": """replicaCount: "8"
+ingress:
+  enabled: "true"
+  annotations:
+    "kubernetes.io/ingress.class": "nginx"
+  paths:
+    - "/"
+  hosts:
+    - "loadtest.local"
+autoscaling:
+  enabled: "true"
+"""
+        }
+    }
+
+    app_cm_obj = ConfigMap(kube_client, app_cm)
+    app_cm_obj.create()
     App = pykube.objects.object_factory(kube_client, api_version, kind)
     app_obj = App(kube_client, load_app)
     app_obj.create()
     yield None
     app_obj.delete()
+    app_cm_obj.delete()
 
 
 @pytest.mark.usefixtures("load_app")
 @pytest.mark.performance
 def test_deployments(kube_client: pykube.HTTPClient):
-    pods = Pod.objects(kube_client).filter(namespace="kube-system")
-    assert len(pods) > 0
+    job_obj = {
+        "apiVersion": "batch/v1",
+        "kind": "Job",
+        "metadata": {
+            "name": "gatling",
+        },
+        "spec": {
+            "backoffLimit": "5",
+            "activeDeadlineSeconds": "100",
+            "template": {
+                "spec": {
+                    "containers": [
+                        {
+                            "name": "pi",
+                            "image": "denvazh/gatling:3.2.1",
+                            "command": ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"],
+                            "restartPolicy": "Never",
+                        }
+                    ]
+                }
+            }
+        }
+    }
+    # gatling_job = Job(kube_client, job_obj)
+    # gatling_job.create()
+    assert True
