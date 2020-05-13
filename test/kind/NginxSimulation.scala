@@ -7,7 +7,7 @@ import scala.concurrent.duration._
 class NginxSimulation extends Simulation {
 
   val httpProtocol = http
-    .baseUrl("http://loadtest.local")
+    .baseUrl("http://nginx-ingress-controller.kube-system.svc.cluster.local")
     .header("Host", "loadtest.local")
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     .doNotTrackHeader("1")

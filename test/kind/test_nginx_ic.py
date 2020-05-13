@@ -140,7 +140,7 @@ def test_deployments(kube_client: pykube.HTTPClient):
                 "spec": {
                     "containers": [
                         {
-                            "name": "pi",
+                            "name": "gatling",
                             "image": "denvazh/gatling:3.2.1",
                             "command": ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"],
                             "restartPolicy": "Never",

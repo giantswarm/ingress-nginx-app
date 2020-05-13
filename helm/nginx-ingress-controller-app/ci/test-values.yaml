@@ -12,4 +12,9 @@ controller:
   maxUnavailable: 1
   autoscaling:
     enabled: "false"
+  service:
+    enabled: "true"
+    nodePorts:
+      http: 30010
+      https: 30011
 profile: xxs
