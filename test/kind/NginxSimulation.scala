@@ -25,8 +25,8 @@ class NginxSimulation extends Simulation {
 
   setUp(
     scn.inject(
-      atOnceUsers(100),
-      rampUsers(350) during (15 seconds)
+      atOnceUsers(1),
+      rampUsers(3) during (2 seconds)
     ).protocols(httpProtocol))
     .maxDuration(5 minutes)
 }

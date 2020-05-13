@@ -2,6 +2,7 @@ from pykube import *
 from typing import Iterator, Callable
 import pykube.objects
 import pytest
+import time
 
 
 class GiantSwarmAppPlatformCRs:
@@ -85,9 +86,11 @@ def load_app(kube_client: pykube.HTTPClient, app_catalog_factory: Callable[[str,
             },
             "name": app_name,
             "namespace": "default",
-            "configMap": {
-                "name": app_cm_name,
-                "namespace": namespace,
+            "config": {
+                "configMap": {
+                    "name": app_cm_name,
+                    "namespace": namespace,
+                }
             }
         }
     }
@@ -132,24 +135,47 @@ def test_deployments(kube_client: pykube.HTTPClient):
         "kind": "Job",
         "metadata": {
             "name": "gatling",
+            "namespace": "default",
+            "labels": {
+                "app": "gatling",
+            },
         },
         "spec": {
-            "backoffLimit": "5",
-            "activeDeadlineSeconds": "100",
+            "backoffLimit": 5,
+            "completions": 1,
             "template": {
                 "spec": {
+                    "restartPolicy": "Never",
                     "containers": [
                         {
                             "name": "gatling",
                             "image": "denvazh/gatling:3.2.1",
-                            "command": ["perl",  "-Mbignum=bpi", "-wle", "print bpi(2000)"],
-                            "restartPolicy": "Never",
+                            "command": ["/bin/bash"],
+                            "args": ["-c", "wget https://github.com/giantswarm/nginx-ingress-controller-app"
+                                     + "/raw/better-testing/test/kind/NginxSimulation.scala "
+                                     + "-O user-files/simulations/NginxSimulation.scala "
+                                     + "&& ./bin/gatling.sh -s nginx.NginxSimulation -rf ./results/nginx/"],
                         }
                     ]
                 }
             }
         }
     }
-    # gatling_job = Job(kube_client, job_obj)
-    # gatling_job.create()
+    gatling_job = Job(kube_client, job_obj)
+    gatling_job.create()
+    while True:
+        gatling_job.reload()
+        status = gatling_job.obj["status"]
+        if status and "conditions" in status and len(status["conditions"]) and status["conditions"][0]["type"] == "Complete":
+            break
+        time.sleep(1)
+    gatling_po = Pod.objects(kube_client).filter(
+        namespace="default",
+        selector={
+            "controller-uid": gatling_job.metadata["uid"],
+            "job-name": gatling_job.metadata["name"]
+        }
+    )
+
+    gatling_job.delete()
     assert True
