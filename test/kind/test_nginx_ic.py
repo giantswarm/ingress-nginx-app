@@ -112,7 +112,7 @@ ingress:
   hosts:
     - "loadtest.local"
 autoscaling:
-  enabled: "true"
+  enabled: "false"
 """
         }
     }
@@ -122,9 +122,11 @@ autoscaling:
     App = pykube.objects.object_factory(kube_client, api_version, kind)
     app_obj = App(kube_client, load_app)
     app_obj.create()
+    # TODO: wait until deployment is all ready
     yield None
-    app_obj.delete()
     app_cm_obj.delete()
+    app_obj.delete()
+    # TODO: wait until finalizer is gone
 
 
 @pytest.mark.usefixtures("load_app")
@@ -169,13 +171,16 @@ def test_deployments(kube_client: pykube.HTTPClient):
         if status and "conditions" in status and len(status["conditions"]) and status["conditions"][0]["type"] == "Complete":
             break
         time.sleep(1)
-    gatling_po = Pod.objects(kube_client).filter(
+    gatling_po_query = Pod.objects(kube_client).filter(
         namespace="default",
         selector={
             "controller-uid": gatling_job.metadata["uid"],
             "job-name": gatling_job.metadata["name"]
         }
     )
+    assert gatling_po_query.get(0) is not None
+    gatling_po = gatling_po_query.get(0)
+    container_log = gatling_po.logs(container="gatling")
 
     gatling_job.delete()
     assert True
