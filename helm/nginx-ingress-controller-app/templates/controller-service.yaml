@@ -4,6 +4,7 @@ kind: Service
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: ingress.{{ .Values.baseDomain }}
+  {{- if eq .Values.controller.service.type "LoadBalancer" }}
   {{- if eq .Values.provider "aws" }}
     {{- if not .Values.controller.service.public }}
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
@@ -18,6 +19,7 @@ metadata:
     {{- if not .Values.controller.service.public }}
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     {{- end }}
+  {{- end }}
   {{- end }}
   name: {{ .Values.controller.name }}
   namespace: {{ .Release.Namespace }}
