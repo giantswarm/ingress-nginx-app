@@ -9,6 +9,4 @@ controller:
   autoscaling:
     enabled: false
   replicaCount: 2
-  service:
-    enabled: true
 `

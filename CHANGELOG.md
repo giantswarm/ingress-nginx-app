@@ -9,8 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Make Load Balancer Type configurable and default to public.
-- Add Load Balancer service for Azure
+- Use LoadBalancer Service on Azure.
 
 ## [v1.6.10] 2020-04-29
 

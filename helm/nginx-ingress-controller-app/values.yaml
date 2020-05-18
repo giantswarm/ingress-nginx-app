@@ -236,9 +236,9 @@ controller:
   service:
 
     # controller.service.enabled
-    # If true, create NodePort Service. Dynamically calculated during cluster creation.
+    # If true, create LoadBalancer Service. Dynamically calculated during cluster creation.
     # Do not overwrite this value.
-    enabled: false
+    enabled: true
 
     # controller.service.externalTrafficPolicy
     # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
@@ -302,7 +302,7 @@ clusterID: uun5a
 # provider (aws|kvm|azure)
 # The provider that the cluster is running on.
 # This value is set automatically, Do not overwrite this value.
-provider: kvm
+provider: aws
 
 # cluster
 cluster:
@@ -318,12 +318,3 @@ cluster:
   # guaranteed capacity.
   # This value is set automatically. Do not overwrite this value.
   profile: 4
-
-# ingressController
-ingressController:
-
-  # ingressController.legacy
-  # Legacy or node pools cluster. On aws provider node pool clusters LoadBalancer
-  # service gets created. Dynamically calculated during cluster creation.
-  # This value is set automatically. Do not overwrite this value.
-  legacy: false
