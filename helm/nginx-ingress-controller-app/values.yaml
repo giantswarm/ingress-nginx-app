@@ -256,18 +256,6 @@ controller:
     # Valid values: LoadBalancer, NodePort
     type: LoadBalancer
 
-    # controller.service.nodePorts
-    # Sets the NodePorts that maps to the Ingress' ports 80 (http) and 443 (https).
-    # nodePort service type is not created for AWS provider as LoadBalancer is used there.
-    # Do not overwrite these values.
-    nodePorts:
-
-      # controller.service.nodePorts.http
-      http: 30010
-
-      # controller.service.nodePorts.https
-      https: 30011
-
 # image
 image:
   registry: quay.io
