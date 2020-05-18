@@ -153,7 +153,7 @@ def test_deployments(kube_client: pykube.HTTPClient):
                             "image": "denvazh/gatling:3.2.1",
                             "command": ["/bin/bash"],
                             "args": ["-c", "wget https://github.com/giantswarm/nginx-ingress-controller-app"
-                                     + "/raw/better-testing/test/kind/NginxSimulation.scala "
+                                     + "/raw/better-testing/test/kat/NginxSimulation.scala "
                                      + "-O user-files/simulations/NginxSimulation.scala "
                                      + "&& ./bin/gatling.sh -s nginx.NginxSimulation -rf ./results/nginx/"],
                         }
