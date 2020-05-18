@@ -9,4 +9,6 @@ controller:
   autoscaling:
     enabled: false
   replicaCount: 2
+  service:
+    type: NodePort
 `

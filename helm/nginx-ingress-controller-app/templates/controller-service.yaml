@@ -5,7 +5,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: ingress.{{ .Values.baseDomain }}
   {{- if eq .Values.provider "aws" }}
-    {{- if eq .Values.controller.service.type "internal" }}
+    {{- if not .Values.controller.service.public }}
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
     {{- end }}
     {{- if index .Values.configmap "use-proxy-protocol" }}
@@ -15,7 +15,7 @@ metadata:
   {{- else if eq .Values.provider "azure" }}
     # this annotation adds lb rules for both TCP and UDP to allow UDP outbound connection with Standard LB
     service.beta.kubernetes.io/azure-load-balancer-mixed-protocols: "true"
-    {{- if eq .Values.controller.service.type "internal" }}
+    {{- if not .Values.controller.service.public }}
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     {{- end }}
   {{- end }}
@@ -26,9 +26,11 @@ metadata:
     giantswarm.io/service-type: "managed"
     k8s-app: {{ .Values.controller.k8sAppLabel }}
 spec:
-  type: LoadBalancer
+  type: {{ .Values.controller.service.type }}
+  {{- if eq .Values.controller.service.type "LoadBalancer" }}
   loadBalancerSourceRanges:
   - 0.0.0.0/0
+  {{- end }}
   ports:
   - name: http
     port: 80

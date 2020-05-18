@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Use LoadBalancer Service on Azure.
+- Change controller.service.type to LoadBalancer/NodePort, and introduce controller.service.public for public/internal service classification.
 
 ## [v1.6.10] 2020-04-29
 
