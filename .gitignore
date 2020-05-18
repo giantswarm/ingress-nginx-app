@@ -14,5 +14,5 @@
 # python testing stuff
 test-results/
 test/kind/.vscode/
-test/kind/__pycache__/
+test/**/__pycache__/
 nginx-ingress-controller-app-*.tgz

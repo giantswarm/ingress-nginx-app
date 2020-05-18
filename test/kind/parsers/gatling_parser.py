@@ -8,7 +8,7 @@ class GatlingParser:
             len(split_lines)) if split_lines[i] == "Generating reports..."]
         assert len(start_line_query) == 1
         start_line = start_line_query[0]
-        report_lines = split_lines[start_line + 2:start_line + 18]
+        report_lines = split_lines[start_line + 2:start_line + 20]
         assert report_lines[0] == "================================================================================"
         assert report_lines[1] == "---- Global Information --------------------------------------------------------"
 
@@ -59,11 +59,29 @@ class GatlingParser:
 
         assert report_lines[12] == "---- Response Time Distribution ------------------------------------------------"
         self.response_time_distribution = {}
+
         line = report_lines[13][2:]
         fields = list(filter(None, line.split(" ")))
         assert fields[0] == "t"
         upper = int(fields[2])
         self.response_time_distribution[(0, upper)] = int(fields[4])
+
+        line = report_lines[14][2:]
+        fields = list(filter(None, line.split(" ")))
+        assert fields[3] == "t"
+        lower = int(fields[0])
+        upper = int(fields[5])
+        self.response_time_distribution[(lower, upper)] = int(fields[7])
+
+        line = report_lines[15][2:]
+        fields = list(filter(None, line.split(" ")))
+        assert fields[0] == "t"
+        lower = int(fields[2])
+        self.response_time_distribution[(lower, None)] = int(fields[4])
+
+        line = report_lines[16][2:]
+        fields = list(filter(None, line.split(" ")))
+        assert fields[0] == "failed"
 
         assert report_lines[17] == "================================================================================"
 

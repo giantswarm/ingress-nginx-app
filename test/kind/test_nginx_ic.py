@@ -1,5 +1,6 @@
 from pykube import *
 from typing import Iterator, Callable
+from parsers.gatling_parser import GatlingParser
 import pykube.objects
 import pytest
 import time
@@ -48,13 +49,11 @@ def app_catalog_factory(kube_client: pykube.HTTPClient) -> Iterator[Callable[[st
             url = "https://giantswarm.github.io/{}-catalog/".format(name)
         api_obj = get_app_catalog_obj(name, url, kube_client)
         created_catalogs.append(api_obj)
-        print("Creating {} AppCatalog".format(name))
         api_obj.create()
         return api_obj
 
     yield _app_catalog_factory
     for catalog in created_catalogs:
-        print("Deleting {} AppCatalog".format(catalog.metadata["name"]))
         catalog.delete()
 
 
@@ -181,6 +180,11 @@ def test_deployments(kube_client: pykube.HTTPClient):
     assert gatling_po_query.get(0) is not None
     gatling_po = gatling_po_query.get(0)
     container_log = gatling_po.logs(container="gatling")
+    results = GatlingParser(container_log)
+
+    assert results.request_count_total == 400
+    assert results.mean_rps >= 100
+    assert results.request_success_ratio >= 0.995
 
     gatling_job.delete()
     assert True
