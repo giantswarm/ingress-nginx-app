@@ -1,11 +1,11 @@
 from pykube import Job, Pod
 from typing import Iterator, Callable
-from test_giantswarm import AppCatalogFactoryFunc
-from test_giantswarm_apps import GatlingAppFactoryFunc, StormforgerLoadAppFactoryFunc
+from conftest import GatlingAppFactoryFunc, StormforgerLoadAppFactoryFunc
 from parsers.gatling_parser import GatlingParser
 import pykube.objects
 import pytest
 import time
+
 
 def wait_for_job(job: Job):
     while True:
@@ -15,6 +15,7 @@ def wait_for_job(job: Job):
                 status["conditions"][0]["type"] == "Complete":
             break
         time.sleep(1)
+
 
 @pytest.mark.performance
 def test_deployments(kube_client: pykube.HTTPClient, stormforger_load_app_factory: StormforgerLoadAppFactoryFunc,

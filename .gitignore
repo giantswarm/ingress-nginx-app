@@ -16,3 +16,5 @@ test-results/
 test/**/.vscode/
 test/**/__pycache__/
 nginx-ingress-controller-app-*.tgz
+test/**/.mypy_cache/
+junit.xml
