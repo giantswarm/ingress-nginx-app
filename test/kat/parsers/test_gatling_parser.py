@@ -6,4 +6,4 @@ def test_gatling_parser():
     with open("sample.log", "r") as f:
         text = f.read()
 
-    parser = GatlingParser(text)
+    GatlingParser(text)

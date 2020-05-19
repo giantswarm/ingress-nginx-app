@@ -1,4 +1,5 @@
-from typing import Tuple
+from typing import Tuple, Dict, Union
+import math
 
 
 class GatlingParser:
@@ -58,26 +59,27 @@ class GatlingParser:
         self.mean_rps = int(mean_rps)
 
         assert report_lines[12] == "---- Response Time Distribution ------------------------------------------------"
-        self.response_time_distribution = {}
+        self.response_time_distribution: Dict[Tuple[float, float], int] = {
+        }
 
         line = report_lines[13][2:]
         fields = list(filter(None, line.split(" ")))
         assert fields[0] == "t"
-        upper = int(fields[2])
+        upper = float(fields[2])
         self.response_time_distribution[(0, upper)] = int(fields[4])
 
         line = report_lines[14][2:]
         fields = list(filter(None, line.split(" ")))
         assert fields[3] == "t"
-        lower = int(fields[0])
-        upper = int(fields[5])
+        lower = float(fields[0])
+        upper = float(fields[5])
         self.response_time_distribution[(lower, upper)] = int(fields[7])
 
         line = report_lines[15][2:]
         fields = list(filter(None, line.split(" ")))
         assert fields[0] == "t"
-        lower = int(fields[2])
-        self.response_time_distribution[(lower, None)] = int(fields[4])
+        lower = float(fields[2])
+        self.response_time_distribution[(lower, math.inf)] = int(fields[4])
 
         line = report_lines[16][2:]
         fields = list(filter(None, line.split(" ")))
