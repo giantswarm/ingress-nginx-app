@@ -16,7 +16,7 @@ spec:
   {{- end}}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+      k8s-app: {{ .Values.controller.k8sAppLabel }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -28,6 +28,7 @@ spec:
       labels:
         app: {{ .Values.controller.name }}
         giantswarm.io/service-type: "managed"
+        k8s-app: {{ .Values.controller.k8sAppLabel }}
         app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
