@@ -1,9 +1,7 @@
 import pytest
 from pykube import ConfigMap, Job
-from typing import Iterator, Callable, NamedTuple, List, Optional
+from typing import Iterator, Callable, NamedTuple, List, Dict
 import pykube.objects
-import time
-from parsers.gatling_parser import GatlingParser
 
 
 def pytest_addoption(parser):
@@ -60,7 +58,7 @@ def app_catalog_factory(kube_client: pykube.HTTPClient) -> Iterator[AppCatalogFa
         # TODO: wait until finalizer is gone and object is deleted
 
 
-StormforgerLoadAppFactoryFunc = Callable[[int, str], None]
+StormforgerLoadAppFactoryFunc = Callable[[int, str, Dict[str, str]], None]
 
 
 @pytest.fixture(scope="module")
@@ -72,7 +70,8 @@ def stormforger_load_app_factory(kube_client: pykube.HTTPClient,
 
     created_apps: List[StormforgerState] = []
 
-    def _stormforger_load_app_factory(replicas: int, host_url: str) -> None:
+    def _stormforger_load_app_factory(replicas: int, host_url: str,
+                                      node_affinity_selector: Dict[str, str] = None) -> None:
         app_name = "loadtest-app"
         app_cm_name = "{}-testing-user-config".format(app_name)
         api_version = "application.giantswarm.io/v1alpha1"
@@ -93,7 +92,7 @@ def stormforger_load_app_factory(kube_client: pykube.HTTPClient,
             },
             "spec": {
                 "catalog": default_catalog.metadata["name"],
-                "version": "0.1.1",
+                "version": "0.1.2",
                 "kubeConfig": {
                     "inCluster": True
                 },
@@ -119,6 +118,11 @@ ingress:
 autoscaling:
   enabled: "false"
 """.format(replicas, host_url)
+        if node_affinity_selector is not None:
+            config_values += """nodeAffinity:
+  enabled: "true"
+  selector: {}
+            """.format(node_affinity_selector)
         app_cm = {
             "apiVersion": "v1",
             "kind": "ConfigMap",
@@ -146,12 +150,13 @@ autoscaling:
         # TODO: wait until finalizer is gone
 
 
-GatlingAppFactoryFunc = Callable[[str, str, str], Job]
+GatlingAppFactoryFunc = Callable[[str, str, str, Dict[str, str]], Job]
 
 
-@pytest.fixture(scope="module")
+@ pytest.fixture(scope="module")
 def gatling_app_factory(kube_client: pykube.HTTPClient) -> Iterator[GatlingAppFactoryFunc]:
-    def _gatling_app_factory(scenario_url: str, scenario_class_name: str, version_tag: str = "3.2.1") -> Job:
+    def _gatling_app_factory(scenario_url: str, scenario_class_name: str,
+                             version_tag: str = "3.2.1", node_affinity_selector: Dict[str, str] = None) -> Job:
         job_obj = {
             "apiVersion": "batch/v1",
             "kind": "Job",
@@ -182,6 +187,8 @@ def gatling_app_factory(kube_client: pykube.HTTPClient) -> Iterator[GatlingAppFa
                 }
             }
         }
+        if node_affinity_selector is not None:
+            job_obj["spec"]["template"]["spec"]["node_selector"] = node_affinity_selector
         return Job(kube_client, job_obj)
     yield _gatling_app_factory
 

@@ -28,10 +28,14 @@ def get_affinity_nodes(kube_client: pykube.HTTPClient, nodes: List[pykube.Node])
     nginx_pods = list(nginx_po_query)
     assert len(nginx_pods) == 1
     nginx_pod = nginx_pods[0]
+    schedulable_nodes = [n for n in nodes if "taints" not in n.obj["spec"] or "NoSchedule" not in [
+        taint["effect"] for taint in n.obj["spec"]["taints"]]]
     host_ip = nginx_pod.obj["status"]["hostIP"]
-    other_nodes = [n for n in nodes if host_ip not in [
+    other_nodes = [n for n in schedulable_nodes if host_ip not in [
         addr["address"] for addr in n.obj["status"]["addresses"]]]
-    return other_nodes[0], other_nodes[1]
+    if len(other_nodes) >= 2:
+        return other_nodes[0], other_nodes[1]
+    return None, None
 
 
 @pytest.mark.performance
@@ -39,12 +43,16 @@ def test_deployments(kube_client: pykube.HTTPClient, stormforger_load_app_factor
                      gatling_app_factory: GatlingAppFactoryFunc):
     # figure out node affinity
     nodes = list(pykube.Node.objects(kube_client))
-    if len(nodes) >= 3:
-        stormforger_node, gatling_node = get_affinity_nodes(kube_client, nodes)
-    stormforger_load_app_factory(8, "loadtest.local")
+    affinity_selector = None
+    stormforger_node, gatling_node = get_affinity_nodes(kube_client, nodes)
+    if stormforger_node is not None and gatling_node is not None:
+        affinity_selector = {
+            "kubernetes.io/hostname": stormforger_node.labels.get("kubernetes.io/hostname")}
+    stormforger_load_app_factory(
+        8, "loadtest.local", node_affinity_selector=affinity_selector)
     gatling_job = gatling_app_factory("https://github.com/giantswarm/nginx-ingress-controller-app/"
                                       + "raw/better-testing/test/kat/NginxSimulation.scala",
-                                      "nginx.NginxSimulation")
+                                      "nginx.NginxSimulation", node_affinity_selector=affinity_selector)
     gatling_job.create()
     wait_for_job(gatling_job)
     gatling_po_query = Pod.objects(kube_client).filter(
