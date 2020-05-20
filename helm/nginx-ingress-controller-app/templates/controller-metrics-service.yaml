@@ -7,7 +7,7 @@ metadata:
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 spec:
   clusterIP: None
   ports:
@@ -15,5 +15,5 @@ spec:
     port: {{ .Values.controller.metrics.service.servicePort }}
     targetPort: metrics
   selector:
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 {{-  end }}

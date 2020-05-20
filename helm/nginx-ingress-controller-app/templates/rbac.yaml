@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.controller.name }}
@@ -23,7 +23,7 @@ metadata:
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.controller.name }}
@@ -41,7 +41,7 @@ metadata:
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 rules:
 - apiGroups:
   - ""
@@ -100,7 +100,7 @@ metadata:
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 rules:
 - apiGroups:
   - ""
@@ -151,7 +151,7 @@ metadata:
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 rules:
 - apiGroups:
   - extensions
@@ -169,7 +169,7 @@ metadata:
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 subjects:
 - kind: ServiceAccount
   name: {{ .Values.controller.name }}
