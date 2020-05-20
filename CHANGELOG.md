@@ -9,6 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Align labels to remove all use of `k8s-app` label selectors.
+
 ## [v1.6.10] 2020-04-29
 
 ### Changed
