@@ -46,13 +46,15 @@ def test_deployments(kube_client: pykube.HTTPClient, stormforger_load_app_factor
     affinity_selector = None
     stormforger_node, gatling_node = get_affinity_nodes(kube_client, nodes)
     if stormforger_node is not None and gatling_node is not None:
-        affinity_selector = {
+        stormforger_affinity_selector = {
             "kubernetes.io/hostname": stormforger_node.labels.get("kubernetes.io/hostname")}
+        gatling_affinity_selector = {
+            "kubernetes.io/hostname": gatling_node.labels.get("kubernetes.io/hostname")}
     stormforger_load_app_factory(
-        8, "loadtest.local", node_affinity_selector=affinity_selector)
+        8, "loadtest.local", node_affinity_selector=stormforger_affinity_selector)
     gatling_job = gatling_app_factory("https://github.com/giantswarm/nginx-ingress-controller-app/"
                                       + "raw/better-testing/test/kat/NginxSimulation.scala",
-                                      "nginx.NginxSimulation", node_affinity_selector=affinity_selector)
+                                      "nginx.NginxSimulation", node_affinity_selector=gatling_affinity_selector)
     gatling_job.create()
     wait_for_job(gatling_job)
     gatling_po_query = Pod.objects(kube_client).filter(
@@ -65,6 +67,7 @@ def test_deployments(kube_client: pykube.HTTPClient, stormforger_load_app_factor
     assert gatling_po_query.get(0) is not None
     gatling_po = gatling_po_query.get(0)
     container_log = gatling_po.logs(container="gatling")
+    print(container_log)
     results = GatlingParser(container_log)
 
     assert results.request_count_total == 400

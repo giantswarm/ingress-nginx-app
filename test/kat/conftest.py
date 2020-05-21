@@ -188,7 +188,7 @@ def gatling_app_factory(kube_client: pykube.HTTPClient) -> Iterator[GatlingAppFa
             }
         }
         if node_affinity_selector is not None:
-            job_obj["spec"]["template"]["spec"]["node_selector"] = node_affinity_selector
+            job_obj["spec"]["template"]["spec"]["nodeSelector"] = node_affinity_selector
         return Job(kube_client, job_obj)
     yield _gatling_app_factory
 
