@@ -1,8 +1,7 @@
-from pykube import Job, Pod
-from typing import Iterator, Callable, List, Tuple
+from pykube import Job, Pod, Node, HTTPClient
+from typing import List, Tuple
 from conftest import GatlingAppFactoryFunc, StormforgerLoadAppFactoryFunc
 from parsers.gatling_parser import GatlingParser
-import pykube.objects
 import pytest
 import time
 
@@ -17,7 +16,7 @@ def wait_for_job(job: Job):
         time.sleep(1)
 
 
-def get_affinity_nodes(kube_client: pykube.HTTPClient, nodes: List[pykube.Node]) -> Tuple[pykube.Node, pykube.Node]:
+def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Node, Node]:
     nginx_po_query = Pod.objects(kube_client).filter(
         namespace="kube-system",
         selector={
@@ -39,10 +38,10 @@ def get_affinity_nodes(kube_client: pykube.HTTPClient, nodes: List[pykube.Node])
 
 
 @pytest.mark.performance
-def test_deployments(kube_client: pykube.HTTPClient, stormforger_load_app_factory: StormforgerLoadAppFactoryFunc,
+def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: StormforgerLoadAppFactoryFunc,
                      gatling_app_factory: GatlingAppFactoryFunc):
     # figure out node affinity
-    nodes = list(pykube.Node.objects(kube_client))
+    nodes = list(Node.objects(kube_client))
     affinity_selector = None
     stormforger_node, gatling_node = get_affinity_nodes(kube_client, nodes)
     if stormforger_node is not None and gatling_node is not None:

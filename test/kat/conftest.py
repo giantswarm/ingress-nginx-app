@@ -1,5 +1,5 @@
 import pytest
-from pykube import ConfigMap, Job
+from pykube import ConfigMap, Job, HTTPClient, KubeConfig
 from typing import Iterator, Callable, NamedTuple, List, Dict
 import pykube.objects
 
@@ -32,8 +32,8 @@ def kubeconfig(pytestconfig) -> str:
 
 
 @pytest.fixture(scope="module")
-def kube_client(kubeconfig: str) -> pykube.HTTPClient:
-    client = pykube.HTTPClient(pykube.KubeConfig.from_file(kubeconfig))
+def kube_client(kubeconfig: str) -> HTTPClient:
+    client = HTTPClient(KubeConfig.from_file(kubeconfig))
     return client
 
 
@@ -41,7 +41,7 @@ AppCatalogFactoryFunc = Callable[[str, str], pykube.objects.APIObject]
 
 
 @pytest.fixture(scope="module")
-def app_catalog_factory(kube_client: pykube.HTTPClient) -> Iterator[AppCatalogFactoryFunc]:
+def app_catalog_factory(kube_client: HTTPClient) -> Iterator[AppCatalogFactoryFunc]:
     created_catalogs = []
 
     def _app_catalog_factory(name: str, url: str = "") -> pykube.objects.APIObject:
@@ -50,6 +50,7 @@ def app_catalog_factory(kube_client: pykube.HTTPClient) -> Iterator[AppCatalogFa
         api_obj = get_app_catalog_obj(name, url, kube_client)
         created_catalogs.append(api_obj)
         api_obj.create()
+        # TODO: check that app catalog is present
         return api_obj
 
     yield _app_catalog_factory
@@ -62,7 +63,7 @@ StormforgerLoadAppFactoryFunc = Callable[[int, str, Dict[str, str]], None]
 
 
 @pytest.fixture(scope="module")
-def stormforger_load_app_factory(kube_client: pykube.HTTPClient,
+def stormforger_load_app_factory(kube_client: HTTPClient,
                                  app_catalog_factory: AppCatalogFactoryFunc) -> Iterator[StormforgerLoadAppFactoryFunc]:
     class StormforgerState(NamedTuple):
         app: pykube.objects.APIObject
@@ -154,7 +155,7 @@ GatlingAppFactoryFunc = Callable[[str, str, str, Dict[str, str]], Job]
 
 
 @ pytest.fixture(scope="module")
-def gatling_app_factory(kube_client: pykube.HTTPClient) -> Iterator[GatlingAppFactoryFunc]:
+def gatling_app_factory(kube_client: HTTPClient) -> Iterator[GatlingAppFactoryFunc]:
     def _gatling_app_factory(scenario_url: str, scenario_class_name: str,
                              version_tag: str = "3.2.1", node_affinity_selector: Dict[str, str] = None) -> Job:
         job_obj = {
@@ -194,7 +195,7 @@ def gatling_app_factory(kube_client: pykube.HTTPClient) -> Iterator[GatlingAppFa
 
 
 class GiantSwarmAppPlatformCRs:
-    def __init__(self, kube_client: pykube.HTTPClient):
+    def __init__(self, kube_client: HTTPClient):
         super().__init__()
         self.app_cr_factory = pykube.objects.object_factory(
             kube_client, "application.giantswarm.io/v1alpha1", "App")
@@ -203,7 +204,7 @@ class GiantSwarmAppPlatformCRs:
 
 
 def get_app_catalog_obj(catalog_name, catalog_uri: str,
-                        kube_client: pykube.HTTPClient) -> pykube.objects.APIObject:
+                        kube_client: HTTPClient) -> pykube.objects.APIObject:
     app_catalog_cr = {
         "apiVersion": "application.giantswarm.io/v1alpha1",
         "kind": "AppCatalog",
