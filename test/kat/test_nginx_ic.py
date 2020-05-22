@@ -42,7 +42,7 @@ def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: Stor
                      gatling_app_factory: GatlingAppFactoryFunc):
     # figure out node affinity
     nodes = list(Node.objects(kube_client))
-    affinity_selector = None
+    stormforger_affinity_selector, gatling_affinity_selector = None, None
     stormforger_node, gatling_node = get_affinity_nodes(kube_client, nodes)
     if stormforger_node is not None and gatling_node is not None:
         stormforger_affinity_selector = {
