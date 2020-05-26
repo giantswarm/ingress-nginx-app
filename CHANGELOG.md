@@ -9,7 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Align labels to remove all use of `k8s-app` label selectors.
+- Align labels, use `app.kubernetes.io/name` instead of `k8s-app` where possible.
+  `k8s-app` remains to be used for compatibility reasons, as selectors are not modifiable without recreating the Deployment.
 
 ## [v1.6.10] 2020-04-29
 
