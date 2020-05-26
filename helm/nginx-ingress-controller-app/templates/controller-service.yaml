@@ -26,7 +26,7 @@ metadata:
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
 spec:
   type: {{ .Values.controller.service.type }}
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
@@ -43,7 +43,7 @@ spec:
     protocol: TCP
     targetPort: 443
   selector:
-    k8s-app: {{ .Values.controller.k8sAppLabel }}
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
   {{- if .Values.controller.service.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.controller.service.externalTrafficPolicy }}
   {{- end }}

@@ -12,6 +12,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Use LoadBalancer Service on Azure.
 - Change controller.service.type to LoadBalancer/NodePort, and introduce controller.service.public for public/internal service classification.
 
+## [v1.6.11] 2020-05-26
+
+### Changed
+
+- Align labels, use `app.kubernetes.io/name` instead of `k8s-app` where possible.
+  `k8s-app` remains to be used for compatibility reasons, as selectors are not modifiable without recreating the Deployment.
+
 ## [v1.6.10] 2020-04-29
 
 ### Changed
@@ -173,7 +180,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.10...master
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.11...master
+[v1.6.11]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.11
 [v1.6.10]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.10
 [v1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.9
 [v1.6.8]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.8
