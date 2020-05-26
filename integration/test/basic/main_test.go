@@ -113,11 +113,12 @@ func init() {
 							"app.kubernetes.io/name":     chartName,
 						},
 						MatchLabels: map[string]string{
-							"app.kubernetes.io/name": chartName,
+							"k8s-app": chartName,
 						},
 						PodLabels: map[string]string{
 							"app":                        chartName,
 							"giantswarm.io/service-type": "managed",
+							"k8s-app":                    chartName,
 							"app.kubernetes.io/name":     chartName,
 						},
 					},
