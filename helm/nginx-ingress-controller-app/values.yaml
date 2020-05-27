@@ -130,6 +130,39 @@ controller:
     # The name tha the RBAC role will get.
     name: nginx-ingress-role
 
+  # controller.livenessProbe
+  # Liveness probe configuration
+  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+  livenessProbe:
+    enabled: true
+    failureThreshold: 30
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+
+  # controller.readinessProbe
+  # Readiness probe configuration
+  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+  readinessProbe:
+    enabled: true
+    failureThreshold: 3
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 1
+
+  # controller.startupProbe
+  # Startup probe configuration
+  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+  startupProbe:
+    enabled: false
+    failureThreshold: 3
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    successThreshold: 1
+    timeoutSeconds: 5
+
   # controller.metrics
   metrics:
 

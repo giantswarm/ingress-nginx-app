@@ -113,11 +113,6 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.namespace
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: {{ .Values.controller.metrics.port }}
-            scheme: HTTP
         {{- if .Values.cluster.profile }}
         {{- if gt (.Values.cluster.profile | int) 2 }}
         resources:
@@ -128,13 +123,42 @@ spec:
           {{- end }}
         {{- end }}
         {{- end }}
+        {{- if .Values.controller.livenessProbe.enabled }}
         livenessProbe:
           httpGet:
             path: /healthz
             port: {{ .Values.controller.metrics.port }}
             scheme: HTTP
-          initialDelaySeconds: 10
-          timeoutSeconds: 1
+          initialDelaySeconds: {{ .Values.controller.livenessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.controller.livenessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.controller.livenessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.controller.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.controller.livenessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.controller.readinessProbe.enabled }}
+        readinessProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.controller.metrics.port }}
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.controller.readinessProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.controller.readinessProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.controller.readinessProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.controller.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.controller.readinessProbe.failureThreshold }}
+        {{- end }}
+        {{- if .Values.controller.startupProbe.enabled }}
+        startupProbe:
+          httpGet:
+            path: /healthz
+            port: {{ .Values.controller.metrics.port }}
+            scheme: HTTP
+          initialDelaySeconds: {{ .Values.controller.startupProbe.initialDelaySeconds }}
+          periodSeconds: {{ .Values.controller.startupProbe.periodSeconds }}
+          timeoutSeconds: {{ .Values.controller.startupProbe.timeoutSeconds }}
+          successThreshold: {{ .Values.controller.startupProbe.successThreshold }}
+          failureThreshold: {{ .Values.controller.startupProbe.failureThreshold }}
+        {{- end }}
         lifecycle:
 {{ toYaml .Values.controller.lifecycle | indent 10 }}
         ports:
