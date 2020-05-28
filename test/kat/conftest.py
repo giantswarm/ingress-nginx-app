@@ -157,7 +157,7 @@ GatlingAppFactoryFunc = Callable[[str, str, str, Dict[str, str]], Job]
 @ pytest.fixture(scope="module")
 def gatling_app_factory(kube_client: HTTPClient) -> Iterator[GatlingAppFactoryFunc]:
     def _gatling_app_factory(scenario_url: str, scenario_class_name: str,
-                             version_tag: str = "3.2.1", node_affinity_selector: Dict[str, str] = None) -> Job:
+                             version_tag: str = "0.0.0-ae445213c76ac52056ee410ccdb4ddb9e6637658", node_affinity_selector: Dict[str, str] = None) -> Job:
         job_obj = {
             "apiVersion": "batch/v1",
             "kind": "Job",
@@ -177,7 +177,7 @@ def gatling_app_factory(kube_client: HTTPClient) -> Iterator[GatlingAppFactoryFu
                         "containers": [
                             {
                                 "name": "gatling",
-                                "image": "denvazh/gatling:{}".format(version_tag),
+                                "image": "quay.io/giantswarm/gatling-app:{}".format(version_tag),
                                 "command": ["/bin/bash"],
                                 "args": ["-c", "wget {} -O user-files/simulations/Simulation.scala \
                                     && ./bin/gatling.sh -s {} -rf ./results/nginx/".format(scenario_url,

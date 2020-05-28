@@ -56,7 +56,7 @@ class GatlingParser:
 
         mean_rps, _, _ = self.parse_result_line(
             report_lines[11], "mean requests/sec")
-        self.mean_rps = int(mean_rps)
+        self.mean_rps = float(mean_rps)
 
         assert report_lines[12] == "---- Response Time Distribution ------------------------------------------------"
         self.response_time_distribution: Dict[Tuple[float, float], int] = {

@@ -44,7 +44,7 @@ Generating reports...
 > response time 75th percentile                          3 (OK=3      KO=-     )
 > response time 95th percentile                          5 (OK=5      KO=-     )
 > response time 99th percentile                         10 (OK=10     KO=-     )
-> mean requests/sec                                    200 (OK=200    KO=-     )
+> mean requests/sec                                  200.0 (OK=200.0  KO=-     )
 ---- Response Time Distribution ------------------------------------------------
 > t < 800 ms                                           400 (100%)
 > 800 ms < t < 1200 ms                                   0 (  0%)
