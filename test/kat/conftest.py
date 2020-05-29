@@ -1,8 +1,12 @@
+import yaml
+from typing import Iterator, Callable, NamedTuple, List, Dict, Any, Optional, Iterable
+
 import pytest
 from pykube import ConfigMap, Job, HTTPClient, KubeConfig
-from typing import Iterator, Callable, NamedTuple, List, Dict
-import pykube.objects
+from pykube.objects import APIObject, object_factory
 
+
+# CLI options
 
 def pytest_addoption(parser):
     parser.addoption("--kube-config", action="store")
@@ -36,22 +40,28 @@ def kube_client(kubeconfig: str) -> HTTPClient:
     client = HTTPClient(KubeConfig.from_file(kubeconfig))
     return client
 
+# app catalog support
 
-AppCatalogFactoryFunc = Callable[[str, str], pykube.objects.APIObject]
+
+AppCR = APIObject
+AppCatalogCR = APIObject
+AppCatalogFactoryFunc = Callable[[str, str], AppCatalogCR]
 
 
 @pytest.fixture(scope="module")
-def app_catalog_factory(kube_client: HTTPClient) -> Iterator[AppCatalogFactoryFunc]:
+def app_catalog_factory(kube_client: HTTPClient) -> Iterable[AppCatalogFactoryFunc]:
+    """Return a factory object, that can be used to configure new AppCatalog CRs
+    for the 'app-operator' running in the cluster"""
     created_catalogs = []
 
-    def _app_catalog_factory(name: str, url: str = "") -> pykube.objects.APIObject:
+    def _app_catalog_factory(name: str, url: Optional[str] = "") -> AppCatalogCR:
         if url == "":
             url = "https://giantswarm.github.io/{}-catalog/".format(name)
-        api_obj = get_app_catalog_obj(name, url, kube_client)
-        created_catalogs.append(api_obj)
-        api_obj.create()
+        app_catalog = get_app_catalog_obj(name, str(url), kube_client)
+        created_catalogs.append(app_catalog)
+        app_catalog.create()
         # TODO: check that app catalog is present
-        return api_obj
+        return app_catalog
 
     yield _app_catalog_factory
     for catalog in created_catalogs:
@@ -59,28 +69,85 @@ def app_catalog_factory(kube_client: HTTPClient) -> Iterator[AppCatalogFactoryFu
         # TODO: wait until finalizer is gone and object is deleted
 
 
-StormforgerLoadAppFactoryFunc = Callable[[int, str, Dict[str, str]], None]
+class GiantSwarmAppPlatformCRs:
+    def __init__(self, kube_client: HTTPClient):
+        super().__init__()
+        self.app_cr_factory: AppCR = object_factory(
+            kube_client, "application.giantswarm.io/v1alpha1", "App")
+        self.app_catalog_cr_factory: AppCatalogCR = object_factory(
+            kube_client, "application.giantswarm.io/v1alpha1", "AppCatalog")
+
+
+def get_app_catalog_obj(catalog_name: str, catalog_uri: str,
+                        kube_client: HTTPClient) -> AppCatalogCR:
+    app_catalog_cr = {
+        "apiVersion": "application.giantswarm.io/v1alpha1",
+        "kind": "AppCatalog",
+        "metadata": {
+            "labels": {
+                "app-operator.giantswarm.io/version": "1.0.0",
+                "application.giantswarm.io/catalog-type": "",
+            },
+            "name": catalog_name,
+        },
+        "spec": {
+            "description": "Catalog for testing.",
+            "storage": {
+                "URL": catalog_uri,
+                "type": "helm",
+            },
+            "title": catalog_name,
+        }
+    }
+    crs = GiantSwarmAppPlatformCRs(kube_client)
+    return crs.app_catalog_cr_factory(kube_client, app_catalog_cr)
+
+# app support
+
+
+AppFactoryFunc = Callable[[str, str, str,
+                           str, int, str, Dict[str, Any]], AppCR]
+
+
+class AppState(NamedTuple):
+    app: AppCR
+    app_cm: ConfigMap
 
 
 @pytest.fixture(scope="module")
-def stormforger_load_app_factory(kube_client: HTTPClient,
-                                 app_catalog_factory: AppCatalogFactoryFunc) -> Iterator[StormforgerLoadAppFactoryFunc]:
-    class StormforgerState(NamedTuple):
-        app: pykube.objects.APIObject
-        app_cm: ConfigMap
+def app_factory(kube_client: HTTPClient,
+                app_catalog_factory: AppCatalogFactoryFunc) -> Iterable[AppFactoryFunc]:
+    """Returns a factory function which can be used to install an app using App CR"""
 
-    created_apps: List[StormforgerState] = []
+    created_apps: List[AppState] = []
 
-    def _stormforger_load_app_factory(replicas: int, host_url: str,
-                                      node_affinity_selector: Dict[str, str] = None) -> None:
-        app_name = "loadtest-app"
-        app_cm_name = "{}-testing-user-config".format(app_name)
+    yield app_factory_func(kube_client, app_catalog_factory, created_apps)
+
+    for created in created_apps:
+        created.app.delete()
+        if created.app_cm:
+            created.app_cm.delete()
+        # TODO: wait until finalizer is gone
+
+
+def app_factory_func(kube_client: HTTPClient,
+                     app_catalog_factory: AppCatalogFactoryFunc,
+                     created_apps: List[AppState]) -> AppFactoryFunc:
+    def _app_factory(app_name: str, app_version: str, catalog_name: str,
+                     catalog_url: str, replicas: int = 1, namespace: str = "default",
+                     config_values: Dict[str, Any] = {}) -> AppCR:
+        # TODO: include proper regexp validation
+        assert app_name is not ""
+        assert app_version is not ""
+        assert catalog_name is not ""
+        assert catalog_url is not ""
+
         api_version = "application.giantswarm.io/v1alpha1"
-        default_catalog = app_catalog_factory("default")
+        app_cm_name = "{}-testing-user-config".format(app_name)
+        catalog = app_catalog_factory(catalog_name, catalog_url)
         kind = "App"
-        namespace = "giantswarm"
 
-        load_app = {
+        app = {
             "apiVersion": api_version,
             "kind": kind,
             "metadata": {
@@ -92,63 +159,87 @@ def stormforger_load_app_factory(kube_client: HTTPClient,
                 },
             },
             "spec": {
-                "catalog": default_catalog.metadata["name"],
-                "version": "0.1.2",
+                "catalog": catalog.metadata["name"],
+                "version": app_version,
                 "kubeConfig": {
                     "inCluster": True
                 },
                 "name": app_name,
-                "namespace": "default",
-                "config": {
-                    "configMap": {
-                        "name": app_cm_name,
-                        "namespace": namespace,
-                    }
+                "namespace": namespace,
+            }
+        }
+
+        app_cm_obj: ConfigMap = None
+        if config_values:
+            app["spec"]["config"] = {
+                "configMap": {
+                    "name": app_cm_name,
+                    "namespace": namespace,
                 }
             }
-        }
-        config_values = """replicaCount: "{}"
-ingress:
-  enabled: "true"
-  annotations:
-    "kubernetes.io/ingress.class": "nginx"
-  paths:
-    - "/"
-  hosts:
-    - "{}"
-autoscaling:
-  enabled: "false"
-""".format(replicas, host_url)
-        if node_affinity_selector is not None:
-            config_values += """nodeAffinity:
-  enabled: "true"
-  selector: {}
-            """.format(node_affinity_selector)
-        app_cm = {
-            "apiVersion": "v1",
-            "kind": "ConfigMap",
-            "metadata": {
-                "name": app_cm_name,
-                "namespace": namespace,
+            app_cm = {
+                "apiVersion": "v1",
+                "kind": "ConfigMap",
+                "metadata": {
+                    "name": app_cm_name,
+                    "namespace": namespace,
+                },
+                "data": {
+                    "values": yaml.dump(config_values)
+                }
+            }
+            app_cm_obj = ConfigMap(kube_client, app_cm)
+            app_cm_obj.create()
+
+        app_obj = GiantSwarmAppPlatformCRs(
+            kube_client).app_cr_factory(kube_client, app)
+        app_obj.create()
+        created_apps.append(AppState(app_obj, app_cm_obj))
+        # TODO: wait until deployment is all ready
+        return app_obj
+    return _app_factory
+
+# specific apps
+
+
+StormforgerLoadAppFactoryFunc = Callable[[int, str, Dict[str, str]], AppCR]
+
+
+@pytest.fixture(scope="module")
+def stormforger_load_app_factory(kube_client: HTTPClient,
+                                 app_catalog_factory: AppCatalogFactoryFunc,
+                                 app_factory: AppFactoryFunc) -> StormforgerLoadAppFactoryFunc:
+    def _stormforger_load_app_factory(replicas: int, host_url: str,
+                                      node_affinity_selector: Dict[str, str] = None) -> AppCR:
+        config_values = {
+            "replicaCount": replicas,
+            "ingress": {
+                "enabled": "true",
+                "annotations": {
+                    "kubernetes.io/ingress.class": "nginx"
+                },
+                "paths": [
+                    "/"
+                ],
+                "hosts": [
+                    host_url
+                ]
             },
-            "data": {
-                "values": config_values
+            "autoscaling": {
+                "enabled": "false"
             }
         }
 
-        app_cm_obj = ConfigMap(kube_client, app_cm)
-        app_cm_obj.create()
-        App = pykube.objects.object_factory(kube_client, api_version, kind)
-        app_obj = App(kube_client, load_app)
-        app_obj.create()
-        created_apps.append(StormforgerState(app_obj, app_cm_obj))
-        # TODO: wait until deployment is all ready
+        if node_affinity_selector is not None:
+            config_values["nodeAffinity"] = {
+                "enabled": "true",
+                "selector": node_affinity_selector
+            }
+        stormforger_app = app_factory("loadtest-app", "0.1.2", "default", "https://giantswarm.github.io/default-catalog/",
+                                      replicas=replicas, config_values=config_values)
+        return stormforger_app
 
-    yield _stormforger_load_app_factory
-    for created in created_apps:
-        created.app.delete()
-        created.app_cm.delete()
-        # TODO: wait until finalizer is gone
+    return _stormforger_load_app_factory
 
 
 GatlingAppFactoryFunc = Callable[[str, str, str, Dict[str, str]], Job]
@@ -192,37 +283,3 @@ def gatling_app_factory(kube_client: HTTPClient) -> Iterator[GatlingAppFactoryFu
             job_obj["spec"]["template"]["spec"]["nodeSelector"] = node_affinity_selector
         return Job(kube_client, job_obj)
     yield _gatling_app_factory
-
-
-class GiantSwarmAppPlatformCRs:
-    def __init__(self, kube_client: HTTPClient):
-        super().__init__()
-        self.app_cr_factory = pykube.objects.object_factory(
-            kube_client, "application.giantswarm.io/v1alpha1", "App")
-        self.app_catalog_cr_factory = pykube.objects.object_factory(
-            kube_client, "application.giantswarm.io/v1alpha1", "AppCatalog")
-
-
-def get_app_catalog_obj(catalog_name, catalog_uri: str,
-                        kube_client: HTTPClient) -> pykube.objects.APIObject:
-    app_catalog_cr = {
-        "apiVersion": "application.giantswarm.io/v1alpha1",
-        "kind": "AppCatalog",
-        "metadata": {
-            "labels": {
-                "app-operator.giantswarm.io/version": "1.0.0",
-                "application.giantswarm.io/catalog-type": "",
-            },
-            "name": catalog_name,
-        },
-        "spec": {
-            "description": "Catalog for testing.",
-            "storage": {
-                "URL": catalog_uri,
-                "type": "helm",
-            },
-            "title": catalog_name,
-        }
-    }
-    crs = GiantSwarmAppPlatformCRs(kube_client)
-    return crs.app_catalog_cr_factory(kube_client, app_catalog_cr)
