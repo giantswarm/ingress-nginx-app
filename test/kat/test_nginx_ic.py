@@ -1,10 +1,12 @@
 from pykube import Job, Pod, Node, HTTPClient
+import logging
 from typing import List, Tuple
 from conftest import GatlingAppFactoryFunc, StormforgerLoadAppFactoryFunc
 from parsers.gatling_parser import GatlingParser
 import pytest
 import time
 
+logger = logging.getLogger("kube-app-testing")
 
 def wait_for_job(job: Job):
     while True:
@@ -66,7 +68,7 @@ def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: Stor
     assert gatling_po_query.get(0) is not None
     gatling_po = gatling_po_query.get(0)
     container_log = gatling_po.logs(container="gatling")
-    print(container_log)
+    logger.info(container_log)
     results = GatlingParser(container_log)
 
     assert results.request_count_total == 400
