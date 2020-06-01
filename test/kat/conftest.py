@@ -271,7 +271,7 @@ def gatling_app_factory(kube_client: HTTPClient,
                              node_affinity_selector: Dict[str, str] = None) -> AppCR:
         namespace = "default"
         with open(simulation_file, "r") as f:
-            simulation_code = f.readlines()
+            simulation_code = f.read()
         simulation_cm: YamlDict = {
             "apiVersion": "v1",
             "kind": "ConfigMap",
@@ -283,11 +283,9 @@ def gatling_app_factory(kube_client: HTTPClient,
                 },
             },
             "data": {
-                "NginxSimulation.scala": " |"
+                "NginxSimulation.scala": simulation_code,
             }
         }
-        for line in simulation_code:
-            simulation_cm["data"]["NginxSimulation.scala"] += line
 
         config_values: YamlDict = {
             "simulation": {
