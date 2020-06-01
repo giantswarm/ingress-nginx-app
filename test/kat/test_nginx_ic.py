@@ -1,12 +1,15 @@
-from pykube import Job, Pod, Node, HTTPClient
 import logging
-from typing import List, Tuple
+import time
+from typing import List, Tuple, Optional
+
+import pytest
+from pykube import Job, Pod, Node, HTTPClient
+
 from conftest import GatlingAppFactoryFunc, StormforgerLoadAppFactoryFunc
 from parsers.gatling_parser import GatlingParser
-import pytest
-import time
 
 logger = logging.getLogger("kube-app-testing")
+
 
 def wait_for_job(job: Job):
     while True:
@@ -18,7 +21,7 @@ def wait_for_job(job: Job):
         time.sleep(1)
 
 
-def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Node, Node]:
+def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Optional[Node], Optional[Node]]:
     nginx_po_query = Pod.objects(kube_client).filter(
         namespace="kube-system",
         selector={

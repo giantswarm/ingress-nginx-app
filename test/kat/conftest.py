@@ -1,5 +1,5 @@
 import yaml
-from typing import Iterator, Callable, NamedTuple, List, Dict, Any, Optional, Iterable
+from typing import Iterator, Callable, NamedTuple, List, Dict, Any, Optional, Iterable, Type
 
 import pytest
 from pykube import ConfigMap, Job, HTTPClient, KubeConfig
@@ -72,9 +72,9 @@ def app_catalog_factory(kube_client: HTTPClient) -> Iterable[AppCatalogFactoryFu
 class GiantSwarmAppPlatformCRs:
     def __init__(self, kube_client: HTTPClient):
         super().__init__()
-        self.app_cr_factory: AppCR = object_factory(
+        self.app_cr_factory: Type[AppCR] = object_factory(
             kube_client, "application.giantswarm.io/v1alpha1", "App")
-        self.app_catalog_cr_factory: AppCatalogCR = object_factory(
+        self.app_catalog_cr_factory: Type[AppCatalogCR] = object_factory(
             kube_client, "application.giantswarm.io/v1alpha1", "AppCatalog")
 
 
@@ -135,8 +135,10 @@ def app_factory_func(kube_client: HTTPClient,
                      created_apps: List[AppState]) -> AppFactoryFunc:
     def _app_factory(app_name: str, app_version: str, catalog_name: str,
                      catalog_url: str, replicas: int = 1, namespace: str = "default",
-                     config_values: Dict[str, Any] = {}) -> AppCR:
+                     config_values=None) -> AppCR:
         # TODO: include proper regexp validation
+        if config_values is None:
+            config_values = {}
         assert app_name is not ""
         assert app_version is not ""
         assert catalog_name is not ""
