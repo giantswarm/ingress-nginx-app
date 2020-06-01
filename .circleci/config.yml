@@ -103,7 +103,7 @@ workflows:
   build_e2e:
     jobs:
       - build
-      
+
       - architect/push-to-app-catalog:
           name: push-to-default-app-catalog
           app_catalog: "default-catalog"
