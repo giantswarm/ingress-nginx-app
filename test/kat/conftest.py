@@ -58,9 +58,14 @@ def app_catalog_factory(kube_client: HTTPClient) -> Iterable[AppCatalogFactoryFu
     def _app_catalog_factory(name: str, url: Optional[str] = "") -> AppCatalogCR:
         if url == "":
             url = "https://giantswarm.github.io/{}-catalog/".format(name)
-        for catalog in created_catalogs:
-            if catalog.metadata["name"] == name:
-                return catalog
+        for c in created_catalogs:
+            if c.metadata["name"] == name:
+                existing_url = c.obj["spec"]["storage"]["URL"]
+                if existing_url == url:
+                    return c
+                raise ValueError(
+                    "You requested creation of AppCatalog named {} with URL {} but it was already registered with URL "
+                    "{}".format(name, url, existing_url))
 
         app_catalog = get_app_catalog_obj(name, str(url), kube_client)
         created_catalogs.append(app_catalog)
@@ -266,7 +271,7 @@ def gatling_app_factory(kube_client: HTTPClient,
                              node_affinity_selector: Dict[str, str] = None) -> AppCR:
         namespace = "default"
         with open(simulation_file, "r") as f:
-            simulation_code = f.read()
+            simulation_code = f.readlines()
         simulation_cm: YamlDict = {
             "apiVersion": "v1",
             "kind": "ConfigMap",
@@ -278,9 +283,11 @@ def gatling_app_factory(kube_client: HTTPClient,
                 },
             },
             "data": {
-                "NginxSimulation.scala": yaml.dump(simulation_code)
+                "NginxSimulation.scala": " |"
             }
         }
+        for line in simulation_code:
+            simulation_cm["data"]["NginxSimulation.scala"] += line
 
         config_values: YamlDict = {
             "simulation": {
