@@ -9,6 +9,9 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Make healthcheck probes configurable.
+- Make liveness probe more resilient.
+
 ## [v1.6.11] 2020-05-26
 
 ### Changed
