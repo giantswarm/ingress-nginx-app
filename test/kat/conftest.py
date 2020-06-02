@@ -1,8 +1,8 @@
-from typing import Iterator, Callable, NamedTuple, List, Dict, Optional, Iterable, Type, Union
+from typing import Callable, NamedTuple, List, Dict, Optional, Iterable, Type, Union
 
 import pytest
 import yaml
-from pykube import ConfigMap, Job, HTTPClient, KubeConfig
+from pykube import ConfigMap, HTTPClient, KubeConfig
 from pykube.objects import APIObject, object_factory
 
 
@@ -270,7 +270,7 @@ def gatling_app_factory(kube_client: HTTPClient,
     def _gatling_app_factory(simulation_file: str,
                              node_affinity_selector: Dict[str, str] = None) -> AppCR:
         namespace = "default"
-        with open(simulation_file, "r") as f:
+        with open(simulation_file) as f:
             simulation_code = f.read()
         simulation_cm: YamlDict = {
             "apiVersion": "v1",
@@ -314,48 +314,3 @@ def gatling_app_factory(kube_client: HTTPClient,
 
     for cm in created_configmaps:
         cm.delete()
-
-
-GatlingJobFactoryFunc = Callable[[str, str, str, Dict[str, str]], Job]
-
-
-@pytest.fixture(scope="module")
-def gatling_job_factory(kube_client: HTTPClient) -> Iterator[GatlingJobFactoryFunc]:
-    def _gatling_job_factory(scenario_url: str, scenario_class_name: str,
-                             version_tag: str = "0.0.0-ae445213c76ac52056ee410ccdb4ddb9e6637658",
-                             node_affinity_selector: Dict[str, str] = None) -> Job:
-        job_obj = {
-            "apiVersion": "batch/v1",
-            "kind": "Job",
-            "metadata": {
-                "name": "gatling",
-                "namespace": "default",
-                "labels": {
-                    "app": "gatling",
-                },
-            },
-            "spec": {
-                "backoffLimit": 5,
-                "completions": 1,
-                "template": {
-                    "spec": {
-                        "restartPolicy": "Never",
-                        "containers": [
-                            {
-                                "name": "gatling",
-                                "image": "quay.io/giantswarm/gatling-app:{}".format(version_tag),
-                                "command": ["/bin/bash"],
-                                "args": ["-c", "wget {} -O user-files/simulations/Simulation.scala \
-                                    && ./bin/gatling.sh -s {} -rf ./results/nginx/".format(scenario_url,
-                                                                                           scenario_class_name)],
-                            }
-                        ]
-                    }
-                }
-            }
-        }
-        if node_affinity_selector is not None:
-            job_obj["spec"]["template"]["spec"]["nodeSelector"] = node_affinity_selector
-        return Job(kube_client, job_obj)
-
-    yield _gatling_job_factory
