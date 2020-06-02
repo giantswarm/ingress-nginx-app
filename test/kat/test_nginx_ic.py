@@ -1,24 +1,38 @@
-from pykube import Job, Pod, Node, HTTPClient
 import logging
-from typing import List, Tuple
-from conftest import GatlingAppFactoryFunc, StormforgerLoadAppFactoryFunc
-from parsers.gatling_parser import GatlingParser
-import pytest
 import time
+from typing import List, Tuple, Optional
+
+import pykube.exceptions
+import pytest
+from pykube import Job, Pod, Node, HTTPClient
+
+from conftest import StormforgerLoadAppFactoryFunc, GatlingAppFactoryFunc
+from parsers.gatling_parser import GatlingParser
 
 logger = logging.getLogger("kube-app-testing")
 
-def wait_for_job(job: Job):
+
+def wait_for_job(kube_client: HTTPClient, job_name: str, namespace: str, max_wait_time_sec: int):
+    job: Job
+    wait_time_sec = 0
     while True:
-        job.reload()
-        status = job.obj["status"]
-        if status and "conditions" in status and len(status["conditions"]) and \
-                status["conditions"][0]["type"] == "Complete":
-            break
+        try:
+            job = Job.objects(kube_client).filter(namespace=namespace).get(name=job_name)
+            status = job.obj["status"]
+            if status and "conditions" in status and len(status["conditions"]) and \
+                    status["conditions"][0]["type"] == "Complete":
+                break
+        except pykube.exceptions.ObjectDoesNotExist:
+            pass
+        if wait_time_sec >= max_wait_time_sec:
+            raise TimeoutError(
+                "Job {} in namespace {} was not completed in {} seconds".format(job_name, namespace, max_wait_time_sec))
         time.sleep(1)
+        wait_time_sec += 1
+    return job
 
 
-def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Node, Node]:
+def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Optional[Node], Optional[Node]]:
     nginx_po_query = Pod.objects(kube_client).filter(
         namespace="kube-system",
         selector={
@@ -51,13 +65,9 @@ def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: Stor
             "kubernetes.io/hostname": stormforger_node.labels.get("kubernetes.io/hostname")}
         gatling_affinity_selector = {
             "kubernetes.io/hostname": gatling_node.labels.get("kubernetes.io/hostname")}
-    stormforger_load_app_factory(
-        8, "loadtest.local", node_affinity_selector=stormforger_affinity_selector)
-    gatling_job = gatling_app_factory("https://github.com/giantswarm/nginx-ingress-controller-app/"
-                                      + "raw/better-testing/test/kat/NginxSimulation.scala",
-                                      "nginx.NginxSimulation", node_affinity_selector=gatling_affinity_selector)
-    gatling_job.create()
-    wait_for_job(gatling_job)
+    stormforger_load_app_factory(8, "loadtest.local", stormforger_affinity_selector)
+    gatling_app_factory("NginxSimulation.scala", gatling_affinity_selector)
+    gatling_job = wait_for_job(kube_client, "gatling", "default", 600)
     gatling_po_query = Pod.objects(kube_client).filter(
         namespace="default",
         selector={

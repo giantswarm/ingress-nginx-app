@@ -1,7 +1,7 @@
-import yaml
-from typing import Iterator, Callable, NamedTuple, List, Dict, Any, Optional, Iterable
+from typing import Iterator, Callable, NamedTuple, List, Dict, Optional, Iterable, Type, Union
 
 import pytest
+import yaml
 from pykube import ConfigMap, Job, HTTPClient, KubeConfig
 from pykube.objects import APIObject, object_factory
 
@@ -15,30 +15,31 @@ def pytest_addoption(parser):
     parser.addoption("--chart-version", action="store")
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def chart_name(pytestconfig) -> str:
     return pytestconfig.getoption("chart_name")
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def chart_version(pytestconfig) -> str:
     return pytestconfig.getoption("chart_version")
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def values_file_path(pytestconfig) -> str:
     return pytestconfig.getoption("values_file")
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def kubeconfig(pytestconfig) -> str:
     return pytestconfig.getoption("kube_config")
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def kube_client(kubeconfig: str) -> HTTPClient:
     client = HTTPClient(KubeConfig.from_file(kubeconfig))
     return client
+
 
 # app catalog support
 
@@ -48,7 +49,7 @@ AppCatalogCR = APIObject
 AppCatalogFactoryFunc = Callable[[str, str], AppCatalogCR]
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def app_catalog_factory(kube_client: HTTPClient) -> Iterable[AppCatalogFactoryFunc]:
     """Return a factory object, that can be used to configure new AppCatalog CRs
     for the 'app-operator' running in the cluster"""
@@ -57,6 +58,15 @@ def app_catalog_factory(kube_client: HTTPClient) -> Iterable[AppCatalogFactoryFu
     def _app_catalog_factory(name: str, url: Optional[str] = "") -> AppCatalogCR:
         if url == "":
             url = "https://giantswarm.github.io/{}-catalog/".format(name)
+        for c in created_catalogs:
+            if c.metadata["name"] == name:
+                existing_url = c.obj["spec"]["storage"]["URL"]
+                if existing_url == url:
+                    return c
+                raise ValueError(
+                    "You requested creation of AppCatalog named {} with URL {} but it was already registered with URL "
+                    "{}".format(name, url, existing_url))
+
         app_catalog = get_app_catalog_obj(name, str(url), kube_client)
         created_catalogs.append(app_catalog)
         app_catalog.create()
@@ -72,9 +82,9 @@ def app_catalog_factory(kube_client: HTTPClient) -> Iterable[AppCatalogFactoryFu
 class GiantSwarmAppPlatformCRs:
     def __init__(self, kube_client: HTTPClient):
         super().__init__()
-        self.app_cr_factory: AppCR = object_factory(
+        self.app_cr_factory: Type[AppCR] = object_factory(
             kube_client, "application.giantswarm.io/v1alpha1", "App")
-        self.app_catalog_cr_factory: AppCatalogCR = object_factory(
+        self.app_catalog_cr_factory: Type[AppCatalogCR] = object_factory(
             kube_client, "application.giantswarm.io/v1alpha1", "AppCatalog")
 
 
@@ -102,11 +112,12 @@ def get_app_catalog_obj(catalog_name: str, catalog_uri: str,
     crs = GiantSwarmAppPlatformCRs(kube_client)
     return crs.app_catalog_cr_factory(kube_client, app_catalog_cr)
 
+
 # app support
 
 
-AppFactoryFunc = Callable[[str, str, str,
-                           str, int, str, Dict[str, Any]], AppCR]
+YamlDict = Dict[str, Union[int, float, str, bool, 'YamlDict']]
+AppFactoryFunc = Callable[[str, str, str, str, str, YamlDict], AppCR]
 
 
 class AppState(NamedTuple):
@@ -114,7 +125,7 @@ class AppState(NamedTuple):
     app_cm: ConfigMap
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="session")
 def app_factory(kube_client: HTTPClient,
                 app_catalog_factory: AppCatalogFactoryFunc) -> Iterable[AppFactoryFunc]:
     """Returns a factory function which can be used to install an app using App CR"""
@@ -134,9 +145,11 @@ def app_factory_func(kube_client: HTTPClient,
                      app_catalog_factory: AppCatalogFactoryFunc,
                      created_apps: List[AppState]) -> AppFactoryFunc:
     def _app_factory(app_name: str, app_version: str, catalog_name: str,
-                     catalog_url: str, replicas: int = 1, namespace: str = "default",
-                     config_values: Dict[str, Any] = {}) -> AppCR:
+                     catalog_url: str, namespace: str = "default",
+                     config_values: YamlDict = None) -> AppCR:
         # TODO: include proper regexp validation
+        if config_values is None:
+            config_values = {}
         assert app_name is not ""
         assert app_version is not ""
         assert catalog_name is not ""
@@ -147,7 +160,7 @@ def app_factory_func(kube_client: HTTPClient,
         catalog = app_catalog_factory(catalog_name, catalog_url)
         kind = "App"
 
-        app = {
+        app: YamlDict = {
             "apiVersion": api_version,
             "kind": kind,
             "metadata": {
@@ -169,7 +182,7 @@ def app_factory_func(kube_client: HTTPClient,
             }
         }
 
-        app_cm_obj: ConfigMap = None
+        app_cm_obj: Optional[ConfigMap] = None
         if config_values:
             app["spec"]["config"] = {
                 "configMap": {
@@ -177,7 +190,7 @@ def app_factory_func(kube_client: HTTPClient,
                     "namespace": namespace,
                 }
             }
-            app_cm = {
+            app_cm: YamlDict = {
                 "apiVersion": "v1",
                 "kind": "ConfigMap",
                 "metadata": {
@@ -197,7 +210,9 @@ def app_factory_func(kube_client: HTTPClient,
         created_apps.append(AppState(app_obj, app_cm_obj))
         # TODO: wait until deployment is all ready
         return app_obj
+
     return _app_factory
+
 
 # specific apps
 
@@ -211,7 +226,7 @@ def stormforger_load_app_factory(kube_client: HTTPClient,
                                  app_factory: AppFactoryFunc) -> StormforgerLoadAppFactoryFunc:
     def _stormforger_load_app_factory(replicas: int, host_url: str,
                                       node_affinity_selector: Dict[str, str] = None) -> AppCR:
-        config_values = {
+        config_values: YamlDict = {
             "replicaCount": replicas,
             "ingress": {
                 "enabled": "true",
@@ -235,20 +250,80 @@ def stormforger_load_app_factory(kube_client: HTTPClient,
                 "enabled": "true",
                 "selector": node_affinity_selector
             }
-        stormforger_app = app_factory("loadtest-app", "0.1.2", "default", "https://giantswarm.github.io/default-catalog/",
-                                      replicas=replicas, config_values=config_values)
+        stormforger_app = app_factory("loadtest-app", "0.1.2", "default",
+                                      "https://giantswarm.github.io/default-catalog/",
+                                      "default", config_values)
         return stormforger_app
 
     return _stormforger_load_app_factory
 
 
-GatlingAppFactoryFunc = Callable[[str, str, str, Dict[str, str]], Job]
+GatlingAppFactoryFunc = Callable[[str, Dict[str, str]], AppCR]
 
 
-@ pytest.fixture(scope="module")
-def gatling_app_factory(kube_client: HTTPClient) -> Iterator[GatlingAppFactoryFunc]:
-    def _gatling_app_factory(scenario_url: str, scenario_class_name: str,
-                             version_tag: str = "0.0.0-ae445213c76ac52056ee410ccdb4ddb9e6637658", node_affinity_selector: Dict[str, str] = None) -> Job:
+@pytest.fixture(scope="module")
+def gatling_app_factory(kube_client: HTTPClient,
+                        app_catalog_factory: AppCatalogFactoryFunc,
+                        app_factory: AppFactoryFunc) -> Iterable[GatlingAppFactoryFunc]:
+    created_configmaps: List[ConfigMap] = []
+
+    def _gatling_app_factory(simulation_file: str,
+                             node_affinity_selector: Dict[str, str] = None) -> AppCR:
+        namespace = "default"
+        with open(simulation_file, "r") as f:
+            simulation_code = f.read()
+        simulation_cm: YamlDict = {
+            "apiVersion": "v1",
+            "kind": "ConfigMap",
+            "metadata": {
+                "name": "gatling-simulation",
+                "namespace": namespace,
+                "labels": {
+                    "app": "gatling"
+                },
+            },
+            "data": {
+                "NginxSimulation.scala": simulation_code,
+            }
+        }
+
+        config_values: YamlDict = {
+            "simulation": {
+                "configMap": {
+                    "name": simulation_cm["metadata"]["name"]
+                },
+                "name": "nginx.NginxSimulation",
+            }
+        }
+
+        if node_affinity_selector is not None:
+            config_values["nodeAffinity"] = {
+                "enabled": "true",
+                "selector": node_affinity_selector
+            }
+
+        simulation_cm_obj = ConfigMap(kube_client, simulation_cm)
+        simulation_cm_obj.create()
+        created_configmaps.append(simulation_cm_obj)
+        gatling_app = app_factory("gatling-app", "1.0.2", "giantswarm-playground",
+                                  "https://giantswarm.github.com/giantswarm-playground-catalog/",
+                                  namespace, config_values)
+        return gatling_app
+
+    yield _gatling_app_factory
+
+    for cm in created_configmaps:
+        cm.delete()
+
+
+GatlingJobFactoryFunc = Callable[[str, str, str, Dict[str, str]], Job]
+
+
+@pytest.fixture(scope="module")
+def gatling_job_factory(kube_client: HTTPClient) -> Iterator[GatlingJobFactoryFunc]:
+    def _gatling_job_factory(scenario_url: str, scenario_class_name: str,
+                             version_tag: str = "0.0.0-ae445213c76ac52056ee410ccdb4ddb9e6637658",
+                             node_affinity_selector: Dict[str, str] = None) -> Job:
         job_obj = {
             "apiVersion": "batch/v1",
             "kind": "Job",
@@ -282,4 +357,5 @@ def gatling_app_factory(kube_client: HTTPClient) -> Iterator[GatlingAppFactoryFu
         if node_affinity_selector is not None:
             job_obj["spec"]["template"]["spec"]["nodeSelector"] = node_affinity_selector
         return Job(kube_client, job_obj)
-    yield _gatling_app_factory
+
+    yield _gatling_job_factory
