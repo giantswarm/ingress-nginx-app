@@ -9,6 +9,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+## [v1.6.12] 2020-06-04
+
+### Changed
+
 - Make healthcheck probes configurable.
 - Make liveness probe more resilient.
 
@@ -180,7 +184,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.11...master
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.12...master
+[v1.6.12]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.12
 [v1.6.11]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.11
 [v1.6.10]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.10
 [v1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.9
