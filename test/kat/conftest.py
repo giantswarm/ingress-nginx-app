@@ -291,7 +291,8 @@ def gatling_app_factory(kube_client: HTTPClient,
             "simulation": {
                 "configMap": {
                     "name": simulation_cm["metadata"]["name"]
-                }
+                },
+                "name": "nginx.NginxSimulation",
             }
         }
 
@@ -304,7 +305,7 @@ def gatling_app_factory(kube_client: HTTPClient,
         simulation_cm_obj = ConfigMap(kube_client, simulation_cm)
         simulation_cm_obj.create()
         created_configmaps.append(simulation_cm_obj)
-        gatling_app = app_factory("gatling-app", "1.0.1", "giantswarm-playground",
+        gatling_app = app_factory("gatling-app", "1.0.2", "giantswarm-playground",
                                   "https://giantswarm.github.com/giantswarm-playground-catalog/",
                                   namespace, config_values)
         return gatling_app
