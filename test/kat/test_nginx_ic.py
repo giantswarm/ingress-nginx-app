@@ -88,8 +88,8 @@ def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: Stor
     logger.info(container_log)
     results = GatlingParser(container_log)
 
-    assert results.request_count_total == 400
-    assert results.mean_rps >= 100
+    assert results.request_count_total == 65000
+    assert results.mean_rps >= 1700
     assert results.request_success_ratio >= 0.995
 
     gatling_job.delete()
