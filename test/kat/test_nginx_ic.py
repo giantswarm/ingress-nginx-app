@@ -27,6 +27,7 @@ def wait_for_job(kube_client: HTTPClient, job_name: str, namespace: str, max_wai
         if wait_time_sec >= max_wait_time_sec:
             raise TimeoutError(
                 "Job {} in namespace {} was not completed in {} seconds".format(job_name, namespace, max_wait_time_sec))
+        logger.info("Waiting for gatling job to complete...")
         time.sleep(1)
         wait_time_sec += 1
     return job
@@ -61,13 +62,19 @@ def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: Stor
     stormforger_affinity_selector, gatling_affinity_selector = None, None
     stormforger_node, gatling_node = get_affinity_nodes(kube_client, nodes)
     if stormforger_node is not None and gatling_node is not None:
+        logger.info("Found at least 3 worker nodes, using affinity for stormforger and gatling apps.")
         stormforger_affinity_selector = {
             "kubernetes.io/hostname": stormforger_node.labels.get("kubernetes.io/hostname")}
         gatling_affinity_selector = {
             "kubernetes.io/hostname": gatling_node.labels.get("kubernetes.io/hostname")}
+    else:
+        logger.info("Not enough nodes to use affinity for gatling and stormforger.")
+    logger.info("Creating stormforger app")
     stormforger_load_app_factory(8, "loadtest.local", stormforger_affinity_selector)
+    logger.info("Creating gatling app")
     gatling_app_factory("NginxSimulation.scala", gatling_affinity_selector)
     gatling_job = wait_for_job(kube_client, "gatling", "default", 600)
+    logger.info("Gatling job complete, looking up job's pod to get stdout")
     gatling_po_query = Pod.objects(kube_client).filter(
         namespace="default",
         selector={

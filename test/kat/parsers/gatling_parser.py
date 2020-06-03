@@ -1,5 +1,5 @@
-from typing import Tuple, Dict, Union
 import math
+from typing import Tuple, Dict, Union
 
 
 class GatlingParser:
@@ -85,8 +85,6 @@ class GatlingParser:
         fields = list(filter(None, line.split(" ")))
         assert fields[0] == "failed"
 
-        assert report_lines[17] == "================================================================================"
-
     def parse_result_line(self, line, header: str) -> Tuple[str, str, str]:
         assert line[0:2] == "> "
         line = line[2:]
@@ -95,5 +93,5 @@ class GatlingParser:
         fields = list(filter(None, fields))
         total = fields[0]
         ok = fields[1].split("=")[1]
-        bad = fields[2].split("=")[1]
+        bad = fields[2].split("=")[1].rstrip(")")
         return total, ok, bad
