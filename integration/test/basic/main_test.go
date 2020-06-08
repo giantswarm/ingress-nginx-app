@@ -22,6 +22,7 @@ import (
 
 const (
 	appName        = "nginx-ingress-controller-app"
+	name           = "nginx-ingress-controller"
 	catalogURL     = "https://giantswarm.github.io/default-catalog"
 	testCatalogURL = "https://giantswarm.github.io/default-test-catalog"
 )
@@ -106,7 +107,7 @@ func init() {
 
 			App: basicapp.Chart{
 				ChartValues:     templates.IngressControllerValues,
-				Name:            appName,
+				Name:            name,
 				Namespace:       metav1.NamespaceSystem,
 				RunReleaseTests: true,
 				URL:             tarballURL,
@@ -114,21 +115,21 @@ func init() {
 			ChartResources: basicapp.ChartResources{
 				Deployments: []basicapp.Deployment{
 					{
-						Name:      appName,
+						Name:      name,
 						Namespace: metav1.NamespaceSystem,
 						DeploymentLabels: map[string]string{
-							"app":                        appName,
+							"app":                        name,
 							"giantswarm.io/service-type": "managed",
-							"app.kubernetes.io/name":     appName,
+							"app.kubernetes.io/name":     name,
 						},
 						MatchLabels: map[string]string{
-							"k8s-app": appName,
+							"k8s-app": name,
 						},
 						PodLabels: map[string]string{
-							"app":                        appName,
+							"app":                        name,
 							"giantswarm.io/service-type": "managed",
-							"k8s-app":                    appName,
-							"app.kubernetes.io/name":     appName,
+							"k8s-app":                    name,
+							"app.kubernetes.io/name":     name,
 						},
 					},
 				},
