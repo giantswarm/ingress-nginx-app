@@ -11,8 +11,12 @@ metadata:
     prometheus.io/port: '{{ .Values.controller.metrics.port }}'
     prometheus.io/scrape: 'true'
 spec:
-  {{- if and ( (not .Values.controller.autoscaling.enabled) (or (not (index .Values.configmap "hpa-enabled")) (ne (index .Values.configmap "hpa-enabled") "true") ) ) }}
+  {{- if not .Values.controller.autoscaling.enabled }}
+  {{- if hasKey .Values.configmap "hpa-enabled" }}
+  {{- if ne (index .Values.configmap "hpa-enabled") "true" }}
   replicas: {{ .Values.controller.replicaCount }}
+  {{- end}}
+  {{- end}}
   {{- end}}
   selector:
     matchLabels:
