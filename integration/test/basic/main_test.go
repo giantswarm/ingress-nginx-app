@@ -21,7 +21,7 @@ import (
 )
 
 const (
-	appName        = "nginx-ingress-controller"
+	appName        = "nginx-ingress-controllera-app"
 	catalogURL     = "https://giantswarm.github.io/default-catalog"
 	testCatalogURL = "https://giantswarm.github.io/default-test-catalog"
 )
