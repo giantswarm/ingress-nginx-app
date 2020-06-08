@@ -5,6 +5,6 @@ home: https://github.com/giantswarm/nginx-ingress-controller-app
 icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
 name: nginx-ingress-controller-app
 namespace: kube-system
-version: 1.1.1
+version: [[ .Version ]]
 sources:
   - https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v[[ .Version ]]/README.md
