@@ -3,7 +3,7 @@ orbs:
   architect: giantswarm/architect@0.8.17
 
 jobs:
-  run_kat_tests:
+  run-perf-tests:
     machine:
       image: ubuntu-1604:201903-01
     working_directory:
@@ -68,13 +68,28 @@ workflows:
                 - master
           requires:
             - push-to-default-app-catalog
-
-      - run_kat_tests:
-          requires:
-            - push-to-default-app-catalog
             - push-to-giantswarm-app-catalog
+
+      # Require manual approval for running performance tests.
+      - hold-run-perf-tests:
+          type: approval
+          requires:
+            - basic-integration-test
           filters:
-            # Do not trigger the job on merge to master.
+            # Do not trigger the job on master branch or release tags.
             branches:
               ignore:
                 - master
+            tags:
+              ignore: /^v.*/
+
+      - run-perf-tests:
+          requires:
+            - hold-run-perf-tests
+          filters:
+            # Do not trigger the job on master branch or release tags.
+            branches:
+              ignore:
+                - master
+            tags:
+              ignore: /^v.*/
