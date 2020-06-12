@@ -12,6 +12,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Use LoadBalancer Service on Azure.
 - Change controller.service.type to LoadBalancer/NodePort, and introduce controller.service.public for public/internal service classification.
 
+## [v1.6.12] 2020-06-04
+
+### Changed
+
+- Make healthcheck probes configurable.
+- Make liveness probe more resilient.
+
 ## [v1.6.11] 2020-05-26
 
 ### Changed
@@ -180,7 +187,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.11...master
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.12...master
+[v1.6.12]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.12
 [v1.6.11]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.11
 [v1.6.10]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.10
 [v1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.9
