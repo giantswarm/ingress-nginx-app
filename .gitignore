@@ -10,3 +10,12 @@
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
+
+# python testing stuff
+test-results/
+test/**/.vscode/
+test/**/.idea/
+test/**/__pycache__/
+nginx-ingress-controller-app-*.tgz
+test/**/.mypy_cache/
+junit.xml
