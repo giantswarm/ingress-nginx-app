@@ -9,6 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Upgrade to ingress-nginx [0.33.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0330).
+
 ## [v1.6.12] 2020-06-04
 
 ### Changed
