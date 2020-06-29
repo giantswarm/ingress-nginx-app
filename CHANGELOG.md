@@ -9,6 +9,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+## [v1.7.0] 2020-06-29
+
+### Changed
+
 - Use LoadBalancer Service on Azure.
 - Change controller.service.type to LoadBalancer/NodePort, and introduce controller.service.public for public/internal service classification.
 - Upgrade to ingress-nginx [0.33.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0330).
@@ -188,24 +192,25 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.12...master
-[v1.6.12]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.12
-[v1.6.11]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.11
-[v1.6.10]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.10
-[v1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.9
-[v1.6.8]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.8
-[v1.6.7]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.7
-[v1.6.6]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.6
-[v1.6.5]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.5
-[v1.6.4]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.4
-[v1.6.3]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.3
-[v1.6.2]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.2
-[v1.6.1]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.1
-[v1.6.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.6.0
-[v1.5.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.5.0
-[v1.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.4.0
-[v1.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.3.0
-[v1.2.1]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.2.1
-[v1.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.2.0
-[v1.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.1.1
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.0...master
+[v1.7.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.12...v1.7.0
+[v1.6.12]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.11...v1.6.12
+[v1.6.11]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.10...v1.6.11
+[v1.6.10]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.9...v1.6.10
+[v1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.8...v1.6.9
+[v1.6.8]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.7...v1.6.8
+[v1.6.7]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.6...v1.6.7
+[v1.6.6]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.5...v1.6.6
+[v1.6.5]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.4...v1.6.5
+[v1.6.4]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.3...v1.6.4
+[v1.6.3]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.2...v1.6.3
+[v1.6.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.1...v1.6.2
+[v1.6.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.0...v1.6.1
+[v1.6.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.5.0...v1.6.0
+[v1.5.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.4.0...v1.5.0
+[v1.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.3.0...v1.4.0
+[v1.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.2.1...v1.3.0
+[v1.2.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.2.0...v1.2.1
+[v1.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.1.1...v1.2.0
+[v1.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.1.0...v1.1.1
 [v1.1.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.1.0
