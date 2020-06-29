@@ -269,9 +269,9 @@ controller:
   service:
 
     # controller.service.enabled
-    # If true, create NodePort Service. Dynamically calculated during cluster creation.
+    # If true, create LoadBalancer Service. Dynamically calculated during cluster creation.
     # Do not overwrite this value.
-    enabled: false
+    enabled: true
 
     # controller.service.externalTrafficPolicy
     # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
@@ -279,22 +279,15 @@ controller:
     #   Cluster - kube-proxy proxies requests randomly across all endpoints (forwards traffic to other nodes if necessary), source IP NAT'd
     externalTrafficPolicy: "Local"
 
+    # controller.service.public
+    # Applies to clusters running on AWS or Azure.
+    # Valid values: true for public, false for internal
+    public: true
+
     # controller.service.type
-    # Applies only to clusters running on AWS.
-    # Valid values: external, internal
-    type: external
-
-    # controller.service.nodePorts
-    # Sets the NodePorts that maps to the Ingress' ports 80 (http) and 443 (https).
-    # nodePort service type is not created for AWS provider as LoadBalancer is used there.
-    # Do not overwrite these values.
-    nodePorts:
-
-      # controller.service.nodePorts.http
-      http: 30010
-
-      # controller.service.nodePorts.https
-      https: 30011
+    # Default to LoadBalancer, support NodePort for testing purposes only.
+    # Valid values: LoadBalancer, NodePort
+    type: LoadBalancer
 
 # image
 image:
@@ -335,7 +328,7 @@ clusterID: uun5a
 # provider (aws|kvm|azure)
 # The provider that the cluster is running on.
 # This value is set automatically, Do not overwrite this value.
-provider: kvm
+provider: aws
 
 # cluster
 cluster:
@@ -351,12 +344,3 @@ cluster:
   # guaranteed capacity.
   # This value is set automatically. Do not overwrite this value.
   profile: 4
-
-# ingressController
-ingressController:
-
-  # ingressController.legacy
-  # Legacy or node pools cluster. On aws provider node pool clusters LoadBalancer
-  # service gets created. Dynamically calculated during cluster creation.
-  # This value is set automatically. Do not overwrite this value.
-  legacy: false

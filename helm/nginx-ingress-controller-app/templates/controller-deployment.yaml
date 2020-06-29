@@ -96,7 +96,7 @@ spec:
         {{- else if .Values.controller.ingressClass }}
         - --ingress-class={{ .Values.controller.ingressClass }}
         {{- end}}
-        {{- if not .Values.ingressController.legacy }}
+        {{- if .Values.controller.service.enabled }}
         - --publish-service={{ .Release.Namespace }}/{{ .Values.controller.name }}
         {{- end }}
         securityContext:

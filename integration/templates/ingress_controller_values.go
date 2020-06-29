@@ -10,5 +10,5 @@ controller:
     enabled: false
   replicaCount: 2
   service:
-    enabled: true
+    type: NodePort
 `
