@@ -4,6 +4,10 @@ kind: Service
 metadata:
   name: {{ .Values.controller.name }}-monitoring
   namespace: {{ .Release.Namespace }}
+  annotations:
+    giantswarm.io/monitoring: "true"
+    giantswarm.io/monitoring-path: /metrics
+    giantswarm.io/monitoring-port: "2020"
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"

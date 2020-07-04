@@ -118,18 +118,19 @@ func init() {
 						Name:      name,
 						Namespace: metav1.NamespaceSystem,
 						DeploymentLabels: map[string]string{
-							"app":                        name,
-							"giantswarm.io/service-type": "managed",
-							"app.kubernetes.io/name":     name,
+							"app":                                name,
+							"app.kubernetes.io/name":             name,
+							"giantswarm.io/monitoring_basic_sli": "true",
+							"giantswarm.io/service-type":         "managed",
 						},
 						MatchLabels: map[string]string{
 							"k8s-app": name,
 						},
 						PodLabels: map[string]string{
 							"app":                        name,
+							"app.kubernetes.io/name":     name,
 							"giantswarm.io/service-type": "managed",
 							"k8s-app":                    name,
-							"app.kubernetes.io/name":     name,
 						},
 					},
 				},
