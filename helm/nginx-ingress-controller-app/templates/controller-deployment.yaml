@@ -5,8 +5,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
     app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    giantswarm.io/monitoring_basic_sli: "true"
+    giantswarm.io/service-type: "managed"
   annotations:
     prometheus.io/port: '{{ .Values.controller.metrics.port }}'
     prometheus.io/scrape: 'true'
