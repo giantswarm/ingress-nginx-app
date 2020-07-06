@@ -141,7 +141,7 @@ If you feel like any of the configuration values need to be encrypted at rest,
 you can also provide a secret. For this app we don't think there are any
 configuration values that need to be encrypted.
 
-It is a convention to call the user level confgimap `{app-name}-user-values`.
+It is a convention to call the user level configmap `{app-name}-user-values`.
 So in this case we called the ConfigMap `nginx-ingress-controller-app-user-values`
 
 If you place these files in a folder called `foldername`, you could use the
