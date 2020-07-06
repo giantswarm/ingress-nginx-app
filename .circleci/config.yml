@@ -73,8 +73,6 @@ workflows:
       # Require manual approval for running performance tests.
       - hold-run-perf-tests:
           type: approval
-          requires:
-            - basic-integration-test
           filters:
             # Do not trigger the job on master branch or release tags.
             branches:
@@ -86,6 +84,7 @@ workflows:
       - run-perf-tests:
           requires:
             - hold-run-perf-tests
+            - basic-integration-test
           filters:
             # Do not trigger the job on master branch or release tags.
             branches:
