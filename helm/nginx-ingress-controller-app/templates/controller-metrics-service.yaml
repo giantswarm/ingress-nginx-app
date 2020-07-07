@@ -6,7 +6,7 @@ metadata:
   annotations:
     giantswarm.io/monitoring: "true"
     giantswarm.io/monitoring-path: /metrics
-    giantswarm.io/monitoring-port: {{ .Values.controller.metrics.service.servicePort | quote }}
+    giantswarm.io/monitoring-port: {{ .Values.controller.metrics.port | quote }}
   labels:
     app: {{ .Values.controller.name }}
     giantswarm.io/service-type: "managed"
