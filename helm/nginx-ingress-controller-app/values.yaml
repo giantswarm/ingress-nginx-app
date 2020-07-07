@@ -166,10 +166,6 @@ controller:
   # controller.metrics
   metrics:
 
-    # controller.metrics.enabled
-    # If true, create the metrics Service for prometheus-operator support.
-    enabled: true
-
     # controller.metrics.port
     # The port on which the metrics container is exposed.
     port: 10254

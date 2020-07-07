@@ -9,7 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Enable managed app monitoring.
+- Make monitoring headless Service non-optional.
+- Enable managed app monitoring via monitoring service.
 
 ## [v1.7.0] 2020-06-29
 
