@@ -285,6 +285,23 @@ controller:
     # Valid values: LoadBalancer, NodePort
     type: LoadBalancer
 
+    # controller.service.internal
+    # Configuration settings for `-internal` suffixed Service variant.
+    # This second Service partially covers use case and need for multiple ingress controllers, providing separate IPs for public and internal traffic in single app.
+    internal:
+
+      # controller.service.internal.enabled
+      enabled: false
+
+      # controller.service.internal.type
+      type: LoadBalancer
+
+      # controller.service.internal.externalTrafficPolicy
+      # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
+      #   Local - kube-proxy only proxies requests to local endpoints (does not forward traffic to other nodes), source IP preserved
+      #   Cluster - kube-proxy proxies requests randomly across all endpoints (forwards traffic to other nodes if necessary), source IP NAT'd
+      externalTrafficPolicy: "Local"
+
 # image
 image:
   registry: quay.io

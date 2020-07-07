@@ -11,6 +11,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Support additional Service, for internal traffic. Existing Service can still be configured to be either for public (default) or internal traffic.
 - Make monitoring headless Service non-optional.
 - Enable managed app monitoring via monitoring service.
 
