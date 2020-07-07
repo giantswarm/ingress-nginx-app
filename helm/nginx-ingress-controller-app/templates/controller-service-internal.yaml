@@ -1,0 +1,46 @@
+{{- if .Values.controller.service.internal.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: ingress-internal.{{ .Values.baseDomain }}
+  {{- if eq .Values.controller.service.internal.type "LoadBalancer" }}
+  {{- if eq .Values.provider "aws" }}
+    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+    {{- if index .Values.configmap "use-proxy-protocol" }}
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
+    {{- end }}
+    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+  {{- else if eq .Values.provider "azure" }}
+    # this annotation adds lb rules for both TCP and UDP to allow UDP outbound connection with Standard LB
+    service.beta.kubernetes.io/azure-load-balancer-mixed-protocols: "true"
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+  {{- end }}
+  {{- end }}
+  name: {{ .Values.controller.name }}-internal
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Values.controller.name }}
+    giantswarm.io/service-type: "managed"
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+spec:
+  type: {{ .Values.controller.service.internal.type }}
+  {{- if eq .Values.controller.service.internal.type "LoadBalancer" }}
+  loadBalancerSourceRanges:
+  - 0.0.0.0/0
+  {{- end }}
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
+  selector:
+    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+  {{- if .Values.controller.service.internal.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.controller.service.internal.externalTrafficPolicy }}
+  {{- end }}
+{{- end }}
