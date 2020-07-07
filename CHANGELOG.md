@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [v1.7.1] 2020-07-07
+
 ### Changed
 
 - Support additional Service, for internal traffic. Existing Service can still be configured to be either for public (default) or internal traffic.
@@ -196,7 +198,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.0...master
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.1...master
+[v1.7.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.0...v1.7.1
 [v1.7.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.12...v1.7.0
 [v1.6.12]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.11...v1.6.12
 [v1.6.11]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.10...v1.6.11
