@@ -5,10 +5,8 @@ import pytest
 from pykube import Pod, Node, HTTPClient
 from pytest_helm_charts.clusters import Cluster
 from pytest_helm_charts.giantswarm_app_platform.apps.http_testing import StormforgerLoadAppFactoryFunc, \
-    GatlingAppFactoryFunc
+    GatlingAppFactoryFunc, GatlingParser
 from pytest_helm_charts.utils import wait_for_job
-
-from parsers.gatling_parser import GatlingParser
 
 logger = logging.getLogger("kube-app-testing")
 
