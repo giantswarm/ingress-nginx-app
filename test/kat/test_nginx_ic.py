@@ -1,36 +1,16 @@
 import logging
-import time
 from typing import List, Tuple, Optional
 
-import pykube.exceptions
 import pytest
-from pykube import Job, Pod, Node, HTTPClient
+from pykube import Pod, Node, HTTPClient
+from pytest_helm_charts.clusters import Cluster
+from pytest_helm_charts.giantswarm_app_platform.apps.http_testing import StormforgerLoadAppFactoryFunc, \
+    GatlingAppFactoryFunc
+from pytest_helm_charts.utils import wait_for_job
 
-from conftest import StormforgerLoadAppFactoryFunc, GatlingAppFactoryFunc
 from parsers.gatling_parser import GatlingParser
 
 logger = logging.getLogger("kube-app-testing")
-
-
-def wait_for_job(kube_client: HTTPClient, job_name: str, namespace: str, max_wait_time_sec: int):
-    job: Job
-    wait_time_sec = 0
-    while True:
-        try:
-            job = Job.objects(kube_client).filter(namespace=namespace).get(name=job_name)
-            status = job.obj["status"]
-            if status and "conditions" in status and len(status["conditions"]) and \
-                    status["conditions"][0]["type"] == "Complete":
-                break
-        except pykube.exceptions.ObjectDoesNotExist:
-            pass
-        if wait_time_sec >= max_wait_time_sec:
-            raise TimeoutError(
-                "Job {} in namespace {} was not completed in {} seconds".format(job_name, namespace, max_wait_time_sec))
-        logger.info("Waiting for gatling job to complete...")
-        time.sleep(1)
-        wait_time_sec += 1
-    return job
 
 
 def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Optional[Node], Optional[Node]]:
@@ -55,12 +35,12 @@ def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Opti
 
 
 @pytest.mark.performance
-def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: StormforgerLoadAppFactoryFunc,
+def test_deployments(kube_cluster: Cluster, stormforger_load_app_factory: StormforgerLoadAppFactoryFunc,
                      gatling_app_factory: GatlingAppFactoryFunc):
     # figure out node affinity
-    nodes = list(Node.objects(kube_client))
+    nodes = list(Node.objects(kube_cluster.kube_client))
     stormforger_affinity_selector, gatling_affinity_selector = None, None
-    stormforger_node, gatling_node = get_affinity_nodes(kube_client, nodes)
+    stormforger_node, gatling_node = get_affinity_nodes(kube_cluster.kube_client, nodes)
     if stormforger_node is not None and gatling_node is not None:
         logger.info("Found at least 3 worker nodes, using affinity for stormforger and gatling apps.")
         stormforger_affinity_selector = {
@@ -73,9 +53,9 @@ def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: Stor
     stormforger_load_app_factory(8, "loadtest.local", stormforger_affinity_selector)
     logger.info("Creating gatling app")
     gatling_app_factory("NginxSimulation.scala", gatling_affinity_selector)
-    gatling_job = wait_for_job(kube_client, "gatling", "default", 600)
+    gatling_job = wait_for_job(kube_cluster.kube_client, "gatling", "default", 600)
     logger.info("Gatling job complete, looking up job's pod to get stdout")
-    gatling_po_query = Pod.objects(kube_client).filter(
+    gatling_po_query = Pod.objects(kube_cluster.kube_client).filter(
         namespace="default",
         selector={
             "controller-uid": gatling_job.metadata["uid"],
