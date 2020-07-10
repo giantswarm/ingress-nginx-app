@@ -112,11 +112,11 @@ controller:
   image:
 
     # controller.image.repository
-    repository: giantswarm/nginx-ingress-controller
+    repository: giantswarm/ingress-nginx-controller
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: 0.33.0
+    tag: v0.34.0
 
   # controller.rbac
   # TODO: Explain what this is for
