@@ -6,7 +6,7 @@ from pykube import Pod, Node, HTTPClient
 from pytest_helm_charts.clusters import Cluster
 from pytest_helm_charts.giantswarm_app_platform.apps.http_testing import StormforgerLoadAppFactoryFunc, \
     GatlingAppFactoryFunc, GatlingParser
-from pytest_helm_charts.utils import wait_for_job
+from pytest_helm_charts.utils import wait_for_jobs_to_complete
 
 logger = logging.getLogger("kube-app-testing")
 
@@ -51,7 +51,9 @@ def test_deployments(kube_cluster: Cluster, stormforger_load_app_factory: Stormf
     stormforger_load_app_factory(8, "loadtest.local", stormforger_affinity_selector)
     logger.info("Creating gatling app")
     gatling_app_factory("NginxSimulation.scala", gatling_affinity_selector)
-    gatling_job = wait_for_job(kube_cluster.kube_client, "gatling", "default", 600)
+    all_jobs = wait_for_jobs_to_complete(kube_cluster.kube_client, ["gatling"], "default", 600)
+    assert len(all_jobs) == 1
+    gatling_job = all_jobs[0]
     logger.info("Gatling job complete, looking up job's pod to get stdout")
     gatling_po_query = Pod.objects(kube_cluster.kube_client).filter(
         namespace="default",
