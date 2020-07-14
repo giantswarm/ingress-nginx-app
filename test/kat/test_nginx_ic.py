@@ -70,7 +70,10 @@ def test_deployments(kube_cluster: Cluster, stormforger_load_app_factory: Stormf
 
     assert results.request_count_total == 50000
     assert results.request_success_ratio >= 0.995
-    if "external_cluster_type" in chart_extra_info:
+    logger.info(f"Tested RPS: {results.mean_rps}")
+    external_type_key = "external_cluster_type"
+    if external_type_key in chart_extra_info:
+        logger.info(f"Chart-extra-info says we're running on type '{chart_extra_info[external_type_key]}'")
         # expected performance when running on kind
         if chart_extra_info["external_cluster_type"] == "kind":
             assert results.mean_rps >= 1000
