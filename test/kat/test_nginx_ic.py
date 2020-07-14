@@ -1,36 +1,14 @@
 import logging
-import time
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Dict
 
-import pykube.exceptions
 import pytest
-from pykube import Job, Pod, Node, HTTPClient
-
-from conftest import StormforgerLoadAppFactoryFunc, GatlingAppFactoryFunc
-from parsers.gatling_parser import GatlingParser
+from pykube import Pod, Node, HTTPClient
+from pytest_helm_charts.clusters import Cluster
+from pytest_helm_charts.giantswarm_app_platform.apps.http_testing import StormforgerLoadAppFactoryFunc, \
+    GatlingAppFactoryFunc, GatlingParser
+from pytest_helm_charts.utils import wait_for_jobs_to_complete
 
 logger = logging.getLogger("kube-app-testing")
-
-
-def wait_for_job(kube_client: HTTPClient, job_name: str, namespace: str, max_wait_time_sec: int):
-    job: Job
-    wait_time_sec = 0
-    while True:
-        try:
-            job = Job.objects(kube_client).filter(namespace=namespace).get(name=job_name)
-            status = job.obj["status"]
-            if status and "conditions" in status and len(status["conditions"]) and \
-                    status["conditions"][0]["type"] == "Complete":
-                break
-        except pykube.exceptions.ObjectDoesNotExist:
-            pass
-        if wait_time_sec >= max_wait_time_sec:
-            raise TimeoutError(
-                "Job {} in namespace {} was not completed in {} seconds".format(job_name, namespace, max_wait_time_sec))
-        logger.info("Waiting for gatling job to complete...")
-        time.sleep(1)
-        wait_time_sec += 1
-    return job
 
 
 def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Optional[Node], Optional[Node]]:
@@ -55,12 +33,12 @@ def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Opti
 
 
 @pytest.mark.performance
-def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: StormforgerLoadAppFactoryFunc,
-                     gatling_app_factory: GatlingAppFactoryFunc):
+def test_deployments(kube_cluster: Cluster, stormforger_load_app_factory: StormforgerLoadAppFactoryFunc,
+                     gatling_app_factory: GatlingAppFactoryFunc, chart_extra_info: Dict[str, str]):
     # figure out node affinity
-    nodes = list(Node.objects(kube_client))
+    nodes = list(Node.objects(kube_cluster.kube_client))
     stormforger_affinity_selector, gatling_affinity_selector = None, None
-    stormforger_node, gatling_node = get_affinity_nodes(kube_client, nodes)
+    stormforger_node, gatling_node = get_affinity_nodes(kube_cluster.kube_client, nodes)
     if stormforger_node is not None and gatling_node is not None:
         logger.info("Found at least 3 worker nodes, using affinity for stormforger and gatling apps.")
         stormforger_affinity_selector = {
@@ -73,9 +51,11 @@ def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: Stor
     stormforger_load_app_factory(8, "loadtest.local", stormforger_affinity_selector)
     logger.info("Creating gatling app")
     gatling_app_factory("NginxSimulation.scala", gatling_affinity_selector)
-    gatling_job = wait_for_job(kube_client, "gatling", "default", 600)
+    all_jobs = wait_for_jobs_to_complete(kube_cluster.kube_client, ["gatling"], "default", 600)
+    assert len(all_jobs) == 1
+    gatling_job = all_jobs[0]
     logger.info("Gatling job complete, looking up job's pod to get stdout")
-    gatling_po_query = Pod.objects(kube_client).filter(
+    gatling_po_query = Pod.objects(kube_cluster.kube_client).filter(
         namespace="default",
         selector={
             "controller-uid": gatling_job.metadata["uid"],
@@ -89,7 +69,19 @@ def test_deployments(kube_client: HTTPClient, stormforger_load_app_factory: Stor
     results = GatlingParser(container_log)
 
     assert results.request_count_total == 50000
-    assert results.mean_rps >= 1000
     assert results.request_success_ratio >= 0.995
+    logger.info(f"Tested RPS: {results.mean_rps}")
+    external_type_key = "external_cluster_type"
+    if external_type_key in chart_extra_info:
+        logger.info(f"Chart-extra-info says we're running on type '{chart_extra_info[external_type_key]}'")
+        # expected performance when running on kind
+        if chart_extra_info["external_cluster_type"] == "kind":
+            assert results.mean_rps >= 1000
+        # expected performance when running on giantswarm
+        elif chart_extra_info["external_cluster_type"] == "giantswarm":
+            assert results.mean_rps >= 1200
+    else:
+        # in case we miss extra info about cluster type we're running on
+        assert results.mean_rps >= 1000
 
     gatling_job.delete()

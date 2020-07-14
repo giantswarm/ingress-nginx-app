@@ -9,9 +9,11 @@ flake8 = "*"
 flake8-mypy = "*"
 
 [packages]
-pytest = "*"
-pykube-ng = "*"
+pytest-helm-charts = ">=0.1.6"
+pytest = ">=5.4.2"
+pykube-ng = ">=20.7.0"
 pyyaml = "*"
+requests = "*"
 
 [requires]
 python_version = "3.7"
