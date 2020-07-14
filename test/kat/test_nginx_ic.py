@@ -1,5 +1,5 @@
 import logging
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Dict
 
 import pytest
 from pykube import Pod, Node, HTTPClient
@@ -34,7 +34,7 @@ def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Opti
 
 @pytest.mark.performance
 def test_deployments(kube_cluster: Cluster, stormforger_load_app_factory: StormforgerLoadAppFactoryFunc,
-                     gatling_app_factory: GatlingAppFactoryFunc):
+                     gatling_app_factory: GatlingAppFactoryFunc, chart_extra_info: Dict[str, str]):
     # figure out node affinity
     nodes = list(Node.objects(kube_cluster.kube_client))
     stormforger_affinity_selector, gatling_affinity_selector = None, None
@@ -69,7 +69,16 @@ def test_deployments(kube_cluster: Cluster, stormforger_load_app_factory: Stormf
     results = GatlingParser(container_log)
 
     assert results.request_count_total == 50000
-    assert results.mean_rps >= 1000
     assert results.request_success_ratio >= 0.995
+    if "external_cluster_type" in chart_extra_info:
+        # expected performance when running on kind
+        if chart_extra_info["external_cluster_type"] == "kind":
+            assert results.mean_rps >= 1000
+        # expected performance when running on giantswarm
+        elif chart_extra_info["external_cluster_type"] == "giantswarm":
+            assert results.mean_rps >= 1200
+    else:
+        # in case we miss extra info about cluster type we're running on
+        assert results.mean_rps >= 1000
 
     gatling_job.delete()
