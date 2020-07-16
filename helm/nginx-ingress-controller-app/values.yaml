@@ -116,7 +116,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v0.34.0
+    tag: v0.34.1
 
   # controller.rbac
   # TODO: Explain what this is for
