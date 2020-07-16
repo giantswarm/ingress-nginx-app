@@ -11,13 +11,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Upgrade to ingress-nginx [v0.34.1](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0341).
 
-## [v1.7.2] 2020-07-10
+## [1.7.2] 2020-07-10
 
 ### Changed
 
 - Upgrade to ingress-nginx [v0.34.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0340).
 
-## [v1.7.1] 2020-07-07
+## [1.7.1] 2020-07-07
 
 ### Changed
 
@@ -25,7 +25,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Make monitoring headless Service non-optional.
 - Enable managed app monitoring via monitoring service.
 
-## [v1.7.0] 2020-06-29
+## [1.7.0] 2020-06-29
 
 ### Changed
 
@@ -33,27 +33,27 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Change controller.service.type to LoadBalancer/NodePort, and introduce controller.service.public for public/internal service classification.
 - Upgrade to ingress-nginx [0.33.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0330).
 
-## [v1.6.12] 2020-06-04
+## [1.6.12] 2020-06-04
 
 ### Changed
 
 - Make healthcheck probes configurable.
 - Make liveness probe more resilient.
 
-## [v1.6.11] 2020-05-26
+## [1.6.11] 2020-05-26
 
 ### Changed
 
 - Align labels, use `app.kubernetes.io/name` instead of `k8s-app` where possible.
   `k8s-app` remains to be used for compatibility reasons, as selectors are not modifiable without recreating the Deployment.
 
-## [v1.6.10] 2020-04-29
+## [1.6.10] 2020-04-29
 
 ### Changed
 
 - Make NGINX IC Service `externalTrafficPolicy` configurable and default to `Local`.
 
-## [v1.6.9] 2020-04-22
+## [1.6.9] 2020-04-22
 
 ### Changed
 
@@ -66,7 +66,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Drop unnecessary Helm release revision annotation from NGINX IC Deployment.
 - Adjust README for display in the web interface context.
 
-## [v1.6.8] 2020-04-09
+## [1.6.8] 2020-04-09
 
 ### Changed
 
@@ -77,7 +77,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Changed default `error-log-level` from `error` to `notice`.
 - Added a link to the README in the sources of Chart.yaml
 
-## [v1.6.7] 2020-04-08
+## [1.6.7] 2020-04-08
 
 ### Changed
 
@@ -86,25 +86,25 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Make NGINX IC controller container lifecycle hooks configurable, and change from `sleep 60` to using `/wait-shutdown` as preStop hook.
 - Make `controller.minReadySeconds` configurable.
 
-## [v1.6.6] 2020-04-01
+## [1.6.6] 2020-04-01
 
 ### Changed
 
 - Change deployment to use release revision not time for Helm 3 support.
 
-## [v1.6.5] 2020-03-23
+## [1.6.5] 2020-03-23
 
 ### Changed
 
 - Fix small cluster profile resource requests. ([#42](https://github.com/giantswarm/nginx-ingress-controller-app/pull/42))
 
-## [v1.6.4] 2020-03-17
+## [1.6.4] 2020-03-17
 
 ### Changed
 
 - Disable HPA and PDB for xs clusters since NGINX Deployment resource requests are not set there. ([#40](https://github.com/giantswarm/nginx-ingress-controller-app/pull/40))
 
-## [v1.6.3] 2020-03-16
+## [1.6.3] 2020-03-16
 
 ### Changed
 
@@ -116,7 +116,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - small clusters - have some resource requests, HPA and PDB are enabled
   - clusters larger than small or unknown - have decent resource requests i.e. capacity out-of-the-box, and HPA and PDB are enabled.
 
-## [v1.6.2] 2020-03-12
+## [1.6.2] 2020-03-12
 
 ### Changed
 
@@ -130,13 +130,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - `configmap.hpa-target-memory-utilization-percentage`
   - `configmap.ingress-class`
 
-## [v1.6.1] 2020-03-10
+## [1.6.1] 2020-03-10
 
 ### Changed
 
 - Disable HPA, PDB and clear resource requests for extra small clusters. ([#34](https://github.com/giantswarm/nginx-ingress-controller-app/pull/34))
 
-## [v1.6.0] 2020-02-28
+## [1.6.0] 2020-02-28
 
 ### Changed
 
@@ -159,32 +159,32 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - New `controller.replicaCount` config property is introduced, default replica count is set to 1, and then by default enabled HPA takes it over from there, by default scaling the Deployment in range of 1 to 20 replicas
   - If HPA gets disabled on-demand, replica count will stay static if not manually or automatically changed by some third party.
 
-## [v1.5.0] 2020-02-18
+## [1.5.0] 2020-02-18
 
 ### Changed
 
 - Disable nginx NodePort Service by default, having legacy cluster-operator enable it for legacy Azure only. ([#29](https://github.com/giantswarm/nginx-ingress-controller-app/pull/29))
 - Upgrade to nginx-ingress-controller 0.29.0. ([#30](https://github.com/giantswarm/nginx-ingress-controller-app/pull/30))
 
-## [v1.4.0] 2020-02-10
+## [1.4.0] 2020-02-10
 
 ### Changed
 
 - Support overriding all nginx configmap settings. ([#26](https://github.com/giantswarm/nginx-ingress-controller-app/pull/26))
 
-## [v1.3.0] 2020-01-30
+## [1.3.0] 2020-01-30
 
 ### Changed
 
 - Upgrade to nginx-ingress-controller 0.28.0. ([#24](https://github.com/giantswarm/nginx-ingress-controller-app/pull/24))
 
-## [v1.2.1] 2020-01-29
+## [1.2.1] 2020-01-29
 
 ### Changed
 
 - Support proxy protocol for AWS. ([#23](https://github.com/giantswarm/nginx-ingress-controller-app/pull/23))
 
-## [v1.2.0] 2020-01-21
+## [1.2.0] 2020-01-21
 
 ### Changed
 
@@ -192,13 +192,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Add metrics Service for prometheus-operator support. ([#19](https://github.com/giantswarm/nginx-ingress-controller-app/pull/19))
 - Allow overriding of nginx SSL protocol default setting. ([#17](https://github.com/giantswarm/nginx-ingress-controller-app/pull/17))
 
-## [v1.1.1] 2020-01-04
+## [1.1.1] 2020-01-04
 
 ### Changed
 
 - Updated manifests for Kubernetes 1.16. ([#16](https://github.com/giantswarm/nginx-ingress-controller-app/pull/16))
 
-## [v1.1.0]
+## [1.1.0]
 
 ### Changed
 
@@ -208,27 +208,27 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.2...master
-[v1.7.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.1...v1.7.2
-[v1.7.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.0...v1.7.1
-[v1.7.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.12...v1.7.0
-[v1.6.12]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.11...v1.6.12
-[v1.6.11]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.10...v1.6.11
-[v1.6.10]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.9...v1.6.10
-[v1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.8...v1.6.9
-[v1.6.8]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.7...v1.6.8
-[v1.6.7]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.6...v1.6.7
-[v1.6.6]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.5...v1.6.6
-[v1.6.5]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.4...v1.6.5
-[v1.6.4]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.3...v1.6.4
-[v1.6.3]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.2...v1.6.3
-[v1.6.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.1...v1.6.2
-[v1.6.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.0...v1.6.1
-[v1.6.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.5.0...v1.6.0
-[v1.5.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.4.0...v1.5.0
-[v1.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.3.0...v1.4.0
-[v1.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.2.1...v1.3.0
-[v1.2.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.2.0...v1.2.1
-[v1.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.1.1...v1.2.0
-[v1.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.1.0...v1.1.1
-[v1.1.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.1.0
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.2...HEAD
+[1.7.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.1...v1.7.2
+[1.7.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.0...v1.7.1
+[1.7.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.12...v1.7.0
+[1.6.12]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.11...v1.6.12
+[1.6.11]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.10...v1.6.11
+[1.6.10]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.9...v1.6.10
+[1.6.9]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.8...v1.6.9
+[1.6.8]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.7...v1.6.8
+[1.6.7]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.6...v1.6.7
+[1.6.6]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.5...v1.6.6
+[1.6.5]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.4...v1.6.5
+[1.6.4]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.3...v1.6.4
+[1.6.3]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.2...v1.6.3
+[1.6.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.1...v1.6.2
+[1.6.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.0...v1.6.1
+[1.6.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.5.0...v1.6.0
+[1.5.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.4.0...v1.5.0
+[1.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.3.0...v1.4.0
+[1.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.2.1...v1.3.0
+[1.2.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.1.1...v1.2.0
+[1.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.1.0...v1.1.1
+[1.1.0]: https://github.com/giantswarm/nginx-ingress-controller-app/releases/tag/v1.1.0
