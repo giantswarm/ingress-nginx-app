@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.7.3] - 2020-07-16
+
 ### Changed
 
 - Upgrade to ingress-nginx [v0.34.1](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0341).
@@ -208,7 +210,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.2...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.3...HEAD
+[1.7.3]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.2...v1.7.3
 [1.7.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.1...v1.7.2
 [1.7.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.6.12...v1.7.0
