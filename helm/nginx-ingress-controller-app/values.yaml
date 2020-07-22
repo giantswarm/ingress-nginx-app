@@ -9,23 +9,6 @@
 
 # -----------------------------------------------------------------------------#
 
-# Deprecations
-# Various values in the `configmap` key have been moved to the `controller`
-# key instead. These values are thus deprecated and it is recommended that you
-# use the alternative. When the value is still present in the `configmap` key,
-# then it will take presedence.
-
-# configmap.annotations-prefix                       -> controller.annotationsPrefix
-# configmap.default-ssl-certificate                  -> controller.defaultSSLCertificate
-# configmap.hpa-enabled                              -> controller.autoscaling.enabled
-# configmap.hpa-max-replicas                         -> controller.autoscaling.maxReplicas
-# configmap.hpa-min-replicas                         -> controller.autoscaling.minReplicas
-# configmap.hpa-target-cpu-utilization-percentage    -> controller.autoscaling.targetCPUUtilizationPercentage
-# configmap.hpa-target-memory-utilization-percentage -> controller.autoscaling.targetMemoryUtilizationPercentage
-# configmap.ingress-class                            -> controller.ingressClass
-
-# -----------------------------------------------------------------------------#
-
 # configmap
 # These values get applied directly to a configmap which configures the
 # nginx-ingress-controller
@@ -230,11 +213,6 @@ controller:
     minReplicas: 2
     maxReplicas: 20
     targetCPUUtilizationPercentage: 50
-
-    # Configures HPA target memory utilization percentage.
-    # This is a replacement for deprecated configmap.hpa-target-memory-utilization-percentage
-    # configuration property; if both are configured,
-    # configmap.hpa-target-memory-utilization-percentage has precedence.
     targetMemoryUtilizationPercentage: 80
 
   # controller.annotationsPrefix

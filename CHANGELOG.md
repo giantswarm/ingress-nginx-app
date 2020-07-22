@@ -7,6 +7,18 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Removed
+
+- Dropped support for deprecated configuration properties:
+  - `configmap.annotations-prefix`
+  - `configmap.default-ssl-certificate`
+  - `configmap.hpa-enabled`
+  - `configmap.hpa-max-replicas`
+  - `configmap.hpa-min-replicas`
+  - `configmap.hpa-target-cpu-utilization-percentage`
+  - `configmap.hpa-target-memory-utilization-percentage`
+  - `configmap.ingress-class`
+
 ## [1.7.3] - 2020-07-16
 
 ### Changed

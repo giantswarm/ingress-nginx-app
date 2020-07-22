@@ -1,49 +1,5 @@
 {{- if gt (.Values.cluster.profile | int) 2 }}
-{{- if index .Values.configmap "hpa-enabled" }}
-{{- if eq (index .Values.configmap "hpa-enabled") "true" }}
-apiVersion: autoscaling/v2beta1
-kind: HorizontalPodAutoscaler
-metadata:
-  name: {{ .Values.controller.name }}
-  namespace: {{ .Release.Namespace }}
-  labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: {{ .Values.controller.name }}
-  {{- if index .Values.configmap "hpa-min-replicas" }}
-  minReplicas: {{ index .Values.configmap "hpa-min-replicas" }}
-  {{- else }}
-  minReplicas: {{ .Values.controller.autoscaling.minReplicas }}
-  {{- end }}
-  {{- if index .Values.configmap "hpa-max-replicas" }}
-  maxReplicas: {{ index .Values.configmap "hpa-max-replicas" }}
-  {{- else }}
-  maxReplicas: {{ .Values.controller.autoscaling.maxReplicas }}
-  {{- end }}
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu
-        {{- if index .Values.configmap "hpa-target-cpu-utilization-percentage" }}
-        targetAverageUtilization: {{ index .Values.configmap "hpa-target-cpu-utilization-percentage" }}
-        {{- else }}
-        targetAverageUtilization: {{ .Values.controller.autoscaling.targetCPUUtilizationPercentage }}
-        {{- end }}
-    - type: Resource
-      resource:
-        name: memory
-        {{- if index .Values.configmap "hpa-target-memory-utilization-percentage" }}
-        targetAverageUtilization: {{ index .Values.configmap "hpa-target-memory-utilization-percentage" }}
-        {{- else }}
-        targetAverageUtilization: {{ .Values.controller.autoscaling.targetMemoryUtilizationPercentage }}
-        {{- end }}
-{{- end}}
-{{- else if .Values.controller.autoscaling.enabled }}
+{{- if .Values.controller.autoscaling.enabled }}
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
