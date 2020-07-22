@@ -13,11 +13,7 @@ metadata:
     prometheus.io/scrape: 'true'
 spec:
   {{- if not .Values.controller.autoscaling.enabled }}
-  {{- if hasKey .Values.configmap "hpa-enabled" }}
-  {{- if ne (index .Values.configmap "hpa-enabled") "true" }}
   replicas: {{ .Values.controller.replicaCount }}
-  {{- end}}
-  {{- end}}
   {{- end}}
   selector:
     matchLabels:
