@@ -100,6 +100,14 @@ func init() {
 		}
 	}
 
+	var helmChartLabel string
+	{
+		helmChartLabel = fmt.Sprintf("%s-%s", appName, version)
+		if len(helmChartLabel) > 63 {
+			helmChartLabel = helmChartLabel[:63]
+		}
+	}
+
 	{
 		c := basicapp.Config{
 			Clients:    k8sClients,
@@ -126,7 +134,7 @@ func init() {
 							"app.kubernetes.io/version":          "v0.34.1",
 							"giantswarm.io/monitoring_basic_sli": "true",
 							"giantswarm.io/service-type":         "managed",
-							"helm.sh/chart":                      fmt.Sprintf("%s-%s", appName, version),
+							"helm.sh/chart":                      helmChartLabel,
 						},
 						MatchLabels: map[string]string{
 							"app.kubernetes.io/name":     "name",
@@ -140,7 +148,7 @@ func init() {
 							"app.kubernetes.io/version":          "v0.34.1",
 							"giantswarm.io/monitoring_basic_sli": "true",
 							"giantswarm.io/service-type":         "managed",
-							"helm.sh/chart":                      fmt.Sprintf("%s-%s", appName, version),
+							"helm.sh/chart":                      helmChartLabel,
 						},
 					},
 				},
