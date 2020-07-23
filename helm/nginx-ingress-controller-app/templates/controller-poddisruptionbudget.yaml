@@ -2,14 +2,12 @@
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
+  name: {{ include "resource.default.name" . }}
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
-  name: {{ .Values.controller.name }}
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+      {{- include "labels.selector" . | nindent 6 }}
   maxUnavailable: {{ .Values.controller.maxUnavailable }}
 {{- end }}
