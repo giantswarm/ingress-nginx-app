@@ -6,7 +6,5 @@ controller:
     enabled: false
   service:
     enabled: true
-    nodePorts:
-      http: 30010
-      https: 30011
-profile: xxs
+cluster:
+  profile: 1
