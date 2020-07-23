@@ -7,5 +7,5 @@ characters for resource names, the stem is truncated to 47 characters to leave
 room for such suffix.
 */}}
 {{- define "resource.default.name" -}}
-{{- default .Release.Name .Values.nameOverride | replace "." "-" | trunc 47 | trimSuffix "-" -}}
+{{- default .Release.Name .Values.resourceDefaultNameOverride | replace "." "-" | trunc 47 | trimSuffix "-" -}}
 {{- end -}}

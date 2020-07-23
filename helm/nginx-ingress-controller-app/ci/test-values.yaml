@@ -5,4 +5,4 @@ controller:
     enabled: false
 cluster:
   profile: 1
-nameOverride: "nginx-ingress-controller"
+resourceDefaultNameOverride: "nginx-ingress-controller"
