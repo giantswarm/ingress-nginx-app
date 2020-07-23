@@ -47,8 +47,9 @@ func init() {
 		}
 	}
 
+	var version string
 	{
-		version := fmt.Sprintf("%s-%s", latestRelease, env.CircleSHA())
+		version = fmt.Sprintf("%s-%s", latestRelease, env.CircleSHA())
 		tarballURL, err = appcatalog.NewTarballURL(testCatalogURL, appName, version)
 		if err != nil {
 			panic(err.Error())
@@ -119,18 +120,27 @@ func init() {
 						Namespace: metav1.NamespaceSystem,
 						DeploymentLabels: map[string]string{
 							"app":                                name,
+							"app.kubernetes.io/instance":         name,
+							"app.kubernetes.io/managed-by":       "Helm",
 							"app.kubernetes.io/name":             name,
+							"app.kubernetes.io/version":          "v0.34.1",
 							"giantswarm.io/monitoring_basic_sli": "true",
 							"giantswarm.io/service-type":         "managed",
+							"helm.sh/chart":                      fmt.Sprintf("%s-%s", appName, version),
 						},
 						MatchLabels: map[string]string{
-							"k8s-app": name,
+							"app.kubernetes.io/name":     "name",
+							"app.kubernetes.io/instance": "name",
 						},
 						PodLabels: map[string]string{
-							"app":                        name,
-							"app.kubernetes.io/name":     name,
-							"giantswarm.io/service-type": "managed",
-							"k8s-app":                    name,
+							"app":                                name,
+							"app.kubernetes.io/instance":         name,
+							"app.kubernetes.io/managed-by":       "Helm",
+							"app.kubernetes.io/name":             name,
+							"app.kubernetes.io/version":          "v0.34.1",
+							"giantswarm.io/monitoring_basic_sli": "true",
+							"giantswarm.io/service-type":         "managed",
+							"helm.sh/chart":                      fmt.Sprintf("%s-%s", appName, version),
 						},
 					},
 				},
