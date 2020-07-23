@@ -135,10 +135,10 @@ func init() {
 							"giantswarm.io/monitoring_basic_sli": "true",
 							"giantswarm.io/service-type":         "managed",
 							"helm.sh/chart":                      helmChartLabel,
+							"k8s-app":                            name,
 						},
 						MatchLabels: map[string]string{
-							"app.kubernetes.io/name":     name,
-							"app.kubernetes.io/instance": name,
+							"k8s-app": name,
 						},
 						PodLabels: map[string]string{
 							"app":                          name,
@@ -148,6 +148,7 @@ func init() {
 							"app.kubernetes.io/version":    "v0.34.1",
 							"giantswarm.io/service-type":   "managed",
 							"helm.sh/chart":                helmChartLabel,
+							"k8s-app":                      name,
 						},
 					},
 				},
