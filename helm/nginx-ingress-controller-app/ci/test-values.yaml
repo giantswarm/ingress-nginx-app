@@ -1,10 +1,7 @@
 configmap:
   worker-processes: "2"
 controller:
-  name: nginx-ingress-controller
   autoscaling:
     enabled: false
-  service:
-    enabled: true
 cluster:
   profile: 1
