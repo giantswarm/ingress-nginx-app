@@ -1,20 +1,7 @@
 configmap:
-  error-log-level: "notice"
-  hsts: "false"
-  server-name-hash-bucket-size: "1024"
   worker-processes: "2"
-  worker-shutdown-timeout: "240s"
-  use-forwarded-headers: "true"
-  hpa-enabled: "false"
 controller:
-  name: nginx-ingress-controller
-  replicaCount: 1
-  maxUnavailable: 1
   autoscaling:
-    enabled: "false"
-  service:
-    enabled: "true"
-    nodePorts:
-      http: 30010
-      https: 30011
-profile: xxs
+    enabled: false
+cluster:
+  profile: 1
