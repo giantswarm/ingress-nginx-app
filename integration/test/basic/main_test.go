@@ -137,8 +137,8 @@ func init() {
 							"helm.sh/chart":                      helmChartLabel,
 						},
 						MatchLabels: map[string]string{
-							"app.kubernetes.io/name":     "name",
-							"app.kubernetes.io/instance": "name",
+							"app.kubernetes.io/name":     name,
+							"app.kubernetes.io/instance": name,
 						},
 						PodLabels: map[string]string{
 							"app":                                name,
