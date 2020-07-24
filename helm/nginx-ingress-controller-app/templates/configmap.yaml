@@ -1,10 +1,9 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: {{ .Values.controller.configmap.name }}
+  name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    giantswarm.io/service-type: "managed"
-    k8s-addon: ingress-nginx.addons.k8s.io
+    {{- include "labels.common" . | nindent 4 }}
 data:
   {{- toYaml .Values.configmap | trim | nindent 2 }}

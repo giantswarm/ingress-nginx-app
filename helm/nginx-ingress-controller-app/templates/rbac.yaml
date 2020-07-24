@@ -1,47 +1,41 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ .Values.controller.name }}
+  name: {{ include "resource.default.name" . }}
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.common" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: {{ .Values.controller.name }}
+  name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: {{ .Values.controller.name }}
+  name: {{ include "resource.default.name" . }}
   apiGroup: rbac.authorization.k8s.io
 ---
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ .Values.controller.name }}
+  name: {{ include "resource.default.name" . }}-ng
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.common" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: {{ .Values.controller.name }}
+  name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: Role
-  name: {{ .Values.controller.role.name }}
+  name: {{ include "resource.default.name" . }}
   apiGroup: rbac.authorization.k8s.io
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ .Values.controller.name }}
+  name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.common" . | nindent 4 }}
 rules:
 - apiGroups:
   - ""
@@ -95,12 +89,10 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: {{ .Values.controller.role.name }}
+  name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.common" . | nindent 4 }}
 rules:
 - apiGroups:
   - ""
@@ -145,34 +137,30 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ .Values.controller.name }}-psp-user
+  name: {{ include "resource.default.name" . }}-psp-user
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.common" . | nindent 4 }}
 rules:
 - apiGroups:
   - extensions
   resources:
   - podsecuritypolicies
   resourceNames:
-  - {{ .Values.controller.name }}
+  - {{ include "resource.default.name" . }}
   verbs:
   - use
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: {{ .Values.controller.name }}-psp
+  name: {{ include "resource.default.name" . }}-psp
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.common" . | nindent 4 }}
 subjects:
 - kind: ServiceAccount
-  name: {{ .Values.controller.name }}
+  name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
 roleRef:
   kind: ClusterRole
-  name: {{ .Values.controller.name }}-psp-user
+  name: {{ include "resource.default.name" . }}-psp-user
   apiGroup: rbac.authorization.k8s.io

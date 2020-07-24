@@ -1,16 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.controller.name }}-monitoring
+  name: {{ include "resource.default.name" . }}-monitoring
   namespace: {{ .Release.Namespace }}
   annotations:
     giantswarm.io/monitoring: "true"
     giantswarm.io/monitoring-path: /metrics
     giantswarm.io/monitoring-port: {{ .Values.controller.metrics.port | quote }}
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   clusterIP: None
   ports:
@@ -18,4 +16,4 @@ spec:
     port: {{ .Values.controller.metrics.service.servicePort }}
     targetPort: metrics
   selector:
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.selector" . | nindent 4 }}

@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: ingress.{{ .Values.baseDomain }}
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.controller.service.subdomain }}.{{ .Values.baseDomain }}
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
   {{- if eq .Values.provider "aws" }}
     {{- if not .Values.controller.service.public }}
@@ -21,12 +21,10 @@ metadata:
     {{- end }}
   {{- end }}
   {{- end }}
-  name: {{ .Values.controller.name }}
+  name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: {{ .Values.controller.name }}
-    giantswarm.io/service-type: "managed"
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.common" . | nindent 4 }}
 spec:
   type: {{ .Values.controller.service.type }}
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
@@ -43,7 +41,7 @@ spec:
     protocol: TCP
     targetPort: 443
   selector:
-    app.kubernetes.io/name: {{ .Values.controller.k8sAppLabel }}
+    {{- include "labels.selector" . | nindent 4 }}
   {{- if .Values.controller.service.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.controller.service.externalTrafficPolicy }}
   {{- end }}

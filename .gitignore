@@ -19,3 +19,6 @@ test/**/__pycache__/
 nginx-ingress-controller-app-*.tgz
 test/**/.mypy_cache/
 junit.xml
+
+# IDE
+.vscode/

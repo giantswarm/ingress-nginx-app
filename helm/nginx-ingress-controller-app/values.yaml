@@ -56,16 +56,6 @@ configmap:
 # resources that make up the ingress controller.
 controller:
 
-  # controller.name
-  # Gets applied to most metadata.name fields in the various resources that this
-  # chart creates.
-  name: nginx-ingress-controller
-
-  # controller.k8sAppLabel
-  # Gets applied to the `app` label in the metadata.labels of the various resources
-  # that this chart creates.
-  k8sAppLabel: nginx-ingress-controller
-
   # controller.replicaCount
   # Number of initial NGINX IC Deployment replicas.
   replicaCount: 1
@@ -81,16 +71,6 @@ controller:
   # ready before a rolling upgrade can proceed with the next replica.
   minReadySeconds: 0
 
-  # controller.configmap
-  # TODO: Explain what this is for
-  configmap:
-
-    # controller.configmap.name
-    # The name that the configuration configmap will get. This is the configmap
-    # that gets filled with values from the `configmap` field in this values
-    # file.
-    name: ingress-nginx
-
   # controller.image
   image:
 
@@ -100,18 +80,6 @@ controller:
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: v0.34.1
-
-  # controller.rbac
-  # TODO: Explain what this is for
-  rbac:
-
-  # controller.role
-  # TODO: Explain what this is for
-  role:
-
-    # controller.role.name
-    # The name tha the RBAC role will get.
-    name: nginx-ingress-role
 
   # controller.livenessProbe
   # Liveness probe configuration
@@ -258,6 +226,11 @@ controller:
     # Valid values: true for public, false for internal
     public: true
 
+    # controller.service.subdomain
+    # Applies to clusters running on AWS or Azure.
+    # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
+    subdomain: "ingress"
+
     # controller.service.type
     # Default to LoadBalancer, support NodePort for testing purposes only.
     # Valid values: LoadBalancer, NodePort
@@ -270,6 +243,11 @@ controller:
 
       # controller.service.internal.enabled
       enabled: false
+
+      # controller.service.internal.subdomain
+      # Applies to clusters running on AWS or Azure.
+      # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
+      subdomain: "ingress-internal"
 
       # controller.service.internal.type
       type: LoadBalancer

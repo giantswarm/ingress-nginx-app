@@ -15,8 +15,7 @@ def get_affinity_nodes(kube_client: HTTPClient, nodes: List[Node]) -> Tuple[Opti
     nginx_po_query = Pod.objects(kube_client).filter(
         namespace="kube-system",
         selector={
-            "giantswarm.io/service-type": "managed",
-            "k8s-app": "nginx-ingress-controller"
+            "app.kubernetes.io/name": "nginx-ingress-controller"
         }
     )
     nginx_pods = list(nginx_po_query)
