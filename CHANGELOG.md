@@ -9,9 +9,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [1.8.0] - 2020-07-24
 
-### Removed
+### Added
 
 - Support multiple NGINX IC App installations per tenant cluster.
+
+### Removed
+
 - Dropped support for deprecated configuration properties:
   - `configmap.annotations-prefix`
   - `configmap.default-ssl-certificate`
