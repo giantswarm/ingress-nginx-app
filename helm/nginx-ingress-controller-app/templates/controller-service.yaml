@@ -33,13 +33,19 @@ spec:
   {{- end }}
   ports:
   - name: http
-    port: 80
+    port: {{ .Values.controller.service.ports.http }}
     protocol: TCP
-    targetPort: 80
+    targetPort: {{ .Values.controller.service.targetPorts.http }}
+    {{- if eq .Values.controller.service.type "NodePort" }}
+    nodePort: {{ .Values.controller.service.nodePorts.http }}
+    {{- end }}
   - name: https
-    port: 443
+    port: {{ .Values.controller.service.ports.https }}
     protocol: TCP
-    targetPort: 443
+    targetPort: {{ .Values.controller.service.targetPorts.https }}
+    {{- if eq .Values.controller.service.type "NodePort" }}
+    nodePort: {{ .Values.controller.service.nodePorts.https }}
+    {{- end }}
   selector:
     {{- include "labels.selector" . | nindent 4 }}
   {{- if .Values.controller.service.externalTrafficPolicy }}

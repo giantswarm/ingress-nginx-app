@@ -157,12 +157,11 @@ spec:
         lifecycle:
 {{ toYaml .Values.controller.lifecycle | indent 10 }}
         ports:
-        - name: http
-          containerPort: 80
+        {{- range $key, $value := .Values.controller.containerPort }}
+        - name: {{ $key }}
+          containerPort: {{ $value }}
           protocol: TCP
-        - name: https
-          containerPort: 443
-          protocol: TCP
+        {{- end }}
         - name: metrics
           containerPort: {{ .Values.controller.metrics.port }}
           protocol: TCP
