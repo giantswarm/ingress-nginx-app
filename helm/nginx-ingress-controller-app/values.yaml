@@ -236,7 +236,6 @@ controller:
     subdomain: "ingress"
 
     # controller.service.type
-    # Default to LoadBalancer, support NodePort for testing purposes only.
     # Valid values: LoadBalancer, NodePort
     type: LoadBalancer
 
