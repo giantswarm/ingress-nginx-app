@@ -81,6 +81,10 @@ controller:
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: v0.34.1
 
+  containerPort:
+    http: 80
+    https: 443
+
   # controller.livenessProbe
   # Liveness probe configuration
   # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
@@ -232,9 +236,21 @@ controller:
     subdomain: "ingress"
 
     # controller.service.type
-    # Default to LoadBalancer, support NodePort for testing purposes only.
     # Valid values: LoadBalancer, NodePort
     type: LoadBalancer
+
+    ports:
+      http: 80
+      https: 443
+
+    targetPorts:
+      http: http
+      https: https
+
+    # type: NodePort
+    nodePorts:
+      http: 30010
+      https: 30011
 
     # controller.service.internal
     # Configuration settings for `-internal` suffixed Service variant.
@@ -251,6 +267,15 @@ controller:
 
       # controller.service.internal.type
       type: LoadBalancer
+
+      ports:
+        http: 80
+        https: 443
+
+      # type: NodePort
+      nodePorts:
+        http: 30012
+        https: 30013
 
       # controller.service.internal.externalTrafficPolicy
       # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
