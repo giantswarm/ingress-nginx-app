@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix controller RBAC permissions, granting "get" and "update" of leader election ConfigMap lock.
+
 ## [1.8.2] - 2020-07-31
 
 ### Fixed
