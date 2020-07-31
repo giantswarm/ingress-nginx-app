@@ -109,7 +109,7 @@ rules:
   - configmaps
   resourceNames:
     # "<election-id>-<ingress-class>" ConfigMap is used for leader election.
-    # Leader is nginx controller replica that manages to update the lock.
+    # Leader is nginx controller replica that manages to update the lock on it.
   {{- if .Values.controller.ingressClass }}
   - "{{ include "controller.leader.election.id" . }}-{{ .Values.controller.ingressClass }}"
   {{- end}}
