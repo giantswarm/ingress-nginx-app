@@ -33,3 +33,21 @@ Selector labels
 {{- define "labels.selector" -}}
 k8s-app: {{ .Release.Name | quote }}
 {{- end -}}
+
+{{/*
+Create a name stem for resource names
+When pods for deployments are created they have an additional 16 character
+suffix appended, e.g. "-957c9d6ff-pkzgw". Given that Kubernetes allows 63
+characters for resource names, the stem is truncated to 47 characters to leave
+room for such suffix.
+*/}}
+{{- define "resource.default.name" -}}
+{{- .Release.Name | replace "." "-" | trunc 47 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Election ID.
+*/}}
+{{- define "controller.leader.election.id" -}}
+{{ include "resource.default.name" . }}-leader
+{{- end -}}
