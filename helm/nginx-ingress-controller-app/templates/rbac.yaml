@@ -113,7 +113,7 @@ rules:
     # This has to be adapted if you change either parameter
     # when launching the nginx-ingress-controller.
   {{- if .Values.controller.ingressClass }}
-  - "{{ include "controller.election.id" . }}-{{ .Values.controller.ingressClass }}"
+  - "{{ include "controller.leader.election.id" . }}-{{ .Values.controller.ingressClass }}"
   {{- end}}
   verbs:
   - get

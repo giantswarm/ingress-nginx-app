@@ -48,6 +48,6 @@ room for such suffix.
 {{/*
 Election ID.
 */}}
-{{- define "controller.election.id" -}}
+{{- define "controller.leader.election.id" -}}
 {{ include "resource.default.name" . }}-leader
 {{- end -}}

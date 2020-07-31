@@ -76,7 +76,7 @@ spec:
         args:
         - /nginx-ingress-controller
         - --configmap={{ .Release.Namespace }}/{{ include "resource.default.name" . }}
-        - --election-id={{ include "controller.election.id" . }}
+        - --election-id={{ include "controller.leader.election.id" . }}
         {{- if .Values.controller.annotationsPrefix }}
         - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
         {{- end}}
