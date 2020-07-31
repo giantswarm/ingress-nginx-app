@@ -297,7 +297,7 @@ controller:
 
       servicePort: 443
       type: ClusterIP
-    
+
     # controller.admissionWebhooks.patch
     # If enabled, generate a self-signed certificate, then patch the webhook configurations with the generated data.
     # On chart upgrades (or if the secret exists) the cert will not be re-generated. You can use this to provide your own
