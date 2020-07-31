@@ -63,6 +63,15 @@ rules:
   - list
   - watch
 - apiGroups:
+  - ""
+  resources:
+  - configmaps
+  resourceNames:
+  - {{ include "resource.default.name" . }}-{{ .Values.controller.ingressClass }}
+  verbs:
+  - get
+  - update
+- apiGroups:
   - extensions
   - networking.k8s.io
   resources:
