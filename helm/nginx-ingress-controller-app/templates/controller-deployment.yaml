@@ -5,6 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
+    app.kubernetes.io/component: controller
     giantswarm.io/monitoring_basic_sli: "true"
   annotations:
     prometheus.io/port: '{{ .Values.controller.metrics.port }}'
@@ -26,6 +27,7 @@ spec:
     metadata:
       labels:
         {{- include "labels.common" . | nindent 8 }}
+        app.kubernetes.io/component: controller
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
         cluster-autoscaler.kubernetes.io/safe-to-evict: 'true'
@@ -89,6 +91,11 @@ spec:
         {{- end}}
         {{- if .Values.controller.service.enabled }}
         - --publish-service={{ .Release.Namespace }}/{{ include "resource.default.name" . }}
+        {{- end }}
+        {{- if .Values.controller.admissionWebhooks.enabled }}
+        - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
+        - --validating-webhook-certificate=/usr/local/certificates/cert
+        - --validating-webhook-key=/usr/local/certificates/key
         {{- end }}
         securityContext:
           allowPrivilegeEscalation: true
@@ -165,3 +172,20 @@ spec:
         - name: metrics
           containerPort: {{ .Values.controller.metrics.port }}
           protocol: TCP
+        {{- if .Values.controller.admissionWebhooks.enabled }}
+        - name: webhook
+          containerPort: {{ .Values.controller.admissionWebhooks.port }}
+          protocol: TCP
+        {{- end }}
+        {{- if .Values.controller.admissionWebhooks.enabled }}
+        volumeMounts:
+        - name: webhook-cert
+          mountPath: /usr/local/certificates/
+          readOnly: true
+        {{- end }}
+      {{- if .Values.controller.admissionWebhooks.enabled }}
+      volumes:
+      - name: webhook-cert
+        secret:
+          secretName: {{ include "resource.default.name" . }}-admission
+      {{- end }}
