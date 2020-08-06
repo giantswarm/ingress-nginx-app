@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.8.4] - 2020-08-06
+
 ### Fixed
 
 - Fix NetworkPolicy templating, to allow Pod ingress traffic (Prometheus scrape requests) on same port that the metrics/monitoring service advertises.
@@ -250,7 +252,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.3...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.4...HEAD
+[1.8.4]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.3...v1.8.4
 [1.8.3]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.2...v1.8.3
 [1.8.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.1...v1.8.2
 [1.8.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.0...v1.8.1
