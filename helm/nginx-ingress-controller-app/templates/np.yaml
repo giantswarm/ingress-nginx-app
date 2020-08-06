@@ -15,7 +15,7 @@ spec:
       protocol: TCP
     - port: 443
       protocol: TCP
-    - port: {{ .Values.controller.metricsPort }}
+    - port: {{ .Values.controller.metrics.port }}
       protocol: TCP
   egress:
   - {}
