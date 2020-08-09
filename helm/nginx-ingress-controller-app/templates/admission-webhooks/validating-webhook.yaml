@@ -14,12 +14,12 @@ webhooks:
   - apiGroups:
     - extensions
     - networking.k8s.io
-  apiVersions:
+    apiVersions:
     - v1beta1
-  operations:
+    operations:
     - CREATE
     - UPDATE
-  resources:
+    resources:
     - ingresses
   failurePolicy: Fail
   sideEffects: None
