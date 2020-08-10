@@ -13,7 +13,7 @@ metadata:
 spec:
   {{- if not .Values.controller.autoscaling.enabled }}
   replicas: {{ .Values.controller.replicaCount }}
-  {{- end}}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "labels.selector" . | nindent 6 }}
