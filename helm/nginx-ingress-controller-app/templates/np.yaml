@@ -15,7 +15,7 @@ spec:
     - port: $value
       protocol: TCP
     {{- end }}
-    {{- if .Values.controller.admissionWebhooks.enabled -}}
+    {{- if .Values.controller.admissionWebhooks.enabled }}
     - port: {{ .Values.controller.admissionWebhooks.port }}
       protocol: TCP
     {{- end }}
