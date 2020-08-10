@@ -306,7 +306,7 @@ controller:
       enabled: true
       image:
         repository: giantswarm/kube-webhook-certgen
-        tag: v1.3.0
+        tag: v1.2.2
       priorityClassName: ""
       podAnnotations: {}
       nodeSelector: {}
