@@ -12,7 +12,7 @@ spec:
   ingress:
   - ports:
     {{- range $key, $value := .Values.controller.containerPort }}
-    - port: $value
+    - port: {{ $value }}
       protocol: TCP
     {{- end }}
     {{- if .Values.controller.admissionWebhooks.enabled }}
