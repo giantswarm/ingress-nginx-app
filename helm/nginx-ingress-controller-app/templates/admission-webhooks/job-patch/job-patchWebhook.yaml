@@ -15,7 +15,6 @@ spec:
   # Alpha feature since k8s 1.12
   ttlSecondsAfterFinished: 0
 {{- end }}
-  backoffLimit: 1000
   template:
     metadata:
       name: {{ include "resource.default.name" . }}-admission-patch
