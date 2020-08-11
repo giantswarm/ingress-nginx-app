@@ -18,10 +18,13 @@ rules:
       - get
       - update
 {{- if .Values.podSecurityPolicy.enabled }}
-  - apiGroups: ['extensions']
-    resources: ['podsecuritypolicies']
-    verbs:     ['use']
+  - apiGroups: 
+       - extensions
+    resources:
+      - podsecuritypolicies
+    verbs:
+      - use
     resourceNames:
-    - {{ include "resource.default.name" . }}-admission
+      - {{ include "resource.default.name" . }}-admission
 {{- end }}
 {{- end }}
