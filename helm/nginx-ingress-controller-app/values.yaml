@@ -307,6 +307,7 @@ controller:
       image:
         repository: giantswarm/kube-webhook-certgen
         tag: v1.3.0
+      backoffLimit: 15
       priorityClassName: ""
       podAnnotations: {}
       nodeSelector: {}
