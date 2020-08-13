@@ -7,7 +7,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
-- Configure explicit helm hook wights to make validating webhook resource management reliable.
+- Configure explicit helm hook weights to make validating webhook resource management reliable.
 
 ## [1.9.0] - 2020-08-13
 
