@@ -1,0 +1,19 @@
+{{- if .Values.controller.admissionWebhooks.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "resource.default.name" . }}-admission
+{{- if .Values.controller.admissionWebhooks.service.annotations }}
+  annotations: {{ toYaml .Values.controller.admissionWebhooks.service.annotations | nindent 4 }}
+{{- end }}
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+spec:
+  type: {{ .Values.controller.admissionWebhooks.service.type }}
+  ports:
+    - name: https-webhook
+      port: 443
+      targetPort: webhook
+  selector:
+    {{- include "labels.selector" . | nindent 4 }}
+{{- end }}

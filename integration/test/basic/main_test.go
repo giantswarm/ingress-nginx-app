@@ -128,6 +128,7 @@ func init() {
 						Namespace: metav1.NamespaceSystem,
 						DeploymentLabels: map[string]string{
 							"app":                                name,
+							"app.kubernetes.io/component":        "controller",
 							"app.kubernetes.io/instance":         name,
 							"app.kubernetes.io/managed-by":       "Helm",
 							"app.kubernetes.io/name":             name,
@@ -142,6 +143,7 @@ func init() {
 						},
 						PodLabels: map[string]string{
 							"app":                          name,
+							"app.kubernetes.io/component":  "controller",
 							"app.kubernetes.io/instance":   name,
 							"app.kubernetes.io/managed-by": "Helm",
 							"app.kubernetes.io/name":       name,

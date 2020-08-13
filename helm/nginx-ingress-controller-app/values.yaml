@@ -81,6 +81,7 @@ controller:
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: v0.34.1
 
+  # controller.containerPort
   containerPort:
     http: 80
     https: 443
@@ -283,6 +284,36 @@ controller:
       #   Cluster - kube-proxy proxies requests randomly across all endpoints (forwards traffic to other nodes if necessary), source IP NAT'd
       externalTrafficPolicy: "Local"
 
+  # controller.admissionWebhooks
+  # Admission webhook support for Ingress resources can be enabled to prevent incorrectly formatted
+  # rules from making their way into NGINX and potentially preventing the container from starting.
+  admissionWebhooks:
+    enabled: true
+    failurePolicy: Fail
+    port: 8443
+
+    service:
+      annotations: {}
+
+      servicePort: 443
+      type: ClusterIP
+
+    # controller.admissionWebhooks.patch
+    # If enabled, generate a self-signed certificate, then patch the webhook configurations with the generated data.
+    # On chart upgrades (or if the secret exists) the cert will not be re-generated. You can use this to provide your own
+    # certs ahead of time if you wish.
+    patch:
+      enabled: true
+      image:
+        repository: giantswarm/kube-webhook-certgen
+        tag: v1.3.0
+      backoffLimit: 6
+      priorityClassName: ""
+      podAnnotations: {}
+      nodeSelector: {}
+      tolerations: []
+      runAsUser: 2000
+
 # image
 image:
   registry: quay.io
@@ -296,6 +327,12 @@ initContainer:
     tag: 3.12-giantswarm-sysctl
   userID: 1000
   groupID: 1000
+
+# podSecurityPolicy
+# If true, create & use Pod Security Policy resources
+# https://kubernetes.io/docs/concepts/policy/pod-security-policy/
+podSecurityPolicy:
+  enabled: true
 
 # test
 test:
