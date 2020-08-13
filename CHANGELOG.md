@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+- Support Ingress resources validating webhook.
+
 ## [1.8.4] - 2020-08-06
 
 ### Fixed
