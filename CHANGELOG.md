@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.9.1] - 2020-08-14
+
 - Configure explicit helm hook weights to make validating webhook resource management reliable.
 
 ## [1.9.0] - 2020-08-13
@@ -258,7 +260,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.1...HEAD
+[1.9.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.4...v1.9.0
 [1.8.4]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.3...v1.8.4
 [1.8.3]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.2...v1.8.3
