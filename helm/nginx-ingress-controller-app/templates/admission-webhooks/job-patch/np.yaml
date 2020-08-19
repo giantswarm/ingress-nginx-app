@@ -1,0 +1,23 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: {{ include "resource.default.name" . }}-admission
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+    "helm.sh/hook-weight": "-1"
+  labels:
+    {{- include "labels.common" . | nindent 4 }}
+    app.kubernetes.io/component: admission-webhook
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "labels.common" . | nindent 6 }}
+      app.kubernetes.io/component: admission-webhook
+  egress:
+  - {}
+  policyTypes:
+  - Egress
+  - Ingress
+  

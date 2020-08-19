@@ -112,7 +112,7 @@ rules:
     # Leader is nginx controller replica that manages to update the lock on it.
   {{- if .Values.controller.ingressClass }}
   - "{{ include "controller.leader.election.id" . }}-{{ .Values.controller.ingressClass }}"
-  {{- end}}
+  {{- end }}
   verbs:
   - get
   - update
@@ -130,7 +130,7 @@ rules:
   - get
   - create
   - update
-# PSP rbac
+{{- if .Values.podSecurityPolicy.enabled }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
@@ -162,3 +162,4 @@ roleRef:
   kind: ClusterRole
   name: {{ include "resource.default.name" . }}-psp-user
   apiGroup: rbac.authorization.k8s.io
+{{- end }}

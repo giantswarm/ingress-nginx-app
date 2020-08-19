@@ -11,10 +11,14 @@ spec:
       {{- include "labels.selector" . | nindent 6 }}
   ingress:
   - ports:
-    - port: 80
+    {{- range $key, $value := .Values.controller.containerPort }}
+    - port: {{ $value }}
       protocol: TCP
-    - port: 443
+    {{- end }}
+    {{- if .Values.controller.admissionWebhooks.enabled }}
+    - port: {{ .Values.controller.admissionWebhooks.port }}
       protocol: TCP
+    {{- end }}
     - port: {{ .Values.controller.metrics.port }}
       protocol: TCP
   egress:
