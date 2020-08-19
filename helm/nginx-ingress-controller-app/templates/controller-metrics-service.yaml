@@ -5,7 +5,7 @@ metadata:
   namespace: {{ .Release.Namespace }}
   annotations:
     giantswarm.io/monitoring: "true"
-    giantswarm.io/monitoring-path: metrics
+    giantswarm.io/monitoring-path: /metrics
     giantswarm.io/monitoring-port: {{ .Values.controller.metrics.port | quote }}
     prometheus.io/port: {{ .Values.controller.metrics.port | quote }}
     prometheus.io/scrape: "true"

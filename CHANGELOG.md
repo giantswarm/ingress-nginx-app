@@ -12,12 +12,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - `giantswarm.io/monitoring` label (in addition to existing annotation) for
   the new sharded TC Prometheus to pick up the service.
 
-### Changed
-
-- `giantswarm.io/monitoring-path` to not start with a `/` to bring it in line
-  with docs, avoid confusion as to what's expected, and avoid a double-slash in
-  the generated URL.
-
 ## [1.8.4] - 2020-08-06
 
 ### Fixed
