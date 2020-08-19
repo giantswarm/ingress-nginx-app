@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- `giantswarm.io/monitoring` label (in addition to existing annotation) for
+  the new sharded TC Prometheus to pick up the service.
+
 ## [1.9.1] - 2020-08-14
 
 - Configure explicit helm hook weights to make validating webhook resource management reliable.
