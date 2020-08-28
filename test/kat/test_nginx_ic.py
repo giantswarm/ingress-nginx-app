@@ -78,7 +78,7 @@ def test_deployments(kube_cluster: Cluster, stormforger_load_app_factory: Stormf
             assert results.mean_rps >= 1000
         # expected performance when running on giantswarm
         elif chart_extra_info["external_cluster_type"] == "giantswarm":
-            assert results.mean_rps >= 1200
+            assert results.mean_rps >= 2000
     else:
         # in case we miss extra info about cluster type we're running on
         assert results.mean_rps >= 1000
