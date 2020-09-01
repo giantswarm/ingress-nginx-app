@@ -12,6 +12,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - `giantswarm.io/monitoring` label (in addition to existing annotation) for
   the new sharded TC Prometheus to pick up the service.
 
+### Changed
+
+- Upgrade to ingress-nginx [v0.35.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0350).
+
 ## [1.9.1] - 2020-08-14
 
 - Configure explicit helm hook weights to make validating webhook resource management reliable.
