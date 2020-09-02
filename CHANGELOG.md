@@ -58,7 +58,7 @@ In older releases the NGINX IC LoadBalancer Service name was hardcoded to `nginx
 
 When NGINX IC LoadBalancer Service gets recreated, cloud service provider (CSP) load balancer behind it gets recycled as well. It can take minute or so for ingress DNS records to be updated by `external-dns` and change propagated to clients. During that time there's ingress traffic downtime, since clients still resolve old no longer present CSP load balancer.
 
-Please take the potential ingress downtime into consideration when planning the NGINX IC App upgrade from older to v1.8.0+.
+**tl;dr: Please take the potential ingress downtime (a minute or so) into consideration when planning the NGINX IC App upgrade from older to v1.8.0+.**
 
 ### Added
 
