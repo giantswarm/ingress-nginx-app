@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.9.2] - 2020-09-02
+
 ### Added
 
 - `giantswarm.io/monitoring` label (in addition to existing annotation) for
@@ -269,7 +271,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.1...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.2...HEAD
+[1.9.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.1...v1.9.2
 [1.9.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.0...v1.9.1
 [1.9.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.4...v1.9.0
 [1.8.4]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.8.3...v1.8.4
