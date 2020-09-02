@@ -52,6 +52,14 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [1.8.0] - 2020-07-24
 
+### Breaking changes
+
+In older releases the NGINX IC LoadBalancer Service name was hardcoded to `nginx-ingress-controller`. As of this release, to ensure the Service name uniqueness for multiple NGINX ICs per cluster support, the LoadBalancer Service name was made to be dynamic, derived from Helm release i.e. App Custom Resource (CR) name. Therefore, if you're upgrading from an older NGINX IC App release to v1.8.0+, existing NGINX IC LoadBalancer Service may get replaced by a new one for every NGINC IC App CR whose name is not `nginx-ingress-controller`.
+
+When NGINX IC LoadBalancer Service gets recreated, cloud service provider (CSP) load balancer behind it gets recycled as well. It can take minute or so for ingress DNS records to be updated by `external-dns` and change propagated to clients. During that time there's ingress traffic downtime, since clients still resolve old no longer present CSP load balancer.
+
+Please take the potential ingress downtime into consideration when planning the NGINX IC App upgrade from older to v1.8.0+.
+
 ### Added
 
 - Support multiple NGINX IC App installations per tenant cluster.
