@@ -313,7 +313,7 @@ controller:
   # Enables mimalloc as a drop-in replacement for malloc, reduces the memory utilization.
   # For additional options it provides see https://github.com/microsoft/mimalloc#environment-options
   enableMimalloc: true
-  
+
   # controller.extraEnvs
   # Additional environment variables to set for the controller.
   extraEnvs: []
