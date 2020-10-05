@@ -7,6 +7,23 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Upgrade to ingress-nginx [v0.40.1](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0401).
+
+  Upstream changes to pay special attention to:
+
+  - App/chart requires Kubernetes 1.16+
+  - Default configuration changes:
+
+    - [`gzip-level`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#gzip-level) default changed from `5` to `1`
+    - [`ssl-session-tickets`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#ssl-session-tickets) default changed from `true` to `false`
+    - [`use-gzip`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#use-gzip) default changed from `true` to `false`
+    - [`upstream-keepalive-connections`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#upstream-keepalive-connections) changed from `32` to `320`
+    - [`upstream-keepalive-requests`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#upstream-keepalive-requests) changed from `100` to `10000`
+- Support and enable by default [mimalloc](https://github.com/microsoft/mimalloc) as a drop-in malloc replacement to reduce nginx memory utilization.
+- Support configuring additional environment variables for NGINX Ingress Controller container, to support configuring additional mimalloc [options](https://github.com/microsoft/mimalloc#environment-options).
+
 ## [1.9.2] - 2020-09-02
 
 ### Added
