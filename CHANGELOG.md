@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Upgrade to ingress-nginx [v0.40.1](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0401).
+- Upgrade ingress-nginx-controller from v0.35.0 to [v0.40.2](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0402).
 
   **Important** upstream changes to pay special attention to:
 
