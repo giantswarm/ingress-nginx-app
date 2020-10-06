@@ -19,7 +19,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
     Migration options:
 
-    - (*prefered*) Before upgrading to this or newer NGINX IC App, ensure that all existing and new Ingress resources use `networking.k8s.io/v1beta1` API (available since Kubernetes 1.14) or even newer `networking.k8s.io/v1` API (available sicne Kubernetes 1.19)
+    - (*prefered*) Before upgrading to this or newer NGINX IC App, ensure that all existing and new Ingress resources use `networking.k8s.io/v1beta1` API (available since Kubernetes 1.14) or even newer `networking.k8s.io/v1` API (available since Kubernetes 1.19)
     - Before or as part of upgrading to this or newer NGINX IC App, disable validating webhook (by setting `controller.admissionWebhooks.enabled` to `false`), and migrate to new Ingress APIs later, accepting risk that in the meantime invalid Ingress resources can be submitted and break NGINX IC configuration
 
   - Default configuration changes:
