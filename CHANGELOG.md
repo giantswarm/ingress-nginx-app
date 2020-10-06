@@ -11,9 +11,17 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Upgrade to ingress-nginx [v0.40.1](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0401).
 
-  Upstream changes to pay special attention to:
+  **Important** upstream changes to pay special attention to:
 
-  - App/chart requires Kubernetes 1.16+
+  - App/chart requires Kubernetes 1.16+ based platform release
+    - Note to maintainers: if NGINX IC App fix has to be done for Kubernetes 1.15 based platform releases, one of the previous releases has to be used as base)
+  - **Breaking change**: Validating `extensions/v1beta1` Ingress resources is no longer supported (to be able to support `networking.k8s.io/v1beta1` and Kubernetes 1.19+ `networking.k8s.io/v1` Ingress APIs), validating webhook which is enabled by default will reject their creation and any changes
+
+    Migration options:
+
+    - (*prefered*) Before upgrading to this or newer NGINX IC App, ensure that all existing and new Ingress resources use `networking.k8s.io/v1beta1` API (available since Kubernetes 1.14) or even newer `networking.k8s.io/v1` API (available sicne Kubernetes 1.19)
+    - Before or as part of upgrading to this or newer NGINX IC App, disable validating webhook (by setting `controller.admissionWebhooks.enabled` to `false`), and migrate to new Ingress APIs later, accepting risk that in the meantime invalid Ingress resources can be submitted and break NGINX IC configuration
+
   - Default configuration changes:
 
     - [`gzip-level`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#gzip-level) default changed from `5` to `1`
