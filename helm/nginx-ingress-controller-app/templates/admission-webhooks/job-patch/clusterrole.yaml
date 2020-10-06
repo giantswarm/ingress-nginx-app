@@ -20,7 +20,7 @@ rules:
       - update
 {{- if .Values.podSecurityPolicy.enabled }}
   - apiGroups: 
-       - extensions
+      - extensions
     resources:
       - podsecuritypolicies
     verbs:
