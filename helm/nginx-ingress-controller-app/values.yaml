@@ -283,7 +283,7 @@ controller:
   # Admission webhook support for Ingress resources can be enabled to prevent incorrectly formatted
   # rules from making their way into NGINX and potentially preventing the container from starting.
   admissionWebhooks:
-    enabled: false
+    enabled: true
     failurePolicy: Fail
     port: 8443
 
