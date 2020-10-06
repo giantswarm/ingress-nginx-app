@@ -23,6 +23,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     - [`upstream-keepalive-requests`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#upstream-keepalive-requests) changed from `100` to `10000`
 - Support and enable by default [mimalloc](https://github.com/microsoft/mimalloc) as a drop-in malloc replacement to reduce nginx memory utilization.
 - Support configuring additional environment variables for NGINX Ingress Controller container, to support configuring additional mimalloc [options](https://github.com/microsoft/mimalloc#environment-options).
+- Adjust `hook-delete-policy` to make admission webhook management more reliable.
 
 ## [1.9.2] - 2020-09-02
 
