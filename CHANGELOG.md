@@ -14,8 +14,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   **Important** upstream changes to pay special attention to:
 
   - App/chart requires Kubernetes 1.16+ based platform release
+    - It is recommended to change API group of Ingress resources from `extensions/v1beta1` to `networking.k8s.io/v1beta1` (available since Kubernetes 1.14)
   - Default configuration changes:
-
     - [`gzip-level`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#gzip-level) default changed from `5` to `1`
     - [`ssl-session-tickets`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#ssl-session-tickets) default changed from `true` to `false`
     - [`use-gzip`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#use-gzip) default changed from `true` to `false`
