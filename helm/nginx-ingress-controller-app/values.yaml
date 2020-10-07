@@ -33,11 +33,6 @@ configmap:
   # Increase hash table size to allow more server names for stability reasons
   server-name-hash-bucket-size: "1024"
 
-  # configmap.server-tokens
-  # Controls whether to send NGINX Server header in responses and display NGINX
-  # version in error pages.
-  server-tokens: "false"
-
   # configmap.worker-processes
   # Sets the number of worker processes.
   worker-processes: "4"
@@ -79,7 +74,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v0.35.0
+    tag: v0.40.2
 
   # controller.containerPort
   containerPort:
@@ -313,6 +308,21 @@ controller:
       nodeSelector: {}
       tolerations: []
       runAsUser: 2000
+
+  # controller.enableMimalloc
+  # Enables mimalloc as a drop-in replacement for malloc, reduces the memory utilization.
+  # For additional options it provides see https://github.com/microsoft/mimalloc#environment-options
+  enableMimalloc: true
+
+  # controller.extraEnvs
+  # Additional environment variables to set for the controller.
+  extraEnvs: []
+  # extraEnvs:
+  #   - name: FOO
+  #     valueFrom:
+  #       secretKeyRef:
+  #         key: FOO
+  #         name: secret-resource
 
 # image
 image:

@@ -5,8 +5,8 @@ metadata:
   name: {{ include "resource.default.name" . }}-admission
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade,post-install,post-upgrade
-    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
-    "helm.sh/hook-weight": "-1"
+    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
+    "helm.sh/hook-weight": "-2"
   labels:
     {{- include "labels.common" . | nindent 4 }}
     app.kubernetes.io/component: admission-webhook
@@ -20,7 +20,7 @@ rules:
       - update
 {{- if .Values.podSecurityPolicy.enabled }}
   - apiGroups: 
-       - extensions
+      - extensions
     resources:
       - podsecuritypolicies
     verbs:
