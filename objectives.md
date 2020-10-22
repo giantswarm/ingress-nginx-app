@@ -2,7 +2,7 @@
 
 Last updated: 21. Oct 2020
 
-To supplement our [general Service Level Objectives](https://www.giantswarm.io/blog/the-radical-way-giant-swarm-handles-service-level-objectives), Giant Swarm and its customers have a shared objective to keep the NGINX Ingress Controller app up and running.
+To supplement our [General Service Level Objectives](https://www.giantswarm.io/blog/the-radical-way-giant-swarm-handles-service-level-objectives), Giant Swarm and its customers have a shared objective to keep the NGINX Ingress Controller app up and running.
 
 This doc clarifies what Giant Swarm and customer need to do in order to accomplish that.
 
