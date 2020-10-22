@@ -16,7 +16,7 @@ In essence:
 **First, monitoring and alerting.**
 
 In production, we monitor and alert on these basic metrics:
-*   For each workload, when at least one pod was unavailable for more than 5 minutes. In addition, when the error budget’s burn rate
+*   For each workload, when at least one nginx-ingress-controller pod was unavailable for more than 5 minutes. In addition, when the error budget’s burn rate
     *   Was in the last 10mins, higher than 1%
     *   Was in the last hour, higher than the max allowable rate
     *   Will run out in ~3 days
