@@ -21,7 +21,7 @@ In production, we monitor and alert on these basic metrics:
     *   Was in the last hour, higher than the max allowable rate
     *   Will run out in ~3 days
 *   When a container crashes repeatedly.
-*   When an app fails to install or upgrade. We get notified, but not paged yet.
+*   When this app fails to install or upgrade. We get notified, but not paged yet.
 
 **Second, Quality Assurance of releases to reduce likelihood of introducing regressions.**
 
