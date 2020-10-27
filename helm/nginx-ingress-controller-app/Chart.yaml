@@ -10,4 +10,4 @@ version: [[ .Version ]]
 sources:
   - https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v[[ .Version ]]/README.md
 annotations:
-  values_schema_json: https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v[[ .Version ]]/helm/nginx-ingress-controller-app/values.schema.json
+  application.giantswarm.io/values-schema: https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v[[ .Version ]]/helm/nginx-ingress-controller-app/values.schema.json
