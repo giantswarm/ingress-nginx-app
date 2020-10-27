@@ -344,6 +344,15 @@ initContainer:
 podSecurityPolicy:
   enabled: true
 
+# ingressController
+# These values get applied directly to a configmap which configures the
+# nginx-ingress-controller
+# For all the nginx configmap config options see:
+# https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
+# This is used  for control-plane specific configuration, which can be applied via control-plane catalog.
+ingressController:
+  configmap: {}
+
 # test
 test:
 

@@ -7,3 +7,4 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
 data:
   {{- toYaml .Values.configmap | trim | nindent 2 }}
+  {{- toYaml .Values.ingressController.configmap | trim | nindent 2 }}
