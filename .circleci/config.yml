@@ -61,7 +61,7 @@ workflows:
           name: push-to-app-catalog-master
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
-          chart: "nginx-ingress-controller"
+          chart: "nginx-ingress-controller-app"
           filters:
             branches:
               only: master
@@ -72,14 +72,14 @@ workflows:
           name: push-to-app-catalog-pr
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
-          chart: "nginx-ingress-controller"
+          chart: "nginx-ingress-controller-app"
           filters:
             branches:
               ignore: master
 
       - architect/push-to-app-collection:
           name: push-to-aws-app-collection
-          app_name: "nginx-ingress-controller"
+          app_name: "nginx-ingress-controller-app"
           app_collection_repo: "aws-app-collection"
           unique: "true"
           requires:
@@ -92,7 +92,7 @@ workflows:
 
       - architect/push-to-app-collection:
           name: push-to-azure-app-collection
-          app_name: "nginx-ingress-controller"
+          app_name: "nginx-ingress-controller-app"
           app_collection_repo: "azure-app-collection"
           unique: "true"
           requires:
@@ -105,7 +105,7 @@ workflows:
 
       - architect/push-to-app-collection:
           name: push-to-kvm-app-collection
-          app_name: "nginx-ingress-controller"
+          app_name: "nginx-ingress-controller-app"
           app_collection_repo: "kvm-app-collection"
           unique: "true"
           requires:
