@@ -41,6 +41,9 @@ General Quality Assurance
     *   Platform Compatibility Testing, with latest platform releases across providers (AWS, Azure, and KVM)
     *   End-to-End smoke tests to make sure Ingress traffic gets routed when (1) installing a new app, and (2) upgrading an app
 
+Implementation details regarding performance tests and general quality assurance can be found in [performance test files](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/test/kat), [integration test files](https://github.com/giantswarm/nginx-ingress-controller-app/tree/master/integration) and [CircleCI configuration](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/.circleci/config.yml).
+
+
 **Third, 30 day upgrade objective.**
 
 We strive to upgrade all Managed Apps within 30 days of an upstream release. Not falling behind upgrades means better security, smoother upgrades, and less breaking changes. It also means the latest bug fixes and features are always made available to you.
