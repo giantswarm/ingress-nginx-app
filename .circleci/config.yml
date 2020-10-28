@@ -58,7 +58,7 @@ workflows:
               only: /^v.*/
 
       - architect/push-to-app-catalog:
-          name: push-to-app-catalog-master
+          name: push-to-control-plane-app-catalog-master
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
           chart: "nginx-ingress-controller-app"
@@ -69,7 +69,7 @@ workflows:
               only: /^v.*/
 
       - architect/push-to-app-catalog:
-          name: push-to-app-catalog-pr
+          name: push-to-control-plane--app-catalog-pr
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
           chart: "nginx-ingress-controller-app"
@@ -83,7 +83,7 @@ workflows:
           app_collection_repo: "aws-app-collection"
           unique: "true"
           requires:
-            - push-to-app-catalog-master
+            - push-to-control-plane-app-catalog-master
           filters:
             branches:
               ignore: /.*/
@@ -96,7 +96,7 @@ workflows:
           app_collection_repo: "azure-app-collection"
           unique: "true"
           requires:
-            - push-to-app-catalog-master
+            - push-to-control-plane-app-catalog-master
           filters:
             branches:
               ignore: /.*/
@@ -109,7 +109,7 @@ workflows:
           app_collection_repo: "kvm-app-collection"
           unique: "true"
           requires:
-            - push-to-app-catalog-master
+            - push-to-control-plane-app-catalog-master
           filters:
             branches:
               ignore: /.*/
@@ -128,6 +128,7 @@ workflows:
           requires:
             - push-to-default-app-catalog
             - push-to-giantswarm-app-catalog
+            - push-to-control-plane-app-catalog-master
 
       # Require manual approval for running performance tests.
       - hold-run-perf-tests:
