@@ -7,7 +7,6 @@ kubeVersion: ">=1.16.0-0"
 name: nginx-ingress-controller-app
 namespace: kube-system
 version: [[ .Version ]]
-sources:
-  - https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v[[ .Version ]]/README.md
 annotations:
   application.giantswarm.io/values-schema: https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v[[ .Version ]]/helm/nginx-ingress-controller-app/values.schema.json
+  application.giantswarm.io/readme: - https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v[[ .Version ]]/README.md
