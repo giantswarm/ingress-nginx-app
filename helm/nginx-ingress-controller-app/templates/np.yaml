@@ -4,6 +4,7 @@ metadata:
   name: {{ include "resource.default.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
+    app: nginx-ingress-controller
     {{- include "labels.common" . | nindent 4 }}
 spec:
   podSelector:
