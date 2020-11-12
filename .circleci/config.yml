@@ -19,12 +19,12 @@ jobs:
       - run: curl -Lo /tmp/helm.tar.gz https://get.helm.sh/helm-v2.16.5-linux-amd64.tar.gz
       - run: tar zxf /tmp/helm.tar.gz -C /tmp && mv /tmp/linux-amd64/helm /tmp/helm
       - run: /tmp/helm init -c
-      - run: curl -Lo /tmp/kind-app-testing.sh -q https://raw.githubusercontent.com/giantswarm/kube-app-testing/6a103d9298ed56fe62b379688e0cee8dc41ada0f/kube-app-testing.sh
+      - run: curl -Lo /tmp/kind-app-testing.sh -q https://raw.githubusercontent.com/giantswarm/kube-app-testing/use-gsctl/kube-app-testing.sh
       - run: chmod +x /tmp/kind-app-testing.sh
       - run: curl -Lo /tmp/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
       - run: chmod +x /tmp/kubectl
       - run: curl -SL https://github.com/giantswarm/gsctl/releases/download/0.25.0/gsctl-0.25.0-linux-amd64.tar.gz | tar -C /tmp --strip-components 1 -xvzf - gsctl-0.25.0-linux-amd64/gsctl
-      - run: export GSCTL_ENDPOINT="${GS_API_URL}"; export GSCTL_AUTH_TOKEN="${GS_API_KEY}"; PATH="/tmp:$PATH" kind-app-testing.sh -c ${CIRCLE_PROJECT_REPONAME} -t giantswarm --cluster-name ci-${CIRCLE_PROJECT_REPONAME} -n kube-system -r ${GS_RELEASE} --availability-zone ${GS_AVAILABILITY_ZONE} --min-scaling 3 --max-scaling 3
+      - run: export GSCTL_ENDPOINT="${GS_API_URL}"; export GSCTL_AUTH_TOKEN="${GS_API_KEY}"; PATH="/tmp:$PATH" kind-app-testing.sh -c ${CIRCLE_PROJECT_REPONAME} -t giantswarm --cluster-name ci-${CIRCLE_PROJECT_REPONAME} -n kube-system -r ${GS_RELEASE} --availability-zone ${GS_AVAILABILITY_ZONE} --min-scaling 3 --max-scaling 3 --cluster-organization giantswarm
       - store_test_results:
           path: test-results
       - store_artifacts:
