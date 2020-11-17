@@ -122,7 +122,7 @@ jobs:
       - name: Prepare /opt/bin
         run: |
           chmod +x /opt/bin/*
-          echo "::add-path::/opt/bin"
+          echo "/opt/bin" >> $GITHUB_PATH
       - name: Print architect version
         run: |
           architect version ${{ env.architect_flags }}
