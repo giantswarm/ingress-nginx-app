@@ -9,7 +9,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Added
 
-- Add ability to extend `nginx-ingress-controller`with specific values from appcatalog. 
+- Add ability to extend `nginx-ingress-controller`with specific values from appcatalog.
+
+### Changed
+
+- Update image to `v0.41.2`. ([#133](https://github.com/giantswarm/nginx-ingress-controller-app/pull/133))
 
 ## [1.10.0] - 2020-10-07
 
