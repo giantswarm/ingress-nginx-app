@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/giantswarm/apiextensions/v2 v2.5.3 // indirect
-	github.com/giantswarm/appcatalog v0.2.7
+	github.com/giantswarm/appcatalog v0.3.0
 	github.com/giantswarm/e2esetup/v2 v2.1.0
 	github.com/giantswarm/e2etests/v2 v2.0.0
 	github.com/giantswarm/helmclient/v2 v2.1.4
