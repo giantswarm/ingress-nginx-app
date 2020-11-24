@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@dev:include-abs-in-push-to-app-catalog
+  architect: giantswarm/architect@0.17.1
 
 jobs:
   run-perf-tests:
