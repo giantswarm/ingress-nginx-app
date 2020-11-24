@@ -43,7 +43,7 @@ workflows:
           app_catalog_test: "default-test-catalog"
           chart: "nginx-ingress-controller-app"
           filters:
-            # Trigger the job also on git tag.
+            # Trigger the job also on git tag
             tags:
               only: /^v.*/
 
