@@ -170,10 +170,6 @@ All configuration options are documented in the [values.yaml](/helm/nginx-ingres
 Some of our apps have certain restrictions on how they can be deployed.
 Not following these limitations will most likely result in a broken deployment.
 
-- This app _must_ be installed in the `kube-system` namespace.
-
-- This app _must not_ be installed more than once.
-
 - This app _must_ reference the `ingress-controller-values` ConfigMap in its `spec.config` field.
 
 # For developers
