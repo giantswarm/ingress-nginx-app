@@ -31,15 +31,15 @@ func checkDeploymentReady(ctx context.Context) error {
 	l.LogCtx(ctx, "level", "debug", "message", "waiting for deployment ready")
 
 	o := func() error {
-		deploy, err := appTest.K8sClient().AppsV1().Deployments(metav1.NamespaceSystem).Get(ctx, app, metav1.GetOptions{})
+		deploy, err := appTest.K8sClient().AppsV1().Deployments(metav1.NamespaceSystem).Get(ctx, appName, metav1.GetOptions{})
 		if apierrors.IsNotFound(err) {
-			return microerror.Maskf(executionFailedError, "deployment %#q in %#q not found", app, metav1.NamespaceSystem)
+			return microerror.Maskf(executionFailedError, "deployment %#q in %#q not found", appName, metav1.NamespaceSystem)
 		} else if err != nil {
 			return microerror.Mask(err)
 		}
 
 		if deploy.Status.ReadyReplicas != *deploy.Spec.Replicas {
-			return microerror.Maskf(executionFailedError, "deployment %#q want %d replicas %d ready", app, *deploy.Spec.Replicas, deploy.Status.ReadyReplicas)
+			return microerror.Maskf(executionFailedError, "deployment %#q want %d replicas %d ready", appName, *deploy.Spec.Replicas, deploy.Status.ReadyReplicas)
 		}
 
 		return nil

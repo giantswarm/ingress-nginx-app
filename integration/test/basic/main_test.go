@@ -17,7 +17,6 @@ import (
 )
 
 const (
-	app         = "nginx-ingress-controller"
 	appName     = "nginx-ingress-controller-app"
 	catalogName = "default-test"
 )
