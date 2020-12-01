@@ -55,6 +55,11 @@ controller:
   # Number of initial NGINX IC Deployment replicas.
   replicaCount: 1
 
+  # controller.antiAffinityScheduling
+  # Configures podAntiAffinity scheduling strategy.
+  # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
+  antiAffinityScheduling: preferredDuringSchedulingIgnoredDuringExecution
+
   # controller.maxUnavailable
   # Configures maximum number of unavailable replicas while doing a
   # rolling upgrade.
