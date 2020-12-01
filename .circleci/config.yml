@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@0.15.0
+  architect: giantswarm/architect@0.18.1
 
 jobs:
   run-perf-tests:
@@ -60,6 +60,7 @@ workflows:
       - architect/integration-test:
           context: architect
           name: basic-integration-test
+          install-app-platform: true
           test-dir: "integration/test/basic"
           filters:
             # Do not trigger the job on merge to master.
