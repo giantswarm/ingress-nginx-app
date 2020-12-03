@@ -5,7 +5,6 @@ home: https://github.com/giantswarm/nginx-ingress-controller-app
 icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
 kubeVersion: ">=1.16.0-0"
 name: nginx-ingress-controller-app
-namespace: kube-system
 version: [[ .Version ]]
 annotations:
   application.giantswarm.io/values-schema: https://raw.githubusercontent.com/giantswarm/nginx-ingress-controller-app/v[[ .Version ]]/helm/nginx-ingress-controller-app/values.schema.json
