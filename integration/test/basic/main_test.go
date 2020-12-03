@@ -8,53 +8,26 @@ import (
 	"os"
 	"testing"
 
-	"github.com/giantswarm/appcatalog"
-	e2esetup "github.com/giantswarm/e2esetup/v2/chart"
-	"github.com/giantswarm/e2esetup/v2/chart/env"
-	"github.com/giantswarm/e2etests/v2/basicapp"
-	"github.com/giantswarm/helmclient/v2/pkg/helmclient"
-	"github.com/giantswarm/k8sclient/v4/pkg/k8sclient"
+	"github.com/giantswarm/apptest"
 	"github.com/giantswarm/micrologger"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
+	"github.com/giantswarm/nginx-ingress-controller-app/integration/env"
 	"github.com/giantswarm/nginx-ingress-controller-app/integration/templates"
 )
 
 const (
-	appName        = "nginx-ingress-controller-app"
-	name           = "nginx-ingress-controller"
-	catalogURL     = "https://giantswarm.github.io/default-catalog"
-	testCatalogURL = "https://giantswarm.github.io/default-test-catalog"
+	appName     = "nginx-ingress-controller-app"
+	catalogName = "default-test"
 )
 
 var (
-	ba         *basicapp.BasicApp
-	helmClient *helmclient.Client
-	k8sSetup   *k8sclient.Setup
-	l          micrologger.Logger
-	tarballURL string
+	appTest apptest.Interface
+	l       micrologger.Logger
 )
 
 func init() {
-	ctx := context.Background()
 	var err error
-
-	var latestRelease string
-	{
-		latestRelease, err = appcatalog.GetLatestVersion(ctx, catalogURL, appName, "")
-		if err != nil {
-			panic(err.Error())
-		}
-	}
-
-	var version string
-	{
-		version = fmt.Sprintf("%s-%s", latestRelease, env.CircleSHA())
-		tarballURL, err = appcatalog.NewTarballURL(testCatalogURL, appName, version)
-		if err != nil {
-			panic(err.Error())
-		}
-	}
 
 	{
 		c := micrologger.Config{}
@@ -64,100 +37,13 @@ func init() {
 		}
 	}
 
-	var k8sClients *k8sclient.Clients
 	{
-		c := k8sclient.ClientsConfig{
+		c := apptest.Config{
 			Logger: l,
 
-			KubeConfigPath: env.KubeConfigPath(),
+			KubeConfigPath: env.KubeConfig(),
 		}
-		k8sClients, err = k8sclient.NewClients(c)
-		if err != nil {
-			panic(err.Error())
-		}
-	}
-
-	{
-		c := k8sclient.SetupConfig{
-			Logger: l,
-
-			Clients: k8sClients,
-		}
-		k8sSetup, err = k8sclient.NewSetup(c)
-		if err != nil {
-			panic(err.Error())
-		}
-	}
-
-	{
-		c := helmclient.Config{
-			Logger:    l,
-			K8sClient: k8sClients,
-		}
-		helmClient, err = helmclient.New(c)
-		if err != nil {
-			panic(err.Error())
-		}
-	}
-
-	var helmChartLabel string
-	{
-		helmChartLabel = fmt.Sprintf("%s-%s", appName, version)
-		if len(helmChartLabel) > 63 {
-			helmChartLabel = helmChartLabel[:63]
-		}
-	}
-
-	{
-		c := basicapp.Config{
-			Clients:    k8sClients,
-			HelmClient: helmClient,
-			Logger:     l,
-
-			App: basicapp.Chart{
-				ChartValues:     templates.IngressControllerValues,
-				Name:            name,
-				Namespace:       metav1.NamespaceSystem,
-				RunReleaseTests: true,
-				URL:             tarballURL,
-			},
-			ChartResources: basicapp.ChartResources{
-				Deployments: []basicapp.Deployment{
-					{
-						Name:      name,
-						Namespace: metav1.NamespaceSystem,
-						DeploymentLabels: map[string]string{
-							"app":                                name,
-							"app.kubernetes.io/component":        "controller",
-							"app.kubernetes.io/instance":         name,
-							"app.kubernetes.io/managed-by":       "Helm",
-							"app.kubernetes.io/name":             name,
-							"app.kubernetes.io/version":          "v0.40.2",
-							"giantswarm.io/monitoring_basic_sli": "true",
-							"giantswarm.io/service-type":         "managed",
-							"helm.sh/chart":                      helmChartLabel,
-							"k8s-app":                            name,
-						},
-						MatchLabels: map[string]string{
-							"k8s-app": name,
-						},
-						PodLabels: map[string]string{
-							"app":                          name,
-							"app.kubernetes.io/component":  "controller",
-							"app.kubernetes.io/instance":   name,
-							"app.kubernetes.io/managed-by": "Helm",
-							"app.kubernetes.io/name":       name,
-							"app.kubernetes.io/version":    "v0.40.2",
-							"giantswarm.io/service-type":   "managed",
-							"helm.sh/chart":                helmChartLabel,
-							"k8s-app":                      name,
-						},
-					},
-				},
-			},
-		}
-
-		ba, err = basicapp.New(c)
+		appTest, err = apptest.New(c)
 		if err != nil {
 			panic(err.Error())
 		}
@@ -169,17 +55,25 @@ func init() {
 func TestMain(m *testing.M) {
 	ctx := context.Background()
 
+	var err error
+
 	{
-		c := e2esetup.Config{
-			HelmClient: helmClient,
-			Setup:      k8sSetup,
+		apps := []apptest.App{
+			{
+				CatalogName:   catalogName,
+				Name:          appName,
+				Namespace:     metav1.NamespaceSystem,
+				SHA:           env.CircleSHA(),
+				ValuesYAML:    templates.IngressControllerValues,
+				WaitForDeploy: true,
+			},
 		}
-
-		v, err := e2esetup.Setup(ctx, m, c)
+		err = appTest.InstallApps(ctx, apps)
 		if err != nil {
-			l.LogCtx(ctx, "level", "error", "message", "e2e test failed", "stack", fmt.Sprintf("%#v\n", err))
+			l.LogCtx(ctx, "level", "error", "message", "install apps failed", "stack", fmt.Sprintf("%#v\n", err))
+			os.Exit(-1)
 		}
-
-		os.Exit(v)
 	}
+
+	os.Exit(m.Run())
 }

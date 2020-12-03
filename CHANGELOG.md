@@ -7,9 +7,15 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.11.0] - 2020-11-18
+
 ### Added
 
-- Add ability to extend `nginx-ingress-controller`with specific values from appcatalog. 
+- Add ability to extend `nginx-ingress-controller`with specific values from appcatalog.
+
+### Changed
+
+- Update image to `v0.41.2`. ([#133](https://github.com/giantswarm/nginx-ingress-controller-app/pull/133))
 
 ## [1.10.0] - 2020-10-07
 
@@ -308,7 +314,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.10.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.11.0...HEAD
+[1.11.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.2...v1.10.0
 [1.9.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.1...v1.9.2
 [1.9.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.0...v1.9.1

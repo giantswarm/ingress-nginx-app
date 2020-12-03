@@ -1,8 +1,8 @@
 apiVersion: v1
-appVersion: v0.40.2
+appVersion: v0.41.2
 description: A Helm chart for the nginx ingress-controller
 home: https://github.com/giantswarm/nginx-ingress-controller-app
-icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+icon: https://s.giantswarm.io/app-icons/1/png/nginx-ingress-controller-app-light.png
 kubeVersion: ">=1.16.0-0"
 name: nginx-ingress-controller-app
 version: [[ .Version ]]
