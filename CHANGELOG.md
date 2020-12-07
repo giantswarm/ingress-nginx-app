@@ -12,6 +12,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - Add ability to extend `nginx-ingress-controller`with specific values from appcatalog.
+- User value validation through a values.schema.json file based on the current values.yaml.
 
 ### Changed
 
