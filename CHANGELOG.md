@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.12.0] - 2020-12-09
+
 ### Added
 
 - Allow toggling of the `--update-status` flag. Disabling this feature stops NGINX IC from updating Ingress Loadbalancer status fields. ([#151](https://github.com/giantswarm/nginx-ingress-controller-app/pull/151))
@@ -319,7 +321,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.11.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.12.0...HEAD
+[1.12.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.11.0...v1.12.0
 [1.11.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.2...v1.10.0
 [1.9.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.9.1...v1.9.2
