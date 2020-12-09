@@ -309,6 +309,12 @@ controller:
       tolerations: []
       runAsUser: 2000
 
+  # controller.updateIngressStatus
+  # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
+  # managing DNS for ingresses via an external method, this should always be left enabled.
+  # Disabling updates of Ingress status allows two parallel NGINX IC deployments to reconcile the same Ingresses.
+  updateIngressStatus: true
+
   # controller.enableMimalloc
   # Enables mimalloc as a drop-in replacement for malloc, reduces the memory utilization.
   # For additional options it provides see https://github.com/microsoft/mimalloc#environment-options
