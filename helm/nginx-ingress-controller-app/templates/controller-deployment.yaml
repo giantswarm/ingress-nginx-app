@@ -34,7 +34,7 @@ spec:
     spec:
       affinity:
         podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
+          {{ .Values.controller.antiAffinityScheduling }}:
           - weight: 100
             podAffinityTerm:
               labelSelector:

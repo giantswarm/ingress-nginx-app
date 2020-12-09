@@ -11,6 +11,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Allow toggling of the `--update-status` flag. Disabling this feature stops NGINX IC from updating Ingress Loadbalancer status fields. ([#151](https://github.com/giantswarm/nginx-ingress-controller-app/pull/151))
 
+## Changed
+
+- Add ability to set podAntiAffinity scheduling method via the values file. ([#146](https://github.com/giantswarm/nginx-ingress-controller-app/pull/146))
+
 ## [1.11.0] - 2020-11-18
 
 ### Added
