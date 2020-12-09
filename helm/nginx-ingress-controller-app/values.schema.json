@@ -419,6 +419,9 @@
                 "terminationGracePeriodSeconds": {
                     "type": "integer"
                 },
+                "updateIngressStatus": {
+                    "type": "boolean"
+                },
                 "userID": {
                     "type": "integer"
                 }
