@@ -3,7 +3,7 @@ module github.com/giantswarm/nginx-ingress-controller-app
 go 1.15
 
 require (
-	github.com/giantswarm/apptest v0.8.2
+	github.com/giantswarm/apptest v0.9.0
 	github.com/giantswarm/backoff v0.2.0
 	github.com/giantswarm/microerror v0.3.0
 	github.com/giantswarm/micrologger v0.4.0
