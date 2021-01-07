@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@0.18.1
+  architect: giantswarm/architect@dev:update-abs-executor
 
 jobs:
   run-perf-tests:
