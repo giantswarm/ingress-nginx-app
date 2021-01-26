@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update image to `v0.43.0`. ([#165](https://github.com/giantswarm/nginx-ingress-controller-app/pull/165))
+
 ## [1.12.0] - 2020-12-09
 
 ### Added
