@@ -10,6 +10,9 @@ metadata:
   annotations:
     prometheus.io/port: '{{ .Values.controller.metrics.port }}'
     prometheus.io/scrape: 'true'
+    {{- range .Values.controller.extraAnnotations.deployment }}
+    {{ . }}
+    {{- end }}
 spec:
   {{- if not .Values.controller.autoscaling.enabled }}
   replicas: {{ .Values.controller.replicaCount }}
@@ -31,6 +34,9 @@ spec:
       annotations:
         scheduler.alpha.kubernetes.io/critical-pod: ''
         cluster-autoscaler.kubernetes.io/safe-to-evict: 'true'
+        {{- range .Values.controller.extraAnnotations.pod }}
+        {{ . }}
+        {{- end }}
     spec:
       affinity:
         podAntiAffinity:

@@ -147,6 +147,17 @@
                 "enableMimalloc": {
                     "type": "boolean"
                 },
+                "extraAnnotations": {
+                    "type": "object",
+                    "properties": {
+                        "deployment": {
+                            "type": "array"
+                        },
+                        "pod": {
+                            "type": "array"
+                        }
+                    }
+                },
                 "extraEnvs": {
                     "type": "array"
                 },
