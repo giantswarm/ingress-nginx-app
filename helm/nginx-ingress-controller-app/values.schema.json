@@ -110,6 +110,9 @@
                 "annotationsPrefix": {
                     "type": "string"
                 },
+                "antiAffinityScheduling": {
+                    "type": "string"
+                },
                 "autoscaling": {
                     "type": "object",
                     "properties": {
@@ -451,6 +454,17 @@
             "properties": {
                 "registry": {
                     "type": "string"
+                }
+            }
+        },
+        "ingressController": {
+            "type": "object",
+            "properties": {
+                "configmap": {
+                    "type": "object"
+                },
+                "controlPlane": {
+                    "type": "boolean"
                 }
             }
         },
