@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - Add annotation to controller service for external-dns to use for filtering resources. ([#169](https://github.com/giantswarm/nginx-ingress-controller-app/pull/169))
+- Support user-provided annotations for the controller deployment. ([#170](https://github.com/giantswarm/nginx-ingress-controller-app/pull/170))
 
 ## [1.13.0] - 2021-01-27
 
