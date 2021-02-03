@@ -4,6 +4,9 @@ kind: Service
 metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.controller.service.subdomain }}.{{ .Values.baseDomain }}
+    {{- if .Values.controller.service.externalDNS.annotation }}
+    {{ .Values.controller.service.externalDNS.annotation }}
+    {{- end }}
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
   {{- if eq .Values.provider "aws" }}
     {{- if not .Values.controller.service.public }}
