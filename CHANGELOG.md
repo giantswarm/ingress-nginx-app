@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Allow wildcard subdomains to be used in the external-dns annotation. ([#174](https://github.com/giantswarm/nginx-ingress-controller-app/pull/174))
+
 ## [1.14.0] - 2021-02-03
 
 ### Added
