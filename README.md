@@ -10,7 +10,7 @@ Read more in: [What is this repo?](#what-is-this-repo)
 
 # nginx Ingress Controller App
 
-This App installs the [nginx ingress controller] onto your tenant cluster.
+This App installs the [nginx ingress controller] onto your workload cluster.
 
 Its job is to satisfy external requests to services running in the cluster.
 See the [kubernetes ingress docs] for a higher level overview.
@@ -27,7 +27,7 @@ updates to the Ingress resource.
 - [nginx Ingress Controller App](#nginx-ingress-controller-app)
 - [Installing](#installing)
   - [Sample values files for the web interface and API](#sample-values-files-for-the-web-interface-and-api)
-  - [Sample App CR and ConfigMap for the Control Plane](#sample-app-cr-and-configmap-for-the-control-plane)
+  - [Sample App CR and ConfigMap for the management cluster](#sample-app-cr-and-configmap-for-the-management-cluster)
   - [Important note about required cluster level config](#important-note-about-required-cluster-level-config)
 - [Configuration Options](#configuration-options)
 - [Limitations](#limitations)
@@ -39,11 +39,11 @@ updates to the Ingress resource.
 
 # Installing
 
-There are 3 ways to install this app onto a tenant cluster.
+There are 3 ways to install this app onto a workload cluster.
 
-1. [Using our web interface](https://docs.giantswarm.io/reference/web-interface/app-catalog/)
+1. [Using our web interface](https://docs.giantswarm.io/ui-api/web/app-platform/#installing-an-app)
 2. [Using our API](https://docs.giantswarm.io/api/#operation/createClusterAppV5)
-3. Directly creating the App custom resource on the Control Plane.
+3. Directly creating the [App custom resource](https://docs.giantswarm.io/ui-api/management-api/crd/apps.application.giantswarm.io/) on the management cluster.
 
 ## Sample values files for the web interface and API
 
@@ -69,13 +69,13 @@ structure but formatted as JSON:
 }
 ```
 
-## Sample App CR and ConfigMap for the Control Plane
+## Sample App CR and ConfigMap for the management cluster
 
-If you have access to the Kubernetes API on the Control Plane, you could create
+If you have access to the Kubernetes API on the management cluster, you could create
 the App CR and ConfigMap directly.
 
 Here is an example that would install the nginx-ingress-controller-app to
-tenant cluster `abc12`:
+workload cluster `abc12`:
 
 ```
 # appCR.yaml
@@ -86,8 +86,8 @@ metadata:
     app-operator.giantswarm.io/version: 1.0.0
   name: nginx-ingress-controller-app
 
-  # Tenant cluster resources live in a namespace with the same ID as the
-  # tenant cluster.
+  # workload cluster resources live in a namespace with the same ID as the
+  # workload cluster.
   namespace: abc12
 
 spec:
@@ -145,10 +145,10 @@ It is a convention to call the user level configmap `{app-name}-user-values`.
 So in this case we called the ConfigMap `nginx-ingress-controller-app-user-values`
 
 If you place these files in a folder called `foldername`, you could use the
-command: `kubectl apply foldername`, to deploy this app to a tenant cluster
+command: `kubectl apply foldername`, to deploy this app to a workload cluster
 with id `abc12`.
 
-See our [full reference page on how to configure applications](https://docs.giantswarm.io/reference/app-configuration/) for more details.
+See our [full reference page on how to configure applications](https://docs.giantswarm.io/app-platform/app-configuration/) for more details.
 
 ## Important note about required cluster level config
 
@@ -156,7 +156,7 @@ The `ingress-controller-values` ConfigMap referenced in the `spec.config` field 
 is required for the ingress controller to work properly.
 
 `ingress-controller-values` is created by our operators and it helps set values
-unique to your tenant cluster. When creating this App using our web interface or
+unique to your workload cluster. When creating this App using our web interface or
 our API, `spec.config` will be set automatically, but if you are creating the App CR
 yourself you must remember to do this. We are working on a kubectl plugin to
 facilitate this process.
@@ -218,5 +218,5 @@ default app (i.e. it gets installed automatically during cluster creation)
 [default-catalog]: https://github.com/giantswarm/default-catalog
 [default-test-catalog]: https://github.com/giantswarm/default-test-catalog
 [nginx ingress controller]: https://github.com/kubernetes/ingress-nginx
-[Giant Swarm App Platform]: https://docs.giantswarm.io/basics/app-catalog/
+[Giant Swarm App Platform]: https://docs.giantswarm.io/app-platform/overview/
 [Kubernetes Ingress docs]: https://kubernetes.io/docs/concepts/services-networking/ingress/
