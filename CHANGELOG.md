@@ -7,6 +7,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update controller container image to [`v0.44.0`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md)  and kube-webhook-certgen container image to 1.5.1. ([#179](https://github.com/giantswarm/nginx-ingress-controller-app/pull/179))
+- Remove conflicting admission webhook api versions. ([#178](https://github.com/giantswarm/nginx-ingress-controller-app/pull/178))
+- Remove unecessary annotation. ([#180](https://github.com/giantswarm/nginx-ingress-controller-app/pull/180))
+
 ## [1.14.1] - 2021-02-09
 
 ### Changed
