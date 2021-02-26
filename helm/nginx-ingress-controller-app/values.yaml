@@ -79,7 +79,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v0.43.0
+    tag: v0.44.0
 
   # controller.containerPort
   containerPort:
@@ -313,7 +313,7 @@ controller:
       enabled: true
       image:
         repository: giantswarm/kube-webhook-certgen
-        tag: v1.3.0
+        tag: v1.5.1
       backoffLimit: 6
       priorityClassName: ""
       podAnnotations: {}
@@ -377,14 +377,14 @@ podSecurityPolicy:
   enabled: true
 
 # ingressController.controlPlane
-# Defines if this app is installed into control-plane.
+# Defines if this app is installed into management-cluster.
 #
 # ingressController.configmap
 # These values get applied directly to a configmap which configures the
 # nginx-ingress-controller
 # For all the nginx configmap config options see:
 # https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
-# This is used  for control-plane specific configuration, which can be applied via control-plane catalog.
+# This is used  for management-cluster specific configuration, which can be applied via control-plane catalog.
 ingressController:
   controlPlane: false
   configmap: {}
