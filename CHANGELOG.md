@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.15.0] - 2021-03-01
+
 ### Changed
 
 - Update controller container image to [`v0.44.0`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md)  and kube-webhook-certgen container image to 1.5.1. ([#179](https://github.com/giantswarm/nginx-ingress-controller-app/pull/179))
@@ -350,7 +352,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.14.1...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.15.0...HEAD
+[1.15.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.14.1...v1.15.0
 [1.14.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.14.0...v1.14.1
 [1.14.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.13.0...v1.14.0
 [1.13.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.12.0...v1.13.0
