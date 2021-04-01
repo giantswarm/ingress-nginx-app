@@ -296,6 +296,7 @@ controller:
   # rules from making their way into NGINX and potentially preventing the container from starting.
   admissionWebhooks:
     enabled: true
+    timeoutSeconds: 10
     failurePolicy: Fail
     port: 8443
 

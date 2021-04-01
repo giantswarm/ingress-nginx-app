@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Add configuration options for `failurePolicy` and `timeoutSeconds` of validating webhook configuration. ([#186](https://github.com/giantswarm/nginx-ingress-controller-app/pull/186))
+
 ## [1.15.0] - 2021-03-01
 
 ### Changed
