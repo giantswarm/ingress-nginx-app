@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [1.15.1] - 2021-04-01
+
 ### Added
 
 - Add configuration options for `failurePolicy` and `timeoutSeconds` of validating webhook configuration. ([#186](https://github.com/giantswarm/nginx-ingress-controller-app/pull/186))
@@ -356,7 +358,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.15.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.15.1...HEAD
+[1.15.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.15.0...v1.15.1
 [1.15.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.14.1...v1.15.0
 [1.14.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.14.0...v1.14.1
 [1.14.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.13.0...v1.14.0
