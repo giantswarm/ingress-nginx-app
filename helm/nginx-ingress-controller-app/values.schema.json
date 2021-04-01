@@ -49,7 +49,12 @@
                             "type": "boolean"
                         },
                         "failurePolicy": {
-                            "type": "string"
+                            "type": "string",
+                            "enum": ["Ignore", "Fail"]
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer",
+                            "minimum": 0
                         },
                         "patch": {
                             "type": "object",
