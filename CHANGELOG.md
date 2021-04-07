@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+- Update controller container image to [`v0.45.0`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0450) to correct OpenSSL CVEs. ([#188](https://github.com/giantswarm/nginx-ingress-controller-app/pull/188))
+
 ## [1.15.1] - 2021-04-01
 
 ### Added
