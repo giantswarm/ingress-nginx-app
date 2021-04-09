@@ -132,7 +132,7 @@ controller:
 
       # controller.metrics.service.servicePort
       # Configures the port that the metrics service is listening on.
-      servicePort: 9913
+      servicePort: 10254
 
   # controller.resources
   resources:
