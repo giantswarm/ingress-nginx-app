@@ -79,7 +79,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v0.44.0
+    tag: v0.45.0
 
   # controller.containerPort
   containerPort:
@@ -132,7 +132,7 @@ controller:
 
       # controller.metrics.service.servicePort
       # Configures the port that the metrics service is listening on.
-      servicePort: 9913
+      servicePort: 10254
 
   # controller.resources
   resources:

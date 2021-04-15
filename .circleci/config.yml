@@ -1,37 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@2.1.0
-
-jobs:
-  run-perf-tests:
-    machine:
-      image: ubuntu-1604:201903-01
-    working_directory:
-      ~/nginx-ingress-controller-app
-    steps:
-      - checkout
-      - run: pyenv versions
-      - run: pyenv global 3.7.0
-      - run: python --version
-      - run: pip install pipenv aws-shell
-      - run: curl -Lo /tmp/kind "https://github.com/kubernetes-sigs/kind/releases/download/v0.7.0/kind-$(uname)-amd64"
-      - run: chmod +x /tmp/kind
-      - run: curl -Lo /tmp/helm.tar.gz https://get.helm.sh/helm-v2.16.5-linux-amd64.tar.gz
-      - run: tar zxf /tmp/helm.tar.gz -C /tmp && mv /tmp/linux-amd64/helm /tmp/helm
-      - run: /tmp/helm init -c
-      - run: curl -Lo /tmp/kind-app-testing.sh -q https://raw.githubusercontent.com/giantswarm/kube-app-testing/v0.5.2/kube-app-testing.sh
-      - run: chmod +x /tmp/kind-app-testing.sh
-      - run: curl -Lo /tmp/kubectl https://storage.googleapis.com/kubernetes-release/release/v1.18.0/bin/linux/amd64/kubectl
-      - run: chmod +x /tmp/kubectl
-      - run: PATH="/tmp:$PATH" kind-app-testing.sh -c ${CIRCLE_PROJECT_REPONAME} -t giantswarm --cluster-name ci-${CIRCLE_PROJECT_REPONAME} -n kube-system -a ${GS_API_KEY} -r ${GS_RELEASE} --availability-zone ${GS_AVAILABILITY_ZONE} --giantswarm-api-url ${GS_API_URL} --min-scaling 3 --max-scaling 3
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: test-results
-      - run:
-          name: Cleanup resources
-          command: PATH="/tmp:$PATH" kind-app-testing.sh -a ${GS_API_KEY} --force-cleanup
-          when: on_fail
+  architect: giantswarm/architect@2.7.0
 
 workflows:
   version: 2
@@ -59,11 +28,9 @@ workflows:
             tags:
               only: /^v.*/
 
-      - architect/integration-test:
-          context: architect
-          name: basic-integration-test
-          install-app-platform: true
-          test-dir: "integration/test/basic"
+      - architect/run-tests-with-abs:
+          chart_dir: ./helm/nginx-ingress-controller-app
+          name: execute chart tests
           filters:
             # Do not trigger the job on merge to master.
             branches:
@@ -72,26 +39,3 @@ workflows:
           requires:
             - push-to-default-app-catalog
             - push-to-giantswarm-app-catalog
-
-      # Require manual approval for running performance tests.
-      - hold-run-perf-tests:
-          type: approval
-          filters:
-            # Do not trigger the job on master branch or release tags.
-            branches:
-              ignore:
-                - master
-            tags:
-              ignore: /^v.*/
-
-      - run-perf-tests:
-          requires:
-            - hold-run-perf-tests
-            - basic-integration-test
-          filters:
-            # Do not trigger the job on master branch or release tags.
-            branches:
-              ignore:
-                - master
-            tags:
-              ignore: /^v.*/

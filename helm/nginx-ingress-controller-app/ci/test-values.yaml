@@ -3,5 +3,7 @@ configmap:
 controller:
   autoscaling:
     enabled: false
+  service:
+    type: NodePort
 cluster:
   profile: 1
