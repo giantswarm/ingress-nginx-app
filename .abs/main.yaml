@@ -6,10 +6,10 @@ destination: ./build
 # CI overwrites this, check .circleci/config.yaml
 catalog-base-url: https://giantswarm.github.com/default-catalog/
 
-skip-steps: test_functional
-
 app-tests-app-config-file: ./helm/nginx-ingress-controller-app/ci/test-values.yaml
 app-tests-deploy-namespace: kube-system
 
 smoke-tests-cluster-type: kind
 smoke-tests-cluster-config-file: test/kind_config.yaml
+functional-tests-cluster-type: kind
+functional-tests-cluster-config-file: test/kind_config.yaml

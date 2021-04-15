@@ -1,23 +1,17 @@
-import datetime
 import logging
+import requests
+import time
 from contextlib import contextmanager
 from typing import Dict, List, Optional
 
 import pykube
 import pytest
 from pytest_helm_charts.fixtures import Cluster
-from pytest_helm_charts.utils import (
-    wait_for_deployments_to_run,
-    wait_for_stateful_sets_to_run,
-    create_job_and_run_to_completion,
-    make_job_object,
-    ensure_namespace_exists,
-)
+from pytest_helm_charts.utils import wait_for_deployments_to_run
 
 logger = logging.getLogger(__name__)
 
 app_name = "nginx-ingress-controller-app"
-client_service_base_url = "http://admin:admin@opendistro-es-client-service:9200"
 namespace_name = "kube-system"
 catalog_name = "chartmuseum"
 
@@ -38,7 +32,9 @@ def test_api_working(kube_cluster: Cluster) -> None:
 
 
 @pytest.mark.smoke
-def test_cluster_info(kube_cluster: Cluster, cluster_type: str, chart_extra_info: Dict[str, str]) -> None:
+def test_cluster_info(
+    kube_cluster: Cluster, cluster_type: str, chart_extra_info: Dict[str, str]
+) -> None:
     """Example shows how you can access additional information about the cluster the tests are running on"""
     logger.info(f"Running on cluster type {cluster_type}")
     key = "external_cluster_type"
@@ -75,23 +71,120 @@ def test_pods_available(kube_cluster: Cluster, ic_deployment: List[pykube.Deploy
 
 
 @pytest.mark.functional
-def test_masters_green(kube_cluster: Cluster, ic_deployment: List[pykube.Deployment]):
-    masters = [s for s in ic_deployment if s.name == f"{app_name}-opendistro-es-master"]
-    assert len(masters) == 1
+def test_ingress_creation(
+    kube_cluster: Cluster, ic_deployment: List[pykube.Deployment]
+):
+    # create deployment
+    depl_obj = {
+        "apiVersion": "apps/v1",
+        "kind": "Deployment",
+        "metadata": {
+            "labels": {"app": "helloworld"},
+            "name": "helloworld",
+            "namespace": "default",
+        },
+        "spec": {
+            "replicas": 1,
+            "selector": {"matchLabels": {"app": "helloworld"}},
+            "template": {
+                "metadata": {"labels": {"app": "helloworld"}},
+                "spec": {
+                    "containers": [
+                        {
+                            "image": "quay.io/giantswarm/helloworld:latest",
+                            "livenessProbe": {
+                                "httpGet": {"path": "/healthz", "port": 8080},
+                                "initialDelaySeconds": 3,
+                                "periodSeconds": 3,
+                            },
+                            "name": "helloworld",
+                            "ports": [{"containerPort": 8080}],
+                            "readinessProbe": {
+                                "httpGet": {"path": "/healthz", "port": 8080},
+                                "initialDelaySeconds": 3,
+                                "periodSeconds": 3,
+                            },
+                        }
+                    ],
+                    "securityContext": {"runAsUser": 1000},
+                },
+            },
+        },
+    }
+    depl = pykube.Deployment(kube_cluster.kube_client, depl_obj)
+    depl.create()
 
-    create_job_and_run_to_completion(
-        kube_cluster.kube_client,
-        namespace_name,
-        make_job_object(
-            kube_cluster.kube_client,
-            "check-efk-green-",
-            namespace_name,
-            [
-                "sh",
-                "-c",
-                # "wget -O - -q " f"{client_service_base_url}/_cat/health" " | grep green",
-                "wget -O - -q " f"{client_service_base_url}/_cluster/health" " | grep green",
-            ],
-        ),
-        timeout_sec=timeout,
-    )
+    # create service
+    svc_obj = {
+        "apiVersion": "v1",
+        "kind": "Service",
+        "metadata": {
+            "labels": {"app": "helloworld"},
+            "name": "helloworld",
+            "namespace": "default",
+        },
+        "spec": {
+            "ports": [{"port": 8080}],
+            "selector": {"app": "helloworld"},
+            "type": "ClusterIP",
+        },
+    }
+    svc = pykube.Service(kube_cluster.kube_client, svc_obj)
+    svc.create()
+
+    # create ingress
+    ingress_obj = {
+        "apiVersion": "networking.k8s.io/v1beta1",
+        "kind": "Ingress",
+        "metadata": {
+            "name": "helloworld",
+            "namespace": "default",
+            "labels": {
+                "app": "helloworld",
+                # "kubernetes.io/ingress.class": "nginx.ingress.kubernetes.io",
+                "kubernetes.io/ingress.class": "nginx",
+            },
+        },
+        "spec": {
+            "rules": [
+                {
+                    "host": "helloworld",
+                    "http": {
+                        "paths": [
+                            {
+                                "backend": {
+                                    "serviceName": "helloworld",
+                                    "servicePort": 8080,
+                                },
+                                "path": "/",
+                                "pathType": "Prefix",
+                            }
+                        ]
+                    },
+                }
+            ]
+        },
+    }
+    ingress = pykube.Ingress(kube_cluster.kube_client, ingress_obj)
+    ingress.create()
+
+    # sleep (workaround for issue in pykube)
+    time.sleep(10)
+
+    # wait for deployment
+    wait_for_deployments_to_run(kube_cluster.kube_client, ["helloworld"], "default", 45)
+
+    # try the ingress
+    retries = 10
+    last_status = 0
+    while last_status != 200:
+        r = requests.get("http://127.0.0.1:8080/", headers={"Host": "helloworld"})
+        last_status = r.status_code
+
+        if last_status == 200 or retries == 0:
+            break
+
+        retries = retries - 1
+        time.sleep(5)
+
+    assert last_status == 200
