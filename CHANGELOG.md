@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixes validation of cpu requests and limits to allow for string and integer values.
+
 ## [1.15.1] - 2021-04-01
 
 ### Added
