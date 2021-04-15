@@ -22,3 +22,7 @@ junit.xml
 
 # IDE
 .vscode/
+
+# app-build-suite artifacts
+build
+test_results_*.xml
