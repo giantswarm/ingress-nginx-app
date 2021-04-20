@@ -222,7 +222,7 @@ controller:
 
     annotations: {}
     labels: {}
-    
+
     # controller.externalDNS
     externalDNS:
 
