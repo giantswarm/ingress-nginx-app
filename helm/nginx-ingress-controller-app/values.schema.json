@@ -326,6 +326,12 @@
                         "enabled": {
                             "type": "boolean"
                         },
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "labels": {
+                            "type": "object"
+                        },
                         "externalDNS": {
                             "type": "object",
                             "properties": {
