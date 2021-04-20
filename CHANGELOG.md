@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Pass through annotations and labels to the controller service
+
 ## [1.16.0] - 2021-04-15
 
 ### Fixed
