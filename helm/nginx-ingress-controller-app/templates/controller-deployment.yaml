@@ -104,6 +104,9 @@ spec:
         - --validating-webhook-key=/usr/local/certificates/key
         {{- end }}
         - --update-status={{ .Values.controller.updateIngressStatus }}
+        {{- if .Values.controller.disableExternalNameForwarding }}
+        - --disable-svc-external-name
+        {{- end }}
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:

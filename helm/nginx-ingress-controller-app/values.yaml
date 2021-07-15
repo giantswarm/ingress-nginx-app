@@ -79,7 +79,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v0.47.0
+    tag: v0.48.1
 
   # controller.containerPort
   containerPort:
@@ -359,6 +359,11 @@ controller:
     # Add annotations to the controller deployment pod spec
     # (.spec.template.metadata.annotations).
     pod: []
+
+  # controller.disableExternalNameForwarding
+  # Enable or disable forwarding to ExternalName Services through
+  # --disable-svc-external-name flag
+  disableExternalNameForwarding: true
 
 # image
 image:
