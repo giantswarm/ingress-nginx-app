@@ -360,6 +360,11 @@ controller:
     # (.spec.template.metadata.annotations).
     pod: []
 
+  # controller.disableExternalNameForwarding
+  # Enable or disable forwarding to ExternalName Services through
+  # --disable-svc-external-name flag
+  disableExternalNameForwarding: true
+
 # image
 image:
   registry: quay.io
