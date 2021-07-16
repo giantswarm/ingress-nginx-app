@@ -11,8 +11,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+Note: This upgrade is only a breaking change in the unlikely event that you have been specifying services as `externalName` with your Ingress as a backend. Otherwise, it is **not** a breaking change.  
+
 - Update controller container image to [`v0.48.1`](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v0.48.1). ([#211](https://github.com/giantswarm/nginx-ingress-controller-app/pull/211)). This release contains several performance improvements related to the admission webhook.
-- Breaking: Define `--disable-svc-external-name` flag by default to disable forwarding traffic to [ExternalName Services](https://kubernetes.io/docs/concepts/services-networking/service/#externalname). If you require this feature, you can enable forwarding again through setting `controller.disableExternalNameForwarding: false` in user values. ([#211](https://github.com/giantswarm/nginx-ingress-controller-app/pull/211))
+- Potentially Breaking: Define `--disable-svc-external-name` flag by default to disable forwarding traffic to [ExternalName Services](https://kubernetes.io/docs/concepts/services-networking/service/#externalname). If you require this feature, you can enable forwarding again through setting `controller.disableExternalNameForwarding: false` in user values. ([#211](https://github.com/giantswarm/nginx-ingress-controller-app/pull/211))
 
 ## [1.17.0] - 2021-06-16
 
