@@ -79,7 +79,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v0.48.1
+    tag: v0.49.0
 
   # controller.containerPort
   containerPort:
@@ -317,7 +317,7 @@ controller:
       enabled: true
       image:
         repository: giantswarm/kube-webhook-certgen
-        tag: v1.5.1
+        tag: v1.5.2
       backoffLimit: 6
       priorityClassName: ""
       podAnnotations: {}
@@ -375,7 +375,7 @@ initContainer:
   name: sysctl
   image:
     repository: giantswarm/alpine
-    tag: 3.12-giantswarm-sysctl
+    tag: 3.14.1-giantswarm-sysctl
   userID: 1000
   groupID: 1000
 
