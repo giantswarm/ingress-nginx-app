@@ -63,7 +63,6 @@ rules:
   - list
   - watch
 - apiGroups:
-  - extensions
   - networking.k8s.io
   resources:
   - ingresses
@@ -79,7 +78,6 @@ rules:
   - create
   - patch
 - apiGroups:
-  - extensions
   - networking.k8s.io
   resources:
   - ingresses/status
@@ -111,7 +109,7 @@ rules:
     # "<election-id>-<ingress-class>" ConfigMap is used for leader election.
     # Leader is nginx controller replica that manages to update the lock on it.
   {{- if .Values.controller.ingressClass }}
-  - "{{ include "controller.leader.election.id" . }}-{{ .Values.controller.ingressClass }}"
+  - "{{ include "controller.leader.election.id" . }}"
   {{- end }}
   verbs:
   - get

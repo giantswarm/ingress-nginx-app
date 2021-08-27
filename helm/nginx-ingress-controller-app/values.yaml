@@ -79,7 +79,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v0.49.0
+    tag: v1.0.0
 
   # controller.containerPort
   containerPort:
@@ -364,6 +364,11 @@ controller:
   # Enable or disable forwarding to ExternalName Services through
   # --disable-svc-external-name flag
   disableExternalNameForwarding: true
+
+  # Process Ingress objects without ingressClass annotation/ingressClassName field
+  # Overrides value for --watch-ingress-without-class flag of the controller binary
+  # Defaults to false
+  watchIngressWithoutClass: false
 
 # image
 image:

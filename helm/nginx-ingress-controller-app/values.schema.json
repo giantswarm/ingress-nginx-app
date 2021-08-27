@@ -52,10 +52,6 @@
                             "type": "string",
                             "enum": ["Ignore", "Fail"]
                         },
-                        "timeoutSeconds": {
-                            "type": "integer",
-                            "minimum": 0
-                        },
                         "patch": {
                             "type": "object",
                             "properties": {
@@ -109,6 +105,10 @@
                                     "type": "string"
                                 }
                             }
+                        },
+                        "timeoutSeconds": {
+                            "type": "integer",
+                            "minimum": 0
                         }
                     }
                 },
@@ -151,6 +151,9 @@
                 },
                 "defaultSSLCertificate": {
                     "type": "string"
+                },
+                "disableExternalNameForwarding": {
+                    "type": "boolean"
                 },
                 "enableMimalloc": {
                     "type": "boolean"
@@ -323,14 +326,11 @@
                 "service": {
                     "type": "object",
                     "properties": {
-                        "enabled": {
-                            "type": "boolean"
-                        },
                         "annotations": {
                             "type": "object"
                         },
-                        "labels": {
-                            "type": "object"
+                        "enabled": {
+                            "type": "boolean"
                         },
                         "externalDNS": {
                             "type": "object",
@@ -381,6 +381,9 @@
                                     "type": "string"
                                 }
                             }
+                        },
+                        "labels": {
+                            "type": "object"
                         },
                         "nodePorts": {
                             "type": "object",
@@ -457,6 +460,9 @@
                 },
                 "userID": {
                     "type": "integer"
+                },
+                "watchIngressWithoutClass": {
+                    "type": "boolean"
                 }
             }
         },
