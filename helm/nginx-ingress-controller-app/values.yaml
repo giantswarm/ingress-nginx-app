@@ -200,9 +200,15 @@ controller:
   # Example value: "default/foo-tls".
   defaultSSLCertificate: ""
 
-  # controller.ingressClass
-  # The Ingress class, which the controller handles.
-  ingressClass: nginx
+  # controller.ingressClassResource
+  # This section refers to the creation of the IngressClass resource
+  # IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
+  ingressClassResource:
+    name: nginx
+    enabled: true
+    default: false
+    controllerValue: "k8s.io/ingress-nginx"
+    parameters: {}
 
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.

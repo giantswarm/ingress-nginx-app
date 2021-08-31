@@ -74,105 +74,14 @@ def test_pods_available(kube_cluster: Cluster, ic_deployment: List[pykube.Deploy
 def test_ingress_creation(
     kube_cluster: Cluster, ic_deployment: List[pykube.Deployment]
 ):
-    # create deployment
-    depl_obj = {
-        "apiVersion": "apps/v1",
-        "kind": "Deployment",
-        "metadata": {
-            "labels": {"app": "helloworld"},
-            "name": "helloworld",
-            "namespace": "default",
-        },
-        "spec": {
-            "replicas": 1,
-            "selector": {"matchLabels": {"app": "helloworld"}},
-            "template": {
-                "metadata": {"labels": {"app": "helloworld"}},
-                "spec": {
-                    "containers": [
-                        {
-                            "image": "quay.io/giantswarm/helloworld:latest",
-                            "livenessProbe": {
-                                "httpGet": {"path": "/healthz", "port": 8080},
-                                "initialDelaySeconds": 3,
-                                "periodSeconds": 3,
-                            },
-                            "name": "helloworld",
-                            "ports": [{"containerPort": 8080}],
-                            "readinessProbe": {
-                                "httpGet": {"path": "/healthz", "port": 8080},
-                                "initialDelaySeconds": 3,
-                                "periodSeconds": 3,
-                            },
-                        }
-                    ],
-                    "securityContext": {"runAsUser": 1000},
-                },
-            },
-        },
-    }
-    depl = pykube.Deployment(kube_cluster.kube_client, depl_obj)
-    depl.create()
+    kube_cluster.kubectl("apply", filename="test-ingress.yaml", output_format="")
 
-    # create service
-    svc_obj = {
-        "apiVersion": "v1",
-        "kind": "Service",
-        "metadata": {
-            "labels": {"app": "helloworld"},
-            "name": "helloworld",
-            "namespace": "default",
-        },
-        "spec": {
-            "ports": [{"port": 8080}],
-            "selector": {"app": "helloworld"},
-            "type": "ClusterIP",
-        },
-    }
-    svc = pykube.Service(kube_cluster.kube_client, svc_obj)
-    svc.create()
-
-    # create ingress
-    ingress_obj = {
-        "apiVersion": "networking.k8s.io/v1beta1",
-        "kind": "Ingress",
-        "metadata": {
-            "name": "helloworld",
-            "namespace": "default",
-            "labels": {
-                "app": "helloworld",
-                # "kubernetes.io/ingress.class": "nginx.ingress.kubernetes.io",
-                "kubernetes.io/ingress.class": "nginx",
-            },
-        },
-        "spec": {
-            "rules": [
-                {
-                    "host": "helloworld",
-                    "http": {
-                        "paths": [
-                            {
-                                "backend": {
-                                    "serviceName": "helloworld",
-                                    "servicePort": 8080,
-                                },
-                                "path": "/",
-                                "pathType": "Prefix",
-                            }
-                        ]
-                    },
-                }
-            ]
-        },
-    }
-    ingress = pykube.Ingress(kube_cluster.kube_client, ingress_obj)
-    ingress.create()
-
-    # sleep (workaround for issue in pykube)
-    time.sleep(10)
-
-    # wait for deployment
-    wait_for_deployments_to_run(kube_cluster.kube_client, ["helloworld"], "default", 45)
+    kube_cluster.kubectl(
+        "wait deployment helloworld --for=condition=Available",
+        timeout="60s",
+        output_format="",
+        namespace="helloworld",
+    )
 
     # try the ingress
     retries = 10
