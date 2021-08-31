@@ -208,7 +208,10 @@ controller:
     enabled: true
     default: false
     controllerValue: "k8s.io/ingress-nginx"
-    parameters: {}
+    # parameters:
+    #   apiGroup: ""
+    #   kind: ""
+    #   name: ""
 
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.
