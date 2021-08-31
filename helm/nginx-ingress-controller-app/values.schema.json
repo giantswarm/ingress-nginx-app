@@ -186,8 +186,36 @@
                         }
                     }
                 },
-                "ingressClass": {
-                    "type": "string"
+                "ingressClassResource": {
+                    "type": "object",
+                    "properties": {
+                        "controllerValue": {
+                            "type": "string"
+                        },
+                        "default": {
+                            "type": "boolean"
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "name": {
+                            "type": "string"
+                        },
+                        "parameters": {
+                            "type": "object",
+                            "properties": {
+                                "apiGroup": {
+                                    "type": "string"
+                                },
+                                "kind": {
+                                    "type": "string"
+                                },
+                                "name": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
                 },
                 "lifecycle": {
                     "type": "object",
