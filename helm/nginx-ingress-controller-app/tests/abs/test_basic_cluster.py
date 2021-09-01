@@ -2,6 +2,8 @@ import logging
 import requests
 import time
 from contextlib import contextmanager
+from functools import partial
+from json import dumps
 from typing import Dict, List, Optional
 
 import pykube
@@ -61,6 +63,25 @@ def wait_for_ic_deployment(kube_cluster: Cluster) -> List[pykube.Deployment]:
     return deployments
 
 
+def try_ingress(port, host, expected_status):
+    retries = 10
+    last_status = 0
+    while retries != 0:
+        r = requests.get(f"http://127.0.0.1:{port}/", headers={"Host": host})
+        last_status = r.status_code
+        logger.info(
+            f"Status code for GET http://127.0.0.1:{port}/ for host {host}: {last_status}. Expected {expected_status}"
+        )
+
+        retries = retries - 1
+        if retries == 0:
+            break
+
+        time.sleep(1)
+
+    return last_status == expected_status
+
+
 # when we start the tests on circleci, we have to wait for pods to be available, hence
 # this additional delay and retries
 @pytest.mark.smoke
@@ -97,3 +118,43 @@ def test_ingress_creation(
         time.sleep(5)
 
     assert last_status == 200
+
+
+@pytest.mark.functional
+@pytest.mark.flaky(reruns=5, reruns_delay=10)
+def test_multiple_ingress_controllers(
+    kube_cluster: Cluster, ic_deployment: List[pykube.Deployment], chart_version
+):
+    logger.info("applying manifests")
+    # apply test manifests
+    kube_cluster.kubectl(
+        "apply", filename="multi-controller-manifests.yaml", output_format=""
+    )
+
+    # shortcut function with fixed namespace
+    # (defined in multi-controller-manifests.yaml)
+    kubectl = partial(
+        kube_cluster.kubectl, namespace="second-ingress-controller", output_format=""
+    )
+    logger.info("patching app with current chart version")
+    # patch the app cr with the right version
+    patch = dumps([{"op": "replace", "path": "/spec/version", "value": chart_version}])
+    kubectl(f"patch app second-ingress-controller --type=json", patch=patch)
+
+    # just wait a little for app-operator to create the deployment (so kubectl wait does not fail)
+    time.sleep(10)
+
+    logger.info("waiting for deployment condition Available")
+    # wait for the deployment
+    kubectl(
+        "wait deployment second-ingress-controller --for=condition=Available",
+        timeout="60s",
+    )
+
+    # try the ingresses and expect 404 or 200 on port 8080 and 8081
+    assert try_ingress(8081, "helloworld-2", 200)
+    assert try_ingress(8081, "helloworld", 404)
+
+    # try the ingress on port 8080 and expect 404
+    assert try_ingress(8080, "helloworld-2", 404)
+    assert try_ingress(8080, "helloworld", 200)

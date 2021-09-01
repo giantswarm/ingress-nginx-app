@@ -412,15 +412,6 @@ ingressController:
   controlPlane: false
   configmap: {}
 
-# test
-test:
-
-  # test.image
-  image:
-    registry: quay.io
-    repository: giantswarm/alpine-testing
-    tag: 0.1.0
-
 
 # Below are configuration values that you should not overwrite or set yourself.
 
