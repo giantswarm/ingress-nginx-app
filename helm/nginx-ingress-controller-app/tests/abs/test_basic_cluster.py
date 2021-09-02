@@ -64,14 +64,17 @@ def wait_for_ic_deployment(kube_cluster: Cluster) -> List[pykube.Deployment]:
 
 
 def try_ingress(port, host, expected_status):
-    retries = 10
+    retries = 5
     last_status = 0
     while retries != 0:
-        r = requests.get(f"http://127.0.0.1:{port}/", headers={"Host": host})
-        last_status = r.status_code
-        logger.info(
-            f"Status code for GET http://127.0.0.1:{port}/ for host {host}: {last_status}. Expected {expected_status}"
-        )
+        logger.info(f"trying GET http://127.0.0.1:{port}/ with Host: {host}")
+        try:
+            r = requests.get(f"http://127.0.0.1:{port}/", headers={"Host": host})
+            last_status = r.status_code
+        except Exception as e:
+            logger.info(f"Request failed: {e}")
+        else:
+            logger.info(f"Result: {last_status}. Expected {expected_status}")
 
         retries = retries - 1
         if retries == 0:
@@ -141,16 +144,23 @@ def test_multiple_ingress_controllers(
     patch = dumps([{"op": "replace", "path": "/spec/version", "value": chart_version}])
     kubectl(f"patch app second-ingress-controller --type=json", patch=patch)
 
-    # just wait a little for app-operator to create the deployment (so kubectl wait does not fail)
-    time.sleep(10)
-
-    logger.info("waiting for deployment condition Available")
-    # wait for the deployment
-    kubectl(
-        "wait deployment second-ingress-controller --for=condition=Available",
-        timeout="60s",
+    logger.info("waiting until second controller deployment is ready")
+    wait_for_deployments_to_run(
+        kube_cluster.kube_client,
+        ["second-ingress-controller"],
+        "second-ingress-controller",
+        timeout,
     )
 
+    logger.info("waiting until second helloworld deployment is ready")
+    wait_for_deployments_to_run(
+        kube_cluster.kube_client,
+        ["helloworld-2"],
+        "helloworld-2",
+        timeout,
+    )
+
+    logger.info("Checking if controller handle their respective Ingresses")
     # try the ingresses and expect 404 or 200 on port 8080 and 8081
     assert try_ingress(8081, "helloworld-2", 200)
     assert try_ingress(8081, "helloworld", 404)
