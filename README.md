@@ -48,6 +48,8 @@ Version [2.2.0](./CHANGELOG.md#TODO) of the nginx Ingress Controller app contain
 
 Additionally, you'll have to make sure your Ingress resources are using the `spec.IngressClassName` (or the deprecated `kubernetes.io/ingress.class` annotation) matching the name of your IngressClass (default `nginx`).
 
+In case it is not possible to update all Ingress resources to specify the `spec.IngressClassName`, you can specify `controller.watchIngressWithoutClass` to `true` in your [user configuration](#configuration-options). Please make sure there is no other Ingress Controller deployed to your cluster.
+
 You can find more information in the upstream [migration to networking.k8s.io/v1 FAQ](https://github.com/kubernetes/ingress-nginx/blob/main/docs/index.md#faq---migration-to-apiversion-networkingk8siov1).
 
 ## Installing
