@@ -51,3 +51,13 @@ Election ID.
 {{- define "controller.leader.election.id" -}}
 {{ include "resource.default.name" . }}-leader
 {{- end -}}
+
+{{/*
+IngressClass parameters.
+*/}}
+{{- define "ingressClass.parameters" -}}
+  {{- if .Values.controller.ingressClassResource.parameters -}}
+          parameters:
+{{ toYaml .Values.controller.ingressClassResource.parameters | indent 4}}
+  {{ end }}
+{{- end -}}

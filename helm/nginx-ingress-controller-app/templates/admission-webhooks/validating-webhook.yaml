@@ -14,7 +14,7 @@ webhooks:
   - apiGroups:
     - networking.k8s.io
     apiVersions:
-    - v1beta1
+    - v1
     operations:
     - CREATE
     - UPDATE
@@ -23,13 +23,12 @@ webhooks:
   failurePolicy: {{ .Values.controller.admissionWebhooks.failurePolicy | default "Fail" }}
   sideEffects: None
   admissionReviewVersions:
-    - v1beta1
     - v1
   clientConfig:
     service:
       namespace: {{ .Release.Namespace }}
       name: {{ include "resource.default.name" . }}-admission
-      path: /networking/v1beta1/ingresses
+      path: /networking/v1/ingresses
   {{- if .Values.controller.admissionWebhooks.timeoutSeconds }}
   timeoutSeconds: {{ .Values.controller.admissionWebhooks.timeoutSeconds }}
   {{- end }}

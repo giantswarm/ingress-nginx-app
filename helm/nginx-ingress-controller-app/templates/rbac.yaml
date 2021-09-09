@@ -63,7 +63,6 @@ rules:
   - list
   - watch
 - apiGroups:
-  - extensions
   - networking.k8s.io
   resources:
   - ingresses
@@ -79,12 +78,19 @@ rules:
   - create
   - patch
 - apiGroups:
-  - extensions
   - networking.k8s.io
   resources:
   - ingresses/status
   verbs:
   - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingressclasses
+  verbs:
+  - get
+  - list
+  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -97,9 +103,6 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - configmaps
-  - pods
-  - secrets
   - namespaces
   verbs:
   - get
@@ -107,12 +110,49 @@ rules:
   - ""
   resources:
   - configmaps
+  - pods
+  - secrets
+  - endpoints
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - services
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingresses/status
+  verbs:
+  - update
+- apiGroups:
+  - networking.k8s.io
+  resources:
+  - ingressclasses
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
   resourceNames:
-    # "<election-id>-<ingress-class>" ConfigMap is used for leader election.
-    # Leader is nginx controller replica that manages to update the lock on it.
-  {{- if .Values.controller.ingressClass }}
-  - "{{ include "controller.leader.election.id" . }}-{{ .Values.controller.ingressClass }}"
-  {{- end }}
+  - "{{ include "controller.leader.election.id" . }}"
   verbs:
   - get
   - update
@@ -125,11 +165,10 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - endpoints
+  - events
   verbs:
-  - get
   - create
-  - update
+  - patch
 {{- if .Values.podSecurityPolicy.enabled }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1

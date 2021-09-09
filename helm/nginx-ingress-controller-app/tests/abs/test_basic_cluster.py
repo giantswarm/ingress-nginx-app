@@ -2,6 +2,8 @@ import logging
 import requests
 import time
 from contextlib import contextmanager
+from functools import partial
+from json import dumps
 from typing import Dict, List, Optional
 
 import pykube
@@ -61,6 +63,28 @@ def wait_for_ic_deployment(kube_cluster: Cluster) -> List[pykube.Deployment]:
     return deployments
 
 
+def try_ingress(port, host, expected_status):
+    retries = 5
+    last_status = 0
+    while retries != 0:
+        logger.info(f"trying GET http://127.0.0.1:{port}/ with Host: {host}")
+        try:
+            r = requests.get(f"http://127.0.0.1:{port}/", headers={"Host": host})
+            last_status = r.status_code
+        except Exception as e:
+            logger.info(f"Request failed: {e}")
+        else:
+            logger.info(f"Result: {last_status}. Expected {expected_status}")
+
+        retries = retries - 1
+        if retries == 0:
+            break
+
+        time.sleep(1)
+
+    return last_status == expected_status
+
+
 # when we start the tests on circleci, we have to wait for pods to be available, hence
 # this additional delay and retries
 @pytest.mark.smoke
@@ -74,105 +98,14 @@ def test_pods_available(kube_cluster: Cluster, ic_deployment: List[pykube.Deploy
 def test_ingress_creation(
     kube_cluster: Cluster, ic_deployment: List[pykube.Deployment]
 ):
-    # create deployment
-    depl_obj = {
-        "apiVersion": "apps/v1",
-        "kind": "Deployment",
-        "metadata": {
-            "labels": {"app": "helloworld"},
-            "name": "helloworld",
-            "namespace": "default",
-        },
-        "spec": {
-            "replicas": 1,
-            "selector": {"matchLabels": {"app": "helloworld"}},
-            "template": {
-                "metadata": {"labels": {"app": "helloworld"}},
-                "spec": {
-                    "containers": [
-                        {
-                            "image": "quay.io/giantswarm/helloworld:latest",
-                            "livenessProbe": {
-                                "httpGet": {"path": "/healthz", "port": 8080},
-                                "initialDelaySeconds": 3,
-                                "periodSeconds": 3,
-                            },
-                            "name": "helloworld",
-                            "ports": [{"containerPort": 8080}],
-                            "readinessProbe": {
-                                "httpGet": {"path": "/healthz", "port": 8080},
-                                "initialDelaySeconds": 3,
-                                "periodSeconds": 3,
-                            },
-                        }
-                    ],
-                    "securityContext": {"runAsUser": 1000},
-                },
-            },
-        },
-    }
-    depl = pykube.Deployment(kube_cluster.kube_client, depl_obj)
-    depl.create()
+    kube_cluster.kubectl("apply", filename="test-ingress.yaml", output_format="")
 
-    # create service
-    svc_obj = {
-        "apiVersion": "v1",
-        "kind": "Service",
-        "metadata": {
-            "labels": {"app": "helloworld"},
-            "name": "helloworld",
-            "namespace": "default",
-        },
-        "spec": {
-            "ports": [{"port": 8080}],
-            "selector": {"app": "helloworld"},
-            "type": "ClusterIP",
-        },
-    }
-    svc = pykube.Service(kube_cluster.kube_client, svc_obj)
-    svc.create()
-
-    # create ingress
-    ingress_obj = {
-        "apiVersion": "networking.k8s.io/v1beta1",
-        "kind": "Ingress",
-        "metadata": {
-            "name": "helloworld",
-            "namespace": "default",
-            "labels": {
-                "app": "helloworld",
-                # "kubernetes.io/ingress.class": "nginx.ingress.kubernetes.io",
-                "kubernetes.io/ingress.class": "nginx",
-            },
-        },
-        "spec": {
-            "rules": [
-                {
-                    "host": "helloworld",
-                    "http": {
-                        "paths": [
-                            {
-                                "backend": {
-                                    "serviceName": "helloworld",
-                                    "servicePort": 8080,
-                                },
-                                "path": "/",
-                                "pathType": "Prefix",
-                            }
-                        ]
-                    },
-                }
-            ]
-        },
-    }
-    ingress = pykube.Ingress(kube_cluster.kube_client, ingress_obj)
-    ingress.create()
-
-    # sleep (workaround for issue in pykube)
-    time.sleep(10)
-
-    # wait for deployment
-    wait_for_deployments_to_run(kube_cluster.kube_client, ["helloworld"], "default", 45)
+    kube_cluster.kubectl(
+        "wait deployment helloworld --for=condition=Available",
+        timeout="60s",
+        output_format="",
+        namespace="helloworld",
+    )
 
     # try the ingress
     retries = 10
@@ -188,3 +121,50 @@ def test_ingress_creation(
         time.sleep(5)
 
     assert last_status == 200
+
+
+@pytest.mark.functional
+@pytest.mark.flaky(reruns=5, reruns_delay=10)
+def test_multiple_ingress_controllers(
+    kube_cluster: Cluster, ic_deployment: List[pykube.Deployment], chart_version
+):
+    logger.info("applying manifests")
+    # apply test manifests
+    kube_cluster.kubectl(
+        "apply", filename="multi-controller-manifests.yaml", output_format=""
+    )
+
+    # shortcut function with fixed namespace
+    # (defined in multi-controller-manifests.yaml)
+    kubectl = partial(
+        kube_cluster.kubectl, namespace="second-ingress-controller", output_format=""
+    )
+    logger.info("patching app with current chart version")
+    # patch the app cr with the right version
+    patch = dumps([{"op": "replace", "path": "/spec/version", "value": chart_version}])
+    kubectl(f"patch app second-ingress-controller --type=json", patch=patch)
+
+    logger.info("waiting until second controller deployment is ready")
+    wait_for_deployments_to_run(
+        kube_cluster.kube_client,
+        ["second-ingress-controller"],
+        "second-ingress-controller",
+        timeout,
+    )
+
+    logger.info("waiting until second helloworld deployment is ready")
+    wait_for_deployments_to_run(
+        kube_cluster.kube_client,
+        ["helloworld-2"],
+        "helloworld-2",
+        timeout,
+    )
+
+    logger.info("Checking if controller handle their respective Ingresses")
+    # try the ingresses and expect 404 or 200 on port 8080 and 8081
+    assert try_ingress(8081, "helloworld-2", 200)
+    assert try_ingress(8081, "helloworld", 404)
+
+    # try the ingress on port 8080 and expect 404
+    assert try_ingress(8080, "helloworld-2", 404)
+    assert try_ingress(8080, "helloworld", 200)

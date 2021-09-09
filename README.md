@@ -37,7 +37,22 @@ updates to the Ingress resource.
 - [What is this repo?](#what-is-this-repo)
 
 
-# Installing
+## Upgrading notes
+
+Version [2.2.0](./CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
+
+### Prerequisites
+- kubernetes version >= 1.19
+- requires `networking.k8s.io/v1` (`extensions/v1beta1` or `networking.k8s.io/v1beta1` are no longer supported)
+- An IngressClass (One will be created when installing app version [2.2.0](./CHANGELOG.md#220---2021-09-09))
+
+Additionally, you'll have to make sure your Ingress resources are using the `spec.IngressClassName` (or the deprecated `kubernetes.io/ingress.class` annotation) matching the name of your IngressClass (default `nginx`).
+
+In case it is not possible to update all Ingress resources to specify the `spec.IngressClassName`, you can specify `controller.watchIngressWithoutClass` to `true` in your [user configuration](#configuration-options). Please make sure there is no other Ingress Controller deployed to your cluster.
+
+You can find more information in the upstream [migration to networking.k8s.io/v1 FAQ](https://github.com/kubernetes/ingress-nginx/blob/main/docs/index.md#faq---migration-to-apiversion-networkingk8siov1).
+
+## Installing
 
 There are 3 ways to install this app onto a workload cluster.
 
@@ -45,7 +60,7 @@ There are 3 ways to install this app onto a workload cluster.
 2. [Using our API](https://docs.giantswarm.io/api/#operation/createClusterAppV5)
 3. Directly creating the [App custom resource](https://docs.giantswarm.io/ui-api/management-api/crd/apps.application.giantswarm.io/) on the management cluster.
 
-## Sample values files for the web interface and API
+### Sample values files for the web interface and API
 
 This is an example of the values file you could upload using our web interface.
 
@@ -69,7 +84,7 @@ structure but formatted as JSON:
 }
 ```
 
-## Sample App CR and ConfigMap for the management cluster
+### Sample App CR and ConfigMap for the management cluster
 
 If you have access to the Kubernetes API on the management cluster, you could create
 the App CR and ConfigMap directly.
@@ -83,7 +98,6 @@ apiVersion: application.giantswarm.io/v1alpha1
 kind: App
 metadata:
   labels:
-    app-operator.giantswarm.io/version: 1.0.0
   name: nginx-ingress-controller-app
 
   # workload cluster resources live in a namespace with the same ID as the
@@ -94,30 +108,11 @@ spec:
   name: nginx-ingress-controller-app
   namespace: kube-system
   catalog: giantswarm
-  version: 1.6.8
+  version: 2.2.0
 
   userConfig:
     configMap:
       name: nginx-ingress-controller-app-user-values
-      namespace: abc12
-    secret:
-      name: ""
-      namespace: ""
-
-  config:
-    configMap:
-      name: ingress-controller-values
-      namespace: abc12
-    secret:
-      name: ""
-      namespace: ""
-
-  kubeConfig:
-    context:
-      name: abc12-kubeconfig
-    inCluster: false
-    secret:
-      name: abc12-kubeconfig
       namespace: abc12
 ```
 
@@ -150,7 +145,7 @@ with id `abc12`.
 
 See our [full reference page on how to configure applications](https://docs.giantswarm.io/app-platform/app-configuration/) for more details.
 
-## Important note about required cluster level config
+### Important note about required cluster level config
 
 The `ingress-controller-values` ConfigMap referenced in the `spec.config` field of the App CR
 is required for the ingress controller to work properly.
@@ -161,20 +156,20 @@ our API, `spec.config` will be set automatically, but if you are creating the Ap
 yourself you must remember to do this. We are working on a kubectl plugin to
 facilitate this process.
 
-# Configuration Options
+## Configuration Options
 
 All configuration options are documented in the [values.yaml](/helm/nginx-ingress-controller-app/values.yaml) file.
 
-# Limitations
+## Limitations
 
 Some of our apps have certain restrictions on how they can be deployed.
 Not following these limitations will most likely result in a broken deployment.
 
 - This app _must_ reference the `ingress-controller-values` ConfigMap in its `spec.config` field.
 
-# For developers
+## For developers
 
-## Installing the Chart locally
+### Installing the Chart locally
 
 To install the chart locally:
 
@@ -190,12 +185,11 @@ Provide a custom `values.yaml`:
 $ helm install nginx-ingress-controller-app -f values.yaml
 ```
 
-## Release Process
+### Release Process
 
 * Ensure CHANGELOG.md is up to date.
-* Create a new GitHub release with the version e.g. `v0.1.0` and link the
-changelog entry.
-* This will push a new git tag and trigger a new tarball to be pushed to the
+* Create a new branch with name `master#release#vX.X.X`. Automation will create a release PR.
+* Merging the release PR will push a new git tag and trigger a new tarball to be pushed to the
 [giantswarm-catalog] and [default-catalog].
 * Test and verify the ingress controller release across supported environments in a new or existing WIP platform release.
 

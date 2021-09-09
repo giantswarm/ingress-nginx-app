@@ -92,9 +92,7 @@ spec:
         - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
         {{- end}}
         - --enable-ssl-chain-completion=false
-        {{- if .Values.controller.ingressClass }}
-        - --ingress-class={{ .Values.controller.ingressClass }}
-        {{- end}}
+        - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
         {{- if .Values.controller.service.enabled }}
         - --publish-service={{ .Release.Namespace }}/{{ include "resource.default.name" . }}
         {{- end }}
@@ -106,6 +104,9 @@ spec:
         - --update-status={{ .Values.controller.updateIngressStatus }}
         {{- if .Values.controller.disableExternalNameForwarding }}
         - --disable-svc-external-name
+        {{- end }}
+        {{- if .Values.controller.watchIngressWithoutClass }}
+        - --watch-ingress-without-class=true
         {{- end }}
         securityContext:
           allowPrivilegeEscalation: true

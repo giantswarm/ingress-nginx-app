@@ -13,3 +13,7 @@ nodes:
     hostPort: 8080
     listenAddress: "127.0.0.1"
     protocol: TCP
+  - containerPort: 30012
+    hostPort: 8081
+    listenAddress: "127.0.0.1"
+    protocol: TCP

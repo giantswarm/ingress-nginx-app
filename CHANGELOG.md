@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking change** Update controller container image to [`v1.0.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100). From this version on, only clusters with kubernetes >= 1.19 are supported. Please make sure to read the [upgrading notes](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/README.md#upgrading-notes). ([#218](https://github.com/giantswarm/nginx-ingress-controller-app/pull/218)).
+
 ## [2.1.0] - 2021-08-26
 
 ### Changed

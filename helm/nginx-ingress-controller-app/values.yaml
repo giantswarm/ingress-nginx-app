@@ -79,7 +79,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v0.49.0
+    tag: v1.0.0
 
   # controller.containerPort
   containerPort:
@@ -200,9 +200,18 @@ controller:
   # Example value: "default/foo-tls".
   defaultSSLCertificate: ""
 
-  # controller.ingressClass
-  # The Ingress class, which the controller handles.
-  ingressClass: nginx
+  # controller.ingressClassResource
+  # This section refers to the creation of the IngressClass resource
+  # IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
+  ingressClassResource:
+    name: nginx
+    enabled: true
+    default: false
+    controllerValue: "k8s.io/ingress-nginx"
+    # parameters:
+    #   apiGroup: ""
+    #   kind: ""
+    #   name: ""
 
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.
@@ -365,6 +374,11 @@ controller:
   # --disable-svc-external-name flag
   disableExternalNameForwarding: true
 
+  # Process Ingress objects without ingressClass annotation/ingressClassName field
+  # Overrides value for --watch-ingress-without-class flag of the controller binary
+  # Defaults to false
+  watchIngressWithoutClass: false
+
 # image
 image:
   registry: quay.io
@@ -397,15 +411,6 @@ podSecurityPolicy:
 ingressController:
   controlPlane: false
   configmap: {}
-
-# test
-test:
-
-  # test.image
-  image:
-    registry: quay.io
-    repository: giantswarm/alpine-testing
-    tag: 0.1.0
 
 
 # Below are configuration values that you should not overwrite or set yourself.
