@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.2.0] - 2021-09-09
+
 ### Changed
 
 - **Breaking change** Update controller container image to [`v1.0.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100). From this version on, only clusters with kubernetes >= 1.19 are supported. Please make sure to read the [upgrading notes](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/README.md#upgrading-notes). ([#218](https://github.com/giantswarm/nginx-ingress-controller-app/pull/218)).
@@ -397,7 +399,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.2.0...HEAD
+[2.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.17.0...v2.0.0
 [1.17.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.16.1...v1.17.0
