@@ -39,12 +39,12 @@ updates to the Ingress resource.
 
 ## Upgrading notes
 
-Version [2.2.0](./CHANGELOG.md#TODO) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
+Version [2.2.0](./CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
 
 ### Prerequisites
 - kubernetes version >= 1.19
 - requires `networking.k8s.io/v1` (`extensions/v1beta1` or `networking.k8s.io/v1beta1` are no longer supported)
-- An IngressClass (One will be created when installing app version [2.2.0](TODO))
+- An IngressClass (One will be created when installing app version [2.2.0](./CHANGELOG.md#220---2021-09-09))
 
 Additionally, you'll have to make sure your Ingress resources are using the `spec.IngressClassName` (or the deprecated `kubernetes.io/ingress.class` annotation) matching the name of your IngressClass (default `nginx`).
 
