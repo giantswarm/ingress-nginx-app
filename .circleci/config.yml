@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@4.3.0
+  architect: giantswarm/architect@dev:split-app-testing
 
 workflows:
   version: 2
@@ -28,8 +28,7 @@ workflows:
             tags:
               only: /^v.*/
 
-      - architect/run-tests-with-abs:
-          chart_dir: ./helm/nginx-ingress-controller-app
+      - architect/run-tests-with-ats:
           name: execute chart tests
           filters:
             # Do not trigger the job on merge to master.
@@ -38,4 +37,3 @@ workflows:
                 - master
           requires:
             - push-to-default-app-catalog
-            - push-to-giantswarm-app-catalog
