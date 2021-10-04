@@ -4,6 +4,7 @@ import time
 from contextlib import contextmanager
 from functools import partial
 from json import dumps
+from pathlib import Path
 from typing import Dict, List, Optional
 
 import pykube
@@ -96,9 +97,9 @@ def test_pods_available(kube_cluster: Cluster, ic_deployment: List[pykube.Deploy
 
 @pytest.mark.functional
 def test_ingress_creation(
-    kube_cluster: Cluster, ic_deployment: List[pykube.Deployment]
+    request, kube_cluster: Cluster, ic_deployment: List[pykube.Deployment]
 ):
-    kube_cluster.kubectl("apply", filename="test-ingress.yaml", output_format="")
+    kube_cluster.kubectl("apply", filename=Path(request.fspath.dirname) / "test-ingress.yaml", output_format="")
 
     kube_cluster.kubectl(
         "wait deployment helloworld --for=condition=Available",
@@ -126,12 +127,12 @@ def test_ingress_creation(
 @pytest.mark.functional
 @pytest.mark.flaky(reruns=5, reruns_delay=10)
 def test_multiple_ingress_controllers(
-    kube_cluster: Cluster, ic_deployment: List[pykube.Deployment], chart_version
+    request, kube_cluster: Cluster, ic_deployment: List[pykube.Deployment], chart_version
 ):
     logger.info("applying manifests")
     # apply test manifests
     kube_cluster.kubectl(
-        "apply", filename="multi-controller-manifests.yaml", output_format=""
+        "apply", filename=Path(request.fspath.dirname) / "multi-controller-manifests.yaml", output_format=""
     )
 
     # shortcut function with fixed namespace

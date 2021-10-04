@@ -12,16 +12,18 @@
 *.out
 
 # python testing stuff
+__pycache__/
+.pytest_cache/
 test-results/
 test/**/.vscode/
 test/**/.idea/
-test/**/__pycache__/
 nginx-ingress-controller-app-*.tgz
 test/**/.mypy_cache/
 junit.xml
 
 # IDE
 .vscode/
+.devcontainer/
 
 # app-build-suite artifacts
 build
