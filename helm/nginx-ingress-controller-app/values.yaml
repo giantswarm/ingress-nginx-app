@@ -79,7 +79,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v1.0.0
+    tag: v1.0.2
 
   # controller.containerPort
   containerPort:
