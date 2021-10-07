@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update controller container image to [`v1.0.3`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#103) which resolves issues related to lua modules used in the controller. ([#225](https://github.com/giantswarm/nginx-ingress-controller-app/pull/225))
+
 ## [2.2.0] - 2021-09-09
 
 ### Changed
