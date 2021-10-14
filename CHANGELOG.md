@@ -11,7 +11,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Update controller container image to [`v1.0.4`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#104) which disables ssl_session_cache due to possible memory fragmentation. ([#231](https://github.com/giantswarm/nginx-ingress-controller-app/pull/231))
 
-
 ## [2.3.0] - 2021-10-07
 
 ### Changed
