@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.4.0] - 2021-10-18
+
 ### Changed
 
 - Update controller container image to [`v1.0.4`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#104) which disables ssl_session_cache due to possible memory fragmentation. ([#231](https://github.com/giantswarm/nginx-ingress-controller-app/pull/231))
@@ -409,7 +411,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.3.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.4.0...HEAD
+[2.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...v2.2.0
 [2.1.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.0.0...v2.1.0
