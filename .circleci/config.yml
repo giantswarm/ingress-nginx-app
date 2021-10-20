@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@4.6.0
+  architect: giantswarm/architect@dev:fix-ats-dats-dl-url
 
 workflows:
   version: 2
@@ -31,6 +31,8 @@ workflows:
 
       - architect/run-tests-with-ats:
           name: execute chart tests
+          app-test-suite_version: 52781c1f133cd558a586e4360726e0a59d210c5f
+          app-test-suite_container_tag: 0.1.4-52781c1f133cd558a586e4360726e0a59d210c5f
           filters:
             # Do not trigger the job on merge to master.
             branches:

@@ -4,4 +4,4 @@ generate-metadata: true
 chart-dir: ./helm/nginx-ingress-controller-app
 destination: ./build
 # CI overwrites this, check .circleci/config.yaml
-catalog-base-url: https://giantswarm.github.com/default-catalog/
+catalog-base-url: https://giantswarm.github.io/default-catalog/
