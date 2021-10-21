@@ -12,6 +12,7 @@ workflows:
           app_catalog_test: "giantswarm-test-catalog"
           chart: "nginx-ingress-controller-app"
           executor: "app-build-suite"
+          persist_chart_archive: true
           filters:
             # Trigger the job also on git tag.
             tags:
