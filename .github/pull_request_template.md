@@ -27,4 +27,3 @@ In order to verify that my changes also work on, I did the following tests:
 - [ ] Existing Ingress resources are reconciled correctly (change domain, see if its available)
 - [ ] Fresh install works
 - [ ] Fresh Ingress resources are reconciled correctly
-
