@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Internal change: Stop publishing nginx-ingress-controller-app to default catalog. ([#235](https://github.com/giantswarm/nginx-ingress-controller-app/pull/235))
+
 ## [2.4.0] - 2021-10-18
 
 ### Changed
