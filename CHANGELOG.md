@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.1.2] - 2021-10-22
+
 ### Changed
 
 - Internal change: Stop publishing nginx-ingress-controller-app to default catalog. ([#235](https://github.com/giantswarm/nginx-ingress-controller-app/pull/235))
@@ -415,7 +417,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.4.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.2...HEAD
+[2.1.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.4.0...v2.1.2
 [2.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...v2.2.0
