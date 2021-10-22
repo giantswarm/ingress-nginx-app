@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Disallow the controller Ingress to parse and add *-snippet annotations/directives created by the user. This can be changed by setting `controller.enableSnippetDirectives` to `true`.
+  We recommend enabling this option only if you TRUST users with permission to create Ingress objects, as this may allow a user to add restricted configurations to the final nginx.conf file. ([#237](https://github.com/giantswarm/nginx-ingress-controller-app/pull/237))
+
 ## [2.1.1] - 2021-10-21
 
 ### Changed
