@@ -379,6 +379,12 @@ controller:
   # Defaults to false
   watchIngressWithoutClass: false
 
+  # This configuration defines if Ingress Controller should allow users to set
+  # their own *-snippet annotations, otherwise this is forbidden / dropped
+  # when users add those annotations.
+  # Global snippets in ConfigMap are still respected
+  allowSnippetAnnotations: false
+
 # image
 image:
   registry: quay.io
