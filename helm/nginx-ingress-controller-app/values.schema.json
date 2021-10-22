@@ -112,6 +112,9 @@
                         }
                     }
                 },
+                "allowSnippetAnnotations": {
+                    "type": "boolean"
+                },
                 "annotationsPrefix": {
                     "type": "string"
                 },
@@ -548,25 +551,6 @@
         },
         "provider": {
             "type": "string"
-        },
-        "test": {
-            "type": "object",
-            "properties": {
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "registry": {
-                            "type": "string"
-                        },
-                        "repository": {
-                            "type": "string"
-                        },
-                        "tag": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
         }
     }
 }

@@ -10,6 +10,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Internal change: Stop publishing nginx-ingress-controller-app to default catalog. ([#235](https://github.com/giantswarm/nginx-ingress-controller-app/pull/235))
+- Disallow the controller Ingress to parse and add *-snippet annotations created by the user. This can be changed by setting `controller.allowSnippetAnnotations` to `true`.
+  We recommend enabling this option only if you TRUST users with permission to create Ingress objects, as this may allow a user to add restricted configurations to the final nginx.conf file. ([#238](https://github.com/giantswarm/nginx-ingress-controller-app/pull/238))
 
 ## [2.4.0] - 2021-10-18
 
