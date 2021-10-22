@@ -6,6 +6,7 @@ metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
 data:
+  enable-snippet-directives: "{{ .Values.controller.enableSnippetDirectives }}"
   {{- toYaml .Values.configmap | trim | nindent 2 }}
   {{- if .Values.ingressController.controlPlane }}
   {{- toYaml .Values.ingressController.configmap | trim | nindent 2 }}
