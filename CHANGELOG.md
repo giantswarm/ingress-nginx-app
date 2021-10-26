@@ -7,9 +7,15 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.4.1] - 2021-10-22
+
 ### Changed
 
 - Internal change: Stop publishing nginx-ingress-controller-app to default catalog. ([#235](https://github.com/giantswarm/nginx-ingress-controller-app/pull/235))
+- Disallow the controller Ingress to parse and add *-snippet annotations created by the user. This can be changed by setting `controller.allowSnippetAnnotations` to `true`.
+  We recommend enabling this option only if you TRUST users with permission to create Ingress objects, as this may allow a user to add restricted configurations to the final nginx.conf file.
+  This is a mitigation against CVE-2021-25742.
+  ([#238](https://github.com/giantswarm/nginx-ingress-controller-app/pull/238))
 
 ## [2.4.0] - 2021-10-18
 
@@ -28,6 +34,21 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - **Breaking change** Update controller container image to [`v1.0.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100). From this version on, only clusters with kubernetes >= 1.19 are supported. Please make sure to read the [upgrading notes](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/README.md#upgrading-notes). ([#218](https://github.com/giantswarm/nginx-ingress-controller-app/pull/218)).
+
+## [2.1.2] - 2021-10-22
+
+### Changed
+
+- Disallow the controller Ingress to parse and add *-snippet annotations/directives created by the user. This can be changed by setting `controller.enableSnippetDirectives` to `true`.
+  We recommend enabling this option only if you TRUST users with permission to create Ingress objects, as this may allow a user to add restricted configurations to the final nginx.conf file.
+  This is a mitigation against CVE-2021-25742.
+  ([#237](https://github.com/giantswarm/nginx-ingress-controller-app/pull/237))
+
+## [2.1.1] - 2021-10-21
+
+### Changed
+
+- Update controller container image to [`v0.49.3`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0493). ([#228](https://github.com/giantswarm/nginx-ingress-controller-app/pull/228))
 
 ## [2.1.0] - 2021-08-26
 
@@ -415,10 +436,13 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.4.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.4.1...HEAD
+[2.4.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.4.0...v2.4.1
 [2.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...v2.2.0
+[2.1.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.1...v2.1.2
+[2.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.0.0...v2.1.0
 [2.0.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.17.0...v2.0.0
 [1.17.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v1.16.1...v1.17.0
