@@ -1,4 +1,4 @@
-apiVersion: v2
+apiVersion: v1
 appVersion: v1.0.4
 description: The most popular ingress controller for Kubernetes, based on NGINX
 home: https://github.com/giantswarm/nginx-ingress-controller-app
