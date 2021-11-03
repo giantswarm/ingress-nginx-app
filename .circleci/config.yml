@@ -42,7 +42,7 @@ workflows:
 
       - architect/run-tests-with-ats:
           name: execute upgrade tests
-          additional_app-test-suite_flags: "--run-steps upgrade"
+          additional_app-test-suite_flags: "--steps upgrade"
           filters:
             # Do not trigger the job on merge to master.
             branches:
