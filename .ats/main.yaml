@@ -5,3 +5,11 @@ smoke-tests-cluster-type: kind
 smoke-tests-cluster-config-file: tests/kind_config.yaml
 functional-tests-cluster-type: kind
 functional-tests-cluster-config-file: tests/kind_config.yaml
+
+skip-steps: upgrade # to run upgrade tests run app-test-suite with --run-steps upgrade
+
+upgrade-tests-cluster-type: kind
+upgrade-tests-cluster-config-file: tests/kind_config.yaml
+upgrade-tests-app-catalog-url: https://giantswarm.github.io/default-catalog/
+upgrade-tests-app-version: 2.1.0
+upgrade-tests-app-config-file: tests/test-values.yaml
