@@ -58,9 +58,9 @@ each needs to have a unique ingress class. You also need to use the values struc
 
 e.g.
 ```
-    controller:
-      ingressClassResource:
-        name: nginx-internal
+controller:
+  ingressClassResource:
+    name: nginx-internal
 ```
 
 ## Installing
