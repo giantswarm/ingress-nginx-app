@@ -54,7 +54,7 @@ You can find more information in the upstream [migration to networking.k8s.io/v1
 
 If you are installing [multiple nginx ingress controllers](https://docs.giantswarm.io/advanced/ingress/multi-nginx-ic/)
 each needs to have a unique ingress class. You also need to use the values structure below. 
-**Note:** This is a breaking change from older releases which used `controller.ingressClass`.
+**Note:** This is a **breaking change** from older releases which used `controller.ingressClass`.
 
 e.g.
 ```
