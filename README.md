@@ -52,6 +52,17 @@ In case it is not possible to update all Ingress resources to specify the `spec.
 
 You can find more information in the upstream [migration to networking.k8s.io/v1 FAQ](https://github.com/kubernetes/ingress-nginx/blob/main/docs/index.md#faq---migration-to-apiversion-networkingk8siov1).
 
+If you are installing [multiple nginx ingress controllers](https://docs.giantswarm.io/advanced/ingress/multi-nginx-ic/)
+each needs to have a unique ingress class. You also need to use the values structure below. 
+**Note:** This is a breaking change from older releases which used `controller.ingressClass`.
+
+e.g.
+```
+    controller:
+      ingressClassResource:
+        name: nginx-internal
+```
+
 ## Installing
 
 There are 3 ways to install this app onto a workload cluster.
