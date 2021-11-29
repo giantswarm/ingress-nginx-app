@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update controller container image to [`v1.1.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#110). ([#246](https://github.com/giantswarm/nginx-ingress-controller-app/pull/246))
+
 ## [2.4.1] - 2021-10-22
 
 ### Changed
