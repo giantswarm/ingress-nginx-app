@@ -229,6 +229,12 @@ controller:
     # Do not overwrite this value.
     enabled: true
 
+    # controller.service.suffix
+    # Suffix to add to the LoadBalancer Service name. This is useful for
+    # OpenStack where cloud controller creates and references LBs by the name
+    # and the namespace of the Service.
+    suffix: ""
+
     annotations: {}
     labels: {}
 

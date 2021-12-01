@@ -363,6 +363,9 @@
                         "enabled": {
                             "type": "boolean"
                         },
+                        "suffix": {
+                            "type": "string"
+                        },
                         "externalDNS": {
                             "type": "object",
                             "properties": {
