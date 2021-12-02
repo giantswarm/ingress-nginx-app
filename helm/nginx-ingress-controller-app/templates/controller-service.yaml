@@ -33,7 +33,7 @@ metadata:
   {{- if .Values.controller.service.labels }}
     {{- toYaml .Values.controller.service.labels | nindent 4 }}
   {{- end }}
-  name: {{ include "resource.default.name" . }}
+  name: {{ include "resource.default.name" . }}{{ .Values.controller.service.suffix }}
   namespace: {{ .Release.Namespace }}
 spec:
   type: {{ .Values.controller.service.type }}

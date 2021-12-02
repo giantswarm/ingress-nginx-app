@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Allow setting LB Service name suffix with new `controller.service.suffix`
+  value.
+
 ## [2.5.0] - 2021-11-29
 
 ### Changed
