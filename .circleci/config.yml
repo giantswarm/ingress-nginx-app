@@ -18,6 +18,19 @@ workflows:
             tags:
               only: /^v.*/
 
+      # deploy to openstack installations (only tags)
+      - architect/push-to-app-collection:
+          name: push-to-openstack-app-collection
+          app_name: "nginx-ingress-controller-app"
+          app_collection_repo: "openstack-app-collection"
+          requires:
+            - push-to-giantswarm-app-catalog
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+
       - architect/run-tests-with-ats:
           name: execute chart tests
           filters:
