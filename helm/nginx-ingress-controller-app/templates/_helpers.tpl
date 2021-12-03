@@ -53,6 +53,13 @@ Election ID.
 {{- end -}}
 
 {{/*
+LB Service name.
+*/}}
+{{- define "resource.controller-service.name" -}}
+{{ include "resource.default.name" . }}{{ .Values.controller.service.suffix }}
+{{- end -}}
+
+{{/*
 IngressClass parameters.
 */}}
 {{- define "ingressClass.parameters" -}}
