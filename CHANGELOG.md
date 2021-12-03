@@ -7,7 +7,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix LB Service name suffix introduced in v2.6.0.
+
 ## [2.6.0] - 2021-12-02
+
+:warning: This release is broken. Please use v2.6.1 instead.
 
 ### Added
 
