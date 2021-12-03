@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.6.1] - 2021-12-03
+
 ### Fixed
 
 - Fix LB Service name suffix introduced in v2.6.0.
@@ -455,7 +457,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.6.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.6.1...HEAD
+[2.6.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.6.0...v2.6.1
 [2.6.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.5.0...v2.6.0
 [2.5.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.4.1...v2.5.0
 [2.4.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.4.0...v2.4.1
