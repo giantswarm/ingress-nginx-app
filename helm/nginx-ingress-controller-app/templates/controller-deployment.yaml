@@ -94,7 +94,7 @@ spec:
         - --enable-ssl-chain-completion=false
         - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
         {{- if .Values.controller.service.enabled }}
-        - --publish-service={{ .Release.Namespace }}/{{ include "resource.default.name" . }}
+        - --publish-service={{ .Release.Namespace }}/{{ include "resource.controller-service.name" . }}
         {{- end }}
         {{- if .Values.controller.admissionWebhooks.enabled }}
         - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
