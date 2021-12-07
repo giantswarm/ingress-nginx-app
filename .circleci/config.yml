@@ -22,6 +22,8 @@ workflows:
       - architect/push-to-app-collection:
           name: push-to-openstack-app-collection
           app_name: "nginx-ingress-controller-app"
+          app_namespace: "kube-system"
+          app_catalog: "giantswarm"
           app_collection_repo: "openstack-app-collection"
           requires:
             - push-to-giantswarm-app-catalog
