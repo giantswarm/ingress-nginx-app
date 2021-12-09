@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Add custom external-dns annotation the internal service.
+
 ## [2.6.1] - 2021-12-03
 
 ### Fixed
