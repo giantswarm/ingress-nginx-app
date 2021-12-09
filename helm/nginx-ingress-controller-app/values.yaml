@@ -245,6 +245,10 @@ controller:
       # Assign an annotation to the controller's Service - this is used by external-dns to filter which resources it reconciles. Required for running multiple external-dns instances in a single cluster.
       annotation: "giantswarm.io/external-dns: managed"
 
+      # controller.externalDNS.enabled
+      # Indicates whether to set external-dns annotations on the LB service.
+      enabled: true
+
     # controller.service.externalTrafficPolicy
     # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
     #   Local - kube-proxy only proxies requests to local endpoints (does not forward traffic to other nodes), source IP preserved
