@@ -3,7 +3,9 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
+  {{- if .Values.controller.service.externalDNS.enabled }}
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.controller.service.internal.subdomain }}.{{ .Values.baseDomain }}
+  {{- end }}
   {{- if eq .Values.controller.service.internal.type "LoadBalancer" }}
   {{- if eq .Values.provider "aws" }}
     service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0

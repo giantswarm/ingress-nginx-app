@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Allow disabling external-dns annotations.
+
 ## [2.6.1] - 2021-12-03
 
 ### Fixed

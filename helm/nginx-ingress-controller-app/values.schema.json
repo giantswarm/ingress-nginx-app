@@ -371,6 +371,9 @@
                             "properties": {
                                 "annotation": {
                                     "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
                                 }
                             }
                         },
