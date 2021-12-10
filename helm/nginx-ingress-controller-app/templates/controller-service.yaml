@@ -6,10 +6,12 @@ metadata:
   {{- range $key, $value := .Values.controller.service.annotations }}
     {{ $key }}: {{ $value | quote }}
   {{- end }}
+  {{- if .Values.controller.service.externalDNS.enabled }}
     external-dns.alpha.kubernetes.io/hostname: "{{ .Values.controller.service.subdomain }}.{{ .Values.baseDomain }}"
     {{- if .Values.controller.service.externalDNS.annotation }}
     {{ .Values.controller.service.externalDNS.annotation }}
     {{- end }}
+  {{- end }}
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
   {{- if eq .Values.provider "aws" }}
     {{- if not .Values.controller.service.public }}
