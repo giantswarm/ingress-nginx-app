@@ -6,7 +6,7 @@ metadata:
   {{- range $key, $value := .Values.controller.service.annotations }}
     {{ $key }}: {{ $value | quote }}
   {{- end }}
-  {{- if .controller.service.externalDNS.enabled }}
+  {{- if .Values.controller.service.externalDNS.enabled }}
     external-dns.alpha.kubernetes.io/hostname: "{{ .Values.controller.service.subdomain }}.{{ .Values.baseDomain }}"
     {{- if .Values.controller.service.externalDNS.annotation }}
     {{ .Values.controller.service.externalDNS.annotation }}
