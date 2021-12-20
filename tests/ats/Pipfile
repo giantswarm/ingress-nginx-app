@@ -11,4 +11,4 @@ pytest-rerunfailures = "~=10.1"
 requests = "~=2.26.0"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"
