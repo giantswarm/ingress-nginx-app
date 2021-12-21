@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - Allow disabling external-dns annotations.
+- Update aws-load-balancer annotations for internal cluster use.
 
 ## [2.6.1] - 2021-12-03
 
