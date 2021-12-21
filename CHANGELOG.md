@@ -11,6 +11,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Allow disabling external-dns annotations.
 - Update aws-load-balancer annotations for internal cluster use.
+- Add required external-dns annotation to internal controller service.
 
 ## [2.6.1] - 2021-12-03
 

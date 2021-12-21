@@ -5,6 +5,9 @@ metadata:
   annotations:
   {{- if .Values.controller.service.externalDNS.enabled }}
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.controller.service.internal.subdomain }}.{{ .Values.baseDomain }}
+    {{- if .Values.controller.service.externalDNS.annotation }}
+    {{ .Values.controller.service.externalDNS.annotation }}
+    {{- end }}
   {{- end }}
   {{- if eq .Values.controller.service.internal.type "LoadBalancer" }}
   {{- if eq .Values.provider "aws" }}
