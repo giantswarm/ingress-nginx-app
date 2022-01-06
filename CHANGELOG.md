@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - Allow disabling external-dns annotations.
+- Augment monitoring annotations to have a stable name for monitoring. ([#263](https://github.com/giantswarm/nginx-ingress-controller-app/pull/263))
 
 ## [2.6.1] - 2021-12-03
 
