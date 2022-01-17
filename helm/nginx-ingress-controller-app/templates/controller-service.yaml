@@ -15,7 +15,8 @@ metadata:
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
   {{- if eq .Values.provider "aws" }}
     {{- if not .Values.controller.service.public }}
-    service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
+    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
     {{- end }}
     {{- if index .Values.configmap "use-proxy-protocol" }}
     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
