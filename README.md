@@ -171,6 +171,40 @@ facilitate this process.
 
 All configuration options are documented in the [values.yaml](/helm/nginx-ingress-controller-app/values.yaml) file.
 
+### Internal nginx IC options
+
+This chart contains a template for an additional [internal service](helm/nginx-ingress-controller-app/templates/controller-service-internal.yaml) to cover the use case of having separate internal and external ingress routes with a single nginx IC instance. 
+
+Valid configuration options are as follows: 
+
+**Only external (default)**
+
+This is the default behavior. No additional configuration required.
+
+ **Make default service internal**
+
+This configures the [default service](helm/nginx-ingress-controller-app/templates/controller-service.yaml) to spawn an internal facing load balancer. This disables the external ingress.
+ ```yaml
+controller:
+  service:
+    public: false
+ ```
+
+ **Create additional internal service**
+
+This enables the additional internal service template which creates an internal facing load balancer.
+
+```yaml
+controller:
+  service:
+    internal:
+      enabled: true
+```
+
+Other possible configurations are:
+- Two internal load balancer
+- Disable default service completely `controller.service.enabled: false`
+
 ## Limitations
 
 Some of our apps have certain restrictions on how they can be deployed.
