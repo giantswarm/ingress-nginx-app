@@ -14,6 +14,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Update aws-load-balancer annotations for internal cluster use.
 - Add required external-dns annotation to internal controller service.
 
+### Changed
+
+- Update controller container image to [`v1.1.1`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#111). ([#264](https://github.com/giantswarm/nginx-ingress-controller-app/pull/264))
+
 ## [2.6.1] - 2021-12-03
 
 ### Fixed
