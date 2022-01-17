@@ -12,6 +12,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Allow disabling external-dns annotations.
 - Augment monitoring annotations to have a stable name for monitoring. ([#263](https://github.com/giantswarm/nginx-ingress-controller-app/pull/263))
 
+### Changed
+
+- Update controller container image to [`v1.1.1`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#111). ([#264](https://github.com/giantswarm/nginx-ingress-controller-app/pull/264))
+
 ## [2.6.1] - 2021-12-03
 
 ### Fixed
