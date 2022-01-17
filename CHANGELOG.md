@@ -13,6 +13,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Augment monitoring annotations to have a stable name for monitoring. ([#263](https://github.com/giantswarm/nginx-ingress-controller-app/pull/263))
 - Update aws-load-balancer annotations for internal cluster use.
 - Add required external-dns annotation to internal controller service.
+- Add documentation for service configuration.
 
 ### Changed
 
