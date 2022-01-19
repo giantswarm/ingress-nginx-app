@@ -2,6 +2,29 @@ version: 2.1
 orbs:
   architect: giantswarm/architect@4.9.0
 
+jobs:
+  run-tests-with-k8s-version:
+    parameters:
+      kind_image:
+        description: "kindest/node image to use for kind cluster"
+        type: string
+        default: "kindest/node:v1.21.2@sha256:9d07ff05e4afefbba983fac311807b3c17a5f36e7061f6cb7e2ba756255b2be4"
+    executor: "machine"
+    machine:
+      image: ubuntu-2004:202010-01
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: "Augment kind config file"
+          command: |
+            set -x
+
+            sed -i "s|image: .*$|image: << parameters.kind_image >>|" tests/kind_config.yaml
+      - architect/run-tests-with-ats:
+          app-test-suite_version: "v0.2.2"
+          app-test-suite_container_tag: "0.2.2"
+
 workflows:
   version: 2
   build:
@@ -33,8 +56,20 @@ workflows:
             tags:
               only: /^v.*/
 
-      - architect/run-tests-with-ats:
-          name: execute chart tests
+      #- run-tests-with-k8s-version:
+      #    name: execute chart tests on 1.21
+      #    kind_image: "kindest/node:v1.21.1@sha256:69860bda5563ac81e3c0057d654b5253219618a22ec3a346306239bba8cfa1a6"
+      #    filters:
+      #      # Do not trigger the job on merge to master.
+      #      branches:
+      #        ignore:
+      #          - master
+      #    requires:
+      #      - push-to-giantswarm-app-catalog
+
+      - run-tests-with-k8s-version:
+          name: execute chart tests on 1.22
+          kind_image: "kindest/node:v1.22.4@sha256:ca3587e6e545a96c07bf82e2c46503d9ef86fc704f44c17577fca7bcabf5f978"
           filters:
             # Do not trigger the job on merge to master.
             branches:
@@ -42,3 +77,14 @@ workflows:
                 - master
           requires:
             - push-to-giantswarm-app-catalog
+
+      #- run-tests-with-k8s-version:
+      #    name: execute chart tests on 1.23
+      #    kind_image: "kindest/node:v1.23.1@sha256:355a1e3b7b0fe315c896f63a73847c554aac8fb8615c6bf47f1ca303009e9a2d"
+      #    filters:
+      #      # Do not trigger the job on merge to master.
+      #      branches:
+      #        ignore:
+      #          - master
+      #    requires:
+      #      - push-to-giantswarm-app-catalog
