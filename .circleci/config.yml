@@ -9,7 +9,6 @@ jobs:
         description: "kindest/node image to use for kind cluster"
         type: string
         default: "kindest/node:v1.21.2@sha256:9d07ff05e4afefbba983fac311807b3c17a5f36e7061f6cb7e2ba756255b2be4"
-    executor: "machine"
     machine:
       image: ubuntu-2004:202010-01
     resource_class: medium
