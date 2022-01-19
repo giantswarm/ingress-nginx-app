@@ -10,3 +10,4 @@ sources:
   - https://github.com/kubernetes/ingress-nginx/
 annotations:
   application.giantswarm.io/team: team-cabbage
+  config.giantswarm.io/version: 1.x.x
