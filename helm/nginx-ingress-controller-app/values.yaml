@@ -335,8 +335,8 @@ controller:
     patch:
       enabled: true
       image:
-        repository: giantswarm/kube-webhook-certgen
-        tag: v1.5.2
+        repository: giantswarm/ingress-nginx-kube-webhook-certgen
+        tag: v1.1.1
       backoffLimit: 6
       priorityClassName: ""
       podAnnotations: {}
