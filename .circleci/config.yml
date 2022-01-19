@@ -55,16 +55,16 @@ workflows:
             tags:
               only: /^v.*/
 
-      #- run-tests-with-k8s-version:
-      #    name: execute chart tests on 1.21
-      #    kind_image: "kindest/node:v1.21.1@sha256:69860bda5563ac81e3c0057d654b5253219618a22ec3a346306239bba8cfa1a6"
-      #    filters:
-      #      # Do not trigger the job on merge to master.
-      #      branches:
-      #        ignore:
-      #          - master
-      #    requires:
-      #      - push-to-giantswarm-app-catalog
+      - run-tests-with-k8s-version:
+         name: execute chart tests on 1.21
+         kind_image: "kindest/node:v1.21.1@sha256:69860bda5563ac81e3c0057d654b5253219618a22ec3a346306239bba8cfa1a6"
+         filters:
+           # Do not trigger the job on merge to master.
+           branches:
+             ignore:
+               - master
+         requires:
+           - push-to-giantswarm-app-catalog
 
       - run-tests-with-k8s-version:
           name: execute chart tests on 1.22
@@ -77,13 +77,13 @@ workflows:
           requires:
             - push-to-giantswarm-app-catalog
 
-      #- run-tests-with-k8s-version:
-      #    name: execute chart tests on 1.23
-      #    kind_image: "kindest/node:v1.23.1@sha256:355a1e3b7b0fe315c896f63a73847c554aac8fb8615c6bf47f1ca303009e9a2d"
-      #    filters:
-      #      # Do not trigger the job on merge to master.
-      #      branches:
-      #        ignore:
-      #          - master
-      #    requires:
-      #      - push-to-giantswarm-app-catalog
+      - run-tests-with-k8s-version:
+         name: execute chart tests on 1.23
+         kind_image: "kindest/node:v1.23.1@sha256:355a1e3b7b0fe315c896f63a73847c554aac8fb8615c6bf47f1ca303009e9a2d"
+         filters:
+           # Do not trigger the job on merge to master.
+           branches:
+             ignore:
+               - master
+         requires:
+           - push-to-giantswarm-app-catalog
