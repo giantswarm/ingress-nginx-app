@@ -24,7 +24,7 @@ workflows:
           app_catalog_test: "control-plane-test-catalog"
           chart: "nginx-ingress-controller-app"
           executor: "app-build-suite"
-          persist_chart_archive: true
+          persist_chart_archive: false
           filters:
             # Trigger the job also on git tag.
             tags:
