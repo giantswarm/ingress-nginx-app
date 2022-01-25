@@ -7,9 +7,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+This release contains a potential breaking change in case you are using and relying on the configuration setting `use-forwarded-headers`. From now on the default value will change to `false`. When you need this to be true override this in your customized values.
+
 ### Changed
 
 - Push chart to control plane catalog.
+- Disable `use-forwarded-headers` by default.
 
 ## [2.7.0] - 2022-01-19
 

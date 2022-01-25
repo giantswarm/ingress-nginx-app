@@ -44,7 +44,7 @@ configmap:
 
   # configmap.use-forwarded-headers
   # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
-  use-forwarded-headers: "true"
+  use-forwarded-headers: "false"
 
 # controller
 # Contains mostly configuration values that get applied to the kubernetes
