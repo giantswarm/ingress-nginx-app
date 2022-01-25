@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Push chart to control plane catalog.
+
 ## [2.7.0] - 2022-01-19
 
 ### Added
