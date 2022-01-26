@@ -7,7 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
-This release contains a potential breaking change in case you are using and relying on the configuration setting `use-forwarded-headers`. From now on the default value will change to `false`. When you need this to be true override this in your customized values.
+This release contains a potential breaking change in case you are using and relying on the configuration setting [`use-forwarded-headers`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#use-forwarded-headers). From now on the default value will change to `false`. In case you're relying on this feature, you'll need override this in your customized values like this:
+
+    configmap:
+        use-forwarded-headers: "true"
+
 
 ### Changed
 
