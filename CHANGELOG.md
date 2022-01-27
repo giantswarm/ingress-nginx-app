@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.8.0] - 2022-01-27
+
 This release contains a potential breaking change in case you are using and relying on the configuration setting [`use-forwarded-headers`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#use-forwarded-headers). From now on the default value will change to `false`. In case you're relying on this feature, you'll need override this in your customized values like this:
 
     configmap:
@@ -483,7 +485,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.7.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm/compare/v2.8.0...HEAD
+[2.8.0]: https://github.com/giantswarm/giantswarm/compare/v2.7.0...v2.8.0
 [2.7.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.6.1...v2.7.0
 [2.6.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.6.0...v2.6.1
 [2.6.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.5.0...v2.6.0
