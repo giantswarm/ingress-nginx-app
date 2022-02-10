@@ -161,6 +161,9 @@
                 "enableMimalloc": {
                     "type": "boolean"
                 },
+                "enableSSLChainCompletion": {
+                    "type": "boolean"
+                },
                 "extraAnnotations": {
                     "type": "object",
                     "properties": {

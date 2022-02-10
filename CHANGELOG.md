@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Allow enabling the `--enable-ssl-chain-completion` flag. Disabled by default. Use this to autocomplete SSL certificate chains with missing intermediate CA certificates. Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
+
 ## [2.8.0] - 2022-01-27
 
 This release contains a potential breaking change in case you are using and relying on the configuration setting [`use-forwarded-headers`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#use-forwarded-headers). From now on the default value will change to `false`. In case you're relying on this feature, you'll need override this in your customized values like this:
