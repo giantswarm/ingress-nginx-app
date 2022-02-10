@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Added
 
-- Allow enabling the `enable-ssl-chain-completion` flag. Disabled by default.
+- Allow enabling the `--enable-ssl-chain-completion` flag. Disabled by default. Use this to autocomplete SSL certificate chains with missing intermediate CA certificates. Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
 
 ## [2.8.0] - 2022-01-27
 
