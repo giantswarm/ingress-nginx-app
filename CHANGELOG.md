@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.9.0] - 2022-02-10
+
 ### Added
 
 - Allow enabling the `--enable-ssl-chain-completion` flag. Disabled by default. Use this to autocomplete SSL certificate chains with missing intermediate CA certificates. Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
@@ -489,7 +491,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/giantswarm/compare/v2.8.0...HEAD
+[Unreleased]: https://github.com/giantswarm/giantswarm/compare/v2.9.0...HEAD
+[2.9.0]: https://github.com/giantswarm/giantswarm/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/giantswarm/giantswarm/compare/v2.7.0...v2.8.0
 [2.7.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.6.1...v2.7.0
 [2.6.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.6.0...v2.6.1
