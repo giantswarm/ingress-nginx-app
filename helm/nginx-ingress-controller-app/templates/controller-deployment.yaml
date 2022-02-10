@@ -91,7 +91,7 @@ spec:
         {{- if .Values.controller.defaultSSLCertificate }}
         - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
         {{- end}}
-        - --enable-ssl-chain-completion=false
+        - --enable-ssl-chain-completion={{ .Values.controller.enableSSLChainCompletion }}
         - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
         {{- if .Values.controller.service.enabled }}
         - --publish-service={{ .Release.Namespace }}/{{ include "resource.controller-service.name" . }}
