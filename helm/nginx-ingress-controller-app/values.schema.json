@@ -267,6 +267,9 @@
                         }
                     }
                 },
+                "maxSurge": {
+                    "type": "integer"
+                },
                 "maxUnavailable": {
                     "type": "integer"
                 },

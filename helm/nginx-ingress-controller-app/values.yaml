@@ -60,6 +60,11 @@ controller:
   # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   antiAffinityScheduling: preferredDuringSchedulingIgnoredDuringExecution
 
+  # controller.maxSurge
+  # Configures maximum number of replicas that can be created over 
+  # the desired number of Pods.
+  maxSurge: 1
+
   # controller.maxUnavailable
   # Configures maximum number of unavailable replicas while doing a
   # rolling upgrade.
