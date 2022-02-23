@@ -23,7 +23,7 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: {{ .Values.controller.maxSurge }}
       maxUnavailable: {{ .Values.controller.maxUnavailable }}
   minReadySeconds: {{ .Values.controller.minReadySeconds }}
   template:

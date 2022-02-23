@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Added `maxSurge` parameter to values for the controller deployment strategy.
+
 ## [2.9.0] - 2022-02-10
 
 ### Added
