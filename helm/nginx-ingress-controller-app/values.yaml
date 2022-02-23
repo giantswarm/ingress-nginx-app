@@ -61,7 +61,7 @@ controller:
   antiAffinityScheduling: preferredDuringSchedulingIgnoredDuringExecution
 
   # controller.maxSurge
-  # Configures maximum number of replicas that can be created over 
+  # Configures maximum number of replicas that can be created over
   # the desired number of Pods.
   maxSurge: 1
 
