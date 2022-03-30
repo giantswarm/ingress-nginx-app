@@ -431,6 +431,9 @@ initContainer:
 podSecurityPolicy:
   enabled: true
 
+serviceAccount:
+  annotations: {}
+
 # ingressController.controlPlane
 # Defines if this app is installed into management-cluster.
 #
