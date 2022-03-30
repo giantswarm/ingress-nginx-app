@@ -14,16 +14,28 @@ jobs:
         run: echo "${{ steps.files.outputs.all }}"
       - name: 'check if values.schema.json was updated'
         run: |
+          set -x
           VALUES_FILE_CHANGED="false"
           SCHEMA_FILE_CHANGED="false"
 
-          if git ls-tree -r ${{ github.ref }} | grep -q "values.schema.json" ; then
+          base_ref=${GITHUB_BASE_REF##*/}
+          head_ref=${GITHUB_HEAD_REF##*/}
 
-            if grep -q "values.yaml" <<< "${{ steps.files.outputs.all }}" ; then
+          echo "Comparing ${base_ref}...${head_ref}"
+
+          changed_files=$(gh api repos/{owner}/{repo}/compare/${base_ref}...${head_ref} --jq ".files[] | .filename")
+
+          echo "These files changed:"
+          echo "${changed_files}"
+          echo "---"
+
+          if git ls-tree -r --name-only ${head_ref} | grep -q "values.schema.json" ; then
+
+            if grep -q "values.yaml" <<< "${changed_files}" ; then
               VALUES_FILE_CHANGED="true"
             fi
 
-            if grep -q "values.schema.json" <<< "${{ steps.files.outputs.all }}" ; then
+            if grep -q "values.schema.json" <<< "${changed_files}" ; then
               SCHEMA_FILE_CHANGED="true"
             fi
 
