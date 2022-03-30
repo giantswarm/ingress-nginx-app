@@ -13,6 +13,8 @@ jobs:
       - name: 'show changed files in PR'
         run: echo "${{ steps.files.outputs.all }}"
       - name: 'check if values.schema.json was updated'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -x
           VALUES_FILE_CHANGED="false"
