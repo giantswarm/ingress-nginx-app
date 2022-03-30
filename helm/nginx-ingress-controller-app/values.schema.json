@@ -561,7 +561,7 @@
                 }
             }
         },
-        "provider": {
+        "providerr": {
             "type": "string"
         }
     }
