@@ -1,3 +1,4 @@
+{{- if .Values.defaultBackend-enabled -}}
 {{- if or (and (gt (.Values.cluster.profile | int) 2) (and .Values.controller.autoscaling.enabled (gt (.Values.controller.autoscaling.minReplicas | int) 1))) (gt (.Values.controller.replicaCount | int) 1) }}
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
@@ -11,3 +12,4 @@ spec:
       {{- include "labels.selector" . | nindent 6 }}
   maxUnavailable: {{ .Values.controller.maxUnavailable }}
 {{- end }}
+{{- end}}
