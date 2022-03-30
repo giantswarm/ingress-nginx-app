@@ -31,7 +31,7 @@ jobs:
           echo "${changed_files}"
           echo "---"
 
-          if git ls-tree -r --name-only ${head_ref} | grep -q "values.schema.json" ; then
+          if grep -q "values.schema.json" <<< $(git ls-tree -r --name-only ${GITHUB_SHA}); then
 
             if grep -q "values.yaml" <<< "${changed_files}" ; then
               VALUES_FILE_CHANGED="true"
