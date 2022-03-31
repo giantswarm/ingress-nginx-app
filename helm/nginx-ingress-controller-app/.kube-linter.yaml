@@ -1,5 +1,4 @@
 checks:
-  addAllBuiltIn: true
   exclude:
   - "exposed-services"
   - "no-liveness-probe"
