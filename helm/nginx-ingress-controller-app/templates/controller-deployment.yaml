@@ -93,6 +93,7 @@ spec:
         {{- end}}
         - --enable-ssl-chain-completion={{ .Values.controller.enableSSLChainCompletion }}
         - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
+        - --ingress-class={{ .Values.controller.ingressClassResource.name }}
         {{- if .Values.controller.service.enabled }}
         - --publish-service={{ .Release.Namespace }}/{{ include "resource.controller-service.name" . }}
         {{- end }}
@@ -107,6 +108,9 @@ spec:
         {{- end }}
         {{- if .Values.controller.watchIngressWithoutClass }}
         - --watch-ingress-without-class=true
+        {{- end }}
+        {{- if .Values.controller.ingressClassByName }}
+        - --ingress-class-by-name=true
         {{- end }}
         securityContext:
           allowPrivilegeEscalation: true

@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Controller flag `--ingress-class` to use configuration value `controller.ingressClassResource.name`. This enables backwards compatibility with `kubernetes.io/ingress.class` annotations on `Ingresses`. ([#292](https://github.com/giantswarm/nginx-ingress-controller-app/pull/292))
+- Configuration value `ingressClassByName` to enable or disable processing `IngressClass` per name (additionally as per spec.controller) (Default: `false`). ([#292](https://github.com/giantswarm/nginx-ingress-controller-app/pull/292))
+
 ### Changed
 
 - Added team ownership to default labels.

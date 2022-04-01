@@ -192,6 +192,9 @@
                         }
                     }
                 },
+                "ingressClassByName": {
+                    "type": "boolean"
+                },
                 "ingressClassResource": {
                     "type": "object",
                     "properties": {
@@ -369,9 +372,6 @@
                         "enabled": {
                             "type": "boolean"
                         },
-                        "suffix": {
-                            "type": "string"
-                        },
                         "externalDNS": {
                             "type": "object",
                             "properties": {
@@ -454,6 +454,9 @@
                             "type": "boolean"
                         },
                         "subdomain": {
+                            "type": "string"
+                        },
+                        "suffix": {
                             "type": "string"
                         },
                         "targetPorts": {
