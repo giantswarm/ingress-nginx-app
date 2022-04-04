@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.10.0] - 2022-04-04
+
 ### Added
 
 - Controller flag `--ingress-class` to use configuration value `controller.ingressClassResource.name`. This enables backwards compatibility with `kubernetes.io/ingress.class` annotations on `Ingresses`. ([#292](https://github.com/giantswarm/nginx-ingress-controller-app/pull/292))
@@ -507,7 +509,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.9.1...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.10.0...HEAD
+[2.10.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.9.1...v2.10.0
 [2.9.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.9.0...v2.9.1
 [2.9.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.8.0...v2.9.0
 [2.8.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.7.0...v2.8.0
