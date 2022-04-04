@@ -89,7 +89,7 @@ controller:
 
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v1.1.1
+    tag: v1.1.3
 
   # controller.containerPort
   containerPort:
@@ -209,6 +209,10 @@ controller:
   # will use a self-signed certificate.
   # Example value: "default/foo-tls".
   defaultSSLCertificate: ""
+
+  # controller.ingressClassByName
+  # Process IngressClass per name (additionally as per spec.controller).
+  ingressClassByName: false
 
   # controller.ingressClassResource
   # This section refers to the creation of the IngressClass resource
