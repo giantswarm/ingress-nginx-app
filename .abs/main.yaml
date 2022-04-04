@@ -1,5 +1,5 @@
 replace-app-version-with-git: false
-replace-chart-version-with-git: true
+replace-chart-version-with-git: false
 generate-metadata: true
 chart-dir: ./helm/nginx-ingress-controller-app
 destination: ./build
