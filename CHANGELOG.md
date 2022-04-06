@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update controller container image to [`v0.51.0`](https://github.com/kubernetes/ingress-nginx/blob/legacy/Changelog.md#0510) to fix [CVE-2022-0778](https://github.com/kubernetes/ingress-nginx/issues/8339) in OpenSSL and [CVE-2022-23308](https://github.com/kubernetes/ingress-nginx/issues/8321) in libxml2. It also upgrades Alpine to 3.14.4 and nginx to 1.19.10. ([#294](https://github.com/giantswarm/nginx-ingress-controller-app/pull/294))
+- Added team ownership to default labels. ([#294](https://github.com/giantswarm/nginx-ingress-controller-app/pull/294))
+
 ## [2.1.3] - 2021-12-20
 
 ### Changed
