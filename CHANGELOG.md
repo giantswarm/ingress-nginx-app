@@ -108,6 +108,19 @@ This release contains a potential breaking change in case you are using and rely
 
 - **Breaking change** Update controller container image to [`v1.0.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100). From this version on, only clusters with kubernetes >= 1.19 are supported. Please make sure to read the [upgrading notes](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/README.md#upgrading-notes). ([#218](https://github.com/giantswarm/nginx-ingress-controller-app/pull/218)).
 
+## [2.1.4] - 2022-04-07
+
+### Changed
+
+- Update controller container image to [`v0.51.0`](https://github.com/kubernetes/ingress-nginx/blob/legacy/Changelog.md#0510) to fix [CVE-2022-0778](https://github.com/kubernetes/ingress-nginx/issues/8339) in OpenSSL and [CVE-2022-23308](https://github.com/kubernetes/ingress-nginx/issues/8321) in libxml2. It also upgrades Alpine to 3.14.4 and nginx to 1.19.10. ([#294](https://github.com/giantswarm/nginx-ingress-controller-app/pull/294))
+- Added team ownership to default labels. ([#294](https://github.com/giantswarm/nginx-ingress-controller-app/pull/294))
+
+## [2.1.3] - 2021-12-20
+
+### Changed
+
+- Update controller container image to [`v0.50.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0500). ([#259](https://github.com/giantswarm/nginx-ingress-controller-app/pull/259))
+
 ## [2.1.2] - 2021-10-22
 
 ### Changed
@@ -522,6 +535,8 @@ Previous versions changelog can be found [here](https://github.com/giantswarm/ku
 [2.4.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.3.0...v2.4.0
 [2.3.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.2.0...v2.3.0
 [2.2.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...v2.2.0
+[2.1.4]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.3...v2.1.4
+[2.1.3]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.2...v2.1.3
 [2.1.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...v2.1.1
 [2.1.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.0.0...v2.1.0
