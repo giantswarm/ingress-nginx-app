@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.1.4] - 2022-04-07
+
 ### Changed
 
 - Update controller container image to [`v0.51.0`](https://github.com/kubernetes/ingress-nginx/blob/legacy/Changelog.md#0510) to fix [CVE-2022-0778](https://github.com/kubernetes/ingress-nginx/issues/8339) in OpenSSL and [CVE-2022-23308](https://github.com/kubernetes/ingress-nginx/issues/8321) in libxml2. It also upgrades Alpine to 3.14.4 and nginx to 1.19.10. ([#294](https://github.com/giantswarm/nginx-ingress-controller-app/pull/294))
@@ -420,7 +422,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.3...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.4...HEAD
+[2.1.4]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.3...v2.1.4
 [2.1.3]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.2...v2.1.3
 [2.1.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.1...v2.1.2
 [2.1.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.1.0...v2.1.1
