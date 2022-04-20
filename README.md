@@ -61,6 +61,7 @@ e.g.
 controller:
   ingressClassResource:
     name: nginx-internal
+    controllerValue: "k8s.io/ingress-nginx-internal"
 ```
 
 ## Installing
