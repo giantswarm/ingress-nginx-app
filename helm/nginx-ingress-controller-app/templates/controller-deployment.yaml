@@ -32,7 +32,6 @@ spec:
         {{- include "labels.common" . | nindent 8 }}
         app.kubernetes.io/component: controller
       annotations:
-        scheduler.alpha.kubernetes.io/critical-pod: ''
         cluster-autoscaler.kubernetes.io/safe-to-evict: 'true'
         {{- range .Values.controller.extraAnnotations.pod }}
         {{ . }}
