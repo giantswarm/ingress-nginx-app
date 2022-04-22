@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update controller container image to [`v1.2.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#120) which enables deep inspection on Ingress objects. This may increase CPU usage slightly. ([#301](https://github.com/giantswarm/nginx-ingress-controller-app/pull/301))
+
 ## [2.10.0] - 2022-04-04
 
 ### Added
