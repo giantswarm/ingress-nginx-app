@@ -8,6 +8,7 @@ workflows:
     jobs:
       - architect/push-to-app-catalog:
           name: push-to-giantswarm-app-catalog
+          context: architect
           app_catalog: "giantswarm-catalog"
           app_catalog_test: "giantswarm-test-catalog"
           chart: "nginx-ingress-controller-app"
@@ -17,9 +18,11 @@ workflows:
             # Trigger the job also on git tag.
             tags:
               only: /^v.*/
+          push_to_oci_registry: true
 
       - architect/push-to-app-catalog:
           name: push-to-control-plane-app-catalog
+          context: architect
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
           chart: "nginx-ingress-controller-app"
@@ -29,6 +32,7 @@ workflows:
             # Trigger the job also on git tag.
             tags:
               only: /^v.*/
+          push_to_oci_registry: true
 
       # deploy to openstack installations (only tags)
       - architect/push-to-app-collection:
