@@ -8,6 +8,7 @@ workflows:
     jobs:
       - architect/push-to-app-catalog:
           name: push-to-giantswarm-app-catalog
+          context: architect
           app_catalog: "giantswarm-catalog"
           app_catalog_test: "giantswarm-test-catalog"
           chart: "nginx-ingress-controller-app"
@@ -21,6 +22,7 @@ workflows:
 
       - architect/push-to-app-catalog:
           name: push-to-control-plane-app-catalog
+          context: architect
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
           chart: "nginx-ingress-controller-app"
