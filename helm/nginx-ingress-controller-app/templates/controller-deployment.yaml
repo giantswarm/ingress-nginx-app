@@ -136,9 +136,9 @@ spec:
         {{- if .Values.controller.extraEnvs }}
           {{- toYaml .Values.controller.extraEnvs | nindent 8 }}
         {{- end }}
-        {{- if .Values.controller.resources }}
+        {{- with .Values.controller.resources }}
         resources:
-{{ toYaml .Values.controller.resources | indent 10 }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- if .Values.controller.livenessProbe.enabled }}
         livenessProbe:
