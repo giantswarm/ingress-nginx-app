@@ -7,6 +7,14 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Reduced default resource requests to upstream values.
+
+### Removed
+
+- Support for `cluster.profile` parameter. This parameter was not set on either management clusters nor workload clusters and so the default resource requests configured in `controller.resources` got used.
+
 ## [2.11.0] - 2022-04-22
 
 ### Changed
