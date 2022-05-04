@@ -150,8 +150,8 @@ controller:
     # controller.resources.requests
     # These are default resource requests.
     requests:
-      cpu: 100m
-      memory: 90Mi
+      cpu: 500m
+      memory: 600Mi
 
   # controller.terminationGracePeriodSeconds
   # The maximum amount of time NGINX Deployment replica is given to gracefully

@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Reduced default resource requests to upstream values.
+- Reduced default resource requests to former profile `small` and let HPA care about scaling.
 
 ### Removed
 
