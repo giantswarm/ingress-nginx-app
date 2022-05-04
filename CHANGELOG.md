@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Reduced default resource requests to former profile `small` and let HPA care about scaling.
+- Reduced default resource requests to former profile `small` (at least 500m of CPU and 600Mi of memory) and let HPA care about scaling.
 
 ### Removed
 
