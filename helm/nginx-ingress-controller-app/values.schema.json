@@ -5,14 +5,6 @@
         "baseDomain": {
             "type": "string"
         },
-        "cluster": {
-            "type": "object",
-            "properties": {
-                "profile": {
-                    "type": "integer"
-                }
-            }
-        },
         "clusterID": {
             "type": "string"
         },
@@ -294,32 +286,6 @@
                 },
                 "minReadySeconds": {
                     "type": "integer"
-                },
-                "profile": {
-                    "type": "object",
-                    "properties": {
-                        "small": {
-                            "type": "object",
-                            "properties": {
-                                "resources": {
-                                    "type": "object",
-                                    "properties": {
-                                        "requests": {
-                                            "type": "object",
-                                            "properties": {
-                                                "cpu": {
-                                                    "type": ["string", "integer"]
-                                                },
-                                                "memory": {
-                                                    "type": "string"
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 },
                 "readinessProbe": {
                     "type": "object",
