@@ -3,8 +3,10 @@ configmap:
 controller:
   autoscaling:
     enabled: false
+  resources:
+    requests:
+      cpu: 100m
+      memory: 90Mi
   service:
     suffix: "-test"
     type: NodePort
-cluster:
-  profile: 1

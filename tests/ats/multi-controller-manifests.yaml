@@ -19,13 +19,15 @@ data:
         controllerValue: "k8s.io/ingress-nginx2"
       autoscaling:
         enabled: false
+      resources:
+        requests:
+          cpu: 100m
+          memory: 90Mi
       service:
         type: NodePort
         nodePorts:
           http: 30012
           https: 30013
-    cluster:
-      profile: 1
 kind: ConfigMap
 metadata:
   name: second-ingress-controller-cm
