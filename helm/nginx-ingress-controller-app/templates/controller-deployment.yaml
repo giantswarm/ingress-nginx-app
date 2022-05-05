@@ -136,15 +136,9 @@ spec:
         {{- if .Values.controller.extraEnvs }}
           {{- toYaml .Values.controller.extraEnvs | nindent 8 }}
         {{- end }}
-        {{- if .Values.cluster.profile }}
-        {{- if gt (.Values.cluster.profile | int) 2 }}
+        {{- with .Values.controller.resources }}
         resources:
-          {{- if eq (.Values.cluster.profile | toString) "3" }}
-{{ toYaml .Values.controller.profile.small.resources | indent 10 }}
-          {{- else }}
-{{ toYaml .Values.controller.resources | indent 10 }}
-          {{- end }}
-        {{- end }}
+          {{- toYaml . | nindent 10 }}
         {{- end }}
         {{- if .Values.controller.livenessProbe.enabled }}
         livenessProbe:

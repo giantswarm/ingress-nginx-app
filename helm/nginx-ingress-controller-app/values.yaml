@@ -148,28 +148,10 @@ controller:
   resources:
 
     # controller.resources.requests
-    # These are default resource requests when the cluster profile is not
-    # known or when the cluster is larger than "small"
+    # These are default resource requests.
     requests:
-      cpu: 2
-      memory: 2.5Gi
-
-  # controller.profile
-  # Contains resource request profiles that could get selected based on the
-  # value of cluster.profile.
-  # A profile is a set of preconfigured values for the
-  # "spec.template.spec.containers.resources.requests" field of the Deployment
-  # resource.
-  profile:
-    # xxs (1) cluster profile - 1 worker node only - resource requests are not being set
-    # xs (2) cluster profile - 2-3 worker nodes, max CPU < 4 - resource requests are not being set
-    # TODO set resource requests same as small once coredns scale and resources are cluster profile adjusted https://github.com/giantswarm/giantswarm/issues/9316
-    # small (3) cluster profile - > 3 worker nodes, max CPU still < 4
-    small:
-      resources:
-        requests:
-          cpu: 500m
-          memory: 600Mi
+      cpu: 500m
+      memory: 600Mi
 
   # controller.terminationGracePeriodSeconds
   # The maximum amount of time NGINX Deployment replica is given to gracefully
@@ -459,18 +441,3 @@ clusterID: uun5a
 # The provider that the cluster is running on.
 # This value is set automatically, Do not overwrite this value.
 provider: aws
-
-# cluster
-cluster:
-
-  # cluster.profile
-  # Supported values are 1 for extra extra small, 2 for extra small, 3 for small,
-  # and currently any value higher than 3 when actual cluster profile is larger
-  # than small or unknown. By default HPA and PDB are disabled, and resource
-  # requests unset for extra extra small clusters and extra small clusters.
-  # On small clusters some small resource requests are made, HPA and PDB are
-  # enabled by default. On larger than small clusters HPA and PDB are enabled by
-  # default, and non-trivial resource requests set for some out-of-the-box
-  # guaranteed capacity.
-  # This value is set automatically. Do not overwrite this value.
-  profile: 4
