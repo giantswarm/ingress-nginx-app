@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Update controller container image to [`v1.2.1`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#121) which removes the root and alias directives from the internal NGIXN. ([#311](https://github.com/giantswarm/nginx-ingress-controller-app/pull/311))
+- Update controller container image to [`v1.2.1`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#121) which removes the root and alias directives from the internal NGINX. ([#311](https://github.com/giantswarm/nginx-ingress-controller-app/pull/311))
 
 ## [2.12.0] - 2022-05-13
 
