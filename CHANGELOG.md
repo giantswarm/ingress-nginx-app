@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.12.1] - 2022-06-09
+
 ### Changed
 
 - Update controller container image to [`v1.2.1`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#121) which removes the root and alias directives from the internal NGINX. ([#311](https://github.com/giantswarm/nginx-ingress-controller-app/pull/311))
@@ -542,7 +544,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.12.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.12.1...HEAD
+[2.12.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.12.0...v2.12.1
 [2.12.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.11.0...v2.12.0
 [2.11.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.9.1...v2.10.0
