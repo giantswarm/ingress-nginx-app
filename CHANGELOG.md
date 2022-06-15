@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Optional: Topology spread constraints for pod assignment (requires Kubernetes >= 1.19). Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints. Important: We strongly suggest you review these settings before applying onto your clusters. This document https://docs.giantswarm.io/advanced/high-availability/multi-az/ gives more insight.
+
 ## [2.12.1] - 2022-06-09
 
 ### Changed

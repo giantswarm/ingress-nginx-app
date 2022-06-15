@@ -60,6 +60,30 @@ controller:
   # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   antiAffinityScheduling: preferredDuringSchedulingIgnoredDuringExecution
 
+  # controller.topologySpreadConstraints
+  # Topology spread constraints for pod assignment (requires Kubernetes >= 1.19)
+  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+  # Important: We strongly suggest you review these settings before applying onto your clusters.
+  # This document https://docs.giantswarm.io/advanced/high-availability/multi-az/ gives more insight.
+  topologySpreadConstraints: ""
+  # topologySpreadConstraints: |-
+  #   - labelSelector:
+  #       matchLabels:
+  #         app.kubernetes.io/name: {{ include "name" . | quote }}
+  #         app.kubernetes.io/instance: {{ .Release.Name | quote }}
+  #         app.kubernetes.io/component: controller
+  #     topologyKey: topology.kubernetes.io/zone
+  #     maxSkew: 1
+  #     whenUnsatisfiable: ScheduleAnyway
+  #   - labelSelector:
+  #       matchLabels:
+  #         app.kubernetes.io/name: {{ include "name" . | quote }}
+  #         app.kubernetes.io/instance: {{ .Release.Name | quote }}
+  #         app.kubernetes.io/component: controller
+  #     topologyKey: kubernetes.io/hostname
+  #     maxSkew: 1
+  #     whenUnsatisfiable: ScheduleAnyway
+
   # controller.maxSurge
   # Configures maximum number of replicas that can be created over
   # the desired number of Pods.
