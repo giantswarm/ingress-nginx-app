@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Allow users to specify custom `nodeAffinity` configuration through `controller.nodeAffinity` configuration value. ([#313](https://github.com/giantswarm/nginx-ingress-controller-app/pull/313))
+
 ## [2.12.1] - 2022-06-09
 
 ### Changed

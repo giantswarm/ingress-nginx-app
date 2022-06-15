@@ -60,6 +60,18 @@ controller:
   # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   antiAffinityScheduling: preferredDuringSchedulingIgnoredDuringExecution
 
+  # controller.nodeAffinity
+  # Allows to set nodeAffinity scheduling configuration.
+  # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+  nodeAffinity:
+  #  requiredDuringSchedulingIgnoredDuringExecution:
+  #    nodeSelectorTerms:
+  #    - matchExpressions:
+  #      - key: giantswarm.io/machine-deployment
+  #        operator: In
+  #        values:
+  #        - ab123
+
   # controller.maxSurge
   # Configures maximum number of replicas that can be created over
   # the desired number of Pods.

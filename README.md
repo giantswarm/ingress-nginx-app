@@ -44,7 +44,7 @@ Version [2.2.0](./CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller
 ### Prerequisites
 - kubernetes version >= 1.19
 - requires `networking.k8s.io/v1` (`extensions/v1beta1` or `networking.k8s.io/v1beta1` are no longer supported)
-- An IngressClass (One will be created when installing app version [2.2.0](./CHANGELOG.md#220---2021-09-09))
+- An IngressClass (One will be created when installing app version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/CHANGELOG.md#220---2021-09-09))
 
 Additionally, you'll have to make sure your Ingress resources are using the `spec.IngressClassName` (or the deprecated `kubernetes.io/ingress.class` annotation) matching the name of your IngressClass (default `nginx`).
 
@@ -53,7 +53,7 @@ In case it is not possible to update all Ingress resources to specify the `spec.
 You can find more information in the upstream [migration to networking.k8s.io/v1 FAQ](https://github.com/kubernetes/ingress-nginx/blob/main/docs/index.md#faq---migration-to-apiversion-networkingk8siov1).
 
 If you are installing [multiple nginx ingress controllers](https://docs.giantswarm.io/advanced/ingress/multi-nginx-ic/)
-each needs to have a unique ingress class. You also need to use the values structure below. 
+each needs to have a unique ingress class. You also need to use the values structure below.
 **Note:** This is a **breaking change** from older releases which used `controller.ingressClass`.
 
 e.g.
@@ -63,6 +63,8 @@ controller:
     name: nginx-internal
     controllerValue: "k8s.io/ingress-nginx-internal"
 ```
+
+**Attention:** It is not possible to change the `controller.ingressClassResource` values after installation. If you need to change these values, you'll need to uninstall first.
 
 ## Installing
 
@@ -170,13 +172,13 @@ facilitate this process.
 
 ## Configuration Options
 
-All configuration options are documented in the [values.yaml](/helm/nginx-ingress-controller-app/values.yaml) file.
+All configuration options are documented in the [values.yaml](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/helm/nginx-ingress-controller-app/values.yaml) file.
 
 ### Internal nginx IC options
 
-This chart contains a template for an additional [internal service](helm/nginx-ingress-controller-app/templates/controller-service-internal.yaml) to cover the use case of having separate internal and external ingress routes with a single nginx IC instance. 
+This chart contains a template for an additional [internal service](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/helm/nginx-ingress-controller-app/templates/controller-service-internal.yaml) to cover the use case of having separate internal and external ingress routes with a single nginx IC instance.
 
-Valid configuration options are as follows: 
+Valid configuration options are as follows:
 
 **Only external (default)**
 
@@ -184,7 +186,7 @@ This is the default behavior. No additional configuration required.
 
  **Make default service internal**
 
-This configures the [default service](helm/nginx-ingress-controller-app/templates/controller-service.yaml) to spawn an internal facing load balancer. This disables the external ingress.
+This configures the [default service](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/helm/nginx-ingress-controller-app/templates/controller-service.yaml) to spawn an internal facing load balancer. This disables the external ingress.
  ```yaml
 controller:
   service:
@@ -236,7 +238,7 @@ $ helm install nginx-ingress-controller-app -f values.yaml
 * Ensure CHANGELOG.md is up to date.
 * Create a new branch with name `master#release#vX.X.X`. Automation will create a release PR.
 * Merging the release PR will push a new git tag and trigger a new tarball to be pushed to the
-[giantswarm-catalog] and [default-catalog].
+[giantswarm-catalog].
 * Test and verify the ingress controller release across supported environments in a new or existing WIP platform release.
 
 # What is this repo?
@@ -255,8 +257,6 @@ default app (i.e. it gets installed automatically during cluster creation)
 [app-operator]: https://github.com/giantswarm/app-operator
 [giantswarm-catalog]: https://github.com/giantswarm/giantswarm-catalog
 [giantswarm-test-catalog]: https://github.com/giantswarm/giantswarm-test-catalog
-[default-catalog]: https://github.com/giantswarm/default-catalog
-[default-test-catalog]: https://github.com/giantswarm/default-test-catalog
 [nginx ingress controller]: https://github.com/kubernetes/ingress-nginx
 [Giant Swarm App Platform]: https://docs.giantswarm.io/app-platform/overview/
 [Kubernetes Ingress docs]: https://kubernetes.io/docs/concepts/services-networking/ingress/

@@ -38,6 +38,9 @@ spec:
         {{- end }}
     spec:
       affinity:
+        {{- with .Values.controller.nodeAffinity }}
+        nodeAffinity: {{ toYaml . | nindent 10 }}
+        {{- end }}
         podAntiAffinity:
           {{ .Values.controller.antiAffinityScheduling }}:
           - weight: 100
