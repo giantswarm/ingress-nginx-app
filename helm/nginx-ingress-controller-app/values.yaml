@@ -60,6 +60,18 @@ controller:
   # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
   antiAffinityScheduling: preferredDuringSchedulingIgnoredDuringExecution
 
+  # controller.nodeAffinity
+  # Allows to set nodeAffinity scheduling configuration.
+  # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+  nodeAffinity:
+  #  requiredDuringSchedulingIgnoredDuringExecution:
+  #    nodeSelectorTerms:
+  #    - matchExpressions:
+  #      - key: giantswarm.io/machine-deployment
+  #        operator: In
+  #        values:
+  #        - ab123
+
   # controller.topologySpreadConstraints
   # Topology spread constraints for pod assignment (requires Kubernetes >= 1.19)
   # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/

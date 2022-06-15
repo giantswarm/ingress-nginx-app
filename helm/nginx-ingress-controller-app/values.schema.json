@@ -290,6 +290,9 @@
                 "minReadySeconds": {
                     "type": "integer"
                 },
+                "nodeAffinity": {
+                    "type": ["object", "null"]
+                },
                 "readinessProbe": {
                     "type": "object",
                     "properties": {
