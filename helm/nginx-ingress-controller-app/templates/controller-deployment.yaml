@@ -53,9 +53,9 @@ spec:
                   values:
                   - {{ .Release.Name | quote }}
               topologyKey: kubernetes.io/hostname
-      {{- if .Values.topologySpreadConstraints }}
+      {{- if .Values.controller.topologySpreadConstraints }}
       topologySpreadConstraints:
-      {{- tpl .Values.topologySpreadConstraints . | indent 6 }}
+      {{- tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
       {{- end }}
       serviceAccountName: {{ include "resource.default.name"  . }}
       priorityClassName: system-cluster-critical
