@@ -55,7 +55,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       {{- if .Values.controller.topologySpreadConstraints }}
       topologySpreadConstraints:
-      {{- tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
+{{ tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
       {{- end }}
       serviceAccountName: {{ include "resource.default.name"  . }}
       priorityClassName: system-cluster-critical
