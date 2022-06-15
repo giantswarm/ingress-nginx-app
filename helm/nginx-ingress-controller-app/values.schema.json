@@ -113,6 +113,9 @@
                 "antiAffinityScheduling": {
                     "type": "string"
                 },
+                "topologySpreadConstraints": {
+                    "type": "string"
+                },
                 "autoscaling": {
                     "type": "object",
                     "properties": {
