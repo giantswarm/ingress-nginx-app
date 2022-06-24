@@ -446,31 +446,12 @@ initContainer:
 podSecurityPolicy:
   enabled: true
 
-# ingressController.controlPlane
-# Defines if this app is installed into management-cluster.
-#
-# ingressController.configmap
-# These values get applied directly to a configmap which configures the
-# nginx-ingress-controller
-# For all the nginx configmap config options see:
-# https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
-# This is used  for management-cluster specific configuration, which can be applied via control-plane catalog.
-ingressController:
-  controlPlane: false
-  configmap: {}
-
-
 # Below are configuration values that you should not overwrite or set yourself.
 
 # baseDomain
 # The base domain for this ingress.
 # This value is set automatically. Do not overwrite this value.
-baseDomain: uun5a.k8s.ginger.eu-central-1.aws.gigantic.io
-
-# clusterID
-# The id of the cluster that this app is installed on.
-# This value is set automatically. Do not overwrite this value.
-clusterID: uun5a
+baseDomain:
 
 # provider (aws|kvm|azure)
 # The provider that the cluster is running on.
