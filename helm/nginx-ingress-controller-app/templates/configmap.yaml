@@ -8,6 +8,3 @@ metadata:
 data:
   allow-snippet-annotations: "{{ .Values.controller.allowSnippetAnnotations }}"
   {{- toYaml .Values.configmap | trim | nindent 2 }}
-  {{- if .Values.ingressController.controlPlane }}
-  {{- toYaml .Values.ingressController.configmap | trim | nindent 2 }}
-  {{- end }}

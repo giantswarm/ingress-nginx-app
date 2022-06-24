@@ -7,6 +7,15 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- externalDNS annotations won't no longer be set on the ingress services if `baseDomain` is not set. ([#321](https://github.com/giantswarm/nginx-ingress-controller-app/pull/321))
+
+### Removed
+
+- Default value for `baseDomain` configuration value automatically set for workload cluster installations. ([#321](https://github.com/giantswarm/nginx-ingress-controller-app/pull/321))
+- Unused configuration values for chart installations on management clusters. ([#321](https://github.com/giantswarm/nginx-ingress-controller-app/pull/321))
+
 ## [2.13.1] - 2022-06-16
 
 ### Changed
