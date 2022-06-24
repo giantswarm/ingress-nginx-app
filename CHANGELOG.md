@@ -9,6 +9,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [2.13.1] - 2022-06-16
 
+### Changed
+
+- Enable topology spread constraints by default. ([#318](https://github.com/giantswarm/nginx-ingress-controller-app/pull/318))
+
 ## [2.13.0] - 2022-06-15
 
 ### Added
