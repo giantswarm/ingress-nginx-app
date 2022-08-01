@@ -3,6 +3,9 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
+  {{- range $key, $value := .Values.controller.service.internal.annotations }}
+    {{ $key }}: {{ $value | quote }}
+  {{- end }}
   {{- if and .Values.controller.service.externalDNS.enabled .Values.baseDomain }}
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.controller.service.internal.subdomain }}.{{ .Values.baseDomain }}
     {{- if .Values.controller.service.externalDNS.annotation }}

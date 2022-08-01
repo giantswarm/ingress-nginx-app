@@ -321,6 +321,8 @@ controller:
       # controller.service.internal.enabled
       enabled: false
 
+      annotations: {}
+
       # controller.service.internal.subdomain
       # Applies to clusters running on AWS or Azure.
       # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
