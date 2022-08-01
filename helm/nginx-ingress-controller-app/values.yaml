@@ -330,6 +330,12 @@ controller:
       annotations: {}
       labels: {}
 
+      # controller.service.internal.externalTrafficPolicy
+      # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
+      #   Local - kube-proxy only proxies requests to local endpoints (does not forward traffic to other nodes), source IP preserved
+      #   Cluster - kube-proxy proxies requests randomly across all endpoints (forwards traffic to other nodes if necessary), source IP NAT'd
+      externalTrafficPolicy: "Local"
+
       # controller.service.internal.subdomain
       # Applies to clusters running on AWS or Azure.
       # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
@@ -346,12 +352,6 @@ controller:
       nodePorts:
         http: 30012
         https: 30013
-
-      # controller.service.internal.externalTrafficPolicy
-      # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
-      #   Local - kube-proxy only proxies requests to local endpoints (does not forward traffic to other nodes), source IP preserved
-      #   Cluster - kube-proxy proxies requests randomly across all endpoints (forwards traffic to other nodes if necessary), source IP NAT'd
-      externalTrafficPolicy: "Local"
 
   # controller.admissionWebhooks
   # Admission webhook support for Ingress resources can be enabled to prevent incorrectly formatted
