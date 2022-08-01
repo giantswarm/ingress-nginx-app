@@ -7,6 +7,15 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Support for annotations, labels and suffix on the internal controller service.
+
+### Changed
+
+- Aligned internal controller service and its configuration parameters to the normal one.
+- Omit `service.beta.kubernetes.io/aws-load-balancer-proxy-protocol` for `use-proxy-protocol: "false"`.
+
 ## [2.14.0] - 2022-06-24
 
 ### Changed
