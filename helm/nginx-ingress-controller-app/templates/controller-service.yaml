@@ -35,8 +35,8 @@ metadata:
   labels:
     {{- include "labels.common" . | nindent 4 }}
     app.kubernetes.io/component: controller
-  {{- if .Values.controller.service.labels }}
-    {{- toYaml .Values.controller.service.labels | nindent 4 }}
+  {{- with .Values.controller.service.labels }}
+    {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   type: {{ .Values.controller.service.type }}
