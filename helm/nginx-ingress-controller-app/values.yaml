@@ -321,6 +321,12 @@ controller:
       # controller.service.internal.enabled
       enabled: false
 
+      # controller.service.internal.suffix
+      # Suffix to add to the LoadBalancer Service name. This is useful for
+      # OpenStack where cloud controller creates and references LBs by the name
+      # and the namespace of the Service.
+      suffix: ""
+
       annotations: {}
 
       # controller.service.internal.subdomain

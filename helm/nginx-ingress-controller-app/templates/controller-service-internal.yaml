@@ -26,7 +26,7 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
   {{- end }}
   {{- end }}
-  name: {{ include "resource.default.name" . }}-internal
+  name: {{ include "resource.controller-service-internal.name" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "labels.common" . | nindent 4 }}

@@ -389,6 +389,9 @@
                                 "subdomain": {
                                     "type": "string"
                                 },
+                                "suffix": {
+                                    "type": "string"
+                                },
                                 "type": {
                                     "type": "string"
                                 }
