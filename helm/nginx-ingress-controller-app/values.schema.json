@@ -364,6 +364,9 @@
                                 "externalTrafficPolicy": {
                                     "type": "string"
                                 },
+                                "labels": {
+                                    "type": "object"
+                                },
                                 "nodePorts": {
                                     "type": "object",
                                     "properties": {

@@ -328,6 +328,7 @@ controller:
       suffix: ""
 
       annotations: {}
+      labels: {}
 
       # controller.service.internal.subdomain
       # Applies to clusters running on AWS or Azure.
