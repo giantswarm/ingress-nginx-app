@@ -9,7 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Added
 
-- Support for annotations, labels and suffix on the internal controller service.
+- Support for annotations, labels and suffix on the internal controller service.\
+  **NOTE:** Adding, changing or removing the `suffix` results in a different name of the controller service resource. Since Helm does not keep track of the old resource, we recommend to uninstall and reinstall the app when changing the suffix.
 
 ### Changed
 
