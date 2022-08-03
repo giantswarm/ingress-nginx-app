@@ -355,11 +355,17 @@
                         "internal": {
                             "type": "object",
                             "properties": {
+                                "annotations": {
+                                    "type": "object"
+                                },
                                 "enabled": {
                                     "type": "boolean"
                                 },
                                 "externalTrafficPolicy": {
                                     "type": "string"
+                                },
+                                "labels": {
+                                    "type": "object"
                                 },
                                 "nodePorts": {
                                     "type": "object",
@@ -384,6 +390,9 @@
                                     }
                                 },
                                 "subdomain": {
+                                    "type": "string"
+                                },
+                                "suffix": {
                                     "type": "string"
                                 },
                                 "type": {
