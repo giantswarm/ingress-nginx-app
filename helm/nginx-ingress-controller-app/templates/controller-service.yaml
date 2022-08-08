@@ -18,8 +18,8 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
     {{- end }}
-    {{- if index .Values.configmap "use-proxy-protocol" }}
-    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: '*'
+    {{- if eq (index .Values.configmap "use-proxy-protocol") "true" }}
+    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
     {{- end }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
   {{- else if eq .Values.provider "azure" }}
@@ -30,14 +30,14 @@ metadata:
     {{- end }}
   {{- end }}
   {{- end }}
+  name: {{ include "resource.controller-service.name" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
     app.kubernetes.io/component: controller
   {{- if .Values.controller.service.labels }}
     {{- toYaml .Values.controller.service.labels | nindent 4 }}
   {{- end }}
-  name: {{ include "resource.controller-service.name" . }}
-  namespace: {{ .Release.Namespace }}
 spec:
   type: {{ .Values.controller.service.type }}
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
