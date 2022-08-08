@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update initContainer v3.15.5
+
 ## [2.15.0] - 2022-08-03
 
 ### Added
