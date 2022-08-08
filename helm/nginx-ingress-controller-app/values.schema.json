@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {
         "baseDomain": {
-            "type": ["null", "string"]
+            "type": "null"
         },
         "configmap": {
             "type": "object",
@@ -38,8 +38,7 @@
                             "type": "boolean"
                         },
                         "failurePolicy": {
-                            "type": "string",
-                            "enum": ["Ignore", "Fail"]
+                            "type": "string"
                         },
                         "patch": {
                             "type": "object",
@@ -96,8 +95,7 @@
                             }
                         },
                         "timeoutSeconds": {
-                            "type": "integer",
-                            "minimum": 0
+                            "type": "integer"
                         }
                     }
                 },
@@ -198,20 +196,6 @@
                         },
                         "name": {
                             "type": "string"
-                        },
-                        "parameters": {
-                            "type": "object",
-                            "properties": {
-                                "apiGroup": {
-                                    "type": "string"
-                                },
-                                "kind": {
-                                    "type": "string"
-                                },
-                                "name": {
-                                    "type": "string"
-                                }
-                            }
                         }
                     }
                 },
@@ -285,7 +269,7 @@
                     "type": "integer"
                 },
                 "nodeAffinity": {
-                    "type": ["object", "null"]
+                    "type": "null"
                 },
                 "readinessProbe": {
                     "type": "object",
@@ -320,7 +304,7 @@
                             "type": "object",
                             "properties": {
                                 "cpu": {
-                                    "type": ["string", "integer"]
+                                    "type": "string"
                                 },
                                 "memory": {
                                     "type": "string"
