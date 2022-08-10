@@ -90,3 +90,18 @@ workflows:
             tags:
               only: /^v.*/
 
+      - architect/push-to-app-collection:
+          context: architect
+          name: push-to-gcp-app-collection
+          app_name: "nginx-ingress-controller-app"
+          app_namespace: "kube-system"
+          app_catalog: "giantswarm"
+          app_collection_repo: "gcp-app-collection"
+          requires:
+            - push-to-giantswarm-app-catalog
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
+
