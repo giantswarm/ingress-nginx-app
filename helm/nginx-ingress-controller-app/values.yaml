@@ -179,6 +179,10 @@ controller:
       # Configures the port that the metrics service is listening on.
       servicePort: 10254
 
+      # controller.metrics.service.labels
+      # Labels to add to the metrics service.
+      labels: {}
+
   # controller.resources
   resources:
 

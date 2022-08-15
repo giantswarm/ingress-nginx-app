@@ -276,6 +276,9 @@
                             "properties": {
                                 "servicePort": {
                                     "type": "integer"
+                                },
+                                "labels": {
+                                    "type": "object"
                                 }
                             }
                         }
