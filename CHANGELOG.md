@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Support for labels on the controller metrics service.
+
 ## [2.15.1] - 2022-08-08
 
 ### Changed
