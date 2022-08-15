@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.15.2] - 2022-08-15
+
 ### Added
 
 - Support for labels on the controller metrics service.
@@ -590,7 +592,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.15.1...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.15.2...HEAD
+[2.15.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.15.1...v2.15.2
 [2.15.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.15.0...v2.15.1
 [2.15.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.14.0...v2.15.0
 [2.14.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.13.1...v2.14.0
