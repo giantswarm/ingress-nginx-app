@@ -91,6 +91,13 @@ rules:
   - get
   - list
   - watch
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - list
+  - watch
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
@@ -169,6 +176,21 @@ rules:
   verbs:
   - create
   - patch
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  resourceNames:
+  - "{{ include "controller.leader.election.id" . }}"
+  verbs:
+  - get
+  - update
+- apiGroups:
+  - coordination.k8s.io
+  resources:
+  - leases
+  verbs:
+  - create
 {{- if .Values.podSecurityPolicy.enabled }}
 ---
 apiVersion: rbac.authorization.k8s.io/v1
