@@ -39,7 +39,7 @@ updates to the Ingress resource.
 
 ## Upgrading notes
 
-Version [2.2.0](./CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
+Version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
 
 ### Prerequisites
 - kubernetes version >= 1.19
