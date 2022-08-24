@@ -12,6 +12,7 @@ This release removes support for Kubernetes v1.19.0 and adds support for Kuberne
 ### Changed
 
 - Update controller container image to [`v1.3.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#130). ([#335](https://github.com/giantswarm/nginx-ingress-controller-app/pull/335))
+- Increase default replica count to 2. ([#335](https://github.com/giantswarm/nginx-ingress-controller-app/pull/335))
 
 ## [2.15.2] - 2022-08-15
 
