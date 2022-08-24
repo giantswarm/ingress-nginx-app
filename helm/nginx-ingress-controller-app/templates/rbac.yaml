@@ -181,7 +181,7 @@ rules:
   resources:
   - leases
   resourceNames:
-  - {{ .Values.controller.electionID }}
+  - "{{ include "controller.leader.election.id" . }}"
   verbs:
   - get
   - update
