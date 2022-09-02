@@ -7,4 +7,8 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
 data:
   allow-snippet-annotations: "{{ .Values.controller.allowSnippetAnnotations }}"
-  {{- toYaml .Values.configmap | trim | nindent 2 }}
+  {{- if eq .Values.provider "aws" }}
+    {{- merge .Values.configmap .Values.aws.configmap | toYaml | trim | nindent 2 }}
+  {{- else }}
+    {{- toYaml .Values.configmap | trim | nindent 2 }}
+  {{- end }}

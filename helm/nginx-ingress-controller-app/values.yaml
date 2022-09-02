@@ -470,3 +470,9 @@ baseDomain:
 # The provider that the cluster is running on.
 # This value is set automatically, Do not overwrite this value.
 provider: aws
+
+# aws
+# Provider specific default options. Internal use only.
+aws:
+  configmap:
+    use-proxy-protocol: "true"
