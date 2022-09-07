@@ -1,3 +1,4 @@
+provider: kind
 configmap:
   worker-processes: "2"
 controller:
