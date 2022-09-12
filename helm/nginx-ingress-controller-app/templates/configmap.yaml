@@ -7,8 +7,7 @@ metadata:
     {{- include "labels.common" . | nindent 4 }}
 data:
   allow-snippet-annotations: "{{ .Values.controller.allowSnippetAnnotations }}"
-  {{- if eq .Values.provider "aws" }}
-    {{- merge .Values.configmap .Values.aws.configmap | toYaml | trim | nindent 2 }}
-  {{- else }}
-    {{- toYaml .Values.configmap | trim | nindent 2 }}
+  {{- toYaml .Values.configmap | trim | nindent 2 }}
+  {{- if and (eq .Values.provider "aws") (not (index .Values.configmap "use-proxy-protocol")) }}
+  use-proxy-protocol: "true"
   {{- end }}

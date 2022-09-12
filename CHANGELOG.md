@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Add provider specific configmap with `configmap.use-proxy-protocol` enabled by default for AWS.
+- Enable `configmap.use-proxy-protocol` by default for AWS. Hint: Before this was achieved by `cluster-operator` setting `configmap.use-proxy-protocol` in the cluster values.
 
 ## [2.16.0] - 2022-08-24
 
