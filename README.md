@@ -161,14 +161,23 @@ See our [full reference page on how to configure applications](https://docs.gian
 
 ### Important note about required cluster level config
 
+#### Version 2.17 and above.
+
+Starting from version 2.17, the nginx-ingress-controller-app does not requires the dedicated 
+`ingress-controller-values` ConfigMap. Instead, it can make use of the `<CLUSTER_NAME>-cluster-values`.
+
+When creating this App using our web interface or our API, `spec.config` will be set automatically, 
+but if you are creating the App CR yourself you must remember to do this. 
+
+#### Older versions.
+
 The `ingress-controller-values` ConfigMap referenced in the `spec.config` field of the App CR
 is required for the ingress controller to work properly.
 
 `ingress-controller-values` is created by our operators and it helps set values
 unique to your workload cluster. When creating this App using our web interface or
 our API, `spec.config` will be set automatically, but if you are creating the App CR
-yourself you must remember to do this. We are working on a kubectl plugin to
-facilitate this process.
+yourself you must remember to do this. 
 
 ## Configuration Options
 
@@ -207,6 +216,12 @@ controller:
 Other possible configurations are:
 - Two internal load balancer
 - Disable default service completely `controller.service.enabled: false`
+
+### AWS and PROXY Protocol
+
+Since version 2.17, this chart has the `use-proxy-procotol` enabled by default when installed in AWS. 
+
+To disable this behavior, it's still possible to set `configmap.use-proxy-protocol: "false"` in the values file.
 
 ## Limitations
 
