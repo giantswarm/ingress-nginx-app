@@ -163,7 +163,7 @@ See our [full reference page on how to configure applications](https://docs.gian
 
 #### Version 2.17 and above.
 
-Starting from version 2.17, the nginx-ingress-controller-app does not requires the dedicated 
+Starting from version 2.17, the nginx-ingress-controller-app does not require the dedicated 
 `ingress-controller-values` ConfigMap. Instead, it can make use of the `<CLUSTER_NAME>-cluster-values`.
 
 When creating this App using our web interface or our API, `spec.config` will be set automatically, 
