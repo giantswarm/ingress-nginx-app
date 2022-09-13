@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Enable `configmap.use-proxy-protocol` by default for AWS. Hint: Before this was achieved by `cluster-operator` setting `configmap.use-proxy-protocol` in the cluster values.
+
 ## [2.16.0] - 2022-08-24
 
 This release removes support for Kubernetes v1.19.0 and adds support for Kubernetes v1.24.0
