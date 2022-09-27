@@ -36,9 +36,8 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.controller.service.internal.type }}
-  {{- if eq .Values.controller.service.internal.type "LoadBalancer" }}
-  loadBalancerSourceRanges:
-  - 0.0.0.0/0
+  {{- with .Values.controller.service.internal.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges: {{ toYaml . | nindent 2 }}
   {{- end }}
   ports:
   - name: http

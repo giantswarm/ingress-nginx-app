@@ -370,6 +370,9 @@
                                 "labels": {
                                     "type": "object"
                                 },
+                                "loadBalancerSourceRanges": {
+                                    "type": "array"
+                                },
                                 "nodePorts": {
                                     "type": "object",
                                     "properties": {
@@ -405,6 +408,9 @@
                         },
                         "labels": {
                             "type": "object"
+                        },
+                        "loadBalancerSourceRanges": {
+                            "type": "array"
                         },
                         "nodePorts": {
                             "type": "object",
