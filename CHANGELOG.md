@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- `controller.service.loadBalancerSourceRanges` & `controller.service.internal.loadBalancerSourceRanges` for configuring source IP address ranges which can access the ingress service.
+
 ## [2.17.0] - 2022-09-13
 
 ### Changed

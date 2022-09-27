@@ -304,6 +304,11 @@ controller:
     # Valid values: LoadBalancer, NodePort
     type: LoadBalancer
 
+    # controller.service.loadBalancerSourceRanges
+    # Configures the source IP address ranges which can connect to the service.
+    # By default any source IP address can connect to the service.
+    loadBalancerSourceRanges: []
+
     ports:
       http: 80
       https: 443
@@ -347,6 +352,11 @@ controller:
 
       # controller.service.internal.type
       type: LoadBalancer
+
+      # controller.service.internal.loadBalancerSourceRanges
+      # Configures the source IP address ranges which can connect to the service.
+      # By default any source IP address can connect to the service.
+      loadBalancerSourceRanges: []
 
       ports:
         http: 80
