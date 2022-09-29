@@ -353,7 +353,8 @@
                             }
                         },
                         "externalTrafficPolicy": {
-                            "type": "string"
+                            "type": "string",
+                            "pattern": "(Local|Cluster)"
                         },
                         "internal": {
                             "type": "object",
@@ -365,7 +366,8 @@
                                     "type": "boolean"
                                 },
                                 "externalTrafficPolicy": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "pattern": "(Local|Cluster)"
                                 },
                                 "labels": {
                                     "type": "object"
