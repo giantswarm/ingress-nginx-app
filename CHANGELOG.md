@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Validation for `controller.service.externalTrafficPolicy` and `controller.service.internal.externalTrafficPolicy` to only allow `Local` and `Cluster`. ([#344](https://github.com/giantswarm/nginx-ingress-controller-app/pull/344))
+
 ## [2.18.0] - 2022-09-27
 
 ### Added
