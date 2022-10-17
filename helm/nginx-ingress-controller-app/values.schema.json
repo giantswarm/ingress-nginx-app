@@ -274,11 +274,11 @@
                         "service": {
                             "type": "object",
                             "properties": {
-                                "servicePort": {
-                                    "type": "integer"
-                                },
                                 "labels": {
                                     "type": "object"
+                                },
+                                "servicePort": {
+                                    "type": "integer"
                                 }
                             }
                         }
