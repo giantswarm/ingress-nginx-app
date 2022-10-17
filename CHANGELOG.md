@@ -11,6 +11,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add support to create internal Load Balancers on GCP.
 
+### Removed
+
+- Disable `PodSecurityPolicy` for Kubernetes >= v1.25. ([#352](https://github.com/giantswarm/nginx-ingress-controller-app/pull/352))
+
 ## [2.18.2] - 2022-10-17
 
 ### Changed
