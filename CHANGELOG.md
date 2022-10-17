@@ -11,6 +11,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Add support to create internal Load Balancers on GCP.
 
+### Changed
+
+- Update controller container image to [`v1.4.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#140). ([#353](https://github.com/giantswarm/nginx-ingress-controller-app/pull/353))
+
 ## [2.18.2] - 2022-10-17
 
 ### Changed
