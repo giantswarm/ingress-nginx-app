@@ -15,6 +15,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Update controller container image to [`v1.4.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#140). ([#353](https://github.com/giantswarm/nginx-ingress-controller-app/pull/353))
 
+### Removed
+
+- Disable `PodSecurityPolicy` for Kubernetes >= v1.25. ([#352](https://github.com/giantswarm/nginx-ingress-controller-app/pull/352))
+
 ## [2.18.2] - 2022-10-17
 
 ### Changed
