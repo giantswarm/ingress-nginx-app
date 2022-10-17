@@ -15,7 +15,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Update controller container image to [`v1.4.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#140). ([#353](https://github.com/giantswarm/nginx-ingress-controller-app/pull/353))
+- Update controller container image to [`v1.4.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#140). ([#353](https://github.com/giantswarm/nginx-ingress-controller-app/pull/353)) \
+  IMPORTANT NOTE: Please update to any `v2.18.x` version before updating to this version since the controller image version contained in there migrates to the Lease API.
 
 ### Removed
 
