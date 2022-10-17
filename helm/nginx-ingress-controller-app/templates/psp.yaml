@@ -1,3 +1,4 @@
+{{- if (semverCompare "<1.25.0-0" .Capabilities.KubeVersion.Version) }}
 {{- if .Values.podSecurityPolicy.enabled -}}
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
@@ -36,4 +37,5 @@ spec:
   volumes:
   - 'secret'
   - 'configMap'
+{{- end }}
 {{- end }}
