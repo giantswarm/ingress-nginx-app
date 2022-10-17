@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Add support to create internal Load Balancers on GCP.
+
 ## [2.18.2] - 2022-10-17
 
 ### Changed

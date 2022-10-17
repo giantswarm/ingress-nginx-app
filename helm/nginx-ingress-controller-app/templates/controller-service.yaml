@@ -28,6 +28,10 @@ metadata:
     {{- if not .Values.controller.service.public }}
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     {{- end }}
+  {{- else if eq .Values.provider "gcp" }}
+    {{- if not .Values.controller.service.public }}
+    cloud.google.com/load-balancer-type: "Internal"
+    {{- end }}
   {{- end }}
   {{- end }}
   name: {{ include "resource.controller-service.name" . }}
