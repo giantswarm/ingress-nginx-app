@@ -15,12 +15,17 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Update controller container image to [`v1.4.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#140). ([#353](https://github.com/giantswarm/nginx-ingress-controller-app/pull/353)) \
-  IMPORTANT NOTE: Please update to any `v2.18.x` version before updating to this version since the controller image version contained in there migrates to the Lease API.
+- Update controller container image to [`v1.4.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#140). ([#353](https://github.com/giantswarm/nginx-ingress-controller-app/pull/353))
 
 ### Removed
 
 - Disable `PodSecurityPolicy` for Kubernetes >= v1.25. ([#352](https://github.com/giantswarm/nginx-ingress-controller-app/pull/352))
+
+### Important notes
+
+Please upgrade to any `v2.18.x` version before upgrading to this release or above since the controller image contained in there migrates your setup to the Lease API.
+
+Additionally the controller version included in this release deprecates some metric names and introduces others as a replacement. See [this PR](https://github.com/kubernetes/ingress-nginx/pull/8728) and [the upstream docs](https://github.com/kubernetes/ingress-nginx/blob/controller-v1.4.0/docs/user-guide/monitoring.md#exposed-metrics) for more details.
 
 ## [2.18.2] - 2022-10-17
 
