@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.19.0] - 2022-10-17
+
 ### Added
 
 - Add support to create internal Load Balancers on GCP.
@@ -18,6 +20,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Removed
 
 - Disable `PodSecurityPolicy` for Kubernetes >= v1.25. ([#352](https://github.com/giantswarm/nginx-ingress-controller-app/pull/352))
+
+### Important notes
+
+Please upgrade to any `v2.18.x` version before upgrading to this release or above since the controller image contained in there migrates your setup to the Lease API.
+
+Additionally the controller version included in this release deprecates some metric names and introduces others as a replacement. See [this PR](https://github.com/kubernetes/ingress-nginx/pull/8728) and [the upstream docs](https://github.com/kubernetes/ingress-nginx/blob/controller-v1.4.0/docs/user-guide/monitoring.md#exposed-metrics) for more details.
 
 ## [2.18.2] - 2022-10-17
 
@@ -637,7 +645,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.2...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.19.0...HEAD
+[2.19.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.2...v2.19.0
 [2.18.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.1...v2.18.2
 [2.18.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.0...v2.18.1
 [2.18.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.17.0...v2.18.0
