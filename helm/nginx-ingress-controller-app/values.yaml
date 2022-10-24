@@ -13,7 +13,7 @@
 # These values get applied directly to a configmap which configures the
 # nginx-ingress-controller
 # For all the nginx configmap config options see:
-# https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#configmaps
+# https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
 
   # configmap.error-log-level

@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Helpers: Rename `resource.default.name` to `ingress-nginx.fullname`. ([#356](https://github.com/giantswarm/nginx-ingress-controller-app/pull/356))
+- Repository: Rename `master` to `main`. ([#357](https://github.com/giantswarm/nginx-ingress-controller-app/pull/357))
 
 ## [2.19.0] - 2022-10-17
 
@@ -233,7 +234,7 @@ This release contains a potential breaking change in case you are using and rely
 
 ### Changed
 
-- **Breaking change** Update controller container image to [`v1.0.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100). From this version on, only clusters with kubernetes >= 1.19 are supported. Please make sure to read the [upgrading notes](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/README.md#upgrading-notes). ([#218](https://github.com/giantswarm/nginx-ingress-controller-app/pull/218)).
+- **Breaking change** Update controller container image to [`v1.0.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#100). From this version on, only clusters with kubernetes >= 1.19 are supported. Please make sure to read the [upgrading notes](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/README.md#upgrading-notes). ([#218](https://github.com/giantswarm/nginx-ingress-controller-app/pull/218)).
 
 ## [2.1.4] - 2022-04-07
 
@@ -282,7 +283,7 @@ Note: This upgrade is only a breaking change in the unlikely event that you have
 
 ### Changed
 
-- Update controller container image to [`v0.47.0`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0470). ([#204](https://github.com/giantswarm/nginx-ingress-controller-app/pull/204))
+- Update controller container image to [`v0.47.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0470). ([#204](https://github.com/giantswarm/nginx-ingress-controller-app/pull/204))
 
 ## [1.16.1] - 2021-04-20
 
@@ -295,7 +296,7 @@ Note: This upgrade is only a breaking change in the unlikely event that you have
 ### Fixed
 
 - Fixes validation of cpu requests and limits to allow for string and integer values.
-- Update controller container image to [`v0.45.0`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0450) to correct OpenSSL CVEs. ([#188](https://github.com/giantswarm/nginx-ingress-controller-app/pull/188))
+- Update controller container image to [`v0.45.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0450) to correct OpenSSL CVEs. ([#188](https://github.com/giantswarm/nginx-ingress-controller-app/pull/188))
 - Change monitoring service port to `10254`. ([#188](https://github.com/giantswarm/nginx-ingress-controller-app/pull/188))
 
 ## [1.15.1] - 2021-04-01
@@ -308,7 +309,7 @@ Note: This upgrade is only a breaking change in the unlikely event that you have
 
 ### Changed
 
-- Update controller container image to [`v0.44.0`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md)  and kube-webhook-certgen container image to 1.5.1. ([#179](https://github.com/giantswarm/nginx-ingress-controller-app/pull/179))
+- Update controller container image to [`v0.44.0`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md)  and kube-webhook-certgen container image to 1.5.1. ([#179](https://github.com/giantswarm/nginx-ingress-controller-app/pull/179))
 - Remove conflicting admission webhook api versions. ([#178](https://github.com/giantswarm/nginx-ingress-controller-app/pull/178))
 - Remove unecessary annotation. ([#180](https://github.com/giantswarm/nginx-ingress-controller-app/pull/180))
 
@@ -356,18 +357,18 @@ Note: This upgrade is only a breaking change in the unlikely event that you have
 
 ### Changed
 
-- Upgrade ingress-nginx-controller from v0.35.0 to [v0.40.2](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0402).
+- Upgrade ingress-nginx-controller from v0.35.0 to [v0.40.2](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0402).
 
   **Important** upstream changes to pay special attention to:
 
   - App/chart requires Kubernetes 1.16+ based platform release
     - It is recommended to change API group of Ingress resources from `extensions/v1beta1` to `networking.k8s.io/v1beta1` (available since Kubernetes 1.14)
   - Default configuration changes:
-    - [`gzip-level`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#gzip-level) default changed from `5` to `1`
-    - [`ssl-session-tickets`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#ssl-session-tickets) default changed from `true` to `false`
-    - [`use-gzip`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#use-gzip) default changed from `true` to `false`
-    - [`upstream-keepalive-connections`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#upstream-keepalive-connections) changed from `32` to `320`
-    - [`upstream-keepalive-requests`](https://github.com/kubernetes/ingress-nginx/blob/master/docs/user-guide/nginx-configuration/configmap.md#upstream-keepalive-requests) changed from `100` to `10000`
+    - [`gzip-level`](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#gzip-level) default changed from `5` to `1`
+    - [`ssl-session-tickets`](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#ssl-session-tickets) default changed from `true` to `false`
+    - [`use-gzip`](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#use-gzip) default changed from `true` to `false`
+    - [`upstream-keepalive-connections`](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#upstream-keepalive-connections) changed from `32` to `320`
+    - [`upstream-keepalive-requests`](https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#upstream-keepalive-requests) changed from `100` to `10000`
 - Support and enable by default [mimalloc](https://github.com/microsoft/mimalloc) as a drop-in malloc replacement to reduce nginx memory utilization.
 - Support configuring additional environment variables for NGINX Ingress Controller container, to support configuring additional mimalloc [options](https://github.com/microsoft/mimalloc#environment-options).
 - Adjust Helm `hook-delete-policy` and `hook-weight` to make admission webhook management more reliable.
@@ -381,7 +382,7 @@ Note: This upgrade is only a breaking change in the unlikely event that you have
 
 ### Changed
 
-- Upgrade to ingress-nginx [v0.35.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0350).
+- Upgrade to ingress-nginx [v0.35.0](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0350).
 
 ## [1.9.1] - 2020-08-14
 
@@ -450,13 +451,13 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 ### Changed
 
-- Upgrade to ingress-nginx [v0.34.1](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0341).
+- Upgrade to ingress-nginx [v0.34.1](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0341).
 
 ## [1.7.2] 2020-07-10
 
 ### Changed
 
-- Upgrade to ingress-nginx [v0.34.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0340).
+- Upgrade to ingress-nginx [v0.34.0](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0340).
 
 ## [1.7.1] 2020-07-07
 
@@ -472,7 +473,7 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 - Use LoadBalancer Service on Azure.
 - Change controller.service.type to LoadBalancer/NodePort, and introduce controller.service.public for public/internal service classification.
-- Upgrade to ingress-nginx [0.33.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0330).
+- Upgrade to ingress-nginx [0.33.0](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0330).
 
 ## [1.6.12] 2020-06-04
 
@@ -514,7 +515,7 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 - Default `max-worker-connections` to `0`, making it same as `max-worker-open-files` i.e. `max open files (system's limit) / worker-processes - 1024`.
   This optimizes for high load conditions where it improves performance at the cost of increasing RAM utilization (even on idle).
 - HorizontalPodAutoscaler was tuned to use `targetMemoryUtilizationPercentage` of `80` due to increased RAM utilization with new default for `max-worker-connections` of `0`.
-- Removed use of `enable-dynamic-certificates` CLI flag, it has been deprecated since [ingress-nginx 0.26.0](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0260) via [ingress-nginx PR #4356](https://github.com/kubernetes/ingress-nginx/pull/4356)
+- Removed use of `enable-dynamic-certificates` CLI flag, it has been deprecated since [ingress-nginx 0.26.0](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0260) via [ingress-nginx PR #4356](https://github.com/kubernetes/ingress-nginx/pull/4356)
 - Changed default `error-log-level` from `error` to `notice`.
 - Added a link to the README in the sources of Chart.yaml
 

@@ -39,12 +39,12 @@ updates to the Ingress resource.
 
 ## Upgrading notes
 
-Version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
+Version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
 
 ### Prerequisites
 - kubernetes version >= 1.19
 - requires `networking.k8s.io/v1` (`extensions/v1beta1` or `networking.k8s.io/v1beta1` are no longer supported)
-- An IngressClass (One will be created when installing app version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/CHANGELOG.md#220---2021-09-09))
+- An IngressClass (One will be created when installing app version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/CHANGELOG.md#220---2021-09-09))
 
 Additionally, you'll have to make sure your Ingress resources are using the `spec.IngressClassName` (or the deprecated `kubernetes.io/ingress.class` annotation) matching the name of your IngressClass (default `nginx`).
 
@@ -181,11 +181,11 @@ yourself you must remember to do this.
 
 ## Configuration Options
 
-All configuration options are documented in the [values.yaml](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/helm/nginx-ingress-controller-app/values.yaml) file.
+All configuration options are documented in the [values.yaml](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/helm/nginx-ingress-controller-app/values.yaml) file.
 
 ### Internal nginx IC options
 
-This chart contains a template for an additional [internal service](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/helm/nginx-ingress-controller-app/templates/controller-service-internal.yaml) to cover the use case of having separate internal and external ingress routes with a single nginx IC instance.
+This chart contains a template for an additional [internal service](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/helm/nginx-ingress-controller-app/templates/controller-service-internal.yaml) to cover the use case of having separate internal and external ingress routes with a single nginx IC instance.
 
 Valid configuration options are as follows:
 
@@ -195,7 +195,7 @@ This is the default behavior. No additional configuration required.
 
  **Make default service internal**
 
-This configures the [default service](https://github.com/giantswarm/nginx-ingress-controller-app/blob/master/helm/nginx-ingress-controller-app/templates/controller-service.yaml) to spawn an internal facing load balancer. This disables the external ingress.
+This configures the [default service](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/helm/nginx-ingress-controller-app/templates/controller-service.yaml) to spawn an internal facing load balancer. This disables the external ingress.
  ```yaml
 controller:
   service:
@@ -251,7 +251,7 @@ $ helm install nginx-ingress-controller-app -f values.yaml
 ### Release Process
 
 * Ensure CHANGELOG.md is up to date.
-* Create a new branch with name `master#release#vX.X.X`. Automation will create a release PR.
+* Create a new branch with name `main#release#vX.X.X`. Automation will create a release PR.
 * Merging the release PR will push a new git tag and trigger a new tarball to be pushed to the
 [giantswarm-catalog].
 * Test and verify the ingress controller release across supported environments in a new or existing WIP platform release.

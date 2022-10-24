@@ -52,10 +52,10 @@ workflows:
       - architect/run-tests-with-ats:
           name: execute chart tests
           filters:
-            # Do not trigger the job on merge to master.
+            # Do not trigger the job on merge to main.
             branches:
               ignore:
-                - master
+                - main
           requires:
             - push-to-giantswarm-app-catalog
 
