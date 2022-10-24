@@ -4,7 +4,7 @@ metadata:
   name: {{ include "ingress-nginx.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "labels.common" . | nindent 4 }}
+    {{- include "ingress-nginx.labels" . | nindent 4 }}
 data:
   allow-snippet-annotations: "{{ .Values.controller.allowSnippetAnnotations }}"
   {{- toYaml .Values.configmap | trim | nindent 2 }}

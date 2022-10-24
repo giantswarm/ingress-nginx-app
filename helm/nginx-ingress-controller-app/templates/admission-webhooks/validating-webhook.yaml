@@ -6,7 +6,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: {{ include "ingress-nginx.fullname" . }}-admission
   labels:
-    {{- include "labels.common" . | nindent 4 }}
+    {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: admission-webhook
 webhooks:
 - name: validate.nginx.ingress.kubernetes.io

@@ -4,7 +4,7 @@ kind: PodDisruptionBudget
 metadata:
   name: {{ include "ingress-nginx.fullname" . }}
   labels:
-    {{- include "labels.common" . | nindent 4 }}
+    {{- include "ingress-nginx.labels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:

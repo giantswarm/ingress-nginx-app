@@ -10,7 +10,7 @@ metadata:
     prometheus.io/port: {{ .Values.controller.metrics.port | quote }}
     prometheus.io/scrape: "true"
   labels:
-    {{- include "labels.common" . | nindent 4 }}
+    {{- include "ingress-nginx.labels" . | nindent 4 }}
     giantswarm.io/monitoring: "true"
     {{- with .Values.controller.metrics.service.labels }}
     {{- toYaml . | nindent 4 }}
