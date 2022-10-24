@@ -5,8 +5,7 @@ metadata:
   name:  {{ include "ingress-nginx.fullname" . }}-admission
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade,post-install,post-upgrade
-    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
-    "helm.sh/hook-weight": "-1"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: admission-webhook
@@ -17,5 +16,5 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ include "ingress-nginx.fullname" . }}-admission
-    namespace: {{ .Release.Namespace }}
+    namespace: {{ .Release.Namespace | quote }}
 {{- end }}
