@@ -5,8 +5,7 @@ metadata:
   name: {{ include "ingress-nginx.fullname" . }}-admission
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade,post-install,post-upgrade
-    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
-    "helm.sh/hook-weight": "-2"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: admission-webhook
@@ -19,13 +18,10 @@ rules:
       - get
       - update
 {{- if .Values.podSecurityPolicy.enabled }}
-  - apiGroups: 
-      - extensions
-    resources:
-      - podsecuritypolicies
-    verbs:
-      - use
+  - apiGroups: ['extensions']
+    resources: ['podsecuritypolicies']
+    verbs:     ['use']
     resourceNames:
-      - {{ include "ingress-nginx.fullname" . }}-admission
+    - {{ include "ingress-nginx.fullname" . }}-admission
 {{- end }}
 {{- end }}
