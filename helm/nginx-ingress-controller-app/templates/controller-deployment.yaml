@@ -4,7 +4,7 @@ metadata:
   name: {{ include "ingress-nginx.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
-    {{- include "labels.common" . | nindent 4 }}
+    {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: controller
     giantswarm.io/monitoring_basic_sli: "true"
   annotations:
@@ -29,7 +29,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "labels.common" . | nindent 8 }}
+        {{- include "ingress-nginx.labels" . | nindent 8 }}
         app.kubernetes.io/component: controller
       annotations:
         cluster-autoscaler.kubernetes.io/safe-to-evict: 'true'
