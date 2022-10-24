@@ -2,7 +2,7 @@
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  name: {{ include "resource.default.name" . }}
+  name: {{ include "ingress-nginx.fullname" . }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
 spec:

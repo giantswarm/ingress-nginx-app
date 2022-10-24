@@ -1,7 +1,7 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: {{ include "resource.default.name" . }}
+  name: {{ include "ingress-nginx.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
@@ -26,4 +26,3 @@ spec:
   policyTypes:
   - Egress
   - Ingress
-

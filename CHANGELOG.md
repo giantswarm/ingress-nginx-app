@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Helpers: Rename `resource.default.name` to `ingress-nginx.fullname`. ([#356](https://github.com/giantswarm/nginx-ingress-controller-app/pull/356))
+
 ## [2.19.0] - 2022-10-17
 
 ### Added

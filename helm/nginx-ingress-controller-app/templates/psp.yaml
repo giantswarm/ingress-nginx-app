@@ -3,7 +3,7 @@
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  name: {{ include "resource.default.name" . }}
+  name: {{ include "ingress-nginx.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
