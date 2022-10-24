@@ -398,6 +398,8 @@ controller:
       podAnnotations: {}
       nodeSelector: {}
       tolerations: []
+      # -- Labels to be added to patch job resources
+      labels: {}
       runAsUser: 2000
 
   # controller.updateIngressStatus

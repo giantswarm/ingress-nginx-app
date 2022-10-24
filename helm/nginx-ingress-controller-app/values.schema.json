@@ -61,6 +61,9 @@
                                         }
                                     }
                                 },
+                                "labels": {
+                                    "type": "object"
+                                },
                                 "nodeSelector": {
                                     "type": "object"
                                 },
