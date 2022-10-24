@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "resource.default.name" . }}
+  name: {{ include "ingress-nginx.fullname" . }}
   namespace: {{ .Release.Namespace }}
   labels:
     {{- include "labels.common" . | nindent 4 }}
@@ -60,7 +60,7 @@ spec:
       topologySpreadConstraints:
 {{ tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
       {{- end }}
-      serviceAccountName: {{ include "resource.default.name"  . }}
+      serviceAccountName: {{ include "ingress-nginx.fullname"  . }}
       priorityClassName: system-cluster-critical
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       securityContext:
@@ -89,7 +89,7 @@ spec:
         image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         args:
         - /nginx-ingress-controller
-        - --configmap={{ .Release.Namespace }}/{{ include "resource.default.name" . }}
+        - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
         - --election-id={{ include "controller.leader.election.id" . }}
         {{- if .Values.controller.annotationsPrefix }}
         - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
@@ -209,5 +209,5 @@ spec:
       volumes:
       - name: webhook-cert
         secret:
-          secretName: {{ include "resource.default.name" . }}-admission
+          secretName: {{ include "ingress-nginx.fullname" . }}-admission
       {{- end }}

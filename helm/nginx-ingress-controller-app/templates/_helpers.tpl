@@ -43,7 +43,7 @@ suffix appended, e.g. "-957c9d6ff-pkzgw". Given that Kubernetes allows 63
 characters for resource names, the stem is truncated to 47 characters to leave
 room for such suffix.
 */}}
-{{- define "resource.default.name" -}}
+{{- define "ingress-nginx.fullname" -}}
 {{- .Release.Name | replace "." "-" | trunc 47 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -51,21 +51,21 @@ room for such suffix.
 Election ID.
 */}}
 {{- define "controller.leader.election.id" -}}
-{{ include "resource.default.name" . }}-leader
+{{ include "ingress-nginx.fullname" . }}-leader
 {{- end -}}
 
 {{/*
 LB Service name.
 */}}
 {{- define "resource.controller-service.name" -}}
-{{ include "resource.default.name" . }}{{ .Values.controller.service.suffix }}
+{{ include "ingress-nginx.fullname" . }}{{ .Values.controller.service.suffix }}
 {{- end -}}
 
 {{/*
 Internal LB Service name.
 */}}
 {{- define "resource.controller-service-internal.name" -}}
-{{ include "resource.default.name" . }}-internal{{ .Values.controller.service.internal.suffix }}
+{{ include "ingress-nginx.fullname" . }}-internal{{ .Values.controller.service.internal.suffix }}
 {{- end -}}
 
 {{/*

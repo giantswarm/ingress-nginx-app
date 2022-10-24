@@ -2,7 +2,7 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: {{ include "resource.default.name" . }}-admission
+  name: {{ include "ingress-nginx.fullname" . }}-admission
   annotations:
     "helm.sh/hook": pre-install,pre-upgrade,post-install,post-upgrade
     "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded,hook-failed"
@@ -26,6 +26,6 @@ rules:
     verbs:
       - use
     resourceNames:
-      - {{ include "resource.default.name" . }}-admission
+      - {{ include "ingress-nginx.fullname" . }}-admission
 {{- end }}
 {{- end }}
