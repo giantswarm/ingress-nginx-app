@@ -11,6 +11,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Templates: Add `controller.admissionWebhooks.patch.labels`. ([#360](https://github.com/giantswarm/nginx-ingress-controller-app/pull/360))
 - Templates: Add `controller.admissionWebhooks.annotations`. ([#362](https://github.com/giantswarm/nginx-ingress-controller-app/pull/362))
+- Templates: Add `controller.admissionWebhooks.existingPsp`. ([#365](https://github.com/giantswarm/nginx-ingress-controller-app/pull/365))
 
 ### Changed
 

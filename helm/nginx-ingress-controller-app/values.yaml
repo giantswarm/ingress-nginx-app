@@ -381,6 +381,9 @@ controller:
     failurePolicy: Fail
     port: 8443
 
+    # -- Use an existing PSP instead of creating one
+    existingPsp: ""
+
     service:
       annotations: {}
 
