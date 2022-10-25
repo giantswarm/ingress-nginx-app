@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - Templates: Add `controller.admissionWebhooks.patch.labels`. ([#360](https://github.com/giantswarm/nginx-ingress-controller-app/pull/360))
+- Templates: Add `controller.admissionWebhooks.annotations`. ([#362](https://github.com/giantswarm/nginx-ingress-controller-app/pull/362))
 
 ### Changed
 
