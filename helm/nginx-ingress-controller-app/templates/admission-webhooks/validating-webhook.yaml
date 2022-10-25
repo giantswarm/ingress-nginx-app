@@ -10,6 +10,9 @@ metadata:
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: admission-webhook
+    {{- with .Values.controller.admissionWebhooks.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   name: {{ include "ingress-nginx.fullname" . }}-admission
 webhooks:
   - name: validate.nginx.ingress.kubernetes.io
@@ -35,5 +38,11 @@ webhooks:
         path: /networking/v1/ingresses
     {{- if .Values.controller.admissionWebhooks.timeoutSeconds }}
     timeoutSeconds: {{ .Values.controller.admissionWebhooks.timeoutSeconds }}
+    {{- end }}
+    {{- if .Values.controller.admissionWebhooks.namespaceSelector }}
+    namespaceSelector: {{ toYaml .Values.controller.admissionWebhooks.namespaceSelector | nindent 6 }}
+    {{- end }}
+    {{- if .Values.controller.admissionWebhooks.objectSelector }}
+    objectSelector: {{ toYaml .Values.controller.admissionWebhooks.objectSelector | nindent 6 }}
     {{- end }}
 {{- end }}

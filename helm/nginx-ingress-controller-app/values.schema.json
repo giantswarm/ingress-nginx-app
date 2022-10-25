@@ -44,6 +44,15 @@
                             "type": "string",
                             "enum": ["Ignore", "Fail"]
                         },
+                        "labels": {
+                            "type": "object"
+                        },
+                        "namespaceSelector": {
+                            "type": "object"
+                        },
+                        "objectSelector": {
+                            "type": "object"
+                        },
                         "patch": {
                             "type": "object",
                             "properties": {
