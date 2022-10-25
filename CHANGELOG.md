@@ -12,7 +12,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Helpers: Rename `resource.default.name` to `ingress-nginx.fullname`. ([#356](https://github.com/giantswarm/nginx-ingress-controller-app/pull/356))
 - Repository: Rename `master` to `main`. ([#357](https://github.com/giantswarm/nginx-ingress-controller-app/pull/357))
 - Helpers: Rename `labels.common` to `ingress-nginx.labels`. ([#358](https://github.com/giantswarm/nginx-ingress-controller-app/pull/358))
-- Templates: Align hook annotations, namespaces & indention. ([#359](https://github.com/giantswarm/nginx-ingress-controller-app/pull/359))
+- Templates: Align hook annotations, namespaces & indention. ([#359](https://github.com/giantswarm/nginx-ingress-controller-app/pull/359), [#361](https://github.com/giantswarm/nginx-ingress-controller-app/pull/361))
 
 ## [2.19.0] - 2022-10-17
 
