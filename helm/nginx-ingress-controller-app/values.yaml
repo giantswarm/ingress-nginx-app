@@ -373,6 +373,9 @@ controller:
   # Admission webhook support for Ingress resources can be enabled to prevent incorrectly formatted
   # rules from making their way into NGINX and potentially preventing the container from starting.
   admissionWebhooks:
+    annotations: {}
+    # ignore-check.kube-linter.io/no-read-only-rootfs: "This deployment needs write access to root filesystem".
+
     enabled: true
     timeoutSeconds: 10
     failurePolicy: Fail

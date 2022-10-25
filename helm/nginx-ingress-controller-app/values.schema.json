@@ -34,6 +34,9 @@
                 "admissionWebhooks": {
                     "type": "object",
                     "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
                         "enabled": {
                             "type": "boolean"
                         },
