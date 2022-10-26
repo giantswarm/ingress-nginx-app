@@ -59,9 +59,6 @@
                         "patch": {
                             "type": "object",
                             "properties": {
-                                "backoffLimit": {
-                                    "type": "integer"
-                                },
                                 "enabled": {
                                     "type": "boolean"
                                 },

@@ -24,6 +24,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Templates: Align hook annotations, namespaces & indention. ([#359](https://github.com/giantswarm/nginx-ingress-controller-app/pull/359), [#361](https://github.com/giantswarm/nginx-ingress-controller-app/pull/361))
 - Templates: Align `ValidatingWebhookConfiguration`. ([#363](https://github.com/giantswarm/nginx-ingress-controller-app/pull/363))
 
+### Removed
+
+- Webhook: Remove `controller.admissionWebhooks.patch.backoffLimit`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366)) \
+  `backoffLimit` was set to the default value of 6 all the time anyway, so we remove it to ease future upstream alignments.
+
 ## [2.19.0] - 2022-10-17
 
 ### Added

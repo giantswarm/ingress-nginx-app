@@ -21,7 +21,6 @@ spec:
   # Alpha feature since k8s 1.12
   ttlSecondsAfterFinished: 0
 {{- end }}
-  backoffLimit: {{ .Values.controller.admissionWebhooks.patch.backoffLimit }}
   template:
     metadata:
       name: {{ include "ingress-nginx.fullname" . }}-admission-patch

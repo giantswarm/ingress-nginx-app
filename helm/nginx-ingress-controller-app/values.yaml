@@ -403,7 +403,6 @@ controller:
       image:
         repository: giantswarm/ingress-nginx-kube-webhook-certgen
         tag: v20220916-gd32f8c343
-      backoffLimit: 6
       priorityClassName: ""
       podAnnotations: {}
       nodeSelector: {}
