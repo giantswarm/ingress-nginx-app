@@ -385,6 +385,9 @@ controller:
     # -- Labels to be added to admission webhooks
     labels: {}
 
+    # -- Use an existing PSP instead of creating one
+    existingPsp: ""
+
     service:
       annotations: {}
 

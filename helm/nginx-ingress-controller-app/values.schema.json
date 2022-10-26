@@ -40,6 +40,9 @@
                         "enabled": {
                             "type": "boolean"
                         },
+                        "existingPsp": {
+                            "type": "string"
+                        },
                         "failurePolicy": {
                             "type": "string",
                             "enum": ["Ignore", "Fail"]
