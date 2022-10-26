@@ -17,6 +17,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Helpers: Add `ingress-nginx.controller.fullname`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
 - Webhook: Add `controller.admissionWebhooks.extraEnvs`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
 - Webhook: Add `controller.admissionWebhooks.createSecretJob.resources`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
+- Webhook: Add `controller.admissionWebhooks.patchWebhookJob.resources`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
 
 ### Changed
 

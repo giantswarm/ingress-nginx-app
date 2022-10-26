@@ -115,6 +115,9 @@
                         "patchWebhookJob": {
                             "type": "object",
                             "properties": {
+                                "resources": {
+                                    "type": "object"
+                                },
                                 "securityContext": {
                                     "type": "object",
                                     "properties": {

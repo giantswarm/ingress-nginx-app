@@ -416,6 +416,7 @@ controller:
     patchWebhookJob:
       securityContext:
         allowPrivilegeEscalation: false
+      resources: {}
 
     patch:
       enabled: true
