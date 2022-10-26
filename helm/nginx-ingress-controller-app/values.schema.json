@@ -42,6 +42,14 @@
                             "properties": {
                                 "resources": {
                                     "type": "object"
+                                },
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -101,6 +109,19 @@
                                 },
                                 "tolerations": {
                                     "type": "array"
+                                }
+                            }
+                        },
+                        "patchWebhookJob": {
+                            "type": "object",
+                            "properties": {
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        }
+                                    }
                                 }
                             }
                         },

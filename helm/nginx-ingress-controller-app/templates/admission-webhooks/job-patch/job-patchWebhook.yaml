@@ -61,6 +61,9 @@ spec:
           {{- if .Values.controller.admissionWebhooks.extraEnvs }}
             {{- toYaml .Values.controller.admissionWebhooks.extraEnvs | nindent 12 }}
           {{- end }}
+          {{- if .Values.controller.admissionWebhooks.patchWebhookJob.securityContext }}
+          securityContext: {{ toYaml .Values.controller.admissionWebhooks.patchWebhookJob.securityContext | nindent 12 }}
+          {{- end }}
       restartPolicy: OnFailure
       serviceAccountName: {{ include "ingress-nginx.fullname" . }}-admission
     {{- if .Values.controller.admissionWebhooks.patch.nodeSelector }}
