@@ -37,6 +37,14 @@
                         "annotations": {
                             "type": "object"
                         },
+                        "createSecretJob": {
+                            "type": "object",
+                            "properties": {
+                                "resources": {
+                                    "type": "object"
+                                }
+                            }
+                        },
                         "enabled": {
                             "type": "boolean"
                         },
