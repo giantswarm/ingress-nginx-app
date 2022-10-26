@@ -380,6 +380,10 @@ controller:
     timeoutSeconds: 10
     failurePolicy: Fail
     port: 8443
+    namespaceSelector: {}
+    objectSelector: {}
+    # -- Labels to be added to admission webhooks
+    labels: {}
 
     # -- Use an existing PSP instead of creating one
     existingPsp: ""
