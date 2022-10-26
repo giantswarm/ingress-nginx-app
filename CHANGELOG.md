@@ -27,6 +27,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Templates: Align hook annotations, namespaces & indention. ([#359](https://github.com/giantswarm/nginx-ingress-controller-app/pull/359), [#361](https://github.com/giantswarm/nginx-ingress-controller-app/pull/361))
 - Templates: Align `ValidatingWebhookConfiguration`. ([#363](https://github.com/giantswarm/nginx-ingress-controller-app/pull/363))
 - Webhook: Disable privilege escalation. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
+- Webhook: Align image concatenation. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
 
 ### Removed
 

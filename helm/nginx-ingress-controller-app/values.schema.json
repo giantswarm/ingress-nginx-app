@@ -84,6 +84,15 @@
                                 "image": {
                                     "type": "object",
                                     "properties": {
+                                        "digest": {
+                                            "type": "string"
+                                        },
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "pullPolicy": {
+                                            "type": "string"
+                                        },
                                         "repository": {
                                             "type": "string"
                                         },
