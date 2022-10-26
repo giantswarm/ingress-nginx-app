@@ -369,13 +369,13 @@ controller:
         http: 30012
         https: 30013
 
-  # controller.admissionWebhooks
-  # Admission webhook support for Ingress resources can be enabled to prevent incorrectly formatted
-  # rules from making their way into NGINX and potentially preventing the container from starting.
   admissionWebhooks:
     annotations: {}
     # ignore-check.kube-linter.io/no-read-only-rootfs: "This deployment needs write access to root filesystem".
 
+    ## Additional annotations to the admission webhooks.
+    ## These annotations will be added to the ValidatingWebhookConfiguration and
+    ## the Jobs Spec of the admission webhooks.
     enabled: true
     # -- Additional environment variables to set
     extraEnvs: []
@@ -385,9 +385,12 @@ controller:
     #       secretKeyRef:
     #         key: FOO
     #         name: secret-resource
-    timeoutSeconds: 10
+    # -- Admission Webhook failure policy to use
     failurePolicy: Fail
+    # timeoutSeconds: 10
     port: 8443
+    certificate: "/usr/local/certificates/cert"
+    key: "/usr/local/certificates/key"
     namespaceSelector: {}
     objectSelector: {}
     # -- Labels to be added to admission webhooks
@@ -395,10 +398,14 @@ controller:
 
     # -- Use an existing PSP instead of creating one
     existingPsp: ""
+    networkPolicyEnabled: false
 
     service:
       annotations: {}
-
+      # clusterIP: ""
+      externalIPs: []
+      # loadBalancerIP: ""
+      loadBalancerSourceRanges: []
       servicePort: 443
       type: ClusterIP
 
@@ -432,7 +439,8 @@ controller:
       ##
       priorityClassName: ""
       podAnnotations: {}
-      nodeSelector: {}
+      nodeSelector:
+        kubernetes.io/os: linux
       tolerations: []
       # -- Labels to be added to patch job resources
       labels: {}
