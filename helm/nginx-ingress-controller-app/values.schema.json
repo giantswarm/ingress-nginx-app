@@ -43,6 +43,9 @@
                         "existingPsp": {
                             "type": "string"
                         },
+                        "extraEnvs": {
+                            "type": "array"
+                        },
                         "failurePolicy": {
                             "type": "string",
                             "enum": ["Ignore", "Fail"]

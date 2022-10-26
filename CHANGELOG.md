@@ -15,6 +15,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Templates: Add `controller.admissionWebhooks.existingPsp`. ([#365](https://github.com/giantswarm/nginx-ingress-controller-app/pull/365))
 - Webhook: Rename & align `NetworkPolicy`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
 - Helpers: Add `ingress-nginx.controller.fullname`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
+- Webhook: Add `controller.admissionWebhooks.extraEnvs`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
 
 ### Changed
 
