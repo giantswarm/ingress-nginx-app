@@ -113,8 +113,19 @@
                                 "priorityClassName": {
                                     "type": "string"
                                 },
-                                "runAsUser": {
-                                    "type": "integer"
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "fsGroup": {
+                                            "type": "integer"
+                                        },
+                                        "runAsNonRoot": {
+                                            "type": "boolean"
+                                        },
+                                        "runAsUser": {
+                                            "type": "integer"
+                                        }
+                                    }
                                 },
                                 "tolerations": {
                                     "type": "array"

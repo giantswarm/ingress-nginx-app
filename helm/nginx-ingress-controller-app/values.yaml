@@ -436,7 +436,10 @@ controller:
       tolerations: []
       # -- Labels to be added to patch job resources
       labels: {}
-      runAsUser: 2000
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 2000
+        fsGroup: 2000
 
   # controller.updateIngressStatus
   # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
