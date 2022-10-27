@@ -13,12 +13,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Templates: Add `controller.admissionWebhooks.annotations`. ([#362](https://github.com/giantswarm/nginx-ingress-controller-app/pull/362))
 - Webhook: Add labels & selectors. ([#364](https://github.com/giantswarm/nginx-ingress-controller-app/pull/364))
 - Templates: Add `controller.admissionWebhooks.existingPsp`. ([#365](https://github.com/giantswarm/nginx-ingress-controller-app/pull/365))
-- Webhook: Rename & align `NetworkPolicy`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
-- Helpers: Add `ingress-nginx.controller.fullname`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
-- Webhook: Add `controller.admissionWebhooks.extraEnvs`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
-- Webhook: Add `controller.admissionWebhooks.createSecretJob.resources`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
-- Webhook: Add `controller.admissionWebhooks.patchWebhookJob.resources`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
-- Webhook: Add `controller.admissionWebhooks.patch.securityContext`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
+- Webhook: Align values & functions. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
+  - Webhook: Rename & align `NetworkPolicy`.
+  - Helpers: Add `ingress-nginx.controller.fullname`.
+  - Webhook: Add `controller.admissionWebhooks.extraEnvs`.
+  - Webhook: Add `controller.admissionWebhooks.createSecretJob.resources`.
+  - Webhook: Add `controller.admissionWebhooks.patchWebhookJob.resources`.
+  - Webhook: Add `controller.admissionWebhooks.patch.securityContext`.
 
 ### Changed
 
@@ -27,14 +28,16 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Helpers: Rename `labels.common` to `ingress-nginx.labels`. ([#358](https://github.com/giantswarm/nginx-ingress-controller-app/pull/358))
 - Templates: Align hook annotations, namespaces & indention. ([#359](https://github.com/giantswarm/nginx-ingress-controller-app/pull/359), [#361](https://github.com/giantswarm/nginx-ingress-controller-app/pull/361))
 - Templates: Align `ValidatingWebhookConfiguration`. ([#363](https://github.com/giantswarm/nginx-ingress-controller-app/pull/363))
-- Webhook: Disable privilege escalation. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
-- Webhook: Align image concatenation. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
-- Webhook: Align values.yaml. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
+- Webhook: Align values & functions. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
+  - Webhook: Disable privilege escalation.
+  - Webhook: Align image concatenation.
+  - Webhook: Align values.yaml.
 
 ### Removed
 
-- Webhook: Remove `controller.admissionWebhooks.patch.backoffLimit`. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366)) \
-  `backoffLimit` was set to the default value of 6 all the time anyway, so we remove it to ease future upstream alignments.
+- Webhook: Align values & functions. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
+  - Webhook: Remove `controller.admissionWebhooks.patch.backoffLimit`. \
+    `backoffLimit` was set to the default value of 6 all the time anyway, so we remove it to ease future upstream alignments.
 
 ## [2.19.0] - 2022-10-17
 
