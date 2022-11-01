@@ -37,15 +37,40 @@
                         "annotations": {
                             "type": "object"
                         },
+                        "certificate": {
+                            "type": "string"
+                        },
+                        "createSecretJob": {
+                            "type": "object",
+                            "properties": {
+                                "resources": {
+                                    "type": "object"
+                                },
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            }
+                        },
                         "enabled": {
                             "type": "boolean"
                         },
                         "existingPsp": {
                             "type": "string"
                         },
+                        "extraEnvs": {
+                            "type": "array"
+                        },
                         "failurePolicy": {
                             "type": "string",
                             "enum": ["Ignore", "Fail"]
+                        },
+                        "key": {
+                            "type": "string"
                         },
                         "labels": {
                             "type": "object"
@@ -53,21 +78,30 @@
                         "namespaceSelector": {
                             "type": "object"
                         },
+                        "networkPolicyEnabled": {
+                            "type": "boolean"
+                        },
                         "objectSelector": {
                             "type": "object"
                         },
                         "patch": {
                             "type": "object",
                             "properties": {
-                                "backoffLimit": {
-                                    "type": "integer"
-                                },
                                 "enabled": {
                                     "type": "boolean"
                                 },
                                 "image": {
                                     "type": "object",
                                     "properties": {
+                                        "digest": {
+                                            "type": "string"
+                                        },
+                                        "image": {
+                                            "type": "string"
+                                        },
+                                        "pullPolicy": {
+                                            "type": "string"
+                                        },
                                         "repository": {
                                             "type": "string"
                                         },
@@ -88,11 +122,38 @@
                                 "priorityClassName": {
                                     "type": "string"
                                 },
-                                "runAsUser": {
-                                    "type": "integer"
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "fsGroup": {
+                                            "type": "integer"
+                                        },
+                                        "runAsNonRoot": {
+                                            "type": "boolean"
+                                        },
+                                        "runAsUser": {
+                                            "type": "integer"
+                                        }
+                                    }
                                 },
                                 "tolerations": {
                                     "type": "array"
+                                }
+                            }
+                        },
+                        "patchWebhookJob": {
+                            "type": "object",
+                            "properties": {
+                                "resources": {
+                                    "type": "object"
+                                },
+                                "securityContext": {
+                                    "type": "object",
+                                    "properties": {
+                                        "allowPrivilegeEscalation": {
+                                            "type": "boolean"
+                                        }
+                                    }
                                 }
                             }
                         },
@@ -104,6 +165,12 @@
                             "properties": {
                                 "annotations": {
                                     "type": "object"
+                                },
+                                "externalIPs": {
+                                    "type": "array"
+                                },
+                                "loadBalancerSourceRanges": {
+                                    "type": "array"
                                 },
                                 "servicePort": {
                                     "type": "integer"

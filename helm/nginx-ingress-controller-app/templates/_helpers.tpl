@@ -48,6 +48,14 @@ room for such suffix.
 {{- end -}}
 
 {{/*
+Create a default fully qualified controller name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ingress-nginx.controller.fullname" -}}
+{{ include "ingress-nginx.fullname" . }}
+{{- end -}}
+
+{{/*
 Election ID.
 */}}
 {{- define "controller.leader.election.id" -}}
