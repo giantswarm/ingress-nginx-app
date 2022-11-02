@@ -291,12 +291,12 @@ controller:
     externalTrafficPolicy: "Local"
 
     # controller.service.public
-    # Applies to clusters running on AWS or Azure or GCP.
+    # Applies to clusters running on AWS or Azure.
     # Valid values: true for public, false for internal
     public: true
 
     # controller.service.subdomain
-    # Applies to clusters running on AWS or Azure or GCP.
+    # Applies to clusters running on AWS or Azure.
     # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
     subdomain: "ingress"
 
@@ -347,7 +347,7 @@ controller:
       externalTrafficPolicy: "Local"
 
       # controller.service.internal.subdomain
-      # Applies to clusters running on AWS or Azure or GCP.
+      # Applies to clusters running on AWS or Azure.
       # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
       subdomain: "ingress-internal"
 
@@ -527,7 +527,7 @@ podSecurityPolicy:
 # This value is set automatically. Do not overwrite this value.
 baseDomain:
 
-# provider (aws|kvm|azure|gcp)
+# provider (aws|kvm|azure)
 # The provider that the cluster is running on.
 # This value is set automatically, Do not overwrite this value.
 provider: aws
