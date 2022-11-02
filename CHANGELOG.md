@@ -7,9 +7,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
-### Removed
-
-- Revert 'Add support to create internal Load Balancers on GCP.'. ([#367](https://github.com/giantswarm/nginx-ingress-controller-app/pull/367))
+## [2.20.0] - 2022-11-02
 
 ### Added
 
@@ -42,6 +40,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Webhook: Align values & functions. ([#366](https://github.com/giantswarm/nginx-ingress-controller-app/pull/366))
   - Webhook: Remove `controller.admissionWebhooks.patch.backoffLimit`. \
     `backoffLimit` was set to the default value of 6 all the time anyway, so we remove it to ease future upstream alignments.
+- Revert 'Add support to create internal Load Balancers on GCP.'. ([#367](https://github.com/giantswarm/nginx-ingress-controller-app/pull/367))
 
 ## [2.19.0] - 2022-10-17
 
@@ -681,7 +680,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.19.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.20.0...HEAD
+[2.20.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.19.0...v2.20.0
 [2.19.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.2...v2.19.0
 [2.18.2]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.1...v2.18.2
 [2.18.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.0...v2.18.1
