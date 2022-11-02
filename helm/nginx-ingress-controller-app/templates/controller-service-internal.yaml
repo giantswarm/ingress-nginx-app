@@ -24,8 +24,6 @@ metadata:
     # this annotation adds lb rules for both TCP and UDP to allow UDP outbound connection with Standard LB
     service.beta.kubernetes.io/azure-load-balancer-mixed-protocols: "true"
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-  {{- else if eq .Values.provider "gcp" }}
-    cloud.google.com/load-balancer-type: "Internal"
   {{- end }}
   {{- end }}
   name: {{ include "resource.controller-service-internal.name" . }}

@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Removed
+
+- Revert 'Add support to create internal Load Balancers on GCP.'. ([#367](https://github.com/giantswarm/nginx-ingress-controller-app/pull/367))
+
 ### Added
 
 - Templates: Add `controller.admissionWebhooks.patch.labels`. ([#360](https://github.com/giantswarm/nginx-ingress-controller-app/pull/360))
