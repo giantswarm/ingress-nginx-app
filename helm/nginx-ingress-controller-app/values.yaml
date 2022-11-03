@@ -229,6 +229,10 @@ controller:
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 80
 
+  # Mutually exclusive with hpa autoscaling
+  keda:
+    enabled: false
+
   # controller.annotationsPrefix
   # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
   # container.
