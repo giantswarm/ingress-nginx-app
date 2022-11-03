@@ -105,6 +105,12 @@ controller:
   # rolling upgrade.
   maxUnavailable: 1
 
+  # -- Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels
+  ##
+  labels: {}
+  #  keel.sh/policy: patch
+  #  keel.sh/trigger: poll
+
   # controller.minReadySeconds
   # minReadySeconds to avoid killing pods before we are ready
   # Configures the minimum amount of time that a replica has to be
@@ -214,6 +220,7 @@ controller:
   # Contains optional horizontal-pod-autoscaler (hpa) settings
   autoscaling:
     enabled: true
+    annotations: {}
     minReplicas: 2
     maxReplicas: 20
     targetCPUUtilizationPercentage: 50

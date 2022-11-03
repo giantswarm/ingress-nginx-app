@@ -198,6 +198,9 @@
                 "autoscaling": {
                     "type": "object",
                     "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
                         "enabled": {
                             "type": "boolean"
                         },
@@ -299,6 +302,9 @@
                             }
                         }
                     }
+                },
+                "labels": {
+                    "type": "object"
                 },
                 "lifecycle": {
                     "type": "object",
