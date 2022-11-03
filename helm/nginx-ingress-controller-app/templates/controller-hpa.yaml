@@ -2,8 +2,6 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "ingress-nginx.controller.fullname" . }}
-  namespace: {{ .Release.Namespace }}
   annotations:
   {{- with .Values.controller.autoscaling.annotations }}
   {{- toYaml . | trimSuffix "\n" | nindent 4 }}
@@ -14,6 +12,8 @@ metadata:
     {{- with .Values.controller.labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
+  name: {{ include "ingress-nginx.controller.fullname" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
