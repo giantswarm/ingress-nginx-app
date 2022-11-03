@@ -105,6 +105,9 @@ controller:
   # rolling upgrade.
   maxUnavailable: 1
 
+  # -- Use a `DaemonSet` or `Deployment`
+  kind: Deployment
+
   # -- Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels
   ##
   labels: {}

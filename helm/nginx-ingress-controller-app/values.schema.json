@@ -303,6 +303,10 @@
                         }
                     }
                 },
+                "kind": {
+                    "type": "string",
+                    "enum": ["Deployment", "DaemonSet", "Both"]
+                },
                 "labels": {
                     "type": "object"
                 },
