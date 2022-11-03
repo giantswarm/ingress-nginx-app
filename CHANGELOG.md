@@ -7,6 +7,25 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- HPA: Align to upstream. ([#369](https://github.com/giantswarm/nginx-ingress-controller-app/pull/369))
+  - HPA: Add labels & annotations.
+  - HPA: Add `controller.kind` switch.
+  - HPA: Add `controller.autoscalingTemplate`.
+  - HPA: Add `controller.autoscaling.behavior`.
+  - HPA: Add all KEDA values.
+
+### Changed
+
+- HPA: Align to upstream. ([#369](https://github.com/giantswarm/nginx-ingress-controller-app/pull/369))
+  - HPA: Reorder name & namespace.
+  - HPA: Use `ingress-nginx.controller.fullname`.
+  - HPA: Use `autoscaling/v2beta2`.
+  - HPA: Fix indention.
+  - HPA: Swap CPU & memory block.
+  - HPA: Disable when KEDA is enabled.
+
 ## [2.20.0] - 2022-11-02
 
 ### Added
