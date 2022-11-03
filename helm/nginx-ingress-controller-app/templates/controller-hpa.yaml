@@ -40,5 +40,8 @@ spec:
         type: Utilization
         averageUtilization: {{ . }}
   {{- end }}
+  {{- with .Values.controller.autoscalingTemplate }}
+  {{- toYaml . | nindent 2 }}
+  {{- end }}
 {{- end }}
 {{- end }}

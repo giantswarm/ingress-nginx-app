@@ -218,6 +218,9 @@
                         }
                     }
                 },
+                "autoscalingTemplate": {
+                    "type": "array"
+                },
                 "containerPort": {
                     "type": "object",
                     "properties": {
