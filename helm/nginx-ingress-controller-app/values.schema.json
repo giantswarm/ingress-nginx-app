@@ -201,6 +201,9 @@
                         "annotations": {
                             "type": "object"
                         },
+                        "behavior": {
+                            "type": "object"
+                        },
                         "enabled": {
                             "type": "boolean"
                         },

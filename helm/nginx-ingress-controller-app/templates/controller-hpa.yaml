@@ -43,5 +43,9 @@ spec:
   {{- with .Values.controller.autoscalingTemplate }}
   {{- toYaml . | nindent 2 }}
   {{- end }}
+  {{- with .Values.controller.autoscaling.behavior }}
+  behavior:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 {{- end }}
 {{- end }}
