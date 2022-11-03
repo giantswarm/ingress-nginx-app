@@ -18,7 +18,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "ingress-nginx.fullname" . }}
+    name: {{ include "ingress-nginx.controller.fullname" . }}
   minReplicas: {{ .Values.controller.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.controller.autoscaling.maxReplicas }}
   metrics:
