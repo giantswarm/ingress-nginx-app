@@ -312,8 +312,40 @@
                 "keda": {
                     "type": "object",
                     "properties": {
+                        "apiVersion": {
+                            "type": "string"
+                        },
+                        "behavior": {
+                            "type": "object"
+                        },
+                        "cooldownPeriod": {
+                            "type": "integer"
+                        },
                         "enabled": {
                             "type": "boolean"
+                        },
+                        "maxReplicas": {
+                            "type": "integer"
+                        },
+                        "minReplicas": {
+                            "type": "integer"
+                        },
+                        "pollingInterval": {
+                            "type": "integer"
+                        },
+                        "restoreToOriginalReplicaCount": {
+                            "type": "boolean"
+                        },
+                        "scaledObject": {
+                            "type": "object",
+                            "properties": {
+                                "annotations": {
+                                    "type": "object"
+                                }
+                            }
+                        },
+                        "triggers": {
+                            "type": "array"
                         }
                     }
                 },
