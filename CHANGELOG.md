@@ -27,6 +27,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - HPA: Disable when KEDA is enabled.
 - Admission Webhooks: Align from upstream. ([#370](https://github.com/giantswarm/nginx-ingress-controller-app/pull/370))
 - Ingress Class: Align from upstream. ([#371](https://github.com/giantswarm/nginx-ingress-controller-app/pull/371))
+- Helpers: Rename `labels.selector` to `ingress-nginx.selectorLabels`. ([#372](https://github.com/giantswarm/nginx-ingress-controller-app/pull/372))
 
 ## [2.20.0] - 2022-11-02
 

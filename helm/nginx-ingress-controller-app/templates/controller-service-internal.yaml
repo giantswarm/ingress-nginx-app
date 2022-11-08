@@ -55,7 +55,7 @@ spec:
     nodePort: {{ .Values.controller.service.internal.nodePorts.https }}
     {{- end }}
   selector:
-    {{- include "labels.selector" . | nindent 4 }}
+    {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
   {{- if .Values.controller.service.internal.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.controller.service.internal.externalTrafficPolicy }}
   {{- end }}

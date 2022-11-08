@@ -8,6 +8,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "labels.selector" . | nindent 6 }}
+      {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
   maxUnavailable: {{ .Values.controller.maxUnavailable }}
 {{- end }}

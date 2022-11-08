@@ -23,4 +23,4 @@ spec:
     protocol: TCP
     targetPort: metrics
   selector:
-    {{- include "labels.selector" . | nindent 4 }}
+    {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}

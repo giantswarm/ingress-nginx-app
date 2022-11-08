@@ -8,7 +8,7 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      {{- include "labels.selector" . | nindent 6 }}
+      {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
   ingress:
   - ports:
     {{- range $key, $value := .Values.controller.containerPort }}
