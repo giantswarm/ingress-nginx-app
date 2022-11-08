@@ -19,7 +19,7 @@ spec:
   {{- end }}
   selector:
     matchLabels:
-      {{- include "labels.selector" . | nindent 6 }}
+      {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
   strategy:
     type: RollingUpdate
     rollingUpdate:

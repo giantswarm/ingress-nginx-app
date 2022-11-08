@@ -18,7 +18,7 @@ Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
 app: {{ include "name" . | quote }}
-{{ include "labels.selector" . }}
+{{ include "ingress-nginx.selectorLabels" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
 app.kubernetes.io/name: {{ include "name" . | quote }}
 app.kubernetes.io/instance: {{ .Release.Name | quote }}
@@ -32,7 +32,7 @@ helm.sh/chart: {{ include "chart" . | quote }}
 {{/*
 Selector labels
 */}}
-{{- define "labels.selector" -}}
+{{- define "ingress-nginx.selectorLabels" -}}
 k8s-app: {{ .Release.Name | quote }}
 {{- end -}}
 

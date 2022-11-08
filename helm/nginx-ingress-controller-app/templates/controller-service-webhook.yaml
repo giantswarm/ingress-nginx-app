@@ -16,5 +16,5 @@ spec:
       port: 443
       targetPort: webhook
   selector:
-    {{- include "labels.selector" . | nindent 4 }}
+    {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
 {{- end }}
