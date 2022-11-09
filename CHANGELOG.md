@@ -15,6 +15,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - HPA: Add `controller.autoscalingTemplate`.
   - HPA: Add `controller.autoscaling.behavior`.
   - HPA: Add all KEDA values.
+- PDB: Add `minAvailable`. ([#373](https://github.com/giantswarm/nginx-ingress-controller-app/pull/373))
 
 ### Changed
 
@@ -28,6 +29,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Admission Webhooks: Align from upstream. ([#370](https://github.com/giantswarm/nginx-ingress-controller-app/pull/370))
 - Ingress Class: Align from upstream. ([#371](https://github.com/giantswarm/nginx-ingress-controller-app/pull/371))
 - Helpers: Rename `labels.selector` to `ingress-nginx.selectorLabels`. ([#372](https://github.com/giantswarm/nginx-ingress-controller-app/pull/372))
+- PDB: Align from upstream. ([#373](https://github.com/giantswarm/nginx-ingress-controller-app/pull/373))
 
 ## [2.20.0] - 2022-11-02
 

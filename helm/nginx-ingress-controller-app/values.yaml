@@ -100,9 +100,9 @@ controller:
   # the desired number of Pods.
   maxSurge: 1
 
-  # controller.maxUnavailable
-  # Configures maximum number of unavailable replicas while doing a
-  # rolling upgrade.
+  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
+  # minAvailable: 1
+  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
   maxUnavailable: 1
 
   # -- Use a `DaemonSet` or `Deployment`
