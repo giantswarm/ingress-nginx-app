@@ -307,18 +307,17 @@ controller:
   # Process IngressClass per name (additionally as per spec.controller).
   ingressClassByName: false
 
-  # controller.ingressClassResource
-  # This section refers to the creation of the IngressClass resource
-  # IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
+  ## This section refers to the creation of the IngressClass resource
+  ## IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
   ingressClassResource:
+    # -- Name of the ingressClass
     name: nginx
+    # -- Is this ingressClass enabled or not
     enabled: true
+    # -- Is this the default ingressClass for the cluster
     default: false
+    # -- Controller-value of the controller that is processing this ingressClass
     controllerValue: "k8s.io/ingress-nginx"
-    # parameters:
-    #   apiGroup: ""
-    #   kind: ""
-    #   name: ""
 
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.
