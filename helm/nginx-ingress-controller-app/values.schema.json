@@ -425,6 +425,9 @@
                         }
                     }
                 },
+                "minAvailable": {
+                    "type": "integer"
+                },
                 "minReadySeconds": {
                     "type": "integer"
                 },
