@@ -44,6 +44,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - RBAC: Move `ClusterRole` to separate file.
   - RBAC: Move `Role` to separate file.
   - RBAC: Rename `service-account.yaml` to `controller-serviceaccount.yaml`.
+  - RBAC: Rename `psp.yaml` to `controller-psp.yaml`.
 
 ## [2.20.0] - 2022-11-02
 
