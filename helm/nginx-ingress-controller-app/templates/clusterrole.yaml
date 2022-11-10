@@ -75,3 +75,21 @@ rules:
   - list
   - watch
   - get
+{{- if .Values.podSecurityPolicy.enabled }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ include "ingress-nginx.fullname" . }}-psp-user
+  labels:
+    {{- include "ingress-nginx.labels" . | nindent 4 }}
+rules:
+- apiGroups:
+  - extensions
+  resources:
+  - podsecuritypolicies
+  resourceNames:
+  - {{ include "ingress-nginx.fullname" . }}
+  verbs:
+  - use
+{{- end }}

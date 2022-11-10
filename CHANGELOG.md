@@ -46,6 +46,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - RBAC: Rename `service-account.yaml` to `controller-serviceaccount.yaml`.
   - RBAC: Rename `psp.yaml` to `controller-psp.yaml`.
   - RBAC: Move PSP `ClusterRoleBinding` to `clusterrolebinding.yaml`.
+  - RBAC: Move PSP `ClusterRole` to `clusterrole.yaml`.
 
 ## [2.20.0] - 2022-11-02
 
