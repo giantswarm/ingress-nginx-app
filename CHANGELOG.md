@@ -42,6 +42,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - RBAC: Move `ClusterRoleBinding` to separate file.
   - RBAC: Move `RoleBinding` to separate file.
   - RBAC: Move `ClusterRole` to separate file.
+  - RBAC: Move `Role` to separate file.
 
 ## [2.20.0] - 2022-11-02
 
