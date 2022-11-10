@@ -43,6 +43,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - RBAC: Move `RoleBinding` to separate file.
   - RBAC: Move `ClusterRole` to separate file.
   - RBAC: Move `Role` to separate file.
+  - RBAC: Rename `service-account.yaml` to `controller-serviceaccount.yaml`.
 
 ## [2.20.0] - 2022-11-02
 
