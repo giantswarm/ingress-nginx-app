@@ -21,6 +21,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Webhook: Add `controller.admissionWebhooks.service.externalIPs`.
   - Webhook: Add `controller.admissionWebhooks.service.loadBalancerIP`.
   - Webhook: Add `controller.admissionWebhooks.service.loadBalancerSourceRanges`.
+- Ingress Class: Align to upstream. ([#377](https://github.com/giantswarm/nginx-ingress-controller-app/pull/377))
+  - Ingress Class: Add `controller.ingressClass`.
 
 ### Changed
 

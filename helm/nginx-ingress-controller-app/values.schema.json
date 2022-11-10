@@ -281,6 +281,9 @@
                         }
                     }
                 },
+                "ingressClass": {
+                    "type": "string"
+                },
                 "ingressClassByName": {
                     "type": "boolean"
                 },
