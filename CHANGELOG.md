@@ -41,6 +41,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - RBAC: Align to upstream. ([#378](https://github.com/giantswarm/nginx-ingress-controller-app/pull/378))
   - RBAC: Move `ClusterRoleBinding` to separate file.
   - RBAC: Move `RoleBinding` to separate file.
+  - RBAC: Move `ClusterRole` to separate file.
 
 ## [2.20.0] - 2022-11-02
 
