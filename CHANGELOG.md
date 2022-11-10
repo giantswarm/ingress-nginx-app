@@ -38,6 +38,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Helpers: Rename `labels.selector` to `ingress-nginx.selectorLabels`. ([#372](https://github.com/giantswarm/nginx-ingress-controller-app/pull/372))
 - PDB: Align from upstream. ([#373](https://github.com/giantswarm/nginx-ingress-controller-app/pull/373))
 - Webhook: Align to upstream. ([#374](https://github.com/giantswarm/nginx-ingress-controller-app/pull/374))
+- RBAC: Align to upstream. ([#378](https://github.com/giantswarm/nginx-ingress-controller-app/pull/378))
+  - RBAC: Move `ClusterRoleBinding` to separate file.
 
 ## [2.20.0] - 2022-11-02
 
