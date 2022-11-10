@@ -166,8 +166,14 @@
                                 "annotations": {
                                     "type": "object"
                                 },
+                                "clusterIP": {
+                                    "type": "string"
+                                },
                                 "externalIPs": {
                                     "type": "array"
+                                },
+                                "loadBalancerIP": {
+                                    "type": "string"
                                 },
                                 "loadBalancerSourceRanges": {
                                     "type": "array"
