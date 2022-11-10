@@ -32,7 +32,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - HPA: Swap CPU & memory block.
   - HPA: Disable when KEDA is enabled.
 - Admission Webhooks: Align from upstream. ([#370](https://github.com/giantswarm/nginx-ingress-controller-app/pull/370))
-- Ingress Class: Align from upstream. ([#371](https://github.com/giantswarm/nginx-ingress-controller-app/pull/371))
+- Ingress Class: Align from upstream. ([#371](https://github.com/giantswarm/nginx-ingress-controller-app/pull/371), [#374](https://github.com/giantswarm/nginx-ingress-controller-app/pull/374), [#377](https://github.com/giantswarm/nginx-ingress-controller-app/pull/377))
 - Helpers: Rename `labels.selector` to `ingress-nginx.selectorLabels`. ([#372](https://github.com/giantswarm/nginx-ingress-controller-app/pull/372))
 - PDB: Align from upstream. ([#373](https://github.com/giantswarm/nginx-ingress-controller-app/pull/373))
 - Webhook: Align to upstream. ([#374](https://github.com/giantswarm/nginx-ingress-controller-app/pull/374))

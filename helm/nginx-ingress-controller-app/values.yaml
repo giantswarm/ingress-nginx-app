@@ -303,8 +303,12 @@ controller:
   # Example value: "default/foo-tls".
   defaultSSLCertificate: ""
 
-  # controller.ingressClassByName
-  # Process IngressClass per name (additionally as per spec.controller).
+  # -- Process Ingress objects without ingressClass annotation/ingressClassName field
+  # Overrides value for --watch-ingress-without-class flag of the controller binary
+  # Defaults to false
+  watchIngressWithoutClass: false
+
+  # -- Process IngressClass per name (additionally as per spec.controller).
   ingressClassByName: false
 
   ## This section refers to the creation of the IngressClass resource
@@ -318,6 +322,11 @@ controller:
     default: false
     # -- Controller-value of the controller that is processing this ingressClass
     controllerValue: "k8s.io/ingress-nginx"
+
+    # -- Parameters is a link to a custom resource containing additional
+    # configuration for the controller. This is optional if the controller
+    # does not require extra parameters.
+    parameters: {}
 
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.
@@ -559,11 +568,6 @@ controller:
   # Enable or disable forwarding to ExternalName Services through
   # --disable-svc-external-name flag
   disableExternalNameForwarding: true
-
-  # Process Ingress objects without ingressClass annotation/ingressClassName field
-  # Overrides value for --watch-ingress-without-class flag of the controller binary
-  # Defaults to false
-  watchIngressWithoutClass: false
 
   # This configuration defines if Ingress Controller should allow users to set
   # their own *-snippet annotations, otherwise this is forbidden / dropped
