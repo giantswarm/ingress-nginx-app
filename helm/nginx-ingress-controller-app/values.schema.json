@@ -474,6 +474,20 @@
                         }
                     }
                 },
+                "scope": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "namespace": {
+                            "type": "string"
+                        },
+                        "namespaceSelector": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "service": {
                     "type": "object",
                     "properties": {

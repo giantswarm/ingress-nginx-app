@@ -332,6 +332,16 @@ controller:
   # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
   ingressClass: nginx
 
+  # Limit the scope of the controller to a specific namespace
+  scope:
+    # -- Enable 'scope' or not
+    enabled: false
+    # -- Namespace to limit the controller to; defaults to $(POD_NAMESPACE)
+    namespace: ""
+    # -- When scope.enabled == false, instead of watching all namespaces, we watching namespaces whose labels
+    # only match with namespaceSelector. Format like foo=bar. Defaults to empty, means watching all namespaces.
+    namespaceSelector: ""
+
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.
   userID: 101

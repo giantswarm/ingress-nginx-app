@@ -52,6 +52,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - RBAC: Move PSP `ClusterRole` to `clusterrole.yaml`.
   - RBAC: Align `ServiceAccount`.
   - RBAC: Align `ClusterRoleBinding` to upstream.
+  - RBAC: Align `ClusterRole` to upstream.
 
 ## [2.20.0] - 2022-11-02
 
