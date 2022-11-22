@@ -5,6 +5,7 @@ checks:
   - "no-read-only-root-fs"
   - "no-readiness-probe"
   - "privilege-escalation-container"
+  - "privileged-container"
   - "privileged-ports"
   - "required-annotation-email"
   - "required-label-owner"
