@@ -53,6 +53,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - RBAC: Align `ServiceAccount`.
   - RBAC: Align `ClusterRoleBinding` to upstream.
   - RBAC: Align `ClusterRole` to upstream.
+  - RBAC: Reorder `coordination.k8s.io/leases` in `ClusterRole`.
 
 ## [2.20.0] - 2022-11-02
 
