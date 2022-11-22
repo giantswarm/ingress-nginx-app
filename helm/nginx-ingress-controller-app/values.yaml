@@ -593,11 +593,22 @@ initContainer:
   userID: 1000
   groupID: 1000
 
-# podSecurityPolicy
-# If true, create & use Pod Security Policy resources
-# https://kubernetes.io/docs/concepts/policy/pod-security-policy/
+## Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266
+rbac:
+  create: true
+  scope: false
+
+## If true, create & use Pod Security Policy resources
+## https://kubernetes.io/docs/concepts/policy/pod-security-policy/
 podSecurityPolicy:
   enabled: true
+
+serviceAccount:
+  create: true
+  name: ""
+  automountServiceAccountToken: true
+  # -- Annotations for the controller service account
+  annotations: {}
 
 # Below are configuration values that you should not overwrite or set yourself.
 

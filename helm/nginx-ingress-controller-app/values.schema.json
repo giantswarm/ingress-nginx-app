@@ -686,6 +686,34 @@
         },
         "provider": {
             "type": "string"
+        },
+        "rbac": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean"
+                },
+                "scope": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object"
+                },
+                "automountServiceAccountToken": {
+                    "type": "boolean"
+                },
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
         }
     }
 }
