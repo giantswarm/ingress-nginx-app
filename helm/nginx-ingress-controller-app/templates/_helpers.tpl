@@ -37,6 +37,17 @@ k8s-app: {{ .Release.Name | quote }}
 {{- end -}}
 
 {{/*
+Create the name of the controller service account to use
+*/}}
+{{- define "ingress-nginx.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "ingress-nginx.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create a name stem for resource names
 When pods for deployments are created they have an additional 16 character
 suffix appended, e.g. "-957c9d6ff-pkzgw". Given that Kubernetes allows 63
