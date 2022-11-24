@@ -37,6 +37,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Values: Add `controller.metrics.enabled` & `controller.metrics.portName`.
   - Values: Add `tcp` & `udp`.
 
+- CAPA: allow internal ingress loadblancer for CAPA provider.
+
 ### Changed
 
 - HPA: Align to upstream. ([#369](https://github.com/giantswarm/nginx-ingress-controller-app/pull/369))
