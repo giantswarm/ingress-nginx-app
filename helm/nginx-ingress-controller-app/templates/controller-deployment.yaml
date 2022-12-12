@@ -90,7 +90,7 @@ spec:
         args:
         - /nginx-ingress-controller
         - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
-        - --election-id={{ include "controller.leader.election.id" . }}
+        - --election-id={{ include "ingress-nginx.controller.electionID" . }}
         {{- if .Values.controller.annotationsPrefix }}
         - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
         {{- end}}

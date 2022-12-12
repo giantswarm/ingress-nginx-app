@@ -69,7 +69,7 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{/*
 Election ID.
 */}}
-{{- define "controller.leader.election.id" -}}
+{{- define "ingress-nginx.controller.electionID" -}}
 {{ include "ingress-nginx.fullname" . }}-leader
 {{- end -}}
 
