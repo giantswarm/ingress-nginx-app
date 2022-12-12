@@ -26,6 +26,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - RBAC: Align to upstream. ([#378](https://github.com/giantswarm/nginx-ingress-controller-app/pull/378))
   - Values: Add RBAC & service account configuration.
   - Helpers: Add `ingress-nginx.serviceAccountName`.
+  - Values: Add `controller.electionID`.
 
 ### Changed
 

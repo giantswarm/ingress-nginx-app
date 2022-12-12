@@ -247,6 +247,9 @@
                 "disableExternalNameForwarding": {
                     "type": "boolean"
                 },
+                "electionID": {
+                    "type": "string"
+                },
                 "enableMimalloc": {
                     "type": "boolean"
                 },
