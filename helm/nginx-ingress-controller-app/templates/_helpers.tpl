@@ -48,6 +48,17 @@ Create the name of the controller service account to use
 {{- end -}}
 
 {{/*
+Return the appropriate apiGroup for PodSecurityPolicy.
+*/}}
+{{- define "podSecurityPolicy.apiGroup" -}}
+{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- print "policy" -}}
+{{- else -}}
+{{- print "extensions" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create a name stem for resource names
 When pods for deployments are created they have an additional 16 character
 suffix appended, e.g. "-957c9d6ff-pkzgw". Given that Kubernetes allows 63

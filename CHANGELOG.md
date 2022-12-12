@@ -27,6 +27,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Values: Add RBAC & service account configuration.
   - Helpers: Add `ingress-nginx.serviceAccountName`.
   - Values: Add `controller.electionID`.
+  - Helpers: Add `podSecurityPolicy.apiGroup`.
 
 ### Changed
 
