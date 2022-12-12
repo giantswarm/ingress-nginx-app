@@ -55,6 +55,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - RBAC: Align `ClusterRole` to upstream.
   - RBAC: Reorder `coordination.k8s.io/leases` in `ClusterRole`.
   - RBAC: Indent `ClusterRole`.
+  - RBAC: Indent `Role`.
 
 ## [2.20.0] - 2022-11-02
 
