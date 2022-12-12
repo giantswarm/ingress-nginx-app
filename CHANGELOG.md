@@ -62,6 +62,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Rename `controller.leader.election.id` to `ingress-nginx.controller.electionID`.
   - Helpers: Align `ingress-nginx.controller.electionID` to upstream.
   - RBAC: Align `Role` to upstream.
+  - RBAC: Align `RoleBinding` to upstream.
 
 ## [2.20.0] - 2022-11-02
 

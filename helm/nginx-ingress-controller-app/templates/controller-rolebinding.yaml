@@ -1,15 +1,21 @@
-kind: RoleBinding
+{{- if .Values.rbac.create -}}
 apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
 metadata:
-  name: {{ include "ingress-nginx.fullname" . }}-ng
-  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
-subjects:
-- kind: ServiceAccount
+    app.kubernetes.io/component: controller
+    {{- with .Values.controller.labels }}
+    {{- toYaml . | nindent 4 }}
+    {{- end }}
   name: {{ include "ingress-nginx.fullname" . }}
   namespace: {{ .Release.Namespace }}
 roleRef:
+  apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: {{ include "ingress-nginx.fullname" . }}
-  apiGroup: rbac.authorization.k8s.io
+subjects:
+  - kind: ServiceAccount
+    name: {{ template "ingress-nginx.serviceAccountName" . }}
+    namespace: {{ .Release.Namespace | quote }}
+{{- end }}
