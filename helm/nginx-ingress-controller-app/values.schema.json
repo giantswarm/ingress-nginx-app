@@ -256,6 +256,9 @@
                 "enableSSLChainCompletion": {
                     "type": "boolean"
                 },
+                "existingPsp": {
+                    "type": "string"
+                },
                 "extraAnnotations": {
                     "type": "object",
                     "properties": {

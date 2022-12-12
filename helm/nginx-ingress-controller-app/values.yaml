@@ -135,6 +135,9 @@ controller:
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: v1.4.0
 
+  # -- Use an existing PSP instead of creating one
+  existingPsp: ""
+
   # controller.containerPort
   containerPort:
     http: 80

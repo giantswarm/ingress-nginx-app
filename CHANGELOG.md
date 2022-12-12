@@ -28,6 +28,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Add `ingress-nginx.serviceAccountName`.
   - Values: Add `controller.electionID`.
   - Helpers: Add `podSecurityPolicy.apiGroup`.
+  - Values: Add `controller.existingPsp`.
 
 ### Changed
 
