@@ -67,10 +67,13 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{/*
-Election ID.
+Construct a unique electionID.
+Users can provide an override for an explicit electionID if they want via `.Values.controller.electionID`
 */}}
 {{- define "ingress-nginx.controller.electionID" -}}
-{{ include "ingress-nginx.fullname" . }}-leader
+{{- $defElectionID := printf "%s-leader" (include "ingress-nginx.fullname" .) -}}
+{{- $electionID := default $defElectionID .Values.controller.electionID -}}
+{{- print $electionID -}}
 {{- end -}}
 
 {{/*
