@@ -64,6 +64,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - RBAC: Align `Role` to upstream.
   - RBAC: Align `RoleBinding` to upstream.
   - RBAC: Move PSP `ClusterRole` & PSP `ClusterRoleBinding` to `Role`.
+  - RBAC: Reorder & indent `PodSecurityPolicy`.
 
 ## [2.20.0] - 2022-11-02
 
