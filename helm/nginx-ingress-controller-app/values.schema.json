@@ -276,6 +276,28 @@
                 "groupID": {
                     "type": "integer"
                 },
+                "hostNetwork": {
+                    "type": "boolean"
+                },
+                "hostPort": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "ports": {
+                            "type": "object",
+                            "properties": {
+                                "http": {
+                                    "type": "integer"
+                                },
+                                "https": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                },
                 "image": {
                     "type": "object",
                     "properties": {

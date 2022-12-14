@@ -29,6 +29,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Values: Add `controller.electionID`.
   - Helpers: Add `podSecurityPolicy.apiGroup`.
   - Values: Add `controller.existingPsp`.
+  - Values: Add `controller.hostNetwork` & `controller.hostPort`.
 
 ### Changed
 

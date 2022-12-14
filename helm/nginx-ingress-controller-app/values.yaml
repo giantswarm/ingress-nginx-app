@@ -138,7 +138,7 @@ controller:
   # -- Use an existing PSP instead of creating one
   existingPsp: ""
 
-  # controller.containerPort
+  # -- Configures the ports that the nginx-controller listens on
   containerPort:
     http: 80
     https: 443
@@ -313,6 +313,22 @@ controller:
 
   # -- Process IngressClass per name (additionally as per spec.controller).
   ingressClassByName: false
+
+  # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
+  # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
+  # is merged
+  hostNetwork: false
+
+  ## Use host ports 80 and 443
+  ## Disabled by default
+  hostPort:
+    # -- Enable 'hostPort' or not
+    enabled: false
+    ports:
+      # -- 'hostPort' http port
+      http: 80
+      # -- 'hostPort' https port
+      https: 443
 
   # -- Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader'
   electionID: ""
