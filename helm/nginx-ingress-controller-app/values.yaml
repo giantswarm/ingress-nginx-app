@@ -127,6 +127,8 @@ controller:
 
   # controller.image
   image:
+    ## Keep false as default for now!
+    chroot: false
 
     # controller.image.repository
     repository: giantswarm/ingress-nginx-controller

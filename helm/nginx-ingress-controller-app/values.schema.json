@@ -301,6 +301,9 @@
                 "image": {
                     "type": "object",
                     "properties": {
+                        "chroot": {
+                            "type": "boolean"
+                        },
                         "repository": {
                             "type": "string"
                         },
