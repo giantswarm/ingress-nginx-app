@@ -356,6 +356,11 @@ controller:
   # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
   ingressClass: nginx
 
+  # -- See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls
+  sysctls: {}
+  # sysctls:
+  #   "net.core.somaxconn": "8192"
+
   # Limit the scope of the controller to a specific namespace
   scope:
     # -- Enable 'scope' or not

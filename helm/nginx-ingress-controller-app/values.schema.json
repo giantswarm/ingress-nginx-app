@@ -671,6 +671,9 @@
                         }
                     }
                 },
+                "sysctls": {
+                    "type": "object"
+                },
                 "terminationGracePeriodSeconds": {
                     "type": "integer"
                 },
