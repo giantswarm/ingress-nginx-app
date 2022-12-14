@@ -32,6 +32,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Values: Add `controller.hostNetwork` & `controller.hostPort`.
   - Values: Add `controller.image.chroot`.
   - Values: Add `controller.sysctls`.
+  - Values: Add `controller.metrics.enabled` & `controller.metrics.portName`.
 
 ### Changed
 

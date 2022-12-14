@@ -438,8 +438,14 @@
                 "metrics": {
                     "type": "object",
                     "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
                         "port": {
                             "type": "integer"
+                        },
+                        "portName": {
+                            "type": "string"
                         },
                         "service": {
                             "type": "object",

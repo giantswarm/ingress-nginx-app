@@ -178,12 +178,11 @@ controller:
     successThreshold: 1
     timeoutSeconds: 1
 
-  # controller.metrics
   metrics:
-
-    # controller.metrics.port
-    # The port on which the metrics container is exposed.
     port: 10254
+    portName: metrics
+    # if this port is changed, change healthz-port: in extraArgs: accordingly
+    enabled: true
 
     # controller.metrics.service
     # TODO: Explain what this is for
