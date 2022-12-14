@@ -648,6 +648,18 @@ serviceAccount:
   # -- Annotations for the controller service account
   annotations: {}
 
+# -- TCP service key-value pairs
+## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
+##
+tcp: {}
+#  8080: "default/example-tcp-svc:9000"
+
+# -- UDP service key-value pairs
+## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
+##
+udp: {}
+#  53: "kube-system/kube-dns:53"
+
 # Below are configuration values that you should not overwrite or set yourself.
 
 # baseDomain

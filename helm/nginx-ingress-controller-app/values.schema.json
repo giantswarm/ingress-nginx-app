@@ -768,6 +768,12 @@
                     "type": "string"
                 }
             }
+        },
+        "tcp": {
+            "type": "object"
+        },
+        "udp": {
+            "type": "object"
         }
     }
 }
