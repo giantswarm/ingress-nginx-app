@@ -247,11 +247,17 @@
                 "disableExternalNameForwarding": {
                     "type": "boolean"
                 },
+                "electionID": {
+                    "type": "string"
+                },
                 "enableMimalloc": {
                     "type": "boolean"
                 },
                 "enableSSLChainCompletion": {
                     "type": "boolean"
+                },
+                "existingPsp": {
+                    "type": "string"
                 },
                 "extraAnnotations": {
                     "type": "object",
@@ -270,9 +276,34 @@
                 "groupID": {
                     "type": "integer"
                 },
+                "hostNetwork": {
+                    "type": "boolean"
+                },
+                "hostPort": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "ports": {
+                            "type": "object",
+                            "properties": {
+                                "http": {
+                                    "type": "integer"
+                                },
+                                "https": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    }
+                },
                 "image": {
                     "type": "object",
                     "properties": {
+                        "chroot": {
+                            "type": "boolean"
+                        },
                         "repository": {
                             "type": "string"
                         },
@@ -407,8 +438,14 @@
                 "metrics": {
                     "type": "object",
                     "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
                         "port": {
                             "type": "integer"
+                        },
+                        "portName": {
+                            "type": "string"
                         },
                         "service": {
                             "type": "object",
@@ -471,6 +508,20 @@
                                     "type": "string"
                                 }
                             }
+                        }
+                    }
+                },
+                "scope": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "namespace": {
+                            "type": "string"
+                        },
+                        "namespaceSelector": {
+                            "type": "string"
                         }
                     }
                 },
@@ -626,6 +677,9 @@
                         }
                     }
                 },
+                "sysctls": {
+                    "type": "object"
+                },
                 "terminationGracePeriodSeconds": {
                     "type": "integer"
                 },
@@ -686,6 +740,40 @@
         },
         "provider": {
             "type": "string"
+        },
+        "rbac": {
+            "type": "object",
+            "properties": {
+                "create": {
+                    "type": "boolean"
+                },
+                "scope": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "serviceAccount": {
+            "type": "object",
+            "properties": {
+                "annotations": {
+                    "type": "object"
+                },
+                "automountServiceAccountToken": {
+                    "type": "boolean"
+                },
+                "create": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "tcp": {
+            "type": "object"
+        },
+        "udp": {
+            "type": "object"
         }
     }
 }

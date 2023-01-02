@@ -23,6 +23,17 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Webhook: Add `controller.admissionWebhooks.service.loadBalancerSourceRanges`.
 - Ingress Class: Align to upstream. ([#377](https://github.com/giantswarm/nginx-ingress-controller-app/pull/377))
   - Ingress Class: Add `controller.ingressClass`.
+- RBAC: Align to upstream. ([#378](https://github.com/giantswarm/nginx-ingress-controller-app/pull/378))
+  - Values: Add RBAC & service account configuration.
+  - Helpers: Add `ingress-nginx.serviceAccountName`.
+  - Values: Add `controller.electionID`.
+  - Helpers: Add `podSecurityPolicy.apiGroup`.
+  - Values: Add `controller.existingPsp`.
+  - Values: Add `controller.hostNetwork` & `controller.hostPort`.
+  - Values: Add `controller.image.chroot`.
+  - Values: Add `controller.sysctls`.
+  - Values: Add `controller.metrics.enabled` & `controller.metrics.portName`.
+  - Values: Add `tcp` & `udp`.
 
 ### Changed
 
@@ -38,6 +49,28 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Helpers: Rename `labels.selector` to `ingress-nginx.selectorLabels`. ([#372](https://github.com/giantswarm/nginx-ingress-controller-app/pull/372))
 - PDB: Align from upstream. ([#373](https://github.com/giantswarm/nginx-ingress-controller-app/pull/373))
 - Webhook: Align to upstream. ([#374](https://github.com/giantswarm/nginx-ingress-controller-app/pull/374))
+- RBAC: Align to upstream. ([#378](https://github.com/giantswarm/nginx-ingress-controller-app/pull/378))
+  - RBAC: Move `ClusterRoleBinding` to separate file.
+  - RBAC: Move `RoleBinding` to separate file.
+  - RBAC: Move `ClusterRole` to separate file.
+  - RBAC: Move `Role` to separate file.
+  - RBAC: Rename `service-account.yaml` to `controller-serviceaccount.yaml`.
+  - RBAC: Rename `psp.yaml` to `controller-psp.yaml`.
+  - RBAC: Move PSP `ClusterRoleBinding` to `clusterrolebinding.yaml`.
+  - RBAC: Move PSP `ClusterRole` to `clusterrole.yaml`.
+  - RBAC: Align `ServiceAccount`.
+  - RBAC: Align `ClusterRoleBinding` to upstream.
+  - RBAC: Align `ClusterRole` to upstream.
+  - RBAC: Reorder `coordination.k8s.io/leases` in `ClusterRole`.
+  - RBAC: Indent `ClusterRole`.
+  - RBAC: Indent `Role`.
+  - Helpers: Rename `controller.leader.election.id` to `ingress-nginx.controller.electionID`.
+  - Helpers: Align `ingress-nginx.controller.electionID` to upstream.
+  - RBAC: Align `Role` to upstream.
+  - RBAC: Align `RoleBinding` to upstream.
+  - RBAC: Move PSP `ClusterRole` & PSP `ClusterRoleBinding` to `Role`.
+  - RBAC: Reorder & indent `PodSecurityPolicy`.
+  - RBAC: Align `PodSecurityPolicy` to upstream.
 
 ## [2.20.0] - 2022-11-02
 

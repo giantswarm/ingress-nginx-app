@@ -37,6 +37,28 @@ k8s-app: {{ .Release.Name | quote }}
 {{- end -}}
 
 {{/*
+Create the name of the controller service account to use
+*/}}
+{{- define "ingress-nginx.serviceAccountName" -}}
+{{- if .Values.serviceAccount.create -}}
+    {{ default (include "ingress-nginx.fullname" .) .Values.serviceAccount.name }}
+{{- else -}}
+    {{ default "default" .Values.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the appropriate apiGroup for PodSecurityPolicy.
+*/}}
+{{- define "podSecurityPolicy.apiGroup" -}}
+{{- if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
+{{- print "policy" -}}
+{{- else -}}
+{{- print "extensions" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Create a name stem for resource names
 When pods for deployments are created they have an additional 16 character
 suffix appended, e.g. "-957c9d6ff-pkzgw". Given that Kubernetes allows 63
@@ -56,10 +78,13 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{/*
-Election ID.
+Construct a unique electionID.
+Users can provide an override for an explicit electionID if they want via `.Values.controller.electionID`
 */}}
-{{- define "controller.leader.election.id" -}}
-{{ include "ingress-nginx.fullname" . }}-leader
+{{- define "ingress-nginx.controller.electionID" -}}
+{{- $defElectionID := printf "%s-leader" (include "ingress-nginx.fullname" .) -}}
+{{- $electionID := default $defElectionID .Values.controller.electionID -}}
+{{- print $electionID -}}
 {{- end -}}
 
 {{/*
