@@ -72,7 +72,7 @@ There are 3 ways to install this app onto a workload cluster.
 
 1. [Using our web interface](https://docs.giantswarm.io/ui-api/web/app-platform/#installing-an-app)
 2. [Using our API](https://docs.giantswarm.io/api/#operation/createClusterAppV5)
-3. Directly creating the [App custom resource](https://docs.giantswarm.io/ui-api/management-api/crd/apps.application.giantswarm.io/) on the management cluster.
+3. Directly creating the [App custom resource](https://docs.giantswarm.io/use-the-api/management-api/crd/apps.application.giantswarm.io/) on the management cluster.
 
 ### Sample values files for the web interface and API
 
