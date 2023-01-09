@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+- Service: Add CAPA support.
+
 ## [2.21.0] - 2023-01-02
 
 ### Added

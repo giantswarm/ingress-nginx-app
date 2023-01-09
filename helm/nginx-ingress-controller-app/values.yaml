@@ -663,11 +663,11 @@ udp: {}
 # Below are configuration values that you should not overwrite or set yourself.
 
 # baseDomain
-# The base domain for this ingress.
+# The base domain for this ingress controller.
 # This value is set automatically. Do not overwrite this value.
 baseDomain:
 
-# provider (aws|kvm|azure)
+# provider (aws|capa|azure|kvm)
 # The provider that the cluster is running on.
-# This value is set automatically, Do not overwrite this value.
+# This value is set automatically. Do not overwrite this value.
 provider: aws

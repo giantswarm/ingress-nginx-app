@@ -38,7 +38,7 @@ General Quality Assurance
 *   Static Code Analysis (linting, etc.)
 *   Integration Tests to ensure that the Helm chart can be deployed.
 *   Functional Tests
-    *   Platform Compatibility Testing, with latest platform releases across providers (AWS, Azure, and KVM)
+    *   Platform Compatibility Testing, with latest platform releases across providers (AWS, CAPA, Azure and KVM)
     *   End-to-End smoke tests to make sure Ingress traffic gets routed when (1) installing a new app, and (2) upgrading an app
 
 Implementation details regarding performance tests and general quality assurance can be found in [performance test files](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/test/kat), [integration test files](https://github.com/giantswarm/nginx-ingress-controller-app/tree/main/integration) and [CircleCI configuration](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/.circleci/config.yml).

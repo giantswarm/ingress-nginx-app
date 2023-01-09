@@ -13,7 +13,7 @@ metadata:
     {{- end }}
   {{- end }}
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
-  {{- if eq .Values.provider "aws" }}
+  {{- if or (eq .Values.provider "aws") (eq .Values.provider "capa") }}
     {{- if not .Values.controller.service.public }}
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
