@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+- Service: Add CAPA support.
+
 ## [2.21.0] - 2023-01-02
 
 ### Added
@@ -36,8 +38,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Values: Add `controller.sysctls`.
   - Values: Add `controller.metrics.enabled` & `controller.metrics.portName`.
   - Values: Add `tcp` & `udp`.
-
-- CAPA: allow internal ingress loadblancer for CAPA provider.
 
 ### Changed
 

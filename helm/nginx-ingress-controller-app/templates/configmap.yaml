@@ -8,6 +8,6 @@ metadata:
 data:
   allow-snippet-annotations: "{{ .Values.controller.allowSnippetAnnotations }}"
   {{- toYaml .Values.configmap | trim | nindent 2 }}
-  {{- if and (eq .Values.provider "aws") (not (index .Values.configmap "use-proxy-protocol")) }}
+  {{- if and (or (eq .Values.provider "aws") (eq .Values.provider "capa")) (not (index .Values.configmap "use-proxy-protocol")) }}
   use-proxy-protocol: "true"
   {{- end }}
