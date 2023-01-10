@@ -242,6 +242,9 @@
                         "annotations": {
                             "type": "object"
                         },
+                        "apiVersion": {
+                            "type": "string"
+                        },
                         "behavior": {
                             "type": "object"
                         },
