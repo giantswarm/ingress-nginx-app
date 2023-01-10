@@ -37,6 +37,41 @@
                         "annotations": {
                             "type": "object"
                         },
+                        "certManager": {
+                            "type": "object",
+                            "properties": {
+                                "admissionCert": {
+                                    "type": "object",
+                                    "properties": {
+                                        "duration": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "issuerRef": {
+                                    "type": "object",
+                                    "properties": {
+                                        "kind": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "rootCert": {
+                                    "type": "object",
+                                    "properties": {
+                                        "duration": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        },
                         "certificate": {
                             "type": "string"
                         },

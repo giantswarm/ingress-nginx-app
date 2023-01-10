@@ -7,7 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
-- Service: Add CAPA support.
+### Added
+
+- Service: Add CAPA support. ([#380](https://github.com/giantswarm/nginx-ingress-controller-app/pull/380))
+- Webhook: Use `cert-manager` for certificate lifecycle management. ([#386](https://github.com/giantswarm/nginx-ingress-controller-app/pull/386))
 
 ## [2.21.0] - 2023-01-02
 
