@@ -488,11 +488,35 @@
                         "service": {
                             "type": "object",
                             "properties": {
+                                "annotations": {
+                                    "type": "object"
+                                },
+                                "clusterIP": {
+                                    "type": "string"
+                                },
+                                "externalIPs": {
+                                    "type": "array"
+                                },
+                                "externalTrafficPolicy": {
+                                    "type": "string"
+                                },
                                 "labels": {
                                     "type": "object"
                                 },
+                                "loadBalancerIP": {
+                                    "type": "string"
+                                },
+                                "loadBalancerSourceRanges": {
+                                    "type": "array"
+                                },
+                                "nodePort": {
+                                    "type": "string"
+                                },
                                 "servicePort": {
                                     "type": "integer"
+                                },
+                                "type": {
+                                    "type": "string"
                                 }
                             }
                         }

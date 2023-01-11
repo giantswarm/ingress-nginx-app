@@ -12,6 +12,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Service: Add CAPA support. ([#380](https://github.com/giantswarm/nginx-ingress-controller-app/pull/380))
 - Webhook: Use `cert-manager` for certificate lifecycle management. ([#386](https://github.com/giantswarm/nginx-ingress-controller-app/pull/386))
 - HPA: Make `apiVersion` configurable. ([#387](https://github.com/giantswarm/nginx-ingress-controller-app/pull/387))
+- Metrics: Align to upstream. ([#388](https://github.com/giantswarm/nginx-ingress-controller-app/pull/388))
+  - Values: Align to upstream.
 
 ### Changed
 
