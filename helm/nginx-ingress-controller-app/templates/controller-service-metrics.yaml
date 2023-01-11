@@ -11,10 +11,11 @@ metadata:
     prometheus.io/scrape: "true"
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
+    app.kubernetes.io/component: controller
     giantswarm.io/monitoring: "true"
-    {{- with .Values.controller.metrics.service.labels }}
-    {{- toYaml . | nindent 4 }}
-    {{- end }}
+  {{- if .Values.controller.metrics.service.labels }}
+    {{- toYaml .Values.controller.metrics.service.labels | nindent 4 }}
+  {{- end }}
 spec:
   clusterIP: None
   ports:
