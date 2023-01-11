@@ -22,6 +22,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Rename `controller-metrics-service.yaml` -> `controller-service-metrics.yaml`.
   - Service: Align labels to upstream.
   - Service: Order `name` & `namespace`.
+  - Service: Rename from `-monitoring` to `-metrics`.
 
 ## [2.21.0] - 2023-01-02
 
