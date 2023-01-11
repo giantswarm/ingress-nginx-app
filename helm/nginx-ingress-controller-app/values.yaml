@@ -225,6 +225,7 @@ controller:
 
   # Mutually exclusive with keda autoscaling
   autoscaling:
+    apiVersion: autoscaling/v2
     enabled: true
     annotations: {}
     minReplicas: 2
