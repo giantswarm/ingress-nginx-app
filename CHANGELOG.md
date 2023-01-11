@@ -13,6 +13,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Webhook: Use `cert-manager` for certificate lifecycle management. ([#386](https://github.com/giantswarm/nginx-ingress-controller-app/pull/386))
 - HPA: Make `apiVersion` configurable. ([#387](https://github.com/giantswarm/nginx-ingress-controller-app/pull/387))
 
+### Changed
+
+- Metrics: Align to upstream. ([#388](https://github.com/giantswarm/nginx-ingress-controller-app/pull/388))
+  - Service: Rename `controller-metrics-service.yaml` -> `controller-service-metrics.yaml`.
+
 ## [2.21.0] - 2023-01-02
 
 ### Added
