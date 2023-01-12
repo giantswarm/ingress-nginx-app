@@ -12,6 +12,27 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Service: Add CAPA support. ([#380](https://github.com/giantswarm/nginx-ingress-controller-app/pull/380))
 - Webhook: Use `cert-manager` for certificate lifecycle management. ([#386](https://github.com/giantswarm/nginx-ingress-controller-app/pull/386))
 - HPA: Make `apiVersion` configurable. ([#387](https://github.com/giantswarm/nginx-ingress-controller-app/pull/387))
+- Metrics: Align to upstream. ([#388](https://github.com/giantswarm/nginx-ingress-controller-app/pull/388))
+  - Values: Align to upstream.
+  - Service: Make optional, enabled by default.
+  - Service: Implement `controller.metrics.service.annotations`.
+  - Service: Implement `controller.metrics.service.type`.
+  - Service: Implement `controller.metrics.service.clusterIP`.
+  - Service: Implement `controller.metrics.service.externalIPs`.
+  - Service: Implement `controller.metrics.service.loadBalancerIP`.
+  - Service: Implement `controller.metrics.service.loadBalancerSourceRanges`.
+  - Service: Implement `controller.metrics.service.externalTrafficPolicy`.
+  - Service: Implement `controller.metrics.portName`.
+  - Service: Implement `controller.metrics.service.nodePort`.
+
+### Changed
+
+- Metrics: Align to upstream. ([#388](https://github.com/giantswarm/nginx-ingress-controller-app/pull/388))
+  - Service: Rename `controller-metrics-service.yaml` -> `controller-service-metrics.yaml`.
+  - Service: Align labels to upstream.
+  - Service: Order `name` & `namespace`.
+  - Service: Rename from `-monitoring` to `-metrics`.
+  - Service: Align indention of `ports`.
 
 ## [2.21.0] - 2023-01-02
 
