@@ -42,6 +42,10 @@ spec:
       port: {{ .Values.controller.metrics.service.servicePort }}
       protocol: TCP
       targetPort: {{ .Values.controller.metrics.portName }}
+    {{- $setNodePorts := (or (eq .Values.controller.metrics.service.type "NodePort") (eq .Values.controller.metrics.service.type "LoadBalancer")) }}
+    {{- if (and $setNodePorts (not (empty .Values.controller.metrics.service.nodePort))) }}
+      nodePort: {{ .Values.controller.metrics.service.nodePort }}
+    {{- end }}
   selector:
     {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
 {{- end }}

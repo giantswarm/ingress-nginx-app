@@ -23,6 +23,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Implement `controller.metrics.service.loadBalancerSourceRanges`.
   - Service: Implement `controller.metrics.service.externalTrafficPolicy`.
   - Service: Implement `controller.metrics.portName`.
+  - Service: Implement `controller.metrics.service.nodePort`.
 
 ### Changed
 
