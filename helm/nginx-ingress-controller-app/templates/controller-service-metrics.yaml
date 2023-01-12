@@ -28,6 +28,9 @@ spec:
 {{- if .Values.controller.metrics.service.externalIPs }}
   externalIPs: {{ toYaml .Values.controller.metrics.service.externalIPs | nindent 4 }}
 {{- end }}
+{{- if .Values.controller.metrics.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.controller.metrics.service.loadBalancerIP }}
+{{- end }}
   ports:
   - name: metrics
     port: {{ .Values.controller.metrics.service.servicePort }}
