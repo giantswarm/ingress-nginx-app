@@ -38,10 +38,10 @@ spec:
   externalTrafficPolicy: {{ .Values.controller.metrics.service.externalTrafficPolicy }}
 {{- end }}
   ports:
-    - name: metrics
+    - name: {{ .Values.controller.metrics.portName }}
       port: {{ .Values.controller.metrics.service.servicePort }}
       protocol: TCP
-      targetPort: metrics
+      targetPort: {{ .Values.controller.metrics.portName }}
   selector:
     {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
 {{- end }}
