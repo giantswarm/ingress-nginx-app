@@ -34,6 +34,9 @@ spec:
 {{- if .Values.controller.metrics.service.loadBalancerSourceRanges }}
   loadBalancerSourceRanges: {{ toYaml .Values.controller.metrics.service.loadBalancerSourceRanges | nindent 4 }}
 {{- end }}
+{{- if .Values.controller.metrics.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.controller.metrics.service.externalTrafficPolicy }}
+{{- end }}
   ports:
   - name: metrics
     port: {{ .Values.controller.metrics.service.servicePort }}
