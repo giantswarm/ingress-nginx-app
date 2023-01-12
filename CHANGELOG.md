@@ -20,6 +20,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Implement `controller.metrics.service.clusterIP`.
   - Service: Implement `controller.metrics.service.externalIPs`.
   - Service: Implement `controller.metrics.service.loadBalancerIP`.
+  - Service: Implement `controller.metrics.service.loadBalancerSourceRanges`.
 
 ### Changed
 

@@ -31,6 +31,9 @@ spec:
 {{- if .Values.controller.metrics.service.loadBalancerIP }}
   loadBalancerIP: {{ .Values.controller.metrics.service.loadBalancerIP }}
 {{- end }}
+{{- if .Values.controller.metrics.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges: {{ toYaml .Values.controller.metrics.service.loadBalancerSourceRanges | nindent 4 }}
+{{- end }}
   ports:
   - name: metrics
     port: {{ .Values.controller.metrics.service.servicePort }}
