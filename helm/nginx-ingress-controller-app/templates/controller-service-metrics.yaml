@@ -25,6 +25,9 @@ spec:
 {{- if .Values.controller.metrics.service.clusterIP }}
   clusterIP: {{ .Values.controller.metrics.service.clusterIP }}
 {{- end }}
+{{- if .Values.controller.metrics.service.externalIPs }}
+  externalIPs: {{ toYaml .Values.controller.metrics.service.externalIPs | nindent 4 }}
+{{- end }}
   ports:
   - name: metrics
     port: {{ .Values.controller.metrics.service.servicePort }}
