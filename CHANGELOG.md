@@ -16,6 +16,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Values: Align to upstream.
   - Service: Make optional, enabled by default.
   - Service: Implement `controller.metrics.service.annotations`.
+  - Service: Implement `controller.metrics.service.type`.
 
 ### Changed
 
