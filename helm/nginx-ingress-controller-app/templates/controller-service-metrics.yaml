@@ -22,7 +22,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   type: {{ .Values.controller.metrics.service.type }}
-  clusterIP: None
+{{- if .Values.controller.metrics.service.clusterIP }}
+  clusterIP: {{ .Values.controller.metrics.service.clusterIP }}
+{{- end }}
   ports:
   - name: metrics
     port: {{ .Values.controller.metrics.service.servicePort }}
