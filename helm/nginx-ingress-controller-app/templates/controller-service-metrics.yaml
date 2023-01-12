@@ -8,6 +8,9 @@ metadata:
     giantswarm.io/monitoring-app-label: {{ .Chart.Name | quote }}
     prometheus.io/port: {{ .Values.controller.metrics.port | quote }}
     prometheus.io/scrape: "true"
+  {{- if .Values.controller.metrics.service.annotations }}
+    {{ toYaml .Values.controller.metrics.service.annotations | nindent 4 }}
+  {{- end }}
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: controller

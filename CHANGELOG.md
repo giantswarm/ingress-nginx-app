@@ -15,6 +15,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Metrics: Align to upstream. ([#388](https://github.com/giantswarm/nginx-ingress-controller-app/pull/388))
   - Values: Align to upstream.
   - Service: Make optional, enabled by default.
+  - Service: Implement `controller.metrics.service.annotations`.
 
 ### Changed
 
