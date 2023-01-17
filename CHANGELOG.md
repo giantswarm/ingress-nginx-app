@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.22.0] - 2023-01-17
+
 ### Added
 
 - Service: Add CAPA support. ([#380](https://github.com/giantswarm/nginx-ingress-controller-app/pull/380))
@@ -774,7 +776,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.21.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.22.0...HEAD
+[2.22.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.21.0...v2.22.0
 [2.21.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.20.0...v2.21.0
 [2.20.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.19.0...v2.20.0
 [2.19.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.2...v2.19.0
