@@ -188,7 +188,7 @@ controller:
       annotations: {}
       # prometheus.io/scrape: "true"
       # prometheus.io/port: "10254"
-      # -- Labels to be added to patch job resources
+      # -- Labels to be added to the metrics service resource
       labels: {}
 
       # clusterIP: ""
