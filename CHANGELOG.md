@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Removed
+
+- HPA: Remove `controller.autoscaling.apiVersion`, use capabilites instead. ([#392](https://github.com/giantswarm/nginx-ingress-controller-app/pull/392))
+
 ## [2.22.0] - 2023-01-17
 
 ### Added
