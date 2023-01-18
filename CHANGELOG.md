@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Metrics: Add `app.kubernetes.io/component` to selector. ([#393](https://github.com/giantswarm/nginx-ingress-controller-app/pull/393))
+
 ## [2.22.0] - 2023-01-17
 
 ### Added

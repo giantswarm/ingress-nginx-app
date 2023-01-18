@@ -48,4 +48,5 @@ spec:
     {{- end }}
   selector:
     {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: controller
 {{- end }}
