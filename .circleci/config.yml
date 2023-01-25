@@ -36,6 +36,7 @@ workflows:
 
       # deploy to openstack installations (only tags)
       - architect/push-to-app-collection:
+          context: architect
           name: push-to-openstack-app-collection
           app_name: "nginx-ingress-controller-app"
           app_namespace: "kube-system"
