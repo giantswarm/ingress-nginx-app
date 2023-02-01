@@ -91,6 +91,9 @@ spec:
         - /nginx-ingress-controller
         - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
         - --election-id={{ include "ingress-nginx.controller.electionID" . }}
+        {{- if .Values.defaultBackend.enabled }}
+        - --default-backend-service=$(POD_NAMESPACE)/{{ include "ingress-nginx.defaultBackend.fullname" . }}
+        {{- end }}
         {{- if .Values.controller.annotationsPrefix }}
         - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
         {{- end}}
