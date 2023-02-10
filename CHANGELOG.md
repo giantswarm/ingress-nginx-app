@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.23.1] - 2023-02-10
+
 ### Fixed
 
 - Stop targeting default backend pods with the controller service. ([#402](https://github.com/giantswarm/nginx-ingress-controller-app/pull/402))
@@ -796,7 +798,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.23.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.23.1...HEAD
+[2.23.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.23.0...v2.23.1
 [2.23.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.22.1...v2.23.0
 [2.22.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.22.0...v2.22.1
 [2.22.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.21.0...v2.22.0
