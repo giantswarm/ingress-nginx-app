@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Fixed
+
+- Stop targeting default backend pods with the controller service. ([#402](https://github.com/giantswarm/nginx-ingress-controller-app/pull/402))
+
 ## [2.23.0] - 2023-02-02
 
 ### Added
