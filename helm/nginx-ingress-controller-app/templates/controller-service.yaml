@@ -60,6 +60,7 @@ spec:
     {{- end }}
   selector:
     {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: controller
   {{- if .Values.controller.service.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.controller.service.externalTrafficPolicy }}
   {{- end }}
