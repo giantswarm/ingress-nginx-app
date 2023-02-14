@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@4.27.0
+  architect: giantswarm/architect@dev:switch_kubeval_to_kubeconform
 
 workflows:
   version: 2
