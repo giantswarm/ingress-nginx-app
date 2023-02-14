@@ -468,7 +468,7 @@
                     "type": "integer"
                 },
                 "maxUnavailable": {
-                    "type": "integer"
+                    "type": ["integer", "string"]
                 },
                 "metrics": {
                     "type": "object",
