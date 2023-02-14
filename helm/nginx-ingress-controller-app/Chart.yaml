@@ -5,7 +5,7 @@ home: https://github.com/giantswarm/nginx-ingress-controller-app
 icon: https://s.giantswarm.io/app-icons/nginx-ingress-controller/2/icon_dark.svg
 kubeVersion: ">=1.20.0-0"
 name: nginx-ingress-controller-app
-version: 2.23.1
+version: 2.24.0
 sources:
   - https://github.com/kubernetes/ingress-nginx/
 annotations:
