@@ -103,7 +103,7 @@ controller:
   # -- Define either 'minAvailable' or 'maxUnavailable', never both.
   # minAvailable: 1
   # -- Define either 'minAvailable' or 'maxUnavailable', never both.
-  maxUnavailable: 1
+  maxUnavailable: "25%"
 
   # -- Use a `DaemonSet` or `Deployment`
   kind: Deployment
