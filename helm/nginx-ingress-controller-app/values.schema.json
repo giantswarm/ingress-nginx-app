@@ -861,6 +861,9 @@
                 "minAvailable": {
                     "type": "integer"
                 },
+                "minReadySeconds": {
+                    "type": "integer"
+                },
                 "name": {
                     "type": "string"
                 },
@@ -949,6 +952,22 @@
                 },
                 "tolerations": {
                     "type": "array"
+                },
+                "updateStrategy": {
+                    "type": "object",
+                    "properties": {
+                        "rollingUpdate": {
+                            "type": "object",
+                            "properties": {
+                                "maxUnavailable": {
+                                    "type": "integer"
+                                }
+                            }
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    }
                 }
             }
         },

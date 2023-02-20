@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Default Backend: Add `defaultBackend.updateStrategy` & `defaultBackend.minReadySeconds`. ([#406](https://github.com/giantswarm/nginx-ingress-controller-app/pull/406))
+
 ## [2.24.0] - 2023-02-14
 
 ### Changed
