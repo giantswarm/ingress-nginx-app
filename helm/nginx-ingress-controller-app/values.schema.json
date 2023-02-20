@@ -113,9 +113,6 @@
                         "namespaceSelector": {
                             "type": "object"
                         },
-                        "networkPolicyEnabled": {
-                            "type": "boolean"
-                        },
                         "objectSelector": {
                             "type": "object"
                         },
@@ -524,6 +521,14 @@
                 },
                 "minReadySeconds": {
                     "type": "integer"
+                },
+                "networkPolicy": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        }
+                    }
                 },
                 "nodeAffinity": {
                     "type": ["object", "null"]

@@ -11,6 +11,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Default Backend: Add `defaultBackend.updateStrategy` & `defaultBackend.minReadySeconds`. ([#406](https://github.com/giantswarm/nginx-ingress-controller-app/pull/406))
 
+### Changed
+
+- NetworkPolicy: Align to upstream. ([#408](https://github.com/giantswarm/nginx-ingress-controller-app/pull/408))\
+  **NOTE:** `controller.admissionWebhooks.networkPolicyEnabled` is being removed in favor of `controller.networkPolicy.enabled`.
+
 ## [2.24.0] - 2023-02-14
 
 ### Changed
