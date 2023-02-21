@@ -340,6 +340,11 @@ controller:
       # -- 'hostPort' https port
       https: 443
 
+  # NetworkPolicy for controller component.
+  networkPolicy:
+    # -- Enable 'networkPolicy' or not
+    enabled: true
+
   # -- Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader'
   electionID: ""
 
@@ -529,7 +534,6 @@ controller:
 
     # -- Use an existing PSP instead of creating one
     existingPsp: ""
-    networkPolicyEnabled: true
 
     service:
       annotations: {}
