@@ -753,11 +753,33 @@
                 "sysctls": {
                     "type": "object"
                 },
+                "tcp": {
+                    "type": "object",
+                    "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "configMapNamespace": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "terminationGracePeriodSeconds": {
                     "type": "integer"
                 },
                 "topologySpreadConstraints": {
                     "type": "string"
+                },
+                "udp": {
+                    "type": "object",
+                    "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "configMapNamespace": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "updateIngressStatus": {
                     "type": "boolean"
