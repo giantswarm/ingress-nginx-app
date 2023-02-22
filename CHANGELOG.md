@@ -16,6 +16,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - ConfigMap: Implement `controller.proxySetHeaders`.
   - ConfigMap: Implement `dhParam`.
   - ConfigMap: Implement `tcp` and `udp`.
+  - ConfigMap: Implement `controller.config`.
 
 ### Changed
 

@@ -265,6 +265,9 @@
                 "autoscalingTemplate": {
                     "type": "array"
                 },
+                "config": {
+                    "type": "object"
+                },
                 "configAnnotations": {
                     "type": "object"
                 },
