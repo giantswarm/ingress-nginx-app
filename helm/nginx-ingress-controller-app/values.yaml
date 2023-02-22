@@ -145,6 +145,9 @@ controller:
     http: 80
     https: 443
 
+  # -- Annotations to be added to the controller config configuration configmap.
+  configAnnotations: {}
+
   # controller.livenessProbe
   # Liveness probe configuration
   # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes

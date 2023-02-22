@@ -10,6 +10,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - Default Backend: Add `defaultBackend.updateStrategy` & `defaultBackend.minReadySeconds`. ([#406](https://github.com/giantswarm/nginx-ingress-controller-app/pull/406))
+- ConfigMap: Align to upstream. ([#409](https://github.com/giantswarm/nginx-ingress-controller-app/pull/409))
+  - ConfigMap: Implement `controller.configAnnotations`.
 
 ### Changed
 

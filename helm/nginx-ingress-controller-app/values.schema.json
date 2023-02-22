@@ -262,6 +262,9 @@
                 "autoscalingTemplate": {
                     "type": "array"
                 },
+                "configAnnotations": {
+                    "type": "object"
+                },
                 "containerPort": {
                     "type": "object",
                     "properties": {
