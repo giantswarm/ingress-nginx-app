@@ -985,6 +985,9 @@
                 }
             }
         },
+        "dhParam": {
+            "type": "string"
+        },
         "image": {
             "type": "object",
             "properties": {

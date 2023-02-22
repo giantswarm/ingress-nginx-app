@@ -840,6 +840,11 @@ tcp: {}
 udp: {}
 #  53: "kube-system/kube-dns:53"
 
+# -- (string) A base64-encoded Diffie-Hellman parameter.
+# This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
+## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
+dhParam: ""
+
 # Below are configuration values that you should not overwrite or set yourself.
 
 # baseDomain
