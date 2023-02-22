@@ -31,6 +31,9 @@
         "controller": {
             "type": "object",
             "properties": {
+                "addHeaders": {
+                    "type": "object"
+                },
                 "admissionWebhooks": {
                     "type": "object",
                     "properties": {

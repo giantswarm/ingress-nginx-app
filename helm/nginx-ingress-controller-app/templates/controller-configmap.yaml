@@ -14,6 +14,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
 data:
   allow-snippet-annotations: "{{ .Values.controller.allowSnippetAnnotations }}"
+{{- if .Values.controller.addHeaders }}
+  add-headers: {{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}-custom-add-headers
+{{- end }}
   {{- toYaml .Values.configmap | trim | nindent 2 }}
   {{- if and (or (eq .Values.provider "aws") (eq .Values.provider "capa")) (not (index .Values.configmap "use-proxy-protocol")) }}
   use-proxy-protocol: "true"
