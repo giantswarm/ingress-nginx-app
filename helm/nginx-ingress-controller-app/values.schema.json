@@ -539,6 +539,9 @@
                 "nodeAffinity": {
                     "type": ["object", "null"]
                 },
+                "proxySetHeaders": {
+                    "type": "object"
+                },
                 "readinessProbe": {
                     "type": "object",
                     "properties": {

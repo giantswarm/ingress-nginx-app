@@ -13,6 +13,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - ConfigMap: Align to upstream. ([#409](https://github.com/giantswarm/nginx-ingress-controller-app/pull/409))
   - ConfigMap: Implement `controller.configAnnotations`.
   - ConfigMap: Implement `controller.addHeaders`.
+  - ConfigMap: Implement `controller.proxySetHeaders`.
 
 ### Changed
 

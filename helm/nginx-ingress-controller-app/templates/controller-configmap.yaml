@@ -17,6 +17,9 @@ data:
 {{- if .Values.controller.addHeaders }}
   add-headers: {{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}-custom-add-headers
 {{- end }}
+{{- if .Values.controller.proxySetHeaders }}
+  proxy-set-headers: {{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}-custom-proxy-headers
+{{- end }}
   {{- toYaml .Values.configmap | trim | nindent 2 }}
   {{- if and (or (eq .Values.provider "aws") (eq .Values.provider "capa")) (not (index .Values.configmap "use-proxy-protocol")) }}
   use-proxy-protocol: "true"
