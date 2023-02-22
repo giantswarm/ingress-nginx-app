@@ -31,6 +31,9 @@
         "controller": {
             "type": "object",
             "properties": {
+                "addHeaders": {
+                    "type": "object"
+                },
                 "admissionWebhooks": {
                     "type": "object",
                     "properties": {
@@ -261,6 +264,12 @@
                 },
                 "autoscalingTemplate": {
                     "type": "array"
+                },
+                "config": {
+                    "type": "object"
+                },
+                "configAnnotations": {
+                    "type": "object"
                 },
                 "containerPort": {
                     "type": "object",
@@ -533,6 +542,9 @@
                 "nodeAffinity": {
                     "type": ["object", "null"]
                 },
+                "proxySetHeaders": {
+                    "type": "object"
+                },
                 "readinessProbe": {
                     "type": "object",
                     "properties": {
@@ -744,11 +756,33 @@
                 "sysctls": {
                     "type": "object"
                 },
+                "tcp": {
+                    "type": "object",
+                    "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "configMapNamespace": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "terminationGracePeriodSeconds": {
                     "type": "integer"
                 },
                 "topologySpreadConstraints": {
                     "type": "string"
+                },
+                "udp": {
+                    "type": "object",
+                    "properties": {
+                        "annotations": {
+                            "type": "object"
+                        },
+                        "configMapNamespace": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "updateIngressStatus": {
                     "type": "boolean"
@@ -975,6 +1009,9 @@
                     }
                 }
             }
+        },
+        "dhParam": {
+            "type": "string"
         },
         "image": {
             "type": "object",

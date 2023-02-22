@@ -145,6 +145,15 @@ controller:
     http: 80
     https: 443
 
+  # -- Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
+  config: {}
+  # -- Annotations to be added to the controller config configuration configmap.
+  configAnnotations: {}
+  # -- Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers
+  proxySetHeaders: {}
+  # -- Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers
+  addHeaders: {}
+
   # controller.livenessProbe
   # Liveness probe configuration
   # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
@@ -383,6 +392,17 @@ controller:
     # -- When scope.enabled == false, instead of watching all namespaces, we watching namespaces whose labels
     # only match with namespaceSelector. Format like foo=bar. Defaults to empty, means watching all namespaces.
     namespaceSelector: ""
+
+  tcp:
+    # -- Allows customization of the tcp-services-configmap; defaults to $(POD_NAMESPACE)
+    configMapNamespace: ""
+    # -- Annotations to be added to the tcp config configmap
+    annotations: {}
+  udp:
+    # -- Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE)
+    configMapNamespace: ""
+    # -- Annotations to be added to the udp config configmap
+    annotations: {}
 
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.
@@ -832,6 +852,11 @@ tcp: {}
 ##
 udp: {}
 #  53: "kube-system/kube-dns:53"
+
+# -- (string) A base64-encoded Diffie-Hellman parameter.
+# This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
+## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
+dhParam: ""
 
 # Below are configuration values that you should not overwrite or set yourself.
 
