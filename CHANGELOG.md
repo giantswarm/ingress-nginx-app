@@ -19,6 +19,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   **NOTE:** `controller.admissionWebhooks.networkPolicyEnabled` is being removed in favor of `controller.networkPolicy.enabled`.
 - ConfigMap: Align to upstream. ([#409](https://github.com/giantswarm/nginx-ingress-controller-app/pull/409))
   - ConfigMap: Align metadata.
+  - ConfigMap: Rename `configmap.yaml` -> `controller-configmap.yaml`.
 
 ## [2.24.0] - 2023-02-14
 
