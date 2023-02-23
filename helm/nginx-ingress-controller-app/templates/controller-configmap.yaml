@@ -24,7 +24,7 @@ data:
   ssl-dh-param: {{ .Release.Namespace }}/{{ include "ingress-nginx.controller.fullname" . }}
 {{- end }}
 {{- range $key, $value := .Values.controller.config }}
-    {{- $key | nindent 2 }}: {{ $value | quote }}
+  {{- $key | nindent 2 }}: {{ $value | quote }}
 {{- end }}
 {{- toYaml .Values.configmap | trim | nindent 2 }}
 {{- if and (or (eq .Values.provider "aws") (eq .Values.provider "capa")) (not (index .Values.configmap "use-proxy-protocol")) }}
