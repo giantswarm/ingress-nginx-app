@@ -471,7 +471,7 @@
                     }
                 },
                 "maxSurge": {
-                    "type": "integer"
+                    "type": ["integer", "string"]
                 },
                 "maxUnavailable": {
                     "type": ["integer", "string"]
@@ -526,7 +526,7 @@
                     }
                 },
                 "minAvailable": {
-                    "type": "integer"
+                    "type": ["integer", "string"]
                 },
                 "minReadySeconds": {
                     "type": "integer"
@@ -898,7 +898,7 @@
                     }
                 },
                 "minAvailable": {
-                    "type": "integer"
+                    "type": ["integer", "string"]
                 },
                 "minReadySeconds": {
                     "type": "integer"
@@ -999,7 +999,7 @@
                             "type": "object",
                             "properties": {
                                 "maxUnavailable": {
-                                    "type": "integer"
+                                    "type": ["integer", "string"]
                                 }
                             }
                         },
