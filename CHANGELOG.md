@@ -19,6 +19,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - ConfigMap: Implement `controller.config`.
 - Chart: Add KEDA resources. ([#413](https://github.com/giantswarm/nginx-ingress-controller-app/pull/413))
 - Chart: Add Prometheus rules. ([#414](https://github.com/giantswarm/nginx-ingress-controller-app/pull/414))
+- Chart: Add service monitor. ([#415](https://github.com/giantswarm/nginx-ingress-controller-app/pull/415))
 
 ### Changed
 

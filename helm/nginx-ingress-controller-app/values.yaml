@@ -214,6 +214,23 @@ controller:
       # externalTrafficPolicy: ""
       # nodePort: ""
 
+    serviceMonitor:
+      enabled: false
+      additionalLabels: {}
+      ## The label to use to retrieve the job name from.
+      ## jobLabel: "app.kubernetes.io/name"
+      namespace: ""
+      namespaceSelector: {}
+      ## Default: scrape .Release.Namespace only
+      ## To scrape all, use the following:
+      ## namespaceSelector:
+      ##   any: true
+      scrapeInterval: 30s
+      # honorLabels: true
+      targetLabels: []
+      relabelings: []
+      metricRelabelings: []
+
     prometheusRule:
       enabled: false
       additionalLabels: {}
