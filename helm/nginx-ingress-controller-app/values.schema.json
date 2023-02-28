@@ -522,6 +522,38 @@
                                     "type": "string"
                                 }
                             }
+                        },
+                        "serviceMonitor": {
+                            "type": "object",
+                            "properties": {
+                                "additionalLabels": {
+                                    "type": "object"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "honorLabels": {
+                                    "type": "boolean"
+                                },
+                                "metricRelabelings": {
+                                    "type": "array"
+                                },
+                                "namespace": {
+                                    "type": "string"
+                                },
+                                "namespaceSelector": {
+                                    "type": "object"
+                                },
+                                "relabelings": {
+                                    "type": "array"
+                                },
+                                "scrapeInterval": {
+                                    "type": "string"
+                                },
+                                "targetLabels": {
+                                    "type": "array"
+                                }
+                            }
                         }
                     }
                 },
