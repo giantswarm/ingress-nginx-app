@@ -18,6 +18,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - ConfigMap: Implement `tcp` and `udp`.
   - ConfigMap: Implement `controller.config`.
 - Chart: Add KEDA resources. ([#413](https://github.com/giantswarm/nginx-ingress-controller-app/pull/413))
+- Chart: Add Prometheus rules. ([#414](https://github.com/giantswarm/nginx-ingress-controller-app/pull/414))
 
 ### Changed
 

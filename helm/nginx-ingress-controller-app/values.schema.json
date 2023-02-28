@@ -488,6 +488,23 @@
                         "portName": {
                             "type": "string"
                         },
+                        "prometheusRule": {
+                            "type": "object",
+                            "properties": {
+                                "additionalLabels": {
+                                    "type": "object"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
+                                },
+                                "namespace": {
+                                    "type": "string"
+                                },
+                                "rules": {
+                                    "type": "array"
+                                }
+                            }
+                        },
                         "service": {
                             "type": "object",
                             "properties": {
