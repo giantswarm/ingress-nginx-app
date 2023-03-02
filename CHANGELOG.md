@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- AdmissionWebhooks: Update digest to match last SHA ([#416](https://github.com/giantswarm/nginx-ingress-controller-app/pull/416)).
+- Webhook: Update digest to match last SHA. ([#416](https://github.com/giantswarm/nginx-ingress-controller-app/pull/416))
 
 ## [2.24.0] - 2023-02-14
 
