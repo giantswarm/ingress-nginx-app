@@ -30,6 +30,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - ConfigMap: Rename `configmap.yaml` -> `controller-configmap.yaml`.
   - ConfigMap: Align indention.
 
+## [2.24.1] - 2023-03-02
+
+### Changed
+
+- Webhook: Update digest to match last SHA. ([#421](https://github.com/giantswarm/nginx-ingress-controller-app/pull/421))
+
 ## [2.24.0] - 2023-02-14
 
 ### Changed
@@ -827,7 +833,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.24.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.24.1...HEAD
+[2.24.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.24.0...v2.24.1
 [2.24.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.23.1...v2.24.0
 [2.23.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.23.0...v2.23.1
 [2.23.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.22.1...v2.23.0
