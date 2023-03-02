@@ -29,6 +29,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - ConfigMap: Align metadata.
   - ConfigMap: Rename `configmap.yaml` -> `controller-configmap.yaml`.
   - ConfigMap: Align indention.
+- AdmissionWebhooks: Update digest to match last SHA.
 
 ## [2.24.0] - 2023-02-14
 
