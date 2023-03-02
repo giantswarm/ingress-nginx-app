@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- AdmissionWebhooks: Update digest to match last SHA.
+
 ## [2.24.0] - 2023-02-14
 
 ### Changed
