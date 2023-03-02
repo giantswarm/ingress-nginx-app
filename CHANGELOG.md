@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.25.0] - 2023-03-02
+
 ### Added
 
 - Default Backend: Add `defaultBackend.updateStrategy` & `defaultBackend.minReadySeconds`. ([#406](https://github.com/giantswarm/nginx-ingress-controller-app/pull/406))
@@ -833,7 +835,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.24.1...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.25.0...HEAD
+[2.25.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.24.1...v2.25.0
 [2.24.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.24.0...v2.24.1
 [2.24.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.23.1...v2.24.0
 [2.23.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.23.0...v2.23.1
