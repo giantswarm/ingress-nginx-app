@@ -55,6 +55,9 @@ spec:
 {{- if .Values.controller.service.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.controller.service.externalTrafficPolicy }}
 {{- end }}
+{{- if .Values.controller.service.sessionAffinity }}
+  sessionAffinity: {{ .Values.controller.service.sessionAffinity }}
+{{- end }}
   ports:
   - name: http
     port: {{ .Values.controller.service.ports.http }}

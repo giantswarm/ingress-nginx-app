@@ -766,6 +766,10 @@
                         "public": {
                             "type": "boolean"
                         },
+                        "sessionAffinity": {
+                            "type": "string",
+                            "pattern": "(None|ClientIP)"
+                        },
                         "subdomain": {
                             "type": "string"
                         },
