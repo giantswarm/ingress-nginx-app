@@ -49,9 +49,9 @@ spec:
 {{- if .Values.controller.service.loadBalancerIP }}
   loadBalancerIP: {{ .Values.controller.service.loadBalancerIP }}
 {{- end }}
-  {{- with .Values.controller.service.loadBalancerSourceRanges }}
-  loadBalancerSourceRanges: {{ toYaml . | nindent 2 }}
-  {{- end }}
+{{- if .Values.controller.service.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges: {{ toYaml .Values.controller.service.loadBalancerSourceRanges | nindent 4 }}
+{{- end }}
   ports:
   - name: http
     port: {{ .Values.controller.service.ports.http }}

@@ -492,6 +492,7 @@ controller:
     externalIPs: []
     # -- Used by cloud providers to connect the resulting `LoadBalancer` to a pre-existing static IP according to https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
     loadBalancerIP: ""
+    loadBalancerSourceRanges: []
 
     # controller.externalDNS
     externalDNS:
@@ -523,12 +524,6 @@ controller:
     # controller.service.type
     # Valid values: LoadBalancer, NodePort
     type: LoadBalancer
-
-    # controller.service.loadBalancerSourceRanges
-    # Configures the source IP address ranges which can connect to the service.
-    # Keep in mind that some solutions need to access the service to work properly (e.g. cert-manager & Let's Encrypt).
-    # By default any source IP address can connect to the service.
-    loadBalancerSourceRanges: []
 
     ports:
       http: 80
