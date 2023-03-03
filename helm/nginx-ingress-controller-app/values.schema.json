@@ -735,6 +735,9 @@
                         "labels": {
                             "type": "object"
                         },
+                        "loadBalancerIP": {
+                            "type": "string"
+                        },
                         "loadBalancerSourceRanges": {
                             "type": "array"
                         },

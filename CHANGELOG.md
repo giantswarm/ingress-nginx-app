@@ -13,6 +13,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Implement `controller.service.clusterIP`.\
     **NOTE:** The cluster IP of existing services can not be changed. The app deployment might fail when defining this for already installed app instances.
   - Service: Implement `controller.service.externalIPs`.
+  - Service: Implement `controller.service.loadBalancerIP`.
 
 ### Changed
 
