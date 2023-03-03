@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Service: Align to upstream. ([#425](https://github.com/giantswarm/nginx-ingress-controller-app/pull/425))
+  - Service: Reorder name & namespace.
+
 ## [2.25.1] - 2023-03-03
 
 ### Fixed
