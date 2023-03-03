@@ -7,6 +7,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Service: Align to upstream. ([#425](https://github.com/giantswarm/nginx-ingress-controller-app/pull/425))
+  - Service: Implement `controller.service.clusterIP`.\
+    **NOTE:** The cluster IP of existing services can not be changed. The app deployment might fail when defining this for already installed app instances.
+
 ### Changed
 
 - Service: Align to upstream. ([#425](https://github.com/giantswarm/nginx-ingress-controller-app/pull/425))

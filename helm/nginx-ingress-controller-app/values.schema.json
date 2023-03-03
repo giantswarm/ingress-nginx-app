@@ -656,6 +656,9 @@
                         "annotations": {
                             "type": "object"
                         },
+                        "clusterIP": {
+                            "type": "string"
+                        },
                         "enabled": {
                             "type": "boolean"
                         },
