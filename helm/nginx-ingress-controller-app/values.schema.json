@@ -735,6 +735,10 @@
                                 }
                             }
                         },
+                        "ipFamilyPolicy": {
+                            "type": "string",
+                            "pattern": "(SingleStack|PreferDualStack|RequireDualStack)"
+                        },
                         "labels": {
                             "type": "object"
                         },
