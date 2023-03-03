@@ -673,6 +673,9 @@
                                 }
                             }
                         },
+                        "externalIPs": {
+                            "type": "array"
+                        },
                         "externalTrafficPolicy": {
                             "type": "string",
                             "pattern": "(Local|Cluster)"

@@ -486,6 +486,11 @@ controller:
     labels: {}
     # clusterIP: ""
 
+    # -- List of IP addresses at which the controller services are available
+    ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
+    ##
+    externalIPs: []
+
     # controller.externalDNS
     externalDNS:
 
