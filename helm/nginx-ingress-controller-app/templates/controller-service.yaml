@@ -52,6 +52,9 @@ spec:
 {{- if .Values.controller.service.loadBalancerSourceRanges }}
   loadBalancerSourceRanges: {{ toYaml .Values.controller.service.loadBalancerSourceRanges | nindent 4 }}
 {{- end }}
+{{- if .Values.controller.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.controller.service.externalTrafficPolicy }}
+{{- end }}
   ports:
   - name: http
     port: {{ .Values.controller.service.ports.http }}
@@ -70,7 +73,4 @@ spec:
   selector:
     {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: controller
-  {{- if .Values.controller.service.externalTrafficPolicy }}
-  externalTrafficPolicy: {{ .Values.controller.service.externalTrafficPolicy }}
-  {{- end }}
 {{- end }}

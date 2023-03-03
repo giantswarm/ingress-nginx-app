@@ -493,6 +493,9 @@ controller:
     # -- Used by cloud providers to connect the resulting `LoadBalancer` to a pre-existing static IP according to https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer
     loadBalancerIP: ""
     loadBalancerSourceRanges: []
+    ## Set external traffic policy to: "Local" to preserve source IP on providers supporting it.
+    ## Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
+    externalTrafficPolicy: "Local"
 
     # controller.externalDNS
     externalDNS:
@@ -504,12 +507,6 @@ controller:
       # controller.externalDNS.enabled
       # Indicates whether to set external-dns annotations on the LB service.
       enabled: true
-
-    # controller.service.externalTrafficPolicy
-    # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
-    #   Local - kube-proxy only proxies requests to local endpoints (does not forward traffic to other nodes), source IP preserved
-    #   Cluster - kube-proxy proxies requests randomly across all endpoints (forwards traffic to other nodes if necessary), source IP NAT'd
-    externalTrafficPolicy: "Local"
 
     # controller.service.public
     # Applies to clusters running on AWS or Azure.
