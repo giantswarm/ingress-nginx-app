@@ -730,14 +730,6 @@
                                         }
                                     }
                                 },
-                                "ports": {
-                                    "type": "object",
-                                    "properties": {
-                                        "https": {
-                                            "type": "integer"
-                                        }
-                                    }
-                                },
                                 "subdomain": {
                                     "type": "string"
                                 },

@@ -51,6 +51,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE:** This is part of our alignment to upstream. Use `controller.service.type` instead.
   - Internal Service: Remove `controller.service.internal.ports.http`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.service.ports.http` instead.
+  - Internal Service: Remove `controller.service.internal.ports.https`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.service.ports.https` instead.
 
 ## [2.25.1] - 2023-03-03
 

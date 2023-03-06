@@ -602,9 +602,6 @@ controller:
       # By default any source IP address can connect to the service.
       loadBalancerSourceRanges: []
 
-      ports:
-        https: 443
-
       # type: NodePort
       nodePorts:
         http: 30012
