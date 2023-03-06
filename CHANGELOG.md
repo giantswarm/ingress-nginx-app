@@ -27,6 +27,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Align `controller.service.loadBalancerSourceRanges`.
   - Service: Align `controller.service.externalTrafficPolicy`.
   - Service: Align indention of `ports`.
+  - Service: Align node port checks.
 
 ## [2.25.1] - 2023-03-03
 
