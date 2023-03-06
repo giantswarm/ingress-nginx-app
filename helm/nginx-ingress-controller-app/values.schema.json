@@ -743,9 +743,6 @@
                                 },
                                 "suffix": {
                                     "type": "string"
-                                },
-                                "type": {
-                                    "type": "string"
                                 }
                             }
                         },

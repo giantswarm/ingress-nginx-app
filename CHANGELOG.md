@@ -43,6 +43,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Service: Align to upstream. ([#425](https://github.com/giantswarm/nginx-ingress-controller-app/pull/425))
   - Internal Service: Remove `controller.service.internal.labels`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.service.labels` instead.
+  - Internal Service: Remove `controller.service.internal.type`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.service.type` instead.
 
 ## [2.25.1] - 2023-03-03
 

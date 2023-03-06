@@ -595,9 +595,6 @@ controller:
       # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
       subdomain: "ingress-internal"
 
-      # controller.service.internal.type
-      type: LoadBalancer
-
       # controller.service.internal.loadBalancerSourceRanges
       # Configures the source IP address ranges which can connect to the service.
       # Keep in mind that some solutions need to access the service to work properly (e.g. cert-manager & Let's Encrypt).
