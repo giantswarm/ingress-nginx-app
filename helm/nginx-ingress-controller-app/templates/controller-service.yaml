@@ -66,6 +66,11 @@ spec:
   ipFamilyPolicy: {{ .Values.controller.service.ipFamilyPolicy }}
 {{- end }}
 {{- end }}
+{{- if semverCompare ">=1.21.0-0" .Capabilities.KubeVersion.Version -}}
+{{- if .Values.controller.service.ipFamilies }}
+  ipFamilies: {{ toYaml .Values.controller.service.ipFamilies | nindent 4 }}
+{{- end }}
+{{- end }}
   ports:
   - name: http
     port: {{ .Values.controller.service.ports.http }}

@@ -511,6 +511,11 @@ controller:
     # The ipFamilies and clusterIPs fields depend on the value of this field.
     ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
     ipFamilyPolicy: "SingleStack"
+    # -- List of IP families (e.g. IPv4, IPv6) assigned to the service. This field is usually assigned automatically
+    # based on cluster configuration and the ipFamilyPolicy field.
+    ## Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/
+    ipFamilies:
+      - IPv4
 
     # controller.externalDNS
     externalDNS:

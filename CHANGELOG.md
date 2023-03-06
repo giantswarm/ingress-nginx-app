@@ -18,6 +18,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Implement `controller.service.healthCheckNodePort`.\
     **NOTE:** The health check node port of existing services can not be changed. The app deployment might fail when defining this for already installed app instances.
   - Service: Implement `controller.service.ipFamilyPolicy`.
+  - Service: Implement `controller.service.ipFamilies`.
 
 ### Changed
 
