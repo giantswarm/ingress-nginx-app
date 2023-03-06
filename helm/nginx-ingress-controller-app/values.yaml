@@ -547,22 +547,24 @@ controller:
     # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
     subdomain: "ingress"
 
-    # controller.service.type
-    # Valid values: LoadBalancer, NodePort
-    type: LoadBalancer
-
     ports:
       http: 80
       https: 443
-
     targetPorts:
       http: http
       https: https
-
-    # type: NodePort
+    type: LoadBalancer
+    ## type: NodePort
+    ## nodePorts:
+    ##   http: 32080
+    ##   https: 32443
+    ##   tcp:
+    ##     8080: 32808
     nodePorts:
       http: 30010
       https: 30011
+      tcp: {}
+      udp: {}
     external:
       enabled: true
 

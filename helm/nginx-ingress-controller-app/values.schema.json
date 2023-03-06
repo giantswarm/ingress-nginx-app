@@ -779,6 +779,12 @@
                                 },
                                 "https": {
                                     "type": "integer"
+                                },
+                                "tcp": {
+                                    "type": "object"
+                                },
+                                "udp": {
+                                    "type": "object"
                                 }
                             }
                         },
