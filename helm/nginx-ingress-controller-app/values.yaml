@@ -563,6 +563,8 @@ controller:
     nodePorts:
       http: 30010
       https: 30011
+    external:
+      enabled: true
 
     # controller.service.internal
     # Configuration settings for `-internal` suffixed Service variant.

@@ -22,6 +22,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Implement `controller.service.enableHttp`.
   - Service: Implement `controller.service.enableHttps`.
   - Service: Implement `controller.service.appProtocol`.
+  - Service: Implement `controller.service.external.enabled`.
 
 ### Changed
 

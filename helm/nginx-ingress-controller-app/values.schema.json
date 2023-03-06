@@ -671,6 +671,14 @@
                         "enabled": {
                             "type": "boolean"
                         },
+                        "external": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
                         "externalDNS": {
                             "type": "object",
                             "properties": {
