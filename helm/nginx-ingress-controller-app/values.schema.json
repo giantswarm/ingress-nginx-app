@@ -713,9 +713,6 @@
                                     "type": "string",
                                     "pattern": "(Local|Cluster)"
                                 },
-                                "labels": {
-                                    "type": "object"
-                                },
                                 "loadBalancerSourceRanges": {
                                     "type": "array"
                                 },

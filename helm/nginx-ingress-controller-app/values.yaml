@@ -583,7 +583,6 @@ controller:
       suffix: ""
 
       annotations: {}
-      labels: {}
 
       # controller.service.internal.externalTrafficPolicy
       # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints

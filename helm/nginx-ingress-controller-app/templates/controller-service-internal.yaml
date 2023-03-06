@@ -28,8 +28,8 @@ metadata:
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: controller
-  {{- if .Values.controller.service.internal.labels }}
-    {{- toYaml .Values.controller.service.internal.labels | nindent 4 }}
+  {{- if .Values.controller.service.labels }}
+    {{- toYaml .Values.controller.service.labels | nindent 4 }}
   {{- end }}
   name: {{ include "resource.controller-service-internal.name" . }}
   namespace: {{ .Release.Namespace }}
