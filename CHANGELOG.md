@@ -38,6 +38,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Align node port checks.
   - Internal Service: Align initial check.
   - Internal Service: Reorder name & namespace.
+  - Internal Service: Align `controller.service.internal.loadBalancerSourceRanges`.
 
 ### Removed
 

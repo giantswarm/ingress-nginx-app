@@ -38,9 +38,9 @@ spec:
 {{- if .Values.controller.service.internal.loadBalancerIP }}
   loadBalancerIP: {{ .Values.controller.service.internal.loadBalancerIP }}
 {{- end }}
-  {{- with .Values.controller.service.internal.loadBalancerSourceRanges }}
-  loadBalancerSourceRanges: {{ toYaml . | nindent 2 }}
-  {{- end }}
+{{- if .Values.controller.service.internal.loadBalancerSourceRanges }}
+  loadBalancerSourceRanges: {{ toYaml .Values.controller.service.internal.loadBalancerSourceRanges | nindent 4 }}
+{{- end }}
   ports:
   - name: http
     port: {{ .Values.controller.service.internal.ports.http }}
