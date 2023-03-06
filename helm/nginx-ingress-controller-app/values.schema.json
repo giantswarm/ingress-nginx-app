@@ -1146,6 +1146,9 @@
                 }
             }
         },
+        "portNamePrefix": {
+            "type": "string"
+        },
         "provider": {
             "type": "string"
         },
