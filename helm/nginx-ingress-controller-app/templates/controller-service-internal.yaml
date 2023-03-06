@@ -45,6 +45,7 @@ spec:
   externalTrafficPolicy: {{ .Values.controller.service.internal.externalTrafficPolicy }}
 {{- end }}
   ports:
+  {{- if .Values.controller.service.enableHttp }}
     - name: http
       port: {{ .Values.controller.service.ports.http }}
       protocol: TCP
@@ -52,6 +53,8 @@ spec:
     {{- if eq .Values.controller.service.type "NodePort" }}
       nodePort: {{ .Values.controller.service.internal.nodePorts.http }}
     {{- end }}
+  {{- end }}
+  {{- if .Values.controller.service.enableHttps }}
     - name: https
       port: {{ .Values.controller.service.ports.https }}
       protocol: TCP
@@ -59,6 +62,7 @@ spec:
     {{- if eq .Values.controller.service.type "NodePort" }}
       nodePort: {{ .Values.controller.service.internal.nodePorts.https }}
     {{- end }}
+  {{- end }}
   selector:
     {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: controller
