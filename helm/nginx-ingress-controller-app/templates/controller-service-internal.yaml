@@ -35,6 +35,9 @@ metadata:
   namespace: {{ .Release.Namespace }}
 spec:
   type: {{ .Values.controller.service.type }}
+{{- if .Values.controller.service.internal.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.controller.service.internal.loadBalancerIP }}
+{{- end }}
   {{- with .Values.controller.service.internal.loadBalancerSourceRanges }}
   loadBalancerSourceRanges: {{ toYaml . | nindent 2 }}
   {{- end }}

@@ -26,6 +26,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Add `portNamePrefix`.
   - Service: Add `controller.service.nodePorts.tcp` & `controller.service.nodePorts.udp`.
   - Service: Implement node ports for `tcp` and `udp`.
+  - Internal Service: Implement `controller.service.internal.loadBalancerIP`.
 
 ### Changed
 

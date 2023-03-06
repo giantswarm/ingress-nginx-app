@@ -713,6 +713,9 @@
                                     "type": "string",
                                     "pattern": "(Local|Cluster)"
                                 },
+                                "loadBalancerIP": {
+                                    "type": "string"
+                                },
                                 "loadBalancerSourceRanges": {
                                     "type": "array"
                                 },
