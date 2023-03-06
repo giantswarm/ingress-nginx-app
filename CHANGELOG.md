@@ -39,6 +39,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Internal Service: Align initial check.
   - Internal Service: Reorder name & namespace.
   - Internal Service: Align `controller.service.internal.loadBalancerSourceRanges`.
+  - Internal Service: Reorder `controller.service.internal.externalTrafficPolicy`.
 
 ### Removed
 
