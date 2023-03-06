@@ -42,6 +42,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Internal Service: Align `controller.service.internal.loadBalancerSourceRanges`.
   - Internal Service: Reorder `controller.service.internal.externalTrafficPolicy`.
   - Internal Service: Align indention of `ports`.
+  - Internal Service: Align node port checks.
 
 ### Removed
 
