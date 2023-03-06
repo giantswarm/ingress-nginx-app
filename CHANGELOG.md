@@ -36,6 +36,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Align indention of `ports`.
   - Service: Align node port checks.
   - Internal Service: Align initial check.
+  - Internal Service: Reorder name & namespace.
 
 ## [2.25.1] - 2023-03-03
 

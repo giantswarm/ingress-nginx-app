@@ -25,14 +25,14 @@ metadata:
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
   {{- end }}
   {{- end }}
-  name: {{ include "resource.controller-service-internal.name" . }}
-  namespace: {{ .Release.Namespace }}
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
     app.kubernetes.io/component: controller
   {{- if .Values.controller.service.internal.labels }}
     {{- toYaml .Values.controller.service.internal.labels | nindent 4 }}
   {{- end }}
+  name: {{ include "resource.controller-service-internal.name" . }}
+  namespace: {{ .Release.Namespace }}
 spec:
   type: {{ .Values.controller.service.internal.type }}
   {{- with .Values.controller.service.internal.loadBalancerSourceRanges }}
