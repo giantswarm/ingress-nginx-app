@@ -82,6 +82,7 @@ spec:
       nodePort: {{ .Values.controller.service.nodePorts.http }}
     {{- end }}
   {{- end }}
+  {{- if .Values.controller.service.enableHttps }}
     - name: https
       port: {{ .Values.controller.service.ports.https }}
       protocol: TCP
@@ -89,6 +90,7 @@ spec:
     {{- if (and $setNodePorts (not (empty .Values.controller.service.nodePorts.https))) }}
       nodePort: {{ .Values.controller.service.nodePorts.https }}
     {{- end }}
+  {{- end }}
   selector:
     {{- include "ingress-nginx.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: controller

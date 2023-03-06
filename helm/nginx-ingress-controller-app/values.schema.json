@@ -662,6 +662,9 @@
                         "enableHttp": {
                             "type": "boolean"
                         },
+                        "enableHttps": {
+                            "type": "boolean"
+                        },
                         "enabled": {
                             "type": "boolean"
                         },

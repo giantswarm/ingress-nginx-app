@@ -20,6 +20,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Implement `controller.service.ipFamilyPolicy`.
   - Service: Implement `controller.service.ipFamilies`.
   - Service: Implement `controller.service.enableHttp`.
+  - Service: Implement `controller.service.enableHttps`.
 
 ### Changed
 
