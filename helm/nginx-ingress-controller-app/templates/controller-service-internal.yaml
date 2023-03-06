@@ -46,7 +46,7 @@ spec:
 {{- end }}
   ports:
     - name: http
-      port: {{ .Values.controller.service.internal.ports.http }}
+      port: {{ .Values.controller.service.ports.http }}
       protocol: TCP
       targetPort: {{ .Values.controller.service.targetPorts.http }}
     {{- if eq .Values.controller.service.type "NodePort" }}

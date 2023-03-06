@@ -603,7 +603,6 @@ controller:
       loadBalancerSourceRanges: []
 
       ports:
-        http: 80
         https: 443
 
       # type: NodePort

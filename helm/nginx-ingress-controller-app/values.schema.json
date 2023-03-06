@@ -733,9 +733,6 @@
                                 "ports": {
                                     "type": "object",
                                     "properties": {
-                                        "http": {
-                                            "type": "integer"
-                                        },
                                         "https": {
                                             "type": "integer"
                                         }
