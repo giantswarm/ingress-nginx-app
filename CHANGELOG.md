@@ -25,6 +25,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Implement `controller.service.external.enabled`.
   - Service: Add `portNamePrefix`.
   - Service: Add `controller.service.nodePorts.tcp` & `controller.service.nodePorts.udp`.
+  - Service: Implement node ports for `tcp` and `udp`.
 
 ### Changed
 
