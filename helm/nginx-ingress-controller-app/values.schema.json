@@ -659,6 +659,9 @@
                         "clusterIP": {
                             "type": "string"
                         },
+                        "enableHttp": {
+                            "type": "boolean"
+                        },
                         "enabled": {
                             "type": "boolean"
                         },
