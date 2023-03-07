@@ -21,7 +21,6 @@ metadata:
     {{- end }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
   {{- else if eq .Values.provider "azure" }}
-    # this annotation adds lb rules for both TCP and UDP to allow UDP outbound connection with Standard LB
     service.beta.kubernetes.io/azure-load-balancer-mixed-protocols: "true"
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
   {{- end }}
