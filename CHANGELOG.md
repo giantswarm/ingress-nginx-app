@@ -28,6 +28,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Service: Implement node ports for `tcp` and `udp`.
   - Internal Service: Implement `controller.service.internal.loadBalancerIP`.
   - Internal Service: Implement `controller.service.enableHttp` & `controller.service.enableHttps`.
+  - Internal Service: Implement `controller.service.appProtocol`.
 
 ### Changed
 
