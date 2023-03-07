@@ -602,10 +602,16 @@ controller:
       # By default any source IP address can connect to the service.
       loadBalancerSourceRanges: []
 
-      # type: NodePort
+      ## nodePorts:
+      ##   http: 31080
+      ##   https: 31443
+      ##   tcp:
+      ##     8080: 31808
       nodePorts:
         http: 30012
         https: 30013
+        tcp: {}
+        udp: {}
 
   admissionWebhooks:
     annotations: {}
