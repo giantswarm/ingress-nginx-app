@@ -468,12 +468,7 @@ controller:
   # The groupID that the container will run as.
   groupID: 101
 
-  # controller.service
   service:
-
-    # controller.service.enabled
-    # If true, create LoadBalancer Service. Dynamically calculated during cluster creation.
-    # Do not overwrite this value.
     enabled: true
 
     # controller.service.suffix
@@ -567,13 +562,8 @@ controller:
       udp: {}
     external:
       enabled: true
-
-    # controller.service.internal
-    # Configuration settings for `-internal` suffixed Service variant.
-    # This second Service partially covers use case and need for multiple ingress controllers, providing separate IPs for public and internal traffic in single app.
     internal:
-
-      # controller.service.internal.enabled
+      # -- Enables an additional internal load balancer (besides the external one).
       enabled: false
 
       # controller.service.internal.suffix
@@ -582,25 +572,21 @@ controller:
       # and the namespace of the Service.
       suffix: ""
 
+      # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
       annotations: {}
       # loadBalancerIP: ""
-
-      # controller.service.internal.externalTrafficPolicy
-      # Configures kube-proxy, denotes if this Service desires to have external traffic routed to node-local or cluster-wide endpoints
-      #   Local - kube-proxy only proxies requests to local endpoints (does not forward traffic to other nodes), source IP preserved
-      #   Cluster - kube-proxy proxies requests randomly across all endpoints (forwards traffic to other nodes if necessary), source IP NAT'd
-      externalTrafficPolicy: "Local"
 
       # controller.service.internal.subdomain
       # Applies to clusters running on AWS or Azure.
       # Configures external dns subdomain to be appeneded to base domain in definition of cloud load balancer's fully qualified hostname.
       subdomain: "ingress-internal"
 
-      # controller.service.internal.loadBalancerSourceRanges
-      # Configures the source IP address ranges which can connect to the service.
-      # Keep in mind that some solutions need to access the service to work properly (e.g. cert-manager & Let's Encrypt).
-      # By default any source IP address can connect to the service.
+      # -- Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0.
       loadBalancerSourceRanges: []
+      ## Set external traffic policy to: "Local" to preserve source IP on
+      ## providers supporting it
+      ## Ref: https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer
+      externalTrafficPolicy: "Local"
 
       ## nodePorts:
       ##   http: 31080
