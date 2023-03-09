@@ -656,8 +656,28 @@
                         "annotations": {
                             "type": "object"
                         },
+                        "appProtocol": {
+                            "type": "boolean"
+                        },
+                        "clusterIP": {
+                            "type": "string"
+                        },
+                        "enableHttp": {
+                            "type": "boolean"
+                        },
+                        "enableHttps": {
+                            "type": "boolean"
+                        },
                         "enabled": {
                             "type": "boolean"
+                        },
+                        "external": {
+                            "type": "object",
+                            "properties": {
+                                "enabled": {
+                                    "type": "boolean"
+                                }
+                            }
                         },
                         "externalDNS": {
                             "type": "object",
@@ -670,9 +690,15 @@
                                 }
                             }
                         },
+                        "externalIPs": {
+                            "type": "array"
+                        },
                         "externalTrafficPolicy": {
                             "type": "string",
                             "pattern": "(Local|Cluster)"
+                        },
+                        "healthCheckNodePort": {
+                            "type": "integer"
                         },
                         "internal": {
                             "type": "object",
@@ -687,8 +713,8 @@
                                     "type": "string",
                                     "pattern": "(Local|Cluster)"
                                 },
-                                "labels": {
-                                    "type": "object"
+                                "loadBalancerIP": {
+                                    "type": "string"
                                 },
                                 "loadBalancerSourceRanges": {
                                     "type": "array"
@@ -701,17 +727,12 @@
                                         },
                                         "https": {
                                             "type": "integer"
-                                        }
-                                    }
-                                },
-                                "ports": {
-                                    "type": "object",
-                                    "properties": {
-                                        "http": {
-                                            "type": "integer"
                                         },
-                                        "https": {
-                                            "type": "integer"
+                                        "tcp": {
+                                            "type": "object"
+                                        },
+                                        "udp": {
+                                            "type": "object"
                                         }
                                     }
                                 },
@@ -720,14 +741,24 @@
                                 },
                                 "suffix": {
                                     "type": "string"
-                                },
-                                "type": {
-                                    "type": "string"
                                 }
                             }
                         },
+                        "ipFamilies": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "ipFamilyPolicy": {
+                            "type": "string",
+                            "pattern": "(SingleStack|PreferDualStack|RequireDualStack)"
+                        },
                         "labels": {
                             "type": "object"
+                        },
+                        "loadBalancerIP": {
+                            "type": "string"
                         },
                         "loadBalancerSourceRanges": {
                             "type": "array"
@@ -740,6 +771,12 @@
                                 },
                                 "https": {
                                     "type": "integer"
+                                },
+                                "tcp": {
+                                    "type": "object"
+                                },
+                                "udp": {
+                                    "type": "object"
                                 }
                             }
                         },
@@ -756,6 +793,10 @@
                         },
                         "public": {
                             "type": "boolean"
+                        },
+                        "sessionAffinity": {
+                            "type": "string",
+                            "pattern": "(None|ClientIP)"
                         },
                         "subdomain": {
                             "type": "string"
@@ -1102,6 +1143,9 @@
                     "type": "boolean"
                 }
             }
+        },
+        "portNamePrefix": {
+            "type": "string"
         },
         "provider": {
             "type": "string"

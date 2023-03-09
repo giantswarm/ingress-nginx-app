@@ -7,6 +7,59 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Service: Align to upstream. ([#425](https://github.com/giantswarm/nginx-ingress-controller-app/pull/425))
+  - Service: Implement `controller.service.clusterIP`.\
+    **NOTE:** The cluster IP of existing services can not be changed. The app deployment might fail when defining this for already installed app instances.
+  - Service: Implement `controller.service.externalIPs`.
+  - Service: Implement `controller.service.loadBalancerIP`.
+  - Service: Implement `controller.service.sessionAffinity`.
+  - Service: Implement `controller.service.healthCheckNodePort`.\
+    **NOTE:** The health check node port of existing services can not be changed. The app deployment might fail when defining this for already installed app instances.
+  - Service: Implement `controller.service.ipFamilyPolicy`.
+  - Service: Implement `controller.service.ipFamilies`.
+  - Service: Implement `controller.service.enableHttp`.
+  - Service: Implement `controller.service.enableHttps`.
+  - Service: Implement `controller.service.appProtocol`.
+  - Service: Implement `controller.service.external.enabled`.
+  - Service: Add `portNamePrefix`.
+  - Service: Add `controller.service.nodePorts.tcp` & `controller.service.nodePorts.udp`.
+  - Service: Implement node ports for `tcp` and `udp`.
+  - Internal Service: Implement `controller.service.internal.loadBalancerIP`.
+  - Internal Service: Implement `controller.service.enableHttp` & `controller.service.enableHttps`.
+  - Internal Service: Implement `controller.service.appProtocol`.
+  - Internal Service: Add `controller.service.internal.nodePorts.tcp` & `controller.service.internal.nodePorts.udp`.
+  - Internal Service: Implement node ports for `tcp` and `udp`.
+
+### Changed
+
+- Service: Align to upstream. ([#425](https://github.com/giantswarm/nginx-ingress-controller-app/pull/425))
+  - Service: Reorder name & namespace.
+  - Service: Align `controller.service.loadBalancerSourceRanges`.
+  - Service: Align `controller.service.externalTrafficPolicy`.
+  - Service: Align indention of `ports`.
+  - Service: Align node port checks.
+  - Internal Service: Align initial check.
+  - Internal Service: Reorder name & namespace.
+  - Internal Service: Align `controller.service.internal.loadBalancerSourceRanges`.
+  - Internal Service: Reorder `controller.service.internal.externalTrafficPolicy`.
+  - Internal Service: Align indention of `ports`.
+  - Internal Service: Align node port checks.
+  - Values: Align to upstream.
+
+### Removed
+
+- Service: Align to upstream. ([#425](https://github.com/giantswarm/nginx-ingress-controller-app/pull/425))
+  - Internal Service: Remove `controller.service.internal.labels`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.service.labels` instead.
+  - Internal Service: Remove `controller.service.internal.type`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.service.type` instead.
+  - Internal Service: Remove `controller.service.internal.ports.http`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.service.ports.http` instead.
+  - Internal Service: Remove `controller.service.internal.ports.https`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.service.ports.https` instead.
+
 ## [2.25.1] - 2023-03-03
 
 ### Fixed
