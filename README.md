@@ -39,6 +39,15 @@ updates to the Ingress resource.
 
 ## Upgrading notes
 
+Version [v2.26.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/CHANGELOG.md#2260---2023-03-09) drops support for the following `values.yaml` keys:
+
+- `controller.service.internal.labels`: Replaced by `controller.service.labels`.
+- `controller.service.internal.type`: Replaced by `controller.service.type`.
+- `controller.service.internal.ports.http`: Replaced by `controller.service.ports.http`.
+- `controller.service.internal.ports.https`: Replaced by `controller.service.ports.https`.
+
+In most deployments the replacement `values.yaml` keys are already defined and, in some cases, might not meet your requirements. Please check the [default values](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/helm/nginx-ingress-controller-app/values.yaml) included in the release you're upgrading to and those defined in your environment for these `values.yaml` keys to prevent any unintended changes to your deployment, especially the `Service` objects managed by this chart.
+
 Version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
 
 ### Prerequisites
