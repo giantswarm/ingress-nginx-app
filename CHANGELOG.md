@@ -23,6 +23,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Align `ingress-nginx.fullname`.
   - Helpers: Align `ingress-nginx.controller.fullname`.
   - Helpers: Align `ingress-nginx.controller.electionID`.
+  - Helpers: Align `ingress-nginx.defaultBackend.fullname`.
 
 ## [2.26.0] - 2023-03-09
 
