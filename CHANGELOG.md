@@ -12,6 +12,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Helpers: Align to upstream. ([#429](https://github.com/giantswarm/nginx-ingress-controller-app/pull/429))
   - Helpers: Rename `name` to `ingress-nginx.name`.
   - Helpers: Rename `chart` to `ingress-nginx.chart`.
+  - Helpers: Align `ingress-nginx.fullname`.
 
 ## [2.26.0] - 2023-03-09
 

@@ -14,6 +14,18 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ingress-nginx.fullname" -}}
+{{- if .Values.fullnameOverride -}}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
@@ -56,17 +68,6 @@ Return the appropriate apiGroup for PodSecurityPolicy.
 {{- else -}}
 {{- print "extensions" -}}
 {{- end -}}
-{{- end -}}
-
-{{/*
-Create a name stem for resource names
-When pods for deployments are created they have an additional 16 character
-suffix appended, e.g. "-957c9d6ff-pkzgw". Given that Kubernetes allows 63
-characters for resource names, the stem is truncated to 47 characters to leave
-room for such suffix.
-*/}}
-{{- define "ingress-nginx.fullname" -}}
-{{- .Release.Name | replace "." "-" | trunc 47 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
