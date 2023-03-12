@@ -21,6 +21,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Rename `chart` to `ingress-nginx.chart`.
   - Helpers: Align `ingress-nginx.fullname`.
   - Helpers: Align `ingress-nginx.controller.fullname`.
+  - Helpers: Align `ingress-nginx.controller.electionID`.
 
 ## [2.26.0] - 2023-03-09
 
