@@ -452,6 +452,16 @@ controller:
   # sysctls:
   #   "net.core.somaxconn": "8192"
 
+  # -- Allows customization of the source of the IP address or FQDN to report
+  # in the ingress status field. By default, it reads the information provided
+  # by the service. If disable, the status field reports the IP address of the
+  # node or nodes where an ingress controller pod is running.
+  publishService:
+    # -- Enable 'publishService' or not
+    enabled: true
+    # -- Allows overriding of the publish service to bind to
+    # Must be <namespace>/<service_name>
+    pathOverride: ""
   # Limit the scope of the controller to a specific namespace
   scope:
     # -- Enable 'scope' or not

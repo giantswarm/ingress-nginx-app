@@ -91,6 +91,21 @@ Users can provide an override for an explicit electionID if they want via `.Valu
 {{- end -}}
 
 {{/*
+Construct the path for the publish-service.
+
+By convention this will simply use the <namespace>/<controller-name> to match the name of the
+service generated.
+
+Users can provide an override for an explicit service they want bound via `.Values.controller.publishService.pathOverride`
+
+*/}}
+{{- define "ingress-nginx.controller.publishServicePath" -}}
+{{- $defServiceName := printf "%s/%s" "$(POD_NAMESPACE)" (include "ingress-nginx.controller.fullname" .) -}}
+{{- $servicePath := default $defServiceName .Values.controller.publishService.pathOverride }}
+{{- print $servicePath | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
