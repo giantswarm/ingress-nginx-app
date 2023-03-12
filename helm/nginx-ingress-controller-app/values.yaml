@@ -134,7 +134,6 @@ controller:
   # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
   enableSSLChainCompletion: false
 
-  # controller.image
   image:
     ## Keep false as default for now!
     chroot: false
@@ -145,6 +144,10 @@ controller:
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: v1.4.0
+
+    # www-data -> uid 101
+    runAsUser: 101
+    allowPrivilegeEscalation: true
 
   # -- Use an existing PSP instead of creating one
   existingPsp: ""

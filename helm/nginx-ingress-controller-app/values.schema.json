@@ -342,11 +342,17 @@
                 "image": {
                     "type": "object",
                     "properties": {
+                        "allowPrivilegeEscalation": {
+                            "type": "boolean"
+                        },
                         "chroot": {
                             "type": "boolean"
                         },
                         "repository": {
                             "type": "string"
+                        },
+                        "runAsUser": {
+                            "type": "integer"
                         },
                         "tag": {
                             "type": "string"

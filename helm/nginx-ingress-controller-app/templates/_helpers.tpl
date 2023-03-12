@@ -25,6 +25,27 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 
+
+{{/*
+Container SecurityContext.
+*/}}
+{{- define "controller.containerSecurityContext" -}}
+{{- if .Values.controller.containerSecurityContext -}}
+{{- toYaml .Values.controller.containerSecurityContext -}}
+{{- else -}}
+capabilities:
+  drop:
+  - ALL
+  add:
+  - NET_BIND_SERVICE
+  {{- if .Values.controller.image.chroot }}
+  - SYS_CHROOT
+  {{- end }}
+runAsUser: {{ .Values.controller.image.runAsUser }}
+allowPrivilegeEscalation: {{ .Values.controller.image.allowPrivilegeEscalation }}
+{{- end }}
+{{- end -}}
+
 {{/*
 Common labels
 */}}
