@@ -59,6 +59,7 @@ configmap:
 # Contains mostly configuration values that get applied to the kubernetes
 # resources that make up the ingress controller.
 controller:
+  name: controller
 
   # controller.replicaCount
   # Number of initial NGINX IC Deployment replicas.

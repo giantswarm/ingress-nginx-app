@@ -73,6 +73,14 @@ Get specific image digest
 {{- end -}}
 
 {{/*
+Create a default fully qualified controller name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ingress-nginx.controller.fullname" -}}
+{{- include "ingress-nginx.fullname" . }}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
@@ -115,14 +123,6 @@ Return the appropriate apiGroup for PodSecurityPolicy.
 {{- else -}}
 {{- print "extensions" -}}
 {{- end -}}
-{{- end -}}
-
-{{/*
-Create a default fully qualified controller name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-*/}}
-{{- define "ingress-nginx.controller.fullname" -}}
-{{ include "ingress-nginx.fullname" . }}
 {{- end -}}
 
 {{/*

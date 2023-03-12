@@ -586,6 +586,9 @@
                 "minReadySeconds": {
                     "type": "integer"
                 },
+                "name": {
+                    "type": "string"
+                },
                 "networkPolicy": {
                     "type": "object",
                     "properties": {
