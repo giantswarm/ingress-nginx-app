@@ -50,7 +50,7 @@ spec:
                 - key: app.kubernetes.io/name
                   operator: In
                   values:
-                  - {{ include "name" . | quote }}
+                  - {{ include "ingress-nginx.name" . | quote }}
                 - key: app.kubernetes.io/instance
                   operator: In
                   values:
@@ -85,7 +85,7 @@ spec:
           runAsUser: {{ .Values.initContainer.userID }}
           runAsGroup: {{ .Values.initContainer.groupID }}
       containers:
-      - name: {{ include "name" . }}
+      - name: {{ include "ingress-nginx.name" . }}
         image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         args:
         - /nginx-ingress-controller

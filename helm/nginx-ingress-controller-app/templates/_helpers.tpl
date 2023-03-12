@@ -3,14 +3,7 @@
 Expand the name of the chart.
 */}}
 {{- define "ingress-nginx.name" -}}
-{{- .Chart.Name | trimSuffix "-app" | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
-TODO remove this legacy helper once switched to "ingress-nginx.name" everywhere.
-*/}}
-{{- define "name" -}}
-{{- include "ingress-nginx.name" . -}}
+{{- default .Chart.Name .Values.nameOverride | trimSuffix "-app" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
@@ -24,13 +17,13 @@ Create chart name and version as used by the chart label.
 Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
-app: {{ include "name" . | quote }}
+app: {{ include "ingress-nginx.name" . | quote }}
 {{ include "ingress-nginx.selectorLabels" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-app.kubernetes.io/name: {{ include "name" . | quote }}
+app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
 app.kubernetes.io/instance: {{ .Release.Name | quote }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-app.kubernetes.io/part-of: {{ template "name" . }}
+app.kubernetes.io/part-of: {{ template "ingress-nginx.name" . }}
 giantswarm.io/service-type: "managed"
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
 helm.sh/chart: {{ include "chart" . | quote }}

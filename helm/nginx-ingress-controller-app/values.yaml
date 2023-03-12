@@ -9,6 +9,15 @@
 
 # -----------------------------------------------------------------------------#
 
+## nginx configuration
+## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/index.md
+##
+
+## Overrides for generated resource names
+# See templates/_helpers.tpl
+# nameOverride:
+# fullnameOverride:
+
 # configmap
 # These values get applied directly to a configmap which configures the
 # nginx-ingress-controller
@@ -80,7 +89,7 @@ controller:
   topologySpreadConstraints: |-
     - labelSelector:
         matchLabels:
-          app.kubernetes.io/name: {{ include "name" . | quote }}
+          app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
           app.kubernetes.io/instance: {{ .Release.Name | quote }}
           app.kubernetes.io/component: controller
       topologyKey: topology.kubernetes.io/zone
@@ -88,7 +97,7 @@ controller:
       whenUnsatisfiable: ScheduleAnyway
     - labelSelector:
         matchLabels:
-          app.kubernetes.io/name: {{ include "name" . | quote }}
+          app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
           app.kubernetes.io/instance: {{ .Release.Name | quote }}
           app.kubernetes.io/component: controller
       topologyKey: kubernetes.io/hostname
