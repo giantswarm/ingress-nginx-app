@@ -58,6 +58,21 @@ Get specific image
 {{- end -}}
 
 {{/*
+Get specific image digest
+*/}}
+{{- define "ingress-nginx.imageDigest" -}}
+{{- if .chroot -}}
+{{- if .digestChroot -}}
+{{- printf "@%s" .digestChroot -}}
+{{- end }}
+{{- else -}}
+{{ if .digest -}}
+{{- printf "@%s" .digest -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
