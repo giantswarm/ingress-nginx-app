@@ -47,6 +47,17 @@ allowPrivilegeEscalation: {{ .Values.controller.image.allowPrivilegeEscalation }
 {{- end -}}
 
 {{/*
+Get specific image
+*/}}
+{{- define "ingress-nginx.image" -}}
+{{- if .chroot -}}
+{{- printf "%s-chroot" .image -}}
+{{- else -}}
+{{- printf "%s" .image -}}
+{{- end }}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}

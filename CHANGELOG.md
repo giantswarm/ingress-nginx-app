@@ -11,6 +11,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Helpers: Align to upstream. ([#429](https://github.com/giantswarm/nginx-ingress-controller-app/pull/429))
   - Helpers: Add `controller.containerSecurityContext`.
+  - Helpers: Add `ingress-nginx.image`.
 
 ### Changed
 
