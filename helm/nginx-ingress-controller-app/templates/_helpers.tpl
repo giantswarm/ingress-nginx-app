@@ -9,7 +9,7 @@ Expand the name of the chart.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "chart" -}}
+{{- define "ingress-nginx.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -26,7 +26,7 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 app.kubernetes.io/part-of: {{ template "ingress-nginx.name" . }}
 giantswarm.io/service-type: "managed"
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
-helm.sh/chart: {{ include "chart" . | quote }}
+helm.sh/chart: {{ include "ingress-nginx.chart" . | quote }}
 {{- end -}}
 
 {{/*
