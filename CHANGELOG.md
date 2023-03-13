@@ -27,6 +27,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Align `ingress-nginx.defaultBackend.fullname`.
   - Helpers: Align `ingress-nginx.labels`.
   - Helpers: Align `ingress-nginx.selectorLabels`.
+  - Helpers: Align `ingress-nginx.defaultBackend.serviceAccountName`.
 
 ## [2.26.0] - 2023-03-09
 

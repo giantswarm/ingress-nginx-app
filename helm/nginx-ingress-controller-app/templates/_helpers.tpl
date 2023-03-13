@@ -153,6 +153,17 @@ Create the name of the controller service account to use
 {{- end -}}
 
 {{/*
+Create the name of the backend service account to use - only used when podsecuritypolicy is also enabled
+*/}}
+{{- define "ingress-nginx.defaultBackend.serviceAccountName" -}}
+{{- if .Values.defaultBackend.serviceAccount.create -}}
+    {{ default (printf "%s-backend" (include "ingress-nginx.fullname" .)) .Values.defaultBackend.serviceAccount.name }}
+{{- else -}}
+    {{ default "default-backend" .Values.defaultBackend.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Return the appropriate apiGroup for PodSecurityPolicy.
 */}}
 {{- define "podSecurityPolicy.apiGroup" -}}
@@ -185,15 +196,4 @@ IngressClass parameters.
           parameters:
 {{ toYaml .Values.controller.ingressClassResource.parameters | indent 4}}
   {{ end }}
-{{- end -}}
-
-{{/*
-Create the name of the backend service account to use - only used when podsecuritypolicy is also enabled
-*/}}
-{{- define "ingress-nginx.defaultBackend.serviceAccountName" -}}
-{{- if .Values.defaultBackend.serviceAccount.create -}}
-    {{ default (printf "%s-backend" (include "ingress-nginx.fullname" .)) .Values.defaultBackend.serviceAccount.name }}
-{{- else -}}
-    {{ default "default-backend" .Values.defaultBackend.serviceAccount.name }}
-{{- end -}}
 {{- end -}}
