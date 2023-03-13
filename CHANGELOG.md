@@ -19,6 +19,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Add `extraModules`.
 - Chart: Align to upstream. ([#431](https://github.com/giantswarm/nginx-ingress-controller-app/pull/431))
   - Chart: Add `.helmignore`.
+  - Chart: Add `NOTES.txt`.
 
 ### Changed
 
