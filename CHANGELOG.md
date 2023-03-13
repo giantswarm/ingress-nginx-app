@@ -17,6 +17,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Add `ingress-nginx.params`.
   - Helpers: Add `isControllerTagValid`.
   - Helpers: Add `extraModules`.
+- Chart: Align to upstream. ([#431](https://github.com/giantswarm/nginx-ingress-controller-app/pull/431))
+  - Chart: Add `.helmignore`.
 
 ### Changed
 
