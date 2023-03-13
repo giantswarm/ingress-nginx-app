@@ -5,6 +5,9 @@
         "baseDomain": {
             "type": ["null", "string"]
         },
+        "commonLabels": {
+            "type": "object"
+        },
         "configmap": {
             "type": "object",
             "properties": {

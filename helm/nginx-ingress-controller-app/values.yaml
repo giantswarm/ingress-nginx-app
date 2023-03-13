@@ -18,6 +18,12 @@
 # nameOverride:
 # fullnameOverride:
 
+## Labels to apply to all resources
+##
+commonLabels: {}
+# scmhash: abc123
+# myLabel: aakkmd
+
 # configmap
 # These values get applied directly to a configmap which configures the
 # nginx-ingress-controller

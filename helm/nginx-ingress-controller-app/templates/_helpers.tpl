@@ -117,16 +117,21 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
-app: {{ include "ingress-nginx.name" . | quote }}
-{{ include "ingress-nginx.selectorLabels" . }}
-app.kubernetes.io/managed-by: {{ .Release.Service | quote }}
-app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
-app.kubernetes.io/instance: {{ .Release.Name | quote }}
+helm.sh/chart: {{ include "ingress-nginx.chart" . }}
+app.kubernetes.io/name: {{ include "ingress-nginx.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
 app.kubernetes.io/part-of: {{ template "ingress-nginx.name" . }}
-giantswarm.io/service-type: "managed"
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+giantswarm.io/service-type: managed
 application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
-helm.sh/chart: {{ include "ingress-nginx.chart" . | quote }}
+{{- if .Values.commonLabels}}
+{{ toYaml .Values.commonLabels }}
+{{- end }}
+app: {{ include "ingress-nginx.name" . }}
+{{ include "ingress-nginx.selectorLabels" . }}
 {{- end -}}
 
 {{/*
