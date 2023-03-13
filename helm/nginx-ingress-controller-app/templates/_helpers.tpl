@@ -175,13 +175,6 @@ Return the appropriate apiGroup for PodSecurityPolicy.
 {{- end -}}
 
 {{/*
-LB Service name.
-*/}}
-{{- define "resource.controller-service.name" -}}
-{{ include "ingress-nginx.fullname" . }}{{ .Values.controller.service.suffix }}
-{{- end -}}
-
-{{/*
 IngressClass parameters.
 */}}
 {{- define "ingressClass.parameters" -}}
