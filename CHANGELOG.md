@@ -7,6 +7,36 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Helpers: Align to upstream. ([#429](https://github.com/giantswarm/nginx-ingress-controller-app/pull/429))
+  - Helpers: Add `controller.containerSecurityContext`.
+  - Helpers: Add `ingress-nginx.image`.
+  - Helpers: Add `ingress-nginx.imageDigest`.
+  - Helpers: Add `ingress-nginx.controller.publishServicePath`.
+  - Helpers: Add `ingress-nginx.params`.
+  - Helpers: Add `isControllerTagValid`.
+  - Helpers: Add `extraModules`.
+
+### Changed
+
+- Helpers: Align to upstream. ([#429](https://github.com/giantswarm/nginx-ingress-controller-app/pull/429))
+  - Helpers: Rename `name` to `ingress-nginx.name`.
+  - Helpers: Rename `chart` to `ingress-nginx.chart`.
+  - Helpers: Align `ingress-nginx.fullname`.
+  - Helpers: Align `ingress-nginx.controller.fullname`.
+  - Helpers: Align `ingress-nginx.controller.electionID`.
+  - Helpers: Align `ingress-nginx.defaultBackend.fullname`.
+  - Helpers: Align `ingress-nginx.labels`.
+  - Helpers: Align `ingress-nginx.selectorLabels`.
+  - Helpers: Align `ingress-nginx.defaultBackend.serviceAccountName`.
+
+### Removed
+
+- Helpers: Align to upstream. ([#429](https://github.com/giantswarm/nginx-ingress-controller-app/pull/429))
+  - Helpers: Remove `resource.controller-service-internal.name`.
+  - Helpers: Remove `resource.controller-service.name`.
+
 ## [2.26.0] - 2023-03-09
 
 ### Added

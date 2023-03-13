@@ -50,7 +50,7 @@ spec:
                 - key: app.kubernetes.io/name
                   operator: In
                   values:
-                  - {{ include "name" . | quote }}
+                  - {{ include "ingress-nginx.name" . | quote }}
                 - key: app.kubernetes.io/instance
                   operator: In
                   values:
@@ -85,7 +85,7 @@ spec:
           runAsUser: {{ .Values.initContainer.userID }}
           runAsGroup: {{ .Values.initContainer.groupID }}
       containers:
-      - name: {{ include "name" . }}
+      - name: {{ include "ingress-nginx.name" . }}
         image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
         args:
         - /nginx-ingress-controller
@@ -104,7 +104,7 @@ spec:
         - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
         - --ingress-class={{ .Values.controller.ingressClassResource.name }}
         {{- if .Values.controller.service.enabled }}
-        - --publish-service={{ .Release.Namespace }}/{{ include "resource.controller-service.name" . }}
+        - --publish-service={{ .Release.Namespace }}/{{ include "ingress-nginx.controller.fullname" . }}{{ .Values.controller.service.suffix }}
         {{- end }}
         {{- if .Values.controller.admissionWebhooks.enabled }}
         - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}

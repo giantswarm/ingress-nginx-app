@@ -5,6 +5,9 @@
         "baseDomain": {
             "type": ["null", "string"]
         },
+        "commonLabels": {
+            "type": "object"
+        },
         "configmap": {
             "type": "object",
             "properties": {
@@ -314,6 +317,9 @@
                 "extraEnvs": {
                     "type": "array"
                 },
+                "extraModules": {
+                    "type": "array"
+                },
                 "groupID": {
                     "type": "integer"
                 },
@@ -342,11 +348,17 @@
                 "image": {
                     "type": "object",
                     "properties": {
+                        "allowPrivilegeEscalation": {
+                            "type": "boolean"
+                        },
                         "chroot": {
                             "type": "boolean"
                         },
                         "repository": {
                             "type": "string"
+                        },
+                        "runAsUser": {
+                            "type": "integer"
                         },
                         "tag": {
                             "type": "string"
@@ -580,6 +592,9 @@
                 "minReadySeconds": {
                     "type": "integer"
                 },
+                "name": {
+                    "type": "string"
+                },
                 "networkPolicy": {
                     "type": "object",
                     "properties": {
@@ -593,6 +608,17 @@
                 },
                 "proxySetHeaders": {
                     "type": "object"
+                },
+                "publishService": {
+                    "type": "object",
+                    "properties": {
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "pathOverride": {
+                            "type": "string"
+                        }
+                    }
                 },
                 "readinessProbe": {
                     "type": "object",
@@ -1103,6 +1129,9 @@
         "dhParam": {
             "type": "string"
         },
+        "fullnameOverride": {
+            "type": "string"
+        },
         "image": {
             "type": "object",
             "properties": {
@@ -1135,6 +1164,9 @@
                     "type": "integer"
                 }
             }
+        },
+        "nameOverride": {
+            "type": "string"
         },
         "podSecurityPolicy": {
             "type": "object",

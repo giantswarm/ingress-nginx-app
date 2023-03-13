@@ -9,6 +9,21 @@
 
 # -----------------------------------------------------------------------------#
 
+## nginx configuration
+## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/index.md
+##
+
+## Overrides for generated resource names
+# See templates/_helpers.tpl
+# nameOverride:
+# fullnameOverride:
+
+## Labels to apply to all resources
+##
+commonLabels: {}
+# scmhash: abc123
+# myLabel: aakkmd
+
 # configmap
 # These values get applied directly to a configmap which configures the
 # nginx-ingress-controller
@@ -50,6 +65,7 @@ configmap:
 # Contains mostly configuration values that get applied to the kubernetes
 # resources that make up the ingress controller.
 controller:
+  name: controller
 
   # controller.replicaCount
   # Number of initial NGINX IC Deployment replicas.
@@ -80,7 +96,7 @@ controller:
   topologySpreadConstraints: |-
     - labelSelector:
         matchLabels:
-          app.kubernetes.io/name: {{ include "name" . | quote }}
+          app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
           app.kubernetes.io/instance: {{ .Release.Name | quote }}
           app.kubernetes.io/component: controller
       topologyKey: topology.kubernetes.io/zone
@@ -88,7 +104,7 @@ controller:
       whenUnsatisfiable: ScheduleAnyway
     - labelSelector:
         matchLabels:
-          app.kubernetes.io/name: {{ include "name" . | quote }}
+          app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
           app.kubernetes.io/instance: {{ .Release.Name | quote }}
           app.kubernetes.io/component: controller
       topologyKey: kubernetes.io/hostname
@@ -125,7 +141,6 @@ controller:
   # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
   enableSSLChainCompletion: false
 
-  # controller.image
   image:
     ## Keep false as default for now!
     chroot: false
@@ -136,6 +151,10 @@ controller:
     # controller.image.tag
     # When updating tag make sure to also keep appVersion in Chart.yaml in sync
     tag: v1.4.0
+
+    # www-data -> uid 101
+    runAsUser: 101
+    allowPrivilegeEscalation: true
 
   # -- Use an existing PSP instead of creating one
   existingPsp: ""
@@ -439,6 +458,16 @@ controller:
   # sysctls:
   #   "net.core.somaxconn": "8192"
 
+  # -- Allows customization of the source of the IP address or FQDN to report
+  # in the ingress status field. By default, it reads the information provided
+  # by the service. If disable, the status field reports the IP address of the
+  # node or nodes where an ingress controller pod is running.
+  publishService:
+    # -- Enable 'publishService' or not
+    enabled: true
+    # -- Allows overriding of the publish service to bind to
+    # Must be <namespace>/<service_name>
+    pathOverride: ""
   # Limit the scope of the controller to a specific namespace
   scope:
     # -- Enable 'scope' or not
@@ -598,6 +627,15 @@ controller:
         https: 30013
         tcp: {}
         udp: {}
+
+  # -- Modules, which are mounted into the core nginx image. See values.yaml for a sample to add opentelemetry module
+  extraModules: []
+  #   containerSecurityContext:
+  #     allowPrivilegeEscalation: false
+  #
+  # The image must contain a `/usr/local/bin/init_module.sh` executable, which
+  # will be executed as initContainers, to move its config files within the
+  # mounted volume.
 
   admissionWebhooks:
     annotations: {}

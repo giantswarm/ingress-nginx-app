@@ -31,7 +31,7 @@ metadata:
   {{- if .Values.controller.service.labels }}
     {{- toYaml .Values.controller.service.labels | nindent 4 }}
   {{- end }}
-  name: {{ include "resource.controller-service-internal.name" . }}
+  name: {{ include "ingress-nginx.controller.fullname" . }}-internal{{ .Values.controller.service.internal.suffix }}
   namespace: {{ .Release.Namespace }}
 spec:
   type: {{ .Values.controller.service.type }}
