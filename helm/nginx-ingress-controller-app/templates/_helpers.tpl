@@ -138,7 +138,7 @@ app: {{ include "ingress-nginx.name" . }}
 Selector labels
 */}}
 {{- define "ingress-nginx.selectorLabels" -}}
-k8s-app: {{ .Release.Name | quote }}
+k8s-app: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
