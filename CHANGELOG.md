@@ -14,6 +14,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Add `ingress-nginx.image`.
   - Helpers: Add `ingress-nginx.imageDigest`.
   - Helpers: Add `ingress-nginx.controller.publishServicePath`.
+  - Helpers: Add `ingress-nginx.params`.
 
 ### Changed
 
