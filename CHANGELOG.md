@@ -30,6 +30,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Align `ingress-nginx.labels`.
   - Helpers: Align `ingress-nginx.selectorLabels`.
   - Helpers: Align `ingress-nginx.defaultBackend.serviceAccountName`.
+- Chart: Align to upstream. ([#431](https://github.com/giantswarm/nginx-ingress-controller-app/pull/431))
+  - Chart: Align `Chart.yaml`.
 
 ### Removed
 
