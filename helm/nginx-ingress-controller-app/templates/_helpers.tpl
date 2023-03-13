@@ -182,13 +182,6 @@ LB Service name.
 {{- end -}}
 
 {{/*
-Internal LB Service name.
-*/}}
-{{- define "resource.controller-service-internal.name" -}}
-{{ include "ingress-nginx.fullname" . }}-internal{{ .Values.controller.service.internal.suffix }}
-{{- end -}}
-
-{{/*
 IngressClass parameters.
 */}}
 {{- define "ingressClass.parameters" -}}
