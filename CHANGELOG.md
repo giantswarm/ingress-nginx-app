@@ -16,6 +16,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Helpers: Add `ingress-nginx.controller.publishServicePath`.
   - Helpers: Add `ingress-nginx.params`.
   - Helpers: Add `isControllerTagValid`.
+  - Helpers: Add `extraModules`.
 
 ### Changed
 

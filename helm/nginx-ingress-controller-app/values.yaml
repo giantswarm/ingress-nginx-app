@@ -628,6 +628,15 @@ controller:
         tcp: {}
         udp: {}
 
+  # -- Modules, which are mounted into the core nginx image. See values.yaml for a sample to add opentelemetry module
+  extraModules: []
+  #   containerSecurityContext:
+  #     allowPrivilegeEscalation: false
+  #
+  # The image must contain a `/usr/local/bin/init_module.sh` executable, which
+  # will be executed as initContainers, to move its config files within the
+  # mounted volume.
+
   admissionWebhooks:
     annotations: {}
     # ignore-check.kube-linter.io/no-read-only-rootfs: "This deployment needs write access to root filesystem".

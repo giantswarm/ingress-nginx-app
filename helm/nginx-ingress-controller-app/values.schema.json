@@ -317,6 +317,9 @@
                 "extraEnvs": {
                     "type": "array"
                 },
+                "extraModules": {
+                    "type": "array"
+                },
                 "groupID": {
                     "type": "integer"
                 },
