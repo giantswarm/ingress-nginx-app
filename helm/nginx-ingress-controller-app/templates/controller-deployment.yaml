@@ -58,6 +58,9 @@ spec:
       hostname: {{ toYaml .Values.controller.hostname | nindent 8 }}
     {{- end }}
       dnsPolicy: {{ .Values.controller.dnsPolicy }}
+    {{- if .Values.imagePullSecrets }}
+      imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 8 }}
+    {{- end }}
       affinity:
         {{- with .Values.controller.nodeAffinity }}
         nodeAffinity: {{ toYaml . | nindent 10 }}
