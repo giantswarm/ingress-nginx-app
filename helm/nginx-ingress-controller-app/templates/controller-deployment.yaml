@@ -19,12 +19,12 @@ metadata:
     {{ toYaml .Values.controller.annotations | nindent 4 }}
   {{- end }}
 spec:
-  {{- if not .Values.controller.autoscaling.enabled }}
-  replicas: {{ .Values.controller.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
       {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
+  {{- if not .Values.controller.autoscaling.enabled }}
+  replicas: {{ .Values.controller.replicaCount }}
+  {{- end }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
