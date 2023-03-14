@@ -89,10 +89,6 @@ spec:
       {{- end }}
       serviceAccountName: {{ include "ingress-nginx.fullname"  . }}
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
-      securityContext:
-        sysctls:
-        - name: net.ipv4.ip_local_port_range
-          value: "1024 65535"
       initContainers:
       # Overall performance improvements
       # See https://github.com/kubernetes/ingress-nginx/issues/1939
