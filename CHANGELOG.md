@@ -34,6 +34,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `imagePullSecrets`.
   - Deployment: Implement `controller.priorityClassName`.\
     **NOTE**: Removes the hardcoded default `system-cluster-critical`. Please override if required.
+  - Deployment: Implement `controller.podSecurityContext` & `controller.sysctls`.
 
 ### Changed
 

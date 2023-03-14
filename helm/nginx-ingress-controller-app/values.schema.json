@@ -613,6 +613,9 @@
                 "podLabels": {
                     "type": "object"
                 },
+                "podSecurityContext": {
+                    "type": "object"
+                },
                 "priorityClassName": {
                     "type": "string"
                 },
