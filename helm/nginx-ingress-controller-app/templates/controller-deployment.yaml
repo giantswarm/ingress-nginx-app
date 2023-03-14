@@ -34,16 +34,21 @@ spec:
   minReadySeconds: {{ .Values.controller.minReadySeconds }}
   template:
     metadata:
+      annotations:
+        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
+      {{- range .Values.controller.extraAnnotations.pod }}
+        {{ . }}
+      {{- end }}
+    {{- if .Values.controller.podAnnotations }}
+      {{- range $key, $value := .Values.controller.podAnnotations }}
+        {{ $key }}: {{ $value | quote }}
+      {{- end }}
+    {{- end }}
       labels:
         {{- include "ingress-nginx.labels" . | nindent 8 }}
         app.kubernetes.io/component: controller
         {{- with .Values.controller.labels }}
         {{- toYaml . | nindent 8 }}
-        {{- end }}
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: 'true'
-        {{- range .Values.controller.extraAnnotations.pod }}
-        {{ . }}
         {{- end }}
     spec:
       affinity:

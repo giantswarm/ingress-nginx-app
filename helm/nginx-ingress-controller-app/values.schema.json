@@ -606,6 +606,9 @@
                 "nodeAffinity": {
                     "type": ["object", "null"]
                 },
+                "podAnnotations": {
+                    "type": "object"
+                },
                 "proxySetHeaders": {
                     "type": "object"
                 },
