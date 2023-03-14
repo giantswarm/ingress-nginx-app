@@ -61,6 +61,9 @@ spec:
     {{- if .Values.imagePullSecrets }}
       imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 8 }}
     {{- end }}
+    {{- if .Values.controller.priorityClassName }}
+      priorityClassName: {{ .Values.controller.priorityClassName | quote }}
+    {{- end }}
       affinity:
         {{- with .Values.controller.nodeAffinity }}
         nodeAffinity: {{ toYaml . | nindent 10 }}
@@ -85,7 +88,6 @@ spec:
 {{ tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
       {{- end }}
       serviceAccountName: {{ include "ingress-nginx.fullname"  . }}
-      priorityClassName: system-cluster-critical
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       securityContext:
         sysctls:

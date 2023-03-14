@@ -32,6 +32,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.dnsPolicy`.
   - Deployment: Implement `controller.podLabels`.
   - Deployment: Implement `imagePullSecrets`.
+  - Deployment: Implement `controller.priorityClassName`.\
+    **NOTE**: Removes the hardcoded default `system-cluster-critical`. Please override if required.
 
 ### Changed
 

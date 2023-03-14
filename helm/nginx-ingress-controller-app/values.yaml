@@ -780,6 +780,8 @@ controller:
   # Global snippets in ConfigMap are still respected
   allowSnippetAnnotations: false
 
+  priorityClassName: ""
+
 # image
 image:
   registry: quay.io
