@@ -54,6 +54,7 @@ spec:
     {{- if .Values.controller.hostname }}
       hostname: {{ toYaml .Values.controller.hostname | nindent 8 }}
     {{- end }}
+      dnsPolicy: {{ .Values.controller.dnsPolicy }}
       affinity:
         {{- with .Values.controller.nodeAffinity }}
         nodeAffinity: {{ toYaml . | nindent 10 }}

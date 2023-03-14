@@ -297,6 +297,9 @@
                 "dnsConfig": {
                     "type": "object"
                 },
+                "dnsPolicy": {
+                    "type": "string"
+                },
                 "electionID": {
                     "type": "string"
                 },
