@@ -23,6 +23,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Chart: Add CI values from upstream. ([#432](https://github.com/giantswarm/nginx-ingress-controller-app/pull/432))
 - Deployment: Align to upstream. ([#433](https://github.com/giantswarm/nginx-ingress-controller-app/pull/433))
   - Deployment: Implement `controller.kind`.
+  - Deployment: Implement `controller.labels`.
 
 ### Changed
 
