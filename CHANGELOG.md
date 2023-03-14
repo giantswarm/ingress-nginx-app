@@ -20,6 +20,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Chart: Align to upstream. ([#431](https://github.com/giantswarm/nginx-ingress-controller-app/pull/431))
   - Chart: Add `.helmignore`.
   - Chart: Add `NOTES.txt`.
+- Chart: Add CI values from upstream. ([#432](https://github.com/giantswarm/nginx-ingress-controller-app/pull/432))
 
 ### Changed
 
