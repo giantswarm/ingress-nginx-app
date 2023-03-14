@@ -24,6 +24,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Deployment: Align to upstream. ([#433](https://github.com/giantswarm/nginx-ingress-controller-app/pull/433))
   - Deployment: Implement `controller.kind`.
   - Deployment: Implement `controller.labels`.
+  - Deployment: Implement `controller.annotations`.
 
 ### Changed
 

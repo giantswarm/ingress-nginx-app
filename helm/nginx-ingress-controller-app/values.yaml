@@ -123,6 +123,10 @@ controller:
 
   # -- Use a `DaemonSet` or `Deployment`
   kind: Deployment
+  # -- Annotations to be added to the controller Deployment or DaemonSet
+  ##
+  annotations: {}
+  #  keel.sh/pollSchedule: "@every 60m"
 
   # -- Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels
   ##

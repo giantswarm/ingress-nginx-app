@@ -233,6 +233,9 @@
                 "allowSnippetAnnotations": {
                     "type": "boolean"
                 },
+                "annotations": {
+                    "type": "object"
+                },
                 "annotationsPrefix": {
                     "type": "string"
                 },
