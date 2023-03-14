@@ -96,140 +96,140 @@ spec:
           runAsUser: {{ .Values.initContainer.userID }}
           runAsGroup: {{ .Values.initContainer.groupID }}
       containers:
-      - name: {{ include "ingress-nginx.name" . }}
-        image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
-        args:
-        - /nginx-ingress-controller
-        - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
-        - --election-id={{ include "ingress-nginx.controller.electionID" . }}
-        {{- if .Values.defaultBackend.enabled }}
-        - --default-backend-service=$(POD_NAMESPACE)/{{ include "ingress-nginx.defaultBackend.fullname" . }}
-        {{- end }}
-        {{- if .Values.controller.annotationsPrefix }}
-        - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
-        {{- end}}
-        {{- if .Values.controller.defaultSSLCertificate }}
-        - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
-        {{- end}}
-        - --enable-ssl-chain-completion={{ .Values.controller.enableSSLChainCompletion }}
-        - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
-        - --ingress-class={{ .Values.controller.ingressClassResource.name }}
-        {{- if .Values.controller.service.enabled }}
-        - --publish-service={{ .Release.Namespace }}/{{ include "ingress-nginx.controller.fullname" . }}{{ .Values.controller.service.suffix }}
-        {{- end }}
-        {{- if .Values.controller.admissionWebhooks.enabled }}
-        - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
-        - --validating-webhook-certificate=/usr/local/certificates/cert
-        - --validating-webhook-key=/usr/local/certificates/key
-        {{- end }}
-        - --update-status={{ .Values.controller.updateIngressStatus }}
-        {{- if .Values.controller.disableExternalNameForwarding }}
-        - --disable-svc-external-name
-        {{- end }}
-        {{- if .Values.controller.watchIngressWithoutClass }}
-        - --watch-ingress-without-class=true
-        {{- end }}
-        {{- if .Values.controller.ingressClassByName }}
-        - --ingress-class-by-name=true
-        {{- end }}
-        securityContext:
-          allowPrivilegeEscalation: true
-          capabilities:
-            drop:
-              - ALL
-            add:
-              - NET_BIND_SERVICE
-          runAsUser: {{ .Values.controller.userID }}
-          runAsGroup: {{ .Values.controller.groupID }}
-        env:
-        - name: POD_NAME
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.name
-        - name: POD_NAMESPACE
-          valueFrom:
-            fieldRef:
-              fieldPath: metadata.namespace
-        {{- if .Values.controller.enableMimalloc }}
-        - name: LD_PRELOAD
-          value: /usr/local/lib/libmimalloc.so
-        {{- end }}
-        {{- if .Values.controller.extraEnvs }}
-          {{- toYaml .Values.controller.extraEnvs | nindent 8 }}
-        {{- end }}
-        {{- with .Values.controller.resources }}
-        resources:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
-        {{- if .Values.controller.livenessProbe.enabled }}
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: {{ .Values.controller.metrics.port }}
-            scheme: HTTP
-          initialDelaySeconds: {{ .Values.controller.livenessProbe.initialDelaySeconds }}
-          periodSeconds: {{ .Values.controller.livenessProbe.periodSeconds }}
-          timeoutSeconds: {{ .Values.controller.livenessProbe.timeoutSeconds }}
-          successThreshold: {{ .Values.controller.livenessProbe.successThreshold }}
-          failureThreshold: {{ .Values.controller.livenessProbe.failureThreshold }}
-        {{- end }}
-        {{- if .Values.controller.readinessProbe.enabled }}
-        readinessProbe:
-          httpGet:
-            path: /healthz
-            port: {{ .Values.controller.metrics.port }}
-            scheme: HTTP
-          initialDelaySeconds: {{ .Values.controller.readinessProbe.initialDelaySeconds }}
-          periodSeconds: {{ .Values.controller.readinessProbe.periodSeconds }}
-          timeoutSeconds: {{ .Values.controller.readinessProbe.timeoutSeconds }}
-          successThreshold: {{ .Values.controller.readinessProbe.successThreshold }}
-          failureThreshold: {{ .Values.controller.readinessProbe.failureThreshold }}
-        {{- end }}
-        {{- if .Values.controller.startupProbe.enabled }}
-        startupProbe:
-          httpGet:
-            path: /healthz
-            port: {{ .Values.controller.metrics.port }}
-            scheme: HTTP
-          initialDelaySeconds: {{ .Values.controller.startupProbe.initialDelaySeconds }}
-          periodSeconds: {{ .Values.controller.startupProbe.periodSeconds }}
-          timeoutSeconds: {{ .Values.controller.startupProbe.timeoutSeconds }}
-          successThreshold: {{ .Values.controller.startupProbe.successThreshold }}
-          failureThreshold: {{ .Values.controller.startupProbe.failureThreshold }}
-        {{- end }}
-        lifecycle:
+        - name: {{ include "ingress-nginx.name" . }}
+          image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
+          args:
+          - /nginx-ingress-controller
+          - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
+          - --election-id={{ include "ingress-nginx.controller.electionID" . }}
+          {{- if .Values.defaultBackend.enabled }}
+          - --default-backend-service=$(POD_NAMESPACE)/{{ include "ingress-nginx.defaultBackend.fullname" . }}
+          {{- end }}
+          {{- if .Values.controller.annotationsPrefix }}
+          - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
+          {{- end}}
+          {{- if .Values.controller.defaultSSLCertificate }}
+          - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
+          {{- end}}
+          - --enable-ssl-chain-completion={{ .Values.controller.enableSSLChainCompletion }}
+          - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
+          - --ingress-class={{ .Values.controller.ingressClassResource.name }}
+          {{- if .Values.controller.service.enabled }}
+          - --publish-service={{ .Release.Namespace }}/{{ include "ingress-nginx.controller.fullname" . }}{{ .Values.controller.service.suffix }}
+          {{- end }}
+          {{- if .Values.controller.admissionWebhooks.enabled }}
+          - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
+          - --validating-webhook-certificate=/usr/local/certificates/cert
+          - --validating-webhook-key=/usr/local/certificates/key
+          {{- end }}
+          - --update-status={{ .Values.controller.updateIngressStatus }}
+          {{- if .Values.controller.disableExternalNameForwarding }}
+          - --disable-svc-external-name
+          {{- end }}
+          {{- if .Values.controller.watchIngressWithoutClass }}
+          - --watch-ingress-without-class=true
+          {{- end }}
+          {{- if .Values.controller.ingressClassByName }}
+          - --ingress-class-by-name=true
+          {{- end }}
+          securityContext:
+            allowPrivilegeEscalation: true
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - NET_BIND_SERVICE
+            runAsUser: {{ .Values.controller.userID }}
+            runAsGroup: {{ .Values.controller.groupID }}
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+          {{- if .Values.controller.enableMimalloc }}
+            - name: LD_PRELOAD
+              value: /usr/local/lib/libmimalloc.so
+          {{- end }}
+          {{- if .Values.controller.extraEnvs }}
+            {{- toYaml .Values.controller.extraEnvs | nindent 8 }}
+          {{- end }}
+          {{- with .Values.controller.resources }}
+          resources:
+            {{- toYaml . | nindent 10 }}
+          {{- end }}
+          {{- if .Values.controller.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.controller.metrics.port }}
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.controller.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.controller.livenessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.controller.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.controller.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.controller.livenessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.controller.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.controller.metrics.port }}
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.controller.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.controller.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.controller.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.controller.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.controller.readinessProbe.failureThreshold }}
+          {{- end }}
+          {{- if .Values.controller.startupProbe.enabled }}
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: {{ .Values.controller.metrics.port }}
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.controller.startupProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.controller.startupProbe.periodSeconds }}
+            timeoutSeconds: {{ .Values.controller.startupProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.controller.startupProbe.successThreshold }}
+            failureThreshold: {{ .Values.controller.startupProbe.failureThreshold }}
+          {{- end }}
+          lifecycle:
 {{ toYaml .Values.controller.lifecycle | indent 10 }}
-        ports:
-        {{- range $key, $value := .Values.controller.containerPort }}
-        - name: {{ $key }}
-          containerPort: {{ $value }}
-          protocol: TCP
-        {{- end }}
-        - name: metrics
-          containerPort: {{ .Values.controller.metrics.port }}
-          protocol: TCP
-        {{- if .Values.controller.admissionWebhooks.enabled }}
-        - name: webhook
-          containerPort: {{ .Values.controller.admissionWebhooks.port }}
-          protocol: TCP
-        {{- end }}
-        {{- if .Values.controller.admissionWebhooks.enabled }}
-        volumeMounts:
-        - name: webhook-cert
-          mountPath: /usr/local/certificates/
-          readOnly: true
-        {{- end }}
+          ports:
+          {{- range $key, $value := .Values.controller.containerPort }}
+            - name: {{ $key }}
+              containerPort: {{ $value }}
+              protocol: TCP
+          {{- end }}
+            - name: metrics
+              containerPort: {{ .Values.controller.metrics.port }}
+              protocol: TCP
+          {{- if .Values.controller.admissionWebhooks.enabled }}
+            - name: webhook
+              containerPort: {{ .Values.controller.admissionWebhooks.port }}
+              protocol: TCP
+          {{- end }}
+          {{- if .Values.controller.admissionWebhooks.enabled }}
+          volumeMounts:
+            - name: webhook-cert
+              mountPath: /usr/local/certificates/
+              readOnly: true
+          {{- end }}
       {{- if .Values.controller.admissionWebhooks.enabled }}
       volumes:
-      - name: webhook-cert
-        secret:
-          secretName: {{ include "ingress-nginx.fullname" . }}-admission
-          {{- if .Values.controller.admissionWebhooks.certManager.enabled }}
-          items:
-          - key: tls.crt
-            path: cert
-          - key: tls.key
-            path: key
-          {{- end }}
+        - name: webhook-cert
+          secret:
+            secretName: {{ include "ingress-nginx.fullname" . }}-admission
+        {{- if .Values.controller.admissionWebhooks.certManager.enabled }}
+            items:
+              - key: tls.crt
+                path: cert
+              - key: tls.key
+                path: key
+        {{- end }}
       {{- end }}
 {{- end }}
