@@ -178,6 +178,8 @@ controller:
   addHeaders: {}
   # -- Optionally customize the pod dnsConfig.
   dnsConfig: {}
+  # -- Optionally customize the pod hostname.
+  hostname: {}
 
   # controller.livenessProbe
   # Liveness probe configuration
