@@ -757,11 +757,6 @@ controller:
   # Additional annotations to apply to the controller.
   extraAnnotations:
 
-    # controller.extraAnnotations.deployment
-    # Add annotations to the overall controller Deployment
-    # (.metadata.annotations).
-    deployment: []
-
     # controller.extraAnnotations.pod
     # Add annotations to the controller deployment pod spec
     # (.spec.template.metadata.annotations).

@@ -15,9 +15,6 @@ metadata:
   annotations:
     prometheus.io/port: "{{ .Values.controller.metrics.port }}"
     prometheus.io/scrape: "true"
-    {{- range .Values.controller.extraAnnotations.deployment }}
-    {{ . }}
-    {{- end }}
   {{- if .Values.controller.annotations }}
     {{ toYaml .Values.controller.annotations | nindent 4 }}
   {{- end }}

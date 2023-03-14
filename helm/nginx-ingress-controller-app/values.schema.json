@@ -309,9 +309,6 @@
                 "extraAnnotations": {
                     "type": "object",
                     "properties": {
-                        "deployment": {
-                            "type": "array"
-                        },
                         "pod": {
                             "type": "array"
                         }
