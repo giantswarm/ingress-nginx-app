@@ -47,6 +47,9 @@ spec:
         {{- with .Values.controller.labels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
+      {{- if .Values.controller.podLabels }}
+        {{- toYaml .Values.controller.podLabels | nindent 8 }}
+      {{- end }}
     spec:
     {{- if .Values.controller.dnsConfig }}
       dnsConfig: {{ toYaml .Values.controller.dnsConfig | nindent 8 }}

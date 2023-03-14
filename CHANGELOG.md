@@ -30,6 +30,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.dnsConfig`.
   - Deployment: Implement `controller.hostname`.
   - Deployment: Implement `controller.dnsPolicy`.
+  - Deployment: Implement `controller.podLabels`.
 
 ### Changed
 

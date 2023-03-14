@@ -610,6 +610,9 @@
                 "podAnnotations": {
                     "type": "object"
                 },
+                "podLabels": {
+                    "type": "object"
+                },
                 "proxySetHeaders": {
                     "type": "object"
                 },
