@@ -294,6 +294,9 @@
                 "disableExternalNameForwarding": {
                     "type": "boolean"
                 },
+                "dnsConfig": {
+                    "type": "object"
+                },
                 "electionID": {
                     "type": "string"
                 },
