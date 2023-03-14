@@ -1153,31 +1153,6 @@
         "imagePullSecrets": {
             "type": "array"
         },
-        "initContainer": {
-            "type": "object",
-            "properties": {
-                "groupID": {
-                    "type": "integer"
-                },
-                "image": {
-                    "type": "object",
-                    "properties": {
-                        "repository": {
-                            "type": "string"
-                        },
-                        "tag": {
-                            "type": "string"
-                        }
-                    }
-                },
-                "name": {
-                    "type": "string"
-                },
-                "userID": {
-                    "type": "integer"
-                }
-            }
-        },
         "nameOverride": {
             "type": "string"
         },

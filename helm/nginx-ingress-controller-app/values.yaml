@@ -786,16 +786,6 @@ controller:
 image:
   registry: quay.io
 
-# initContainer
-# TODO: Explain and determine if this is a user level config or not.
-initContainer:
-  name: sysctl
-  image:
-    repository: giantswarm/alpine
-    tag: 3.15.5-giantswarm-sysctl
-  userID: 1000
-  groupID: 1000
-
 # -- Rollback limit
 ##
 revisionHistoryLimit: 10

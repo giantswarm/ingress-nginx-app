@@ -63,6 +63,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE:** This is part of our alignment to upstream. Use `controller.podAnnotations` instead.
   - Deployment: Remove `sysctls` setting `net.ipv4.ip_local_port_range`.\
     **NOTE:** Set via `controller.sysctls` if required.
+  - Deployment: Remove `initContainers` setting `net.core.somaxconn`.\
+    **NOTE:** Set via `controller.sysctls` if required.
 
 ## [2.26.0] - 2023-03-09
 
