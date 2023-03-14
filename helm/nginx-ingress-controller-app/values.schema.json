@@ -306,14 +306,6 @@
                 "existingPsp": {
                     "type": "string"
                 },
-                "extraAnnotations": {
-                    "type": "object",
-                    "properties": {
-                        "pod": {
-                            "type": "array"
-                        }
-                    }
-                },
                 "extraEnvs": {
                     "type": "array"
                 },

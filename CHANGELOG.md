@@ -52,6 +52,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Deployment: Align to upstream. ([#433](https://github.com/giantswarm/nginx-ingress-controller-app/pull/433))
   - Deployment: Remove `controller.extraAnnotations.deployment`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.annotations` instead.
+  - Deployment: Remove `controller.extraAnnotations.pod`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.podAnnotations` instead.
 
 ## [2.26.0] - 2023-03-09
 

@@ -757,15 +757,6 @@ controller:
   #         key: FOO
   #         name: secret-resource
 
-  # controller.extraAnnotations
-  # Additional annotations to apply to the controller.
-  extraAnnotations:
-
-    # controller.extraAnnotations.pod
-    # Add annotations to the controller deployment pod spec
-    # (.spec.template.metadata.annotations).
-    pod: []
-
   # controller.disableExternalNameForwarding
   # Enable or disable forwarding to ExternalName Services through
   # --disable-svc-external-name flag
