@@ -25,6 +25,7 @@ spec:
   {{- if not .Values.controller.autoscaling.enabled }}
   replicas: {{ .Values.controller.replicaCount }}
   {{- end }}
+  revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   strategy:
     type: RollingUpdate
     rollingUpdate:

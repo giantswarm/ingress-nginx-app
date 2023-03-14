@@ -1193,6 +1193,9 @@
                 }
             }
         },
+        "revisionHistoryLimit": {
+            "type": "integer"
+        },
         "serviceAccount": {
             "type": "object",
             "properties": {

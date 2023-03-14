@@ -25,6 +25,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.kind`.
   - Deployment: Implement `controller.labels`.
   - Deployment: Implement `controller.annotations`.
+  - Deployment: Implement `revisionHistoryLimit`.
 
 ### Changed
 
