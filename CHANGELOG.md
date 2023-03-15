@@ -97,6 +97,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE:** This is part of our alignment to upstream. Use `controller.updateStrategy` instead.
   - Deployment: Remove `controller.maxUnavailable`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.updateStrategy` instead.
+  - Deployment: Remove `controller.userID`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.image.runAsUser` instead.
 
 ## [2.26.0] - 2023-03-09
 

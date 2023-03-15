@@ -955,9 +955,6 @@
                 "updateStrategy": {
                     "type": "object"
                 },
-                "userID": {
-                    "type": "integer"
-                },
                 "watchIngressWithoutClass": {
                     "type": "boolean"
                 }
