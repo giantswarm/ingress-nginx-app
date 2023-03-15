@@ -130,10 +130,6 @@ spec:
           {{- if .Values.controller.extraEnvs }}
             {{- toYaml .Values.controller.extraEnvs | nindent 12 }}
           {{- end }}
-          {{- with .Values.controller.resources }}
-          resources:
-            {{- toYaml . | nindent 10 }}
-          {{- end }}
           {{- if .Values.controller.livenessProbe.enabled }}
           livenessProbe:
             httpGet:
@@ -190,6 +186,9 @@ spec:
               mountPath: /usr/local/certificates/
               readOnly: true
           {{- end }}
+        {{- if .Values.controller.resources }}
+          resources: {{ toYaml .Values.controller.resources | nindent 12 }}
+        {{- end }}
       serviceAccountName: {{ template "ingress-nginx.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       {{- if .Values.controller.admissionWebhooks.enabled }}
