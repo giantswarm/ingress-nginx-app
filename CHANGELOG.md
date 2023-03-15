@@ -61,6 +61,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `serviceAccount.name`.
   - Deployment: Implement `controller.containerSecurityContext`.
   - Deployment: Implement `controller.hostPort`.
+  - Deployment: Implement `controller.metrics.portName`.
 
 ### Changed
 

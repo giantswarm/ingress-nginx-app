@@ -148,9 +148,11 @@ spec:
               hostPort: {{ index $.Values.controller.hostPort.ports $key | default $value }}
               {{- end }}
           {{- end }}
-            - name: metrics
+          {{- if .Values.controller.metrics.enabled }}
+            - name: {{ .Values.controller.metrics.portName }}
               containerPort: {{ .Values.controller.metrics.port }}
               protocol: TCP
+          {{- end }}
           {{- if .Values.controller.admissionWebhooks.enabled }}
             - name: webhook
               containerPort: {{ .Values.controller.admissionWebhooks.port }}
