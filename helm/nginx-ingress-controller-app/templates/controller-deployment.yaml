@@ -144,6 +144,9 @@ spec:
             - name: {{ $key }}
               containerPort: {{ $value }}
               protocol: TCP
+              {{- if $.Values.controller.hostPort.enabled }}
+              hostPort: {{ index $.Values.controller.hostPort.ports $key | default $value }}
+              {{- end }}
           {{- end }}
             - name: metrics
               containerPort: {{ .Values.controller.metrics.port }}
