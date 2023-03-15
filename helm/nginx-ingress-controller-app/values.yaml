@@ -531,10 +531,6 @@ controller:
   ## extraArgs:
   ##   default-ssl-certificate: "<namespace>/<secret_name>"
 
-  # controller.groupID
-  # The groupID that the container will run as.
-  groupID: 101
-
   service:
     enabled: true
 

@@ -330,9 +330,6 @@
                 "extraModules": {
                     "type": "array"
                 },
-                "groupID": {
-                    "type": "integer"
-                },
                 "healthCheckHost": {
                     "type": "string"
                 },
