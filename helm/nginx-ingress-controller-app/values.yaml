@@ -318,6 +318,10 @@ controller:
   # --disable-svc-external-name flag
   disableExternalNameForwarding: true
 
+  # -- `terminationGracePeriodSeconds` to avoid killing pods before we are ready
+  ## wait up to five minutes for the drain of connections
+  ##
+  terminationGracePeriodSeconds: 300
   ## Liveness and readiness probe values
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
   ##
@@ -455,15 +459,6 @@ controller:
   # -- Annotations to be added to controller pods
   ##
   podAnnotations: {}
-
-  # controller.terminationGracePeriodSeconds
-  # The maximum amount of time NGINX Deployment replica is given to gracefully
-  # terminate. This should not be lower than configmap.worker-shutdown-timeout.
-  # The default value of 300 allows the draining of connections for up to
-  # five minutes
-  # for more info see https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554
-  # and important note in https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0
-  terminationGracePeriodSeconds: 300
 
   # Mutually exclusive with keda autoscaling
   autoscaling:
