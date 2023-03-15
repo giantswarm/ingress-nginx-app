@@ -718,10 +718,8 @@ controller:
     objectSelector: {}
     # -- Labels to be added to admission webhooks
     labels: {}
-
     # -- Use an existing PSP instead of creating one
     existingPsp: ""
-
     service:
       annotations: {}
       # clusterIP: ""
@@ -730,7 +728,6 @@ controller:
       loadBalancerSourceRanges: []
       servicePort: 443
       type: ClusterIP
-
     createSecretJob:
       securityContext:
         allowPrivilegeEscalation: false
@@ -741,12 +738,10 @@ controller:
         # requests:
         #   cpu: 10m
         #   memory: 20Mi
-
     patchWebhookJob:
       securityContext:
         allowPrivilegeEscalation: false
       resources: {}
-
     patch:
       enabled: true
       image:
@@ -770,18 +765,19 @@ controller:
         runAsNonRoot: true
         runAsUser: 2000
         fsGroup: 2000
-
     # Use certmanager to generate webhook certs
     certManager:
       enabled: false
       # self-signed root certificate
       rootCert:
-        duration: ""  # default to be 5y
+        # default to be 5y
+        duration: ""
       admissionCert:
-        duration: ""  # default to be 1y
-      # issuerRef:
-      #   name: "issuer"
-      #   kind: "ClusterIssuer"
+        # default to be 1y
+        duration: ""
+        # issuerRef:
+        #   name: "issuer"
+        #   kind: "ClusterIssuer"
 
   # controller.enableMimalloc
   # Enables mimalloc as a drop-in replacement for malloc, reduces the memory utilization.
