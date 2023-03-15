@@ -197,6 +197,103 @@ controller:
   # when users add those annotations.
   # Global snippets in ConfigMap are still respected
   allowSnippetAnnotations: false
+  # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
+  # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
+  # is merged
+  hostNetwork: false
+  ## Use host ports 80 and 443
+  ## Disabled by default
+  hostPort:
+    # -- Enable 'hostPort' or not
+    enabled: false
+    ports:
+      # -- 'hostPort' http port
+      http: 80
+      # -- 'hostPort' https port
+      https: 443
+  # NetworkPolicy for controller component.
+  networkPolicy:
+    # -- Enable 'networkPolicy' or not
+    enabled: true
+  # -- Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader'
+  electionID: ""
+  ## This section refers to the creation of the IngressClass resource
+  ## IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
+  ingressClassResource:
+    # -- Name of the ingressClass
+    name: nginx
+    # -- Is this ingressClass enabled or not
+    enabled: true
+    # -- Is this the default ingressClass for the cluster
+    default: false
+    # -- Controller-value of the controller that is processing this ingressClass
+    controllerValue: "k8s.io/ingress-nginx"
+    # -- Parameters is a link to a custom resource containing additional
+    # configuration for the controller. This is optional if the controller
+    # does not require extra parameters.
+    parameters: {}
+  # -- For backwards compatibility with ingress.class annotation, use ingressClass.
+  # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
+  ingressClass: nginx
+  # -- Labels to add to the pod container metadata
+  podLabels: {}
+  #  key: value
+
+  # -- Security Context policies for controller pods
+  podSecurityContext: {}
+  # -- See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls
+  sysctls: {}
+  # sysctls:
+  #   "net.core.somaxconn": "8192"
+
+  # -- Allows customization of the source of the IP address or FQDN to report
+  # in the ingress status field. By default, it reads the information provided
+  # by the service. If disable, the status field reports the IP address of the
+  # node or nodes where an ingress controller pod is running.
+  publishService:
+    # -- Enable 'publishService' or not
+    enabled: true
+    # -- Allows overriding of the publish service to bind to
+    # Must be <namespace>/<service_name>
+    pathOverride: ""
+  # Limit the scope of the controller to a specific namespace
+  scope:
+    # -- Enable 'scope' or not
+    enabled: false
+    # -- Namespace to limit the controller to; defaults to $(POD_NAMESPACE)
+    namespace: ""
+    # -- When scope.enabled == false, instead of watching all namespaces, we watching namespaces whose labels
+    # only match with namespaceSelector. Format like foo=bar. Defaults to empty, means watching all namespaces.
+    namespaceSelector: ""
+  # -- Allows customization of the configmap / nginx-configmap namespace; defaults to $(POD_NAMESPACE)
+  configMapNamespace: ""
+  tcp:
+    # -- Allows customization of the tcp-services-configmap; defaults to $(POD_NAMESPACE)
+    configMapNamespace: ""
+    # -- Annotations to be added to the tcp config configmap
+    annotations: {}
+  udp:
+    # -- Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE)
+    configMapNamespace: ""
+    # -- Annotations to be added to the udp config configmap
+    annotations: {}
+  # -- Maxmind license key to download GeoLite2 Databases.
+  ## https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases
+  maxmindLicenseKey: ""
+  # -- Additional command line arguments to pass to nginx-ingress-controller
+  # E.g. to specify the default SSL certificate you can use
+  extraArgs: {}
+  ## extraArgs:
+  ##   default-ssl-certificate: "<namespace>/<secret_name>"
+
+  # -- Additional environment variables to set
+  extraEnvs: []
+  # extraEnvs:
+  #   - name: FOO
+  #     valueFrom:
+  #       secretKeyRef:
+  #         key: FOO
+  #         name: secret-resource
 
   # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
   # container.
@@ -444,105 +541,6 @@ controller:
   customTemplate:
     configMapName: ""
     configMapKey: ""
-
-  # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
-  # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
-  # is merged
-  hostNetwork: false
-  ## Use host ports 80 and 443
-  ## Disabled by default
-  hostPort:
-    # -- Enable 'hostPort' or not
-    enabled: false
-    ports:
-      # -- 'hostPort' http port
-      http: 80
-      # -- 'hostPort' https port
-      https: 443
-  # NetworkPolicy for controller component.
-  networkPolicy:
-    # -- Enable 'networkPolicy' or not
-    enabled: true
-
-  # -- Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader'
-  electionID: ""
-  ## This section refers to the creation of the IngressClass resource
-  ## IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
-  ingressClassResource:
-    # -- Name of the ingressClass
-    name: nginx
-    # -- Is this ingressClass enabled or not
-    enabled: true
-    # -- Is this the default ingressClass for the cluster
-    default: false
-    # -- Controller-value of the controller that is processing this ingressClass
-    controllerValue: "k8s.io/ingress-nginx"
-    # -- Parameters is a link to a custom resource containing additional
-    # configuration for the controller. This is optional if the controller
-    # does not require extra parameters.
-    parameters: {}
-  # -- For backwards compatibility with ingress.class annotation, use ingressClass.
-  # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
-  ingressClass: nginx
-  # -- Labels to add to the pod container metadata
-  podLabels: {}
-  #  key: value
-
-  # -- Security Context policies for controller pods
-  podSecurityContext: {}
-  # -- See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls
-  sysctls: {}
-  # sysctls:
-  #   "net.core.somaxconn": "8192"
-
-  # -- Allows customization of the source of the IP address or FQDN to report
-  # in the ingress status field. By default, it reads the information provided
-  # by the service. If disable, the status field reports the IP address of the
-  # node or nodes where an ingress controller pod is running.
-  publishService:
-    # -- Enable 'publishService' or not
-    enabled: true
-    # -- Allows overriding of the publish service to bind to
-    # Must be <namespace>/<service_name>
-    pathOverride: ""
-  # Limit the scope of the controller to a specific namespace
-  scope:
-    # -- Enable 'scope' or not
-    enabled: false
-    # -- Namespace to limit the controller to; defaults to $(POD_NAMESPACE)
-    namespace: ""
-    # -- When scope.enabled == false, instead of watching all namespaces, we watching namespaces whose labels
-    # only match with namespaceSelector. Format like foo=bar. Defaults to empty, means watching all namespaces.
-    namespaceSelector: ""
-  # -- Allows customization of the configmap / nginx-configmap namespace; defaults to $(POD_NAMESPACE)
-  configMapNamespace: ""
-  tcp:
-    # -- Allows customization of the tcp-services-configmap; defaults to $(POD_NAMESPACE)
-    configMapNamespace: ""
-    # -- Annotations to be added to the tcp config configmap
-    annotations: {}
-  udp:
-    # -- Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE)
-    configMapNamespace: ""
-    # -- Annotations to be added to the udp config configmap
-    annotations: {}
-  # -- Maxmind license key to download GeoLite2 Databases.
-  ## https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases
-  maxmindLicenseKey: ""
-  # -- Additional command line arguments to pass to nginx-ingress-controller
-  # E.g. to specify the default SSL certificate you can use
-  extraArgs: {}
-  ## extraArgs:
-  ##   default-ssl-certificate: "<namespace>/<secret_name>"
-
-  # -- Additional environment variables to set
-  extraEnvs: []
-  # extraEnvs:
-  #   - name: FOO
-  #     valueFrom:
-  #       secretKeyRef:
-  #         key: FOO
-  #         name: secret-resource
 
   service:
     enabled: true
