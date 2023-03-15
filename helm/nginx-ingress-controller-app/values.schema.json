@@ -327,6 +327,9 @@
                 "groupID": {
                     "type": "integer"
                 },
+                "healthCheckHost": {
+                    "type": "string"
+                },
                 "hostNetwork": {
                     "type": "boolean"
                 },
