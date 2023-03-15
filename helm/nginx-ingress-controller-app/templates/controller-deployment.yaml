@@ -166,6 +166,9 @@ spec:
           {{- if .Values.controller.watchIngressWithoutClass }}
           - --watch-ingress-without-class=true
           {{- end }}
+          {{- if .Values.controller.enableTopologyAwareRouting }}
+          - --enable-topology-aware-routing=true
+          {{- end }}
           {{- if .Values.controller.annotationsPrefix }}
           - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
           {{- end}}

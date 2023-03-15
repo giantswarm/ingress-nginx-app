@@ -315,6 +315,9 @@
                 "enableSSLChainCompletion": {
                     "type": "boolean"
                 },
+                "enableTopologyAwareRouting": {
+                    "type": "boolean"
+                },
                 "existingPsp": {
                     "type": "string"
                 },
