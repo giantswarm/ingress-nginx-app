@@ -158,6 +158,22 @@ spec:
               containerPort: {{ .Values.controller.admissionWebhooks.port }}
               protocol: TCP
           {{- end }}
+          {{- range $key, $value := .Values.tcp }}
+            - name: {{ if $.Values.portNamePrefix }}{{ $.Values.portNamePrefix }}-{{ end }}{{ $key }}-tcp
+              containerPort: {{ $key }}
+              protocol: TCP
+              {{- if $.Values.controller.hostPort.enabled }}
+              hostPort: {{ $key }}
+              {{- end }}
+          {{- end }}
+          {{- range $key, $value := .Values.udp }}
+            - name: {{ if $.Values.portNamePrefix }}{{ $.Values.portNamePrefix }}-{{ end }}{{ $key }}-udp
+              containerPort: {{ $key }}
+              protocol: UDP
+              {{- if $.Values.controller.hostPort.enabled }}
+              hostPort: {{ $key }}
+              {{- end }}
+          {{- end }}
           {{- if .Values.controller.admissionWebhooks.enabled }}
           volumeMounts:
             - name: webhook-cert
