@@ -634,6 +634,9 @@
                 "nodeAffinity": {
                     "type": ["object", "null"]
                 },
+                "nodeSelector": {
+                    "type": "object"
+                },
                 "opentelemetry": {
                     "type": "object",
                     "properties": {
