@@ -358,6 +358,18 @@
                         "chroot": {
                             "type": "boolean"
                         },
+                        "digest": {
+                            "type": "string"
+                        },
+                        "digestChroot": {
+                            "type": "string"
+                        },
+                        "image": {
+                            "type": "string"
+                        },
+                        "pullPolicy": {
+                            "type": "string"
+                        },
                         "repository": {
                             "type": "string"
                         },

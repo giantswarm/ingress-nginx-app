@@ -53,6 +53,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Chart: Align to upstream. ([#431](https://github.com/giantswarm/nginx-ingress-controller-app/pull/431))
   - Chart: Align `Chart.yaml`.
 - HPA: Use capabilities, reorder `if`. ([#434](https://github.com/giantswarm/nginx-ingress-controller-app/pull/434))
+- Deployment: Align to upstream. ([#433](https://github.com/giantswarm/nginx-ingress-controller-app/pull/433))
+  - Deployment: Align `controller.image`.
 
 ### Removed
 

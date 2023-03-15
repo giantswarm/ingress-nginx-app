@@ -107,7 +107,10 @@ spec:
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       containers:
         - name: {{ .Values.controller.containerName }}
-          image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
+          {{- with .Values.controller.image }}
+          image: "{{- if .repository -}}{{ .repository }}{{ else }}{{ $.Values.image.registry }}/{{ include "ingress-nginx.image" . }}{{- end -}}:{{ .tag }}{{ include "ingress-nginx.imageDigest" . }}"
+          {{- end }}
+          imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
           args:
           - /nginx-ingress-controller
           - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
