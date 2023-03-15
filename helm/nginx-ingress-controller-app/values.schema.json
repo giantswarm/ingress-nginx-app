@@ -504,6 +504,9 @@
                 "maxUnavailable": {
                     "type": ["integer", "string"]
                 },
+                "maxmindLicenseKey": {
+                    "type": "string"
+                },
                 "metrics": {
                     "type": "object",
                     "properties": {

@@ -53,6 +53,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.scope.namespaceSelector`.
   - Deployment: Implement `controller.reportNodeInternalIp`.
   - Deployment: Implement `controller.admissionWebhooks.certificate` & `controller.admissionWebhooks.key`.
+  - Deployment: Implement `controller.maxmindLicenseKey`.
 
 ### Changed
 

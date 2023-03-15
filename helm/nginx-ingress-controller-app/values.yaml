@@ -502,6 +502,9 @@ controller:
     configMapNamespace: ""
     # -- Annotations to be added to the udp config configmap
     annotations: {}
+  # -- Maxmind license key to download GeoLite2 Databases.
+  ## https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases
+  maxmindLicenseKey: ""
 
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.
