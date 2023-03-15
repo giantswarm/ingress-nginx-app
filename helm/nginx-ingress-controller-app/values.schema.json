@@ -674,6 +674,9 @@
                 "replicaCount": {
                     "type": "integer"
                 },
+                "reportNodeInternalIp": {
+                    "type": "boolean"
+                },
                 "resources": {
                     "type": "object",
                     "properties": {

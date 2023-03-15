@@ -51,6 +51,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.udp.configMapNamespace`.
   - Deployment: Implement `controller.scope.namespace`.
   - Deployment: Implement `controller.scope.namespaceSelector`.
+  - Deployment: Implement `controller.reportNodeInternalIp`.
 
 ### Changed
 
