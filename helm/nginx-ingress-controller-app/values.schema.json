@@ -294,6 +294,17 @@
                         }
                     }
                 },
+                "customTemplate": {
+                    "type": "object",
+                    "properties": {
+                        "configMapKey": {
+                            "type": "string"
+                        },
+                        "configMapName": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "defaultSSLCertificate": {
                     "type": "string"
                 },

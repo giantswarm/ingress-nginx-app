@@ -440,6 +440,10 @@ controller:
  #         value: 2
  #         periodSeconds: 60
 
+  ## Override NGINX template
+  customTemplate:
+    configMapName: ""
+    configMapKey: ""
 
   # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
   # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
