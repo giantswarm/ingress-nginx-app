@@ -57,6 +57,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.healthCheckHost`.
   - Deployment: Implement `controller.healthCheckPath`.
   - Deployment: Implement `controller.enableTopologyAwareRouting`.
+  - Deployment: Implement `controller.extraArgs`.
 
 ### Changed
 

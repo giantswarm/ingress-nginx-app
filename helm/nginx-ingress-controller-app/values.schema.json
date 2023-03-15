@@ -321,6 +321,9 @@
                 "existingPsp": {
                     "type": "string"
                 },
+                "extraArgs": {
+                    "type": "object"
+                },
                 "extraEnvs": {
                     "type": "array"
                 },

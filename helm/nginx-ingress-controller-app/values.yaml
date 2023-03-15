@@ -515,6 +515,11 @@ controller:
   # -- Maxmind license key to download GeoLite2 Databases.
   ## https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases
   maxmindLicenseKey: ""
+  # -- Additional command line arguments to pass to nginx-ingress-controller
+  # E.g. to specify the default SSL certificate you can use
+  extraArgs: {}
+  ## extraArgs:
+  ##   default-ssl-certificate: "<namespace>/<secret_name>"
 
   # controller.userID
   # The userID that the container will run as. 101 is the www-data user.
