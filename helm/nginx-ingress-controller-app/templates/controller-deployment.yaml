@@ -106,7 +106,7 @@ spec:
       serviceAccountName: {{ include "ingress-nginx.fullname"  . }}
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       containers:
-        - name: {{ include "ingress-nginx.name" . }}
+        - name: {{ .Values.controller.containerName }}
           image: "{{ .Values.image.registry }}/{{ .Values.controller.image.repository }}:{{ .Values.controller.image.tag }}"
           args:
           - /nginx-ingress-controller

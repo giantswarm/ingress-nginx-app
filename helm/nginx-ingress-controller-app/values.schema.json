@@ -277,6 +277,9 @@
                 "configAnnotations": {
                     "type": "object"
                 },
+                "containerName": {
+                    "type": "string"
+                },
                 "containerPort": {
                     "type": "object",
                     "properties": {
