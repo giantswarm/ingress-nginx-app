@@ -277,6 +277,9 @@
                 "configAnnotations": {
                     "type": "object"
                 },
+                "configMapNamespace": {
+                    "type": "string"
+                },
                 "containerName": {
                     "type": "string"
                 },

@@ -487,7 +487,8 @@ controller:
     # -- When scope.enabled == false, instead of watching all namespaces, we watching namespaces whose labels
     # only match with namespaceSelector. Format like foo=bar. Defaults to empty, means watching all namespaces.
     namespaceSelector: ""
-
+  # -- Allows customization of the configmap / nginx-configmap namespace; defaults to $(POD_NAMESPACE)
+  configMapNamespace: ""
   tcp:
     # -- Allows customization of the tcp-services-configmap; defaults to $(POD_NAMESPACE)
     configMapNamespace: ""

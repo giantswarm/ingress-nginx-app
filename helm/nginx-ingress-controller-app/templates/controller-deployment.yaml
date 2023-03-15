@@ -130,7 +130,7 @@ spec:
           {{- if .Values.controller.ingressClass }}
           - --ingress-class={{ .Values.controller.ingressClass }}
           {{- end }}
-          - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
+          - --configmap={{ default "$(POD_NAMESPACE)" .Values.controller.configMapNamespace }}/{{ include "ingress-nginx.controller.fullname" . }}
           {{- if .Values.controller.admissionWebhooks.enabled }}
           - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
           - --validating-webhook-certificate=/usr/local/certificates/cert
