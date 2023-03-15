@@ -341,6 +341,9 @@
                 "extraModules": {
                     "type": "array"
                 },
+                "extraVolumeMounts": {
+                    "type": "array"
+                },
                 "healthCheckHost": {
                     "type": "string"
                 },

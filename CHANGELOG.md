@@ -64,6 +64,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.metrics.portName`.
   - Deployment: Implement `tcp` & `udp` ports.
   - Deployment: Implement `controller.customTemplate`.
+  - Deployment: Implement `controller.extraVolumeMounts`.
 
 ### Changed
 

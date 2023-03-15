@@ -678,6 +678,11 @@ controller:
   # This can be used for example to signal log rotation using `kill -USR1` from a sidecar.
   shareProcessNamespace: false
 
+  # -- Additional volumeMounts to the controller main container.
+  extraVolumeMounts: []
+  #  - name: copy-portal-skins
+  #   mountPath: /var/lib/lemonldap-ng/portal/skins
+
   # -- Modules, which are mounted into the core nginx image. See values.yaml for a sample to add opentelemetry module
   extraModules: []
   #   containerSecurityContext:
