@@ -110,6 +110,9 @@ spec:
           image: "{{- if .repository -}}{{ .repository }}{{ else }}{{ $.Values.image.registry }}/{{ include "ingress-nginx.image" . }}{{- end -}}:{{ .tag }}{{ include "ingress-nginx.imageDigest" . }}"
           {{- end }}
           imagePullPolicy: {{ .Values.controller.image.pullPolicy }}
+        {{- if .Values.controller.lifecycle }}
+          lifecycle: {{ toYaml .Values.controller.lifecycle | nindent 12 }}
+        {{- end }}
           args:
           - /nginx-ingress-controller
           - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
@@ -209,8 +212,6 @@ spec:
             successThreshold: {{ .Values.controller.startupProbe.successThreshold }}
             failureThreshold: {{ .Values.controller.startupProbe.failureThreshold }}
           {{- end }}
-          lifecycle:
-{{ toYaml .Values.controller.lifecycle | indent 10 }}
           ports:
           {{- range $key, $value := .Values.controller.containerPort }}
             - name: {{ $key }}
