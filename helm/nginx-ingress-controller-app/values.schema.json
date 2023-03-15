@@ -628,6 +628,25 @@
                 "nodeAffinity": {
                     "type": ["object", "null"]
                 },
+                "opentelemetry": {
+                    "type": "object",
+                    "properties": {
+                        "containerSecurityContext": {
+                            "type": "object",
+                            "properties": {
+                                "allowPrivilegeEscalation": {
+                                    "type": "boolean"
+                                }
+                            }
+                        },
+                        "enabled": {
+                            "type": "boolean"
+                        },
+                        "image": {
+                            "type": "string"
+                        }
+                    }
+                },
                 "podAnnotations": {
                     "type": "object"
                 },
