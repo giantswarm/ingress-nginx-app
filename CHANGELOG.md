@@ -39,6 +39,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.containerName`.
   - Deployment: Implement `controller.updateStrategy`.
   - Deployment: Implement `controller.publishService`.
+  - Deployment: Implement `controller.ingressClass`.\
+    **NOTE**: If you are currently overriding `controller.ingressClassResource.name`, there are two cases which require manual intervention:
+
+    * You are assigning ingresses to an ingress controller by annotation.
+    * You enabled `controller.ingressClassByName`.
+
+    Please set `controller.ingressClass` to the value of `controller.ingressClassResource.name` if any of these cases applies to you.
 
 ### Changed
 

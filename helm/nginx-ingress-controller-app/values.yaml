@@ -439,7 +439,6 @@ controller:
 
   # -- Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader'
   electionID: ""
-
   ## This section refers to the creation of the IngressClass resource
   ## IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
   ingressClassResource:
@@ -451,16 +450,13 @@ controller:
     default: false
     # -- Controller-value of the controller that is processing this ingressClass
     controllerValue: "k8s.io/ingress-nginx"
-
     # -- Parameters is a link to a custom resource containing additional
     # configuration for the controller. This is optional if the controller
     # does not require extra parameters.
     parameters: {}
-
   # -- For backwards compatibility with ingress.class annotation, use ingressClass.
   # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
   ingressClass: nginx
-
   # -- Labels to add to the pod container metadata
   podLabels: {}
   #  key: value

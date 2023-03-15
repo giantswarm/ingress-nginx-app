@@ -127,7 +127,9 @@ spec:
           {{- end }}
           - --election-id={{ include "ingress-nginx.controller.electionID" . }}
           - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
-          - --ingress-class={{ .Values.controller.ingressClassResource.name }}
+          {{- if .Values.controller.ingressClass }}
+          - --ingress-class={{ .Values.controller.ingressClass }}
+          {{- end }}
           - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
           {{- if .Values.controller.admissionWebhooks.enabled }}
           - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
