@@ -59,6 +59,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.enableTopologyAwareRouting`.
   - Deployment: Implement `controller.extraArgs`.
   - Deployment: Implement `serviceAccount.name`.
+  - Deployment: Implement `controller.containerSecurityContext`.
 
 ### Changed
 
