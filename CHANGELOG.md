@@ -49,6 +49,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.configMapNamespace`.
   - Deployment: Implement `controller.tcp.configMapNamespace`.
   - Deployment: Implement `controller.udp.configMapNamespace`.
+  - Deployment: Implement `controller.scope.namespace`.
 
 ### Changed
 

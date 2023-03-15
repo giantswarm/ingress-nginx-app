@@ -137,6 +137,9 @@ spec:
           {{- if .Values.udp }}
           - --udp-services-configmap={{ default "$(POD_NAMESPACE)" .Values.controller.udp.configMapNamespace }}/{{ include "ingress-nginx.fullname" . }}-udp
           {{- end }}
+          {{- if .Values.controller.scope.enabled }}
+          - --watch-namespace={{ default "$(POD_NAMESPACE)" .Values.controller.scope.namespace }}
+          {{- end }}
           {{- if .Values.controller.admissionWebhooks.enabled }}
           - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
           - --validating-webhook-certificate=/usr/local/certificates/cert
