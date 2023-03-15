@@ -102,8 +102,6 @@ spec:
       topologySpreadConstraints:
 {{ tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
       {{- end }}
-      serviceAccountName: {{ template "ingress-nginx.serviceAccountName" . }}
-      terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       containers:
         - name: {{ .Values.controller.containerName }}
           {{- with .Values.controller.image }}
@@ -200,6 +198,8 @@ spec:
               mountPath: /usr/local/certificates/
               readOnly: true
           {{- end }}
+      serviceAccountName: {{ template "ingress-nginx.serviceAccountName" . }}
+      terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       {{- if .Values.controller.admissionWebhooks.enabled }}
       volumes:
         - name: webhook-cert
