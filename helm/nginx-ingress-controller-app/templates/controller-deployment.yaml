@@ -102,7 +102,7 @@ spec:
       topologySpreadConstraints:
 {{ tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
       {{- end }}
-      serviceAccountName: {{ include "ingress-nginx.fullname"  . }}
+      serviceAccountName: {{ template "ingress-nginx.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       containers:
         - name: {{ .Values.controller.containerName }}
