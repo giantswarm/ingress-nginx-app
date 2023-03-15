@@ -142,11 +142,6 @@ controller:
   # ready before a rolling upgrade can proceed with the next replica.
   minReadySeconds: 0
 
-  # controller.enableSSLChainCompletion
-  # Autocomplete SSL certificate chains with missing intermediate CA certificates.
-  # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
-  enableSSLChainCompletion: false
-
   image:
     ## Keep false as default for now!
     chroot: false
@@ -188,9 +183,43 @@ controller:
   # -- Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
   # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
   reportNodeInternalIp: false
+  # -- Process Ingress objects without ingressClass annotation/ingressClassName field
+  # Overrides value for --watch-ingress-without-class flag of the controller binary
+  # Defaults to false
+  watchIngressWithoutClass: false
+  # -- Process IngressClass per name (additionally as per spec.controller).
+  ingressClassByName: false
   # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-aware-hints="auto"
   # Defaults to false
   enableTopologyAwareRouting: false
+  # -- This configuration defines if Ingress Controller should allow users to set
+  # their own *-snippet annotations, otherwise this is forbidden / dropped
+  # when users add those annotations.
+  # Global snippets in ConfigMap are still respected
+  allowSnippetAnnotations: false
+
+  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
+  # container.
+  annotationsPrefix: nginx.ingress.kubernetes.io
+
+  # The Secret referred to by this flag contains the default certificate to be
+  # used when accessing the catch-all server. If this flag is not provided NGINX
+  # will use a self-signed certificate.
+  # Example value: "default/foo-tls".
+  defaultSSLCertificate: ""
+
+  # Autocomplete SSL certificate chains with missing intermediate CA certificates.
+  # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
+  enableSSLChainCompletion: false
+
+  # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
+  # managing DNS for ingresses via an external method, this should always be left enabled.
+  # Disabling updates of Ingress status allows two parallel NGINX IC deployments to reconcile the same Ingresses.
+  updateIngressStatus: true
+
+  # Enable or disable forwarding to ExternalName Services through
+  # --disable-svc-external-name flag
+  disableExternalNameForwarding: true
 
   # controller.livenessProbe
   # Liveness probe configuration
@@ -409,25 +438,6 @@ controller:
  #         value: 2
  #         periodSeconds: 60
 
-  # controller.annotationsPrefix
-  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
-  # container.
-  annotationsPrefix: nginx.ingress.kubernetes.io
-
-  # controller.defaultSSLCertificate
-  # The Secret referred to by this flag contains the default certificate to be
-  # used when accessing the catch-all server. If this flag is not provided NGINX
-  # will use a self-signed certificate.
-  # Example value: "default/foo-tls".
-  defaultSSLCertificate: ""
-
-  # -- Process Ingress objects without ingressClass annotation/ingressClassName field
-  # Overrides value for --watch-ingress-without-class flag of the controller binary
-  # Defaults to false
-  watchIngressWithoutClass: false
-
-  # -- Process IngressClass per name (additionally as per spec.controller).
-  ingressClassByName: false
 
   # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
   # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
@@ -763,12 +773,6 @@ controller:
       #   name: "issuer"
       #   kind: "ClusterIssuer"
 
-  # controller.updateIngressStatus
-  # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
-  # managing DNS for ingresses via an external method, this should always be left enabled.
-  # Disabling updates of Ingress status allows two parallel NGINX IC deployments to reconcile the same Ingresses.
-  updateIngressStatus: true
-
   # controller.enableMimalloc
   # Enables mimalloc as a drop-in replacement for malloc, reduces the memory utilization.
   # For additional options it provides see https://github.com/microsoft/mimalloc#environment-options
@@ -783,17 +787,6 @@ controller:
   #       secretKeyRef:
   #         key: FOO
   #         name: secret-resource
-
-  # controller.disableExternalNameForwarding
-  # Enable or disable forwarding to ExternalName Services through
-  # --disable-svc-external-name flag
-  disableExternalNameForwarding: true
-
-  # This configuration defines if Ingress Controller should allow users to set
-  # their own *-snippet annotations, otherwise this is forbidden / dropped
-  # when users add those annotations.
-  # Global snippets in ConfigMap are still respected
-  allowSnippetAnnotations: false
 
   # -- Improve connection draining when ingress controller pod is deleted using a lifecycle hook:
   # With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds
