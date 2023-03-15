@@ -115,10 +115,26 @@ spec:
         {{- end }}
           args:
           - /nginx-ingress-controller
-          - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
-          - --election-id={{ include "ingress-nginx.controller.electionID" . }}
           {{- if .Values.defaultBackend.enabled }}
           - --default-backend-service=$(POD_NAMESPACE)/{{ include "ingress-nginx.defaultBackend.fullname" . }}
+          {{- end }}
+          {{- if .Values.controller.service.enabled }}
+          - --publish-service={{ .Release.Namespace }}/{{ include "ingress-nginx.controller.fullname" . }}{{ .Values.controller.service.suffix }}
+          {{- end }}
+          - --election-id={{ include "ingress-nginx.controller.electionID" . }}
+          - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
+          - --ingress-class={{ .Values.controller.ingressClassResource.name }}
+          - --configmap={{ .Release.Namespace }}/{{ include "ingress-nginx.fullname" . }}
+          {{- if .Values.controller.admissionWebhooks.enabled }}
+          - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
+          - --validating-webhook-certificate=/usr/local/certificates/cert
+          - --validating-webhook-key=/usr/local/certificates/key
+          {{- end }}
+          {{- if .Values.controller.ingressClassByName }}
+          - --ingress-class-by-name=true
+          {{- end }}
+          {{- if .Values.controller.watchIngressWithoutClass }}
+          - --watch-ingress-without-class=true
           {{- end }}
           {{- if .Values.controller.annotationsPrefix }}
           - --annotations-prefix={{ .Values.controller.annotationsPrefix }}
@@ -127,25 +143,9 @@ spec:
           - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
           {{- end}}
           - --enable-ssl-chain-completion={{ .Values.controller.enableSSLChainCompletion }}
-          - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}
-          - --ingress-class={{ .Values.controller.ingressClassResource.name }}
-          {{- if .Values.controller.service.enabled }}
-          - --publish-service={{ .Release.Namespace }}/{{ include "ingress-nginx.controller.fullname" . }}{{ .Values.controller.service.suffix }}
-          {{- end }}
-          {{- if .Values.controller.admissionWebhooks.enabled }}
-          - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
-          - --validating-webhook-certificate=/usr/local/certificates/cert
-          - --validating-webhook-key=/usr/local/certificates/key
-          {{- end }}
           - --update-status={{ .Values.controller.updateIngressStatus }}
           {{- if .Values.controller.disableExternalNameForwarding }}
           - --disable-svc-external-name
-          {{- end }}
-          {{- if .Values.controller.watchIngressWithoutClass }}
-          - --watch-ingress-without-class=true
-          {{- end }}
-          {{- if .Values.controller.ingressClassByName }}
-          - --ingress-class-by-name=true
           {{- end }}
           securityContext:
             allowPrivilegeEscalation: true
