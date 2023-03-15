@@ -111,11 +111,6 @@ controller:
       maxSkew: 1
       whenUnsatisfiable: ScheduleAnyway
 
-  # controller.maxSurge
-  # Configures maximum number of replicas that can be created over
-  # the desired number of Pods.
-  maxSurge: 1
-
   # -- Define either 'minAvailable' or 'maxUnavailable', never both.
   # minAvailable: 1
   # -- Define either 'minAvailable' or 'maxUnavailable', never both.

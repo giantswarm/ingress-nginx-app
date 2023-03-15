@@ -498,9 +498,6 @@
                         }
                     }
                 },
-                "maxSurge": {
-                    "type": ["integer", "string"]
-                },
                 "maxUnavailable": {
                     "type": ["integer", "string"]
                 },
