@@ -68,6 +68,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.opentelemetry`.
   - Deployment: Implement `controller.extraContainers`.
   - Deployment: Implement `controller.extraInitContainers`.
+  - Deployment: Implement `controller.hostNetwork`.
 
 ### Changed
 
