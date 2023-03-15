@@ -55,6 +55,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.admissionWebhooks.certificate` & `controller.admissionWebhooks.key`.
   - Deployment: Implement `controller.maxmindLicenseKey`.
   - Deployment: Implement `controller.healthCheckHost`.
+  - Deployment: Implement `controller.healthCheckPath`.
 
 ### Changed
 

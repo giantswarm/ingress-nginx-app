@@ -221,6 +221,9 @@ controller:
     periodSeconds: 10
     successThreshold: 1
     timeoutSeconds: 1
+  # -- Path of the health check endpoint. All requests received on the port defined by
+  # the healthz-port parameter are forwarded internally to this path.
+  healthCheckPath: "/healthz"
   # -- Address to bind the health check endpoint.
   # It is better to set this option to the internal node address
   # if the ingress nginx controller is running in the `hostNetwork: true` mode.

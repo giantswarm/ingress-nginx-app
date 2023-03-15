@@ -330,6 +330,9 @@
                 "healthCheckHost": {
                     "type": "string"
                 },
+                "healthCheckPath": {
+                    "type": "string"
+                },
                 "hostNetwork": {
                     "type": "boolean"
                 },
