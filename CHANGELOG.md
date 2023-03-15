@@ -78,6 +78,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - HPA: Use capabilities, reorder `if`. ([#434](https://github.com/giantswarm/nginx-ingress-controller-app/pull/434))
 - Deployment: Align to upstream. ([#433](https://github.com/giantswarm/nginx-ingress-controller-app/pull/433))
   - Deployment: Align `controller.image`.
+  - Deployment: Align `startupProbe`.\
+    **NOTE**: Please remove `controller.startupProbe.enabled` from your overrides and remove/set `controller.startupProbe` instead.
+  - Deployment: Align `livenessProbe`.\
+    **NOTE**: Please remove `controller.livenessProbe.enabled` from your overrides and remove/set `controller.livenessProbe` instead.
+  - Deployment: Align `readinessProbe`.\
+    **NOTE**: Please remove `controller.readinessProbe.enabled` from your overrides and remove/set `controller.readinessProbe` instead.
 
 ### Removed
 

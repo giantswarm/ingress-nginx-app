@@ -221,38 +221,42 @@ controller:
   # --disable-svc-external-name flag
   disableExternalNameForwarding: true
 
-  # controller.livenessProbe
-  # Liveness probe configuration
-  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+  ## Liveness and readiness probe values
+  ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+  ##
+  ## startupProbe:
+  ##   httpGet:
+  ##     # should match container.healthCheckPath
+  ##     path: "/healthz"
+  ##     port: 10254
+  ##     scheme: HTTP
+  ##   initialDelaySeconds: 5
+  ##   periodSeconds: 5
+  ##   timeoutSeconds: 2
+  ##   successThreshold: 1
+  ##   failureThreshold: 5
   livenessProbe:
-    enabled: true
-    failureThreshold: 30
+    httpGet:
+      # should match container.healthCheckPath
+      path: "/healthz"
+      port: 10254
+      scheme: HTTP
     initialDelaySeconds: 10
     periodSeconds: 10
+    timeoutSeconds: 1
     successThreshold: 1
-    timeoutSeconds: 5
-
-  # controller.readinessProbe
-  # Readiness probe configuration
-  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+    failureThreshold: 5
   readinessProbe:
-    enabled: true
-    failureThreshold: 3
+    httpGet:
+      # should match container.healthCheckPath
+      path: "/healthz"
+      port: 10254
+      scheme: HTTP
     initialDelaySeconds: 10
     periodSeconds: 10
-    successThreshold: 1
     timeoutSeconds: 1
-
-  # controller.startupProbe
-  # Startup probe configuration
-  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
-  startupProbe:
-    enabled: false
+    successThreshold: 1
     failureThreshold: 3
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 1
   # -- Path of the health check endpoint. All requests received on the port defined by
   # the healthz-port parameter are forwarded internally to this path.
   healthCheckPath: "/healthz"
