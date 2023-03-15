@@ -47,6 +47,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
     Please set `controller.ingressClass` to the value of `controller.ingressClassResource.name` if any of these cases applies to you.
   - Deployment: Implement `controller.configMapNamespace`.
+  - Deployment: Implement `controller.tcp.configMapNamespace`.
 
 ### Changed
 
