@@ -341,6 +341,9 @@
                 "extraEnvs": {
                     "type": "array"
                 },
+                "extraInitContainers": {
+                    "type": "array"
+                },
                 "extraModules": {
                     "type": "array"
                 },
