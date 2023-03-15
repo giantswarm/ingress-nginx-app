@@ -201,6 +201,9 @@ spec:
         {{- if .Values.controller.resources }}
           resources: {{ toYaml .Values.controller.resources | nindent 12 }}
         {{- end }}
+      {{- if .Values.controller.extraContainers }}
+        {{ toYaml .Values.controller.extraContainers | nindent 8 }}
+      {{- end }}
       serviceAccountName: {{ template "ingress-nginx.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       {{- if .Values.controller.admissionWebhooks.enabled }}

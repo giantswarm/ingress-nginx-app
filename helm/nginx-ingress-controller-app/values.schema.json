@@ -335,6 +335,9 @@
                 "extraArgs": {
                     "type": "object"
                 },
+                "extraContainers": {
+                    "type": "array"
+                },
                 "extraEnvs": {
                     "type": "array"
                 },

@@ -66,6 +66,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.customTemplate`.
   - Deployment: Implement `controller.extraVolumeMounts`.
   - Deployment: Implement `controller.opentelemetry`.
+  - Deployment: Implement `controller.extraContainers`.
 
 ### Changed
 
