@@ -118,8 +118,12 @@ spec:
           {{- if .Values.defaultBackend.enabled }}
           - --default-backend-service=$(POD_NAMESPACE)/{{ include "ingress-nginx.defaultBackend.fullname" . }}
           {{- end }}
-          {{- if .Values.controller.service.enabled }}
-          - --publish-service={{ .Release.Namespace }}/{{ include "ingress-nginx.controller.fullname" . }}{{ .Values.controller.service.suffix }}
+          {{- if and .Values.controller.publishService.enabled .Values.controller.service.enabled }}
+          {{- if .Values.controller.service.external.enabled }}
+          - --publish-service={{ template "ingress-nginx.controller.publishServicePath" . }}{{ .Values.controller.service.suffix }}
+          {{- else if .Values.controller.service.internal.enabled }}
+          - --publish-service={{ template "ingress-nginx.controller.publishServicePath" . }}-internal{{ .Values.controller.service.internal.suffix }}
+          {{- end }}
           {{- end }}
           - --election-id={{ include "ingress-nginx.controller.electionID" . }}
           - --controller-class={{ .Values.controller.ingressClassResource.controllerValue }}

@@ -38,6 +38,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.shareProcessNamespace`.
   - Deployment: Implement `controller.containerName`.
   - Deployment: Implement `controller.updateStrategy`.
+  - Deployment: Implement `controller.publishService`.
 
 ### Changed
 
