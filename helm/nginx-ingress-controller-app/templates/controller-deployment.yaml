@@ -128,7 +128,7 @@ spec:
               value: /usr/local/lib/libmimalloc.so
           {{- end }}
           {{- if .Values.controller.extraEnvs }}
-            {{- toYaml .Values.controller.extraEnvs | nindent 8 }}
+            {{- toYaml .Values.controller.extraEnvs | nindent 12 }}
           {{- end }}
           {{- with .Values.controller.resources }}
           resources:

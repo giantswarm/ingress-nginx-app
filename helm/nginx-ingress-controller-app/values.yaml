@@ -531,6 +531,15 @@ controller:
   ## extraArgs:
   ##   default-ssl-certificate: "<namespace>/<secret_name>"
 
+  # -- Additional environment variables to set
+  extraEnvs: []
+  # extraEnvs:
+  #   - name: FOO
+  #     valueFrom:
+  #       secretKeyRef:
+  #         key: FOO
+  #         name: secret-resource
+
   service:
     enabled: true
 
@@ -769,16 +778,6 @@ controller:
   # Enables mimalloc as a drop-in replacement for malloc, reduces the memory utilization.
   # For additional options it provides see https://github.com/microsoft/mimalloc#environment-options
   enableMimalloc: true
-
-  # controller.extraEnvs
-  # Additional environment variables to set for the controller.
-  extraEnvs: []
-  # extraEnvs:
-  #   - name: FOO
-  #     valueFrom:
-  #       secretKeyRef:
-  #         key: FOO
-  #         name: secret-resource
 
   # -- Improve connection draining when ingress controller pod is deleted using a lifecycle hook:
   # With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds
