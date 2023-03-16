@@ -72,6 +72,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.nodeSelector`.
   - Deployment: Implement `controller.tolerations`.
   - Deployment: Implement `controller.affinity`.
+  - Deployment: Add `DaemonSet` option.
 
 ### Changed
 
