@@ -3,7 +3,7 @@
     "type": "object",
     "properties": {
         "baseDomain": {
-            "type": ["null", "string"]
+            "type": "string"
         },
         "commonLabels": {
             "type": "object"

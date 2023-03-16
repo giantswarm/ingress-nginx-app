@@ -1014,7 +1014,7 @@ image:
 # baseDomain
 # The base domain for this ingress controller.
 # This value is set automatically. Do not overwrite this value.
-baseDomain:
+baseDomain: ""
 
 # provider (aws|capa|azure|kvm)
 # The provider that the cluster is running on.
