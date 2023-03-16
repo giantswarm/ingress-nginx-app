@@ -21,6 +21,58 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Chart: Add `.helmignore`.
   - Chart: Add `NOTES.txt`.
 - Chart: Add CI values from upstream. ([#432](https://github.com/giantswarm/nginx-ingress-controller-app/pull/432))
+- Deployment: Align to upstream. ([#433](https://github.com/giantswarm/nginx-ingress-controller-app/pull/433))
+  - Deployment: Implement `controller.kind`.
+  - Deployment: Implement `controller.labels`.
+  - Deployment: Implement `controller.annotations`.
+  - Deployment: Implement `revisionHistoryLimit`.
+  - Deployment: Implement `controller.podAnnotations`.
+  - Deployment: Implement `controller.dnsConfig`.
+  - Deployment: Implement `controller.hostname`.
+  - Deployment: Implement `controller.dnsPolicy`.
+  - Deployment: Implement `controller.podLabels`.
+  - Deployment: Implement `imagePullSecrets`.
+  - Deployment: Implement `controller.priorityClassName`.\
+    **NOTE**: Removes the hardcoded default `system-cluster-critical`. Please override if required.
+  - Deployment: Implement `controller.podSecurityContext` & `controller.sysctls`.
+  - Deployment: Implement `controller.shareProcessNamespace`.
+  - Deployment: Implement `controller.containerName`.
+  - Deployment: Implement `controller.updateStrategy`.
+  - Deployment: Implement `controller.publishService`.
+  - Deployment: Implement `controller.ingressClass`.\
+    **NOTE**: If you are currently overriding `controller.ingressClassResource.name`, there are two cases which require manual intervention:
+
+    * You are assigning ingresses to an ingress controller by annotation.
+    * You enabled `controller.ingressClassByName`.
+
+    Please set `controller.ingressClass` to the value of `controller.ingressClassResource.name` if any of these cases applies to you.
+  - Deployment: Implement `controller.configMapNamespace`.
+  - Deployment: Implement `controller.tcp.configMapNamespace`.
+  - Deployment: Implement `controller.udp.configMapNamespace`.
+  - Deployment: Implement `controller.scope.namespace`.
+  - Deployment: Implement `controller.scope.namespaceSelector`.
+  - Deployment: Implement `controller.reportNodeInternalIp`.
+  - Deployment: Implement `controller.admissionWebhooks.certificate` & `controller.admissionWebhooks.key`.
+  - Deployment: Implement `controller.maxmindLicenseKey`.
+  - Deployment: Implement `controller.healthCheckHost`.
+  - Deployment: Implement `controller.healthCheckPath`.
+  - Deployment: Implement `controller.enableTopologyAwareRouting`.
+  - Deployment: Implement `controller.extraArgs`.
+  - Deployment: Implement `serviceAccount.name`.
+  - Deployment: Implement `controller.containerSecurityContext`.
+  - Deployment: Implement `controller.hostPort`.
+  - Deployment: Implement `controller.metrics.portName`.
+  - Deployment: Implement `tcp` & `udp` ports.
+  - Deployment: Implement `controller.customTemplate`.
+  - Deployment: Implement `controller.extraVolumeMounts`.
+  - Deployment: Implement `controller.opentelemetry`.
+  - Deployment: Implement `controller.extraContainers`.
+  - Deployment: Implement `controller.extraInitContainers`.
+  - Deployment: Implement `controller.hostNetwork`.
+  - Deployment: Implement `controller.nodeSelector`.
+  - Deployment: Implement `controller.tolerations`.
+  - Deployment: Implement `controller.affinity`.
+  - Deployment: Add `DaemonSet` option.
 
 ### Changed
 
@@ -37,12 +89,40 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Chart: Align to upstream. ([#431](https://github.com/giantswarm/nginx-ingress-controller-app/pull/431))
   - Chart: Align `Chart.yaml`.
 - HPA: Use capabilities, reorder `if`. ([#434](https://github.com/giantswarm/nginx-ingress-controller-app/pull/434))
+- Deployment: Align to upstream. ([#433](https://github.com/giantswarm/nginx-ingress-controller-app/pull/433))
+  - Deployment: Align `controller.image`.
+  - Deployment: Align `startupProbe`.\
+    **NOTE**: Please remove `controller.startupProbe.enabled` from your overrides and remove/set `controller.startupProbe` instead.
+  - Deployment: Align `livenessProbe`.\
+    **NOTE**: Please remove `controller.livenessProbe.enabled` from your overrides and remove/set `controller.livenessProbe` instead.
+  - Deployment: Align `readinessProbe`.\
+    **NOTE**: Please remove `controller.readinessProbe.enabled` from your overrides and remove/set `controller.readinessProbe` instead.
+  - Deployment: Update `controller.image.tag` to [`v1.6.4`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.6.4.md).
 
 ### Removed
 
 - Helpers: Align to upstream. ([#429](https://github.com/giantswarm/nginx-ingress-controller-app/pull/429))
   - Helpers: Remove `resource.controller-service-internal.name`.
   - Helpers: Remove `resource.controller-service.name`.
+- Deployment: Align to upstream. ([#433](https://github.com/giantswarm/nginx-ingress-controller-app/pull/433))
+  - Deployment: Remove `controller.extraAnnotations.deployment`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.annotations` instead.
+  - Deployment: Remove `controller.extraAnnotations.pod`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.podAnnotations` instead.
+  - Deployment: Remove `sysctls` setting `net.ipv4.ip_local_port_range`.\
+    **NOTE:** Set via `controller.sysctls` if required.
+  - Deployment: Remove `initContainers` setting `net.core.somaxconn`.\
+    **NOTE:** Set via `controller.sysctls` if required.
+  - Deployment: Remove `controller.maxSurge`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.updateStrategy` instead.
+  - Deployment: Remove `controller.maxUnavailable`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.updateStrategy` instead.
+  - Deployment: Remove `controller.userID`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.image.runAsUser` instead.
+  - Deployment: Remove `controller.groupID`.\
+    **NOTE:** This is part of our alignment to upstream. There is no replacement for this key.
+  - Deployment: Remove `controller.antiAffinityScheduling` & `controller.nodeAffinity`.
+    **NOTE:** This is part of our alignment to upstream. Use `controller.affinity` instead.
 
 ## [2.26.0] - 2023-03-09
 

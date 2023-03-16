@@ -1,7 +1,7 @@
-{{- if or (eq .Values.controller.kind "Deployment") (eq .Values.controller.kind "Both") -}}
+{{- if or (eq .Values.controller.kind "DaemonSet") (eq .Values.controller.kind "Both") -}}
 {{- include  "isControllerTagValid" . -}}
 apiVersion: apps/v1
-kind: Deployment
+kind: DaemonSet
 metadata:
   labels:
     {{- include "ingress-nginx.labels" . | nindent 4 }}
@@ -22,13 +22,10 @@ spec:
   selector:
     matchLabels:
       {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
-  {{- if not .Values.controller.autoscaling.enabled }}
-  replicas: {{ .Values.controller.replicaCount }}
-  {{- end }}
+      app.kubernetes.io/component: controller
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   {{- if .Values.controller.updateStrategy }}
-  strategy:
-    {{ toYaml .Values.controller.updateStrategy | nindent 4 }}
+  updateStrategy: {{ toYaml .Values.controller.updateStrategy | nindent 4 }}
   {{- end }}
   minReadySeconds: {{ .Values.controller.minReadySeconds }}
   template:
@@ -61,12 +58,12 @@ spec:
       imagePullSecrets: {{ toYaml .Values.imagePullSecrets | nindent 8 }}
     {{- end }}
     {{- if .Values.controller.priorityClassName }}
-      priorityClassName: {{ .Values.controller.priorityClassName | quote }}
+      priorityClassName: {{ .Values.controller.priorityClassName }}
     {{- end }}
     {{- if or .Values.controller.podSecurityContext .Values.controller.sysctls }}
       securityContext:
     {{- end }}
-    {{- if .Values.controller.podSecurityContext }}
+    {{- if .Values.controller.podSecurityContext  }}
         {{- toYaml .Values.controller.podSecurityContext | nindent 8 }}
     {{- end }}
     {{- if .Values.controller.sysctls }}
@@ -151,15 +148,11 @@ spec:
               hostPort: {{ $key }}
               {{- end }}
           {{- end }}
-        {{- if (or .Values.controller.customTemplate.configMapName .Values.controller.extraVolumeMounts .Values.controller.admissionWebhooks.enabled .Values.controller.extraModules .Values.controller.opentelemetry.enabled) }}
+        {{- if (or .Values.controller.customTemplate.configMapName .Values.controller.extraVolumeMounts .Values.controller.admissionWebhooks.enabled .Values.controller.extraModules) }}
           volumeMounts:
-          {{- if (or .Values.controller.extraModules .Values.controller.opentelemetry.enabled) }}
+          {{- if .Values.controller.extraModules }}
             - name: modules
-            {{ if .Values.controller.image.chroot }}
-              mountPath: /chroot/modules_mount
-            {{ else }}
               mountPath: /modules_mount
-            {{ end }}
           {{- end }}
           {{- if .Values.controller.customTemplate.configMapName }}
             - mountPath: /etc/nginx/template
@@ -181,21 +174,26 @@ spec:
       {{- if .Values.controller.extraContainers }}
         {{ toYaml .Values.controller.extraContainers | nindent 8 }}
       {{- end }}
-    {{- if (or .Values.controller.extraInitContainers .Values.controller.extraModules .Values.controller.opentelemetry.enabled) }}
+
+
+    {{- if (or .Values.controller.extraInitContainers .Values.controller.extraModules) }}
       initContainers:
       {{- if .Values.controller.extraInitContainers }}
         {{ toYaml .Values.controller.extraInitContainers | nindent 8 }}
       {{- end }}
       {{- if .Values.controller.extraModules }}
         {{- range .Values.controller.extraModules }}
-          {{ $containerSecurityContext := .containerSecurityContext | default $.Values.controller.containerSecurityContext }}
-          {{- include "extraModules" (dict "name" .name "image" .image "containerSecurityContext" $containerSecurityContext) | nindent 8 }}
+          - name: {{ .Name }}
+            image: {{ .Image }}
+            command: ['sh', '-c', '/usr/local/bin/init_module.sh']
+            {{- if (or $.Values.controller.containerSecurityContext .containerSecurityContext) }}
+            securityContext: {{ .containerSecurityContext | default $.Values.controller.containerSecurityContext | toYaml | nindent 14 }}
+            {{- end }}
+            volumeMounts:
+              - name: modules
+                mountPath: /modules_mount
         {{- end }}
       {{- end }}
-      {{- if .Values.controller.opentelemetry.enabled}}
-          {{ $otelContainerSecurityContext := $.Values.controller.opentelemetry.containerSecurityContext | default $.Values.controller.containerSecurityContext }}
-          {{- include "extraModules" (dict "name" "opentelemetry" "image" .Values.controller.opentelemetry.image "containerSecurityContext" $otelContainerSecurityContext) | nindent 8}}
-      {{- end}}
     {{- end }}
     {{- if .Values.controller.hostNetwork }}
       hostNetwork: {{ .Values.controller.hostNetwork }}
@@ -214,9 +212,9 @@ spec:
     {{- end }}
       serviceAccountName: {{ template "ingress-nginx.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
-    {{- if (or .Values.controller.customTemplate.configMapName .Values.controller.extraVolumeMounts .Values.controller.admissionWebhooks.enabled .Values.controller.extraVolumes .Values.controller.extraModules .Values.controller.opentelemetry.enabled) }}
+    {{- if (or .Values.controller.customTemplate.configMapName .Values.controller.extraVolumeMounts .Values.controller.admissionWebhooks.enabled .Values.controller.extraVolumes .Values.controller.extraModules) }}
       volumes:
-      {{- if (or .Values.controller.extraModules .Values.controller.opentelemetry.enabled)}}
+      {{- if .Values.controller.extraModules }}
         - name: modules
           emptyDir: {}
       {{- end }}

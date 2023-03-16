@@ -1,14 +1,3 @@
-# Default values for the nginx-ingress-controller-app.
-# You can set some of these values by supplying your own values when creating
-# your app. See https://docs.giantswarm.io/reference/app-configuration/
-
-# -----------------------------------------------------------------------------#
-
-# DO NOT copy this entire file and use it as your values file. This will impede
-# upgrading and our own ability to correct issues with the base configuration.
-
-# -----------------------------------------------------------------------------#
-
 ## nginx configuration
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/index.md
 ##
@@ -24,146 +13,30 @@ commonLabels: {}
 # scmhash: abc123
 # myLabel: aakkmd
 
-# configmap
-# These values get applied directly to a configmap which configures the
-# nginx-ingress-controller
-# For all the nginx configmap config options see:
-# https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#configmaps
-configmap:
-
-  # configmap.error-log-level
-  # Configures the logging level of errors.
-  # Valid values: debug, info, notice, warn, error, crit, alert, or emerg
-  # References: http://nginx.org/en/docs/ngx_core_module.html#error_log
-  error-log-level: "notice"
-
-  # configmap.hsts
-  # Enables or disables the HTTP Strict Transport Security (HSTS) header in
-  # servers running SSL.
-  # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
-  hsts: "false"
-
-  # configmap.server-name-hash-bucket-size
-  # Sets the size of the bucket for the server names hash tables.
-  # Increase hash table size to allow more server names for stability reasons
-  server-name-hash-bucket-size: "1024"
-
-  # configmap.worker-processes
-  # Sets the number of worker processes.
-  worker-processes: "4"
-
-  # configmap.worker-shutdown-timeout
-  # Maximum amount of time NGINX worker processes should give active connections to drain.
-  # This should not be higher than controller.terminationGracePeriodSeconds
-  worker-shutdown-timeout: "240s"
-
-  # configmap.use-forwarded-headers
-  # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
-  use-forwarded-headers: "false"
-
-# controller
-# Contains mostly configuration values that get applied to the kubernetes
-# resources that make up the ingress controller.
 controller:
   name: controller
-
-  # controller.replicaCount
-  # Number of initial NGINX IC Deployment replicas.
-  replicaCount: 2
-
-  # controller.antiAffinityScheduling
-  # Configures podAntiAffinity scheduling strategy.
-  # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#inter-pod-affinity-and-anti-affinity
-  antiAffinityScheduling: preferredDuringSchedulingIgnoredDuringExecution
-
-  # controller.nodeAffinity
-  # Allows to set nodeAffinity scheduling configuration.
-  # Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
-  nodeAffinity:
-  #  requiredDuringSchedulingIgnoredDuringExecution:
-  #    nodeSelectorTerms:
-  #    - matchExpressions:
-  #      - key: giantswarm.io/machine-deployment
-  #        operator: In
-  #        values:
-  #        - ab123
-
-  # controller.topologySpreadConstraints
-  # Topology spread constraints for pod assignment (requires Kubernetes >= 1.19)
-  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
-  # Important: We strongly suggest you review these settings before applying onto your clusters.
-  # This document https://docs.giantswarm.io/advanced/high-availability/multi-az/ gives more insight.
-  topologySpreadConstraints: |-
-    - labelSelector:
-        matchLabels:
-          app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
-          app.kubernetes.io/instance: {{ .Release.Name | quote }}
-          app.kubernetes.io/component: controller
-      topologyKey: topology.kubernetes.io/zone
-      maxSkew: 1
-      whenUnsatisfiable: ScheduleAnyway
-    - labelSelector:
-        matchLabels:
-          app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
-          app.kubernetes.io/instance: {{ .Release.Name | quote }}
-          app.kubernetes.io/component: controller
-      topologyKey: kubernetes.io/hostname
-      maxSkew: 1
-      whenUnsatisfiable: ScheduleAnyway
-
-  # controller.maxSurge
-  # Configures maximum number of replicas that can be created over
-  # the desired number of Pods.
-  maxSurge: 1
-
-  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
-  # minAvailable: 1
-  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
-  maxUnavailable: "25%"
-
-  # -- Use a `DaemonSet` or `Deployment`
-  kind: Deployment
-
-  # -- Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels
-  ##
-  labels: {}
-  #  keel.sh/policy: patch
-  #  keel.sh/trigger: poll
-
-  # controller.minReadySeconds
-  # minReadySeconds to avoid killing pods before we are ready
-  # Configures the minimum amount of time that a replica has to be
-  # ready before a rolling upgrade can proceed with the next replica.
-  minReadySeconds: 0
-
-  # controller.enableSSLChainCompletion
-  # Autocomplete SSL certificate chains with missing intermediate CA certificates.
-  # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
-  enableSSLChainCompletion: false
-
   image:
     ## Keep false as default for now!
     chroot: false
-
-    # controller.image.repository
-    repository: giantswarm/ingress-nginx-controller
-
-    # controller.image.tag
-    # When updating tag make sure to also keep appVersion in Chart.yaml in sync
-    tag: v1.4.0
-
+    image: giantswarm/ingress-nginx-controller
+    ## for backwards compatibility consider setting the full image url via the repository value below
+    ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+    ## repository:
+    tag: "v1.6.4"
+    digest: ""
+    digestChroot: ""
+    pullPolicy: IfNotPresent
     # www-data -> uid 101
     runAsUser: 101
     allowPrivilegeEscalation: true
-
   # -- Use an existing PSP instead of creating one
   existingPsp: ""
-
+  # -- Configures the controller container name
+  containerName: controller
   # -- Configures the ports that the nginx-controller listens on
   containerPort:
     http: 80
     https: 443
-
   # -- Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
   config: {}
   # -- Annotations to be added to the controller config configuration configmap.
@@ -172,150 +45,319 @@ controller:
   proxySetHeaders: {}
   # -- Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers
   addHeaders: {}
-
-  # controller.livenessProbe
-  # Liveness probe configuration
-  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
-  livenessProbe:
-    enabled: true
-    failureThreshold: 30
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 5
-
-  # controller.readinessProbe
-  # Readiness probe configuration
-  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
-  readinessProbe:
-    enabled: true
-    failureThreshold: 3
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    successThreshold: 1
-    timeoutSeconds: 1
-
-  # controller.startupProbe
-  # Startup probe configuration
-  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
-  startupProbe:
+  # -- Optionally customize the pod dnsConfig.
+  dnsConfig: {}
+  # -- Optionally customize the pod hostname.
+  hostname: {}
+  # -- Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'.
+  # By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller
+  # to keep resolving names inside the k8s network, use ClusterFirstWithHostNet.
+  dnsPolicy: ClusterFirst
+  # -- Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network
+  # Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply
+  reportNodeInternalIp: false
+  # -- Process Ingress objects without ingressClass annotation/ingressClassName field
+  # Overrides value for --watch-ingress-without-class flag of the controller binary
+  # Defaults to false
+  watchIngressWithoutClass: false
+  # -- Process IngressClass per name (additionally as per spec.controller).
+  ingressClassByName: false
+  # -- This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-aware-hints="auto"
+  # Defaults to false
+  enableTopologyAwareRouting: false
+  # -- This configuration defines if Ingress Controller should allow users to set
+  # their own *-snippet annotations, otherwise this is forbidden / dropped
+  # when users add those annotations.
+  # Global snippets in ConfigMap are still respected
+  allowSnippetAnnotations: false
+  # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
+  # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
+  # is merged
+  hostNetwork: false
+  ## Use host ports 80 and 443
+  ## Disabled by default
+  hostPort:
+    # -- Enable 'hostPort' or not
     enabled: false
-    failureThreshold: 3
+    ports:
+      # -- 'hostPort' http port
+      http: 80
+      # -- 'hostPort' https port
+      https: 443
+  # NetworkPolicy for controller component.
+  networkPolicy:
+    # -- Enable 'networkPolicy' or not
+    enabled: true
+  # -- Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader'
+  electionID: ""
+  ## This section refers to the creation of the IngressClass resource
+  ## IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
+  ingressClassResource:
+    # -- Name of the ingressClass
+    name: nginx
+    # -- Is this ingressClass enabled or not
+    enabled: true
+    # -- Is this the default ingressClass for the cluster
+    default: false
+    # -- Controller-value of the controller that is processing this ingressClass
+    controllerValue: "k8s.io/ingress-nginx"
+    # -- Parameters is a link to a custom resource containing additional
+    # configuration for the controller. This is optional if the controller
+    # does not require extra parameters.
+    parameters: {}
+  # -- For backwards compatibility with ingress.class annotation, use ingressClass.
+  # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
+  ingressClass: nginx
+  # -- Labels to add to the pod container metadata
+  podLabels: {}
+  #  key: value
+
+  # -- Security Context policies for controller pods
+  podSecurityContext: {}
+  # -- See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls
+  sysctls: {}
+  # sysctls:
+  #   "net.core.somaxconn": "8192"
+
+  # -- Allows customization of the source of the IP address or FQDN to report
+  # in the ingress status field. By default, it reads the information provided
+  # by the service. If disable, the status field reports the IP address of the
+  # node or nodes where an ingress controller pod is running.
+  publishService:
+    # -- Enable 'publishService' or not
+    enabled: true
+    # -- Allows overriding of the publish service to bind to
+    # Must be <namespace>/<service_name>
+    pathOverride: ""
+  # Limit the scope of the controller to a specific namespace
+  scope:
+    # -- Enable 'scope' or not
+    enabled: false
+    # -- Namespace to limit the controller to; defaults to $(POD_NAMESPACE)
+    namespace: ""
+    # -- When scope.enabled == false, instead of watching all namespaces, we watching namespaces whose labels
+    # only match with namespaceSelector. Format like foo=bar. Defaults to empty, means watching all namespaces.
+    namespaceSelector: ""
+  # -- Allows customization of the configmap / nginx-configmap namespace; defaults to $(POD_NAMESPACE)
+  configMapNamespace: ""
+  tcp:
+    # -- Allows customization of the tcp-services-configmap; defaults to $(POD_NAMESPACE)
+    configMapNamespace: ""
+    # -- Annotations to be added to the tcp config configmap
+    annotations: {}
+  udp:
+    # -- Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE)
+    configMapNamespace: ""
+    # -- Annotations to be added to the udp config configmap
+    annotations: {}
+  # -- Maxmind license key to download GeoLite2 Databases.
+  ## https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases
+  maxmindLicenseKey: ""
+  # -- Additional command line arguments to pass to nginx-ingress-controller
+  # E.g. to specify the default SSL certificate you can use
+  extraArgs: {}
+  ## extraArgs:
+  ##   default-ssl-certificate: "<namespace>/<secret_name>"
+
+  # -- Additional environment variables to set
+  extraEnvs: []
+  # extraEnvs:
+  #   - name: FOO
+  #     valueFrom:
+  #       secretKeyRef:
+  #         key: FOO
+  #         name: secret-resource
+
+  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
+  # container.
+  annotationsPrefix: nginx.ingress.kubernetes.io
+
+  # The Secret referred to by this flag contains the default certificate to be
+  # used when accessing the catch-all server. If this flag is not provided NGINX
+  # will use a self-signed certificate.
+  # Example value: "default/foo-tls".
+  defaultSSLCertificate: ""
+
+  # Autocomplete SSL certificate chains with missing intermediate CA certificates.
+  # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
+  enableSSLChainCompletion: false
+
+  # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
+  # managing DNS for ingresses via an external method, this should always be left enabled.
+  # Disabling updates of Ingress status allows two parallel NGINX IC deployments to reconcile the same Ingresses.
+  updateIngressStatus: true
+
+  # Enable or disable forwarding to ExternalName Services through
+  # --disable-svc-external-name flag
+  disableExternalNameForwarding: true
+
+  # -- Use a `DaemonSet` or `Deployment`
+  kind: Deployment
+  # -- Annotations to be added to the controller Deployment or DaemonSet
+  ##
+  annotations: {}
+  #  keel.sh/pollSchedule: "@every 60m"
+
+  # -- Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels
+  ##
+  labels: {}
+  #  keel.sh/policy: patch
+  #  keel.sh/trigger: poll
+
+  # -- The update strategy to apply to the Deployment or DaemonSet
+  ##
+  updateStrategy: {}
+  #  rollingUpdate:
+  #    maxUnavailable: 1
+  #  type: RollingUpdate
+
+  # -- `minReadySeconds` to avoid killing pods before we are ready
+  ##
+  minReadySeconds: 0
+  # -- Node tolerations for server scheduling to nodes with taints
+  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  ##
+  tolerations: []
+  #  - key: "key"
+  #    operator: "Equal|Exists"
+  #    value: "value"
+  #    effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
+
+  # -- Affinity and anti-affinity rules for server scheduling to nodes
+  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  ##
+  affinity: {}
+  # # An example of preferred pod anti-affinity, weight is in the range 1-100
+  # podAntiAffinity:
+  #   preferredDuringSchedulingIgnoredDuringExecution:
+  #   - weight: 100
+  #     podAffinityTerm:
+  #       labelSelector:
+  #         matchExpressions:
+  #         - key: app.kubernetes.io/name
+  #           operator: In
+  #           values:
+  #           - ingress-nginx
+  #         - key: app.kubernetes.io/instance
+  #           operator: In
+  #           values:
+  #           - ingress-nginx
+  #         - key: app.kubernetes.io/component
+  #           operator: In
+  #           values:
+  #           - controller
+  #       topologyKey: kubernetes.io/hostname
+
+  # # An example of required pod anti-affinity
+  # podAntiAffinity:
+  #   requiredDuringSchedulingIgnoredDuringExecution:
+  #   - labelSelector:
+  #       matchExpressions:
+  #       - key: app.kubernetes.io/name
+  #         operator: In
+  #         values:
+  #         - ingress-nginx
+  #       - key: app.kubernetes.io/instance
+  #         operator: In
+  #         values:
+  #         - ingress-nginx
+  #       - key: app.kubernetes.io/component
+  #         operator: In
+  #         values:
+  #         - controller
+  #     topologyKey: "kubernetes.io/hostname"
+
+  # -- Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in.
+  ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+  ##
+  topologySpreadConstraints: |-
+    - labelSelector:
+        matchLabels:
+          {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
+          app.kubernetes.io/component: controller
+      topologyKey: topology.kubernetes.io/zone
+      maxSkew: 1
+      whenUnsatisfiable: ScheduleAnyway
+    - labelSelector:
+        matchLabels:
+          {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
+          app.kubernetes.io/component: controller
+      topologyKey: kubernetes.io/hostname
+      maxSkew: 1
+      whenUnsatisfiable: ScheduleAnyway
+
+  # -- `terminationGracePeriodSeconds` to avoid killing pods before we are ready
+  ## wait up to five minutes for the drain of connections
+  ##
+  terminationGracePeriodSeconds: 300
+  # -- Node labels for controller pod assignment
+  ## Ref: https://kubernetes.io/docs/user-guide/node-selection/
+  ##
+  nodeSelector:
+    kubernetes.io/os: linux
+  ## Liveness and readiness probe values
+  ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#container-probes
+  ##
+  ## startupProbe:
+  ##   httpGet:
+  ##     # should match container.healthCheckPath
+  ##     path: "/healthz"
+  ##     port: 10254
+  ##     scheme: HTTP
+  ##   initialDelaySeconds: 5
+  ##   periodSeconds: 5
+  ##   timeoutSeconds: 2
+  ##   successThreshold: 1
+  ##   failureThreshold: 5
+  livenessProbe:
+    httpGet:
+      # should match container.healthCheckPath
+      path: "/healthz"
+      port: 10254
+      scheme: HTTP
     initialDelaySeconds: 10
     periodSeconds: 10
-    successThreshold: 1
     timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 5
+  readinessProbe:
+    httpGet:
+      # should match container.healthCheckPath
+      path: "/healthz"
+      port: 10254
+      scheme: HTTP
+    initialDelaySeconds: 10
+    periodSeconds: 10
+    timeoutSeconds: 1
+    successThreshold: 1
+    failureThreshold: 3
+  # -- Path of the health check endpoint. All requests received on the port defined by
+  # the healthz-port parameter are forwarded internally to this path.
+  healthCheckPath: "/healthz"
+  # -- Address to bind the health check endpoint.
+  # It is better to set this option to the internal node address
+  # if the ingress nginx controller is running in the `hostNetwork: true` mode.
+  healthCheckHost: ""
+  # -- Annotations to be added to controller pods
+  ##
+  podAnnotations: {}
+  replicaCount: 2
+  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
+  # minAvailable: 1
+  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
+  maxUnavailable: "25%"
 
-  metrics:
-    port: 10254
-    portName: metrics
-    # if this port is changed, change healthz-port: in extraArgs: accordingly
-    enabled: true
-
-    service:
-      annotations: {}
-      # prometheus.io/scrape: "true"
-      # prometheus.io/port: "10254"
-      # -- Labels to be added to the metrics service resource
-      labels: {}
-
-      # clusterIP: ""
-
-      # -- List of IP addresses at which the stats-exporter service is available
-      ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
-      ##
-      externalIPs: []
-
-      # loadBalancerIP: ""
-      loadBalancerSourceRanges: []
-      servicePort: 10254
-      type: ClusterIP
-      # externalTrafficPolicy: ""
-      # nodePort: ""
-
-    serviceMonitor:
-      enabled: false
-      additionalLabels: {}
-      ## The label to use to retrieve the job name from.
-      ## jobLabel: "app.kubernetes.io/name"
-      namespace: ""
-      namespaceSelector: {}
-      ## Default: scrape .Release.Namespace only
-      ## To scrape all, use the following:
-      ## namespaceSelector:
-      ##   any: true
-      scrapeInterval: 30s
-      # honorLabels: true
-      targetLabels: []
-      relabelings: []
-      metricRelabelings: []
-
-    prometheusRule:
-      enabled: false
-      additionalLabels: {}
-      # namespace: ""
-      rules: []
-      # # These are just examples rules, please adapt them to your needs
-      # - alert: NGINXConfigFailed
-      #   expr: count(nginx_ingress_controller_config_last_reload_successful == 0) > 0
-      #   for: 1s
-      #   labels:
-      #     severity: critical
-      #   annotations:
-      #     description: bad ingress config - nginx config test failed
-      #     summary: uninstall the latest ingress changes to allow config reloads to resume
-      # - alert: NGINXCertificateExpiry
-      #   expr: (avg(nginx_ingress_controller_ssl_expire_time_seconds) by (host) - time()) < 604800
-      #   for: 1s
-      #   labels:
-      #     severity: critical
-      #   annotations:
-      #     description: ssl certificate(s) will expire in less then a week
-      #     summary: renew expiring certificates to avoid downtime
-      # - alert: NGINXTooMany500s
-      #   expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"5.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
-      #   for: 1m
-      #   labels:
-      #     severity: warning
-      #   annotations:
-      #     description: Too many 5XXs
-      #     summary: More than 5% of all requests returned 5XX, this requires your attention
-      # - alert: NGINXTooMany400s
-      #   expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"4.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
-      #   for: 1m
-      #   labels:
-      #     severity: warning
-      #   annotations:
-      #     description: Too many 4XXs
-      #     summary: More than 5% of all requests returned 4XX, this requires your attention
-
-  # controller.resources
+  ## Define requests resources to avoid probe issues due to CPU utilization in busy nodes
+  ## ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903
+  ## Ideally, there should be no limits.
+  ## https://engineering.indeedblog.com/blog/2019/12/cpu-throttling-regression-fix/
   resources:
-
-    # controller.resources.requests
-    # These are default resource requests.
+    ##  limits:
+    ##    cpu: 100m
+    ##    memory: 90Mi
     requests:
       cpu: 500m
       memory: 600Mi
-
-  # controller.terminationGracePeriodSeconds
-  # The maximum amount of time NGINX Deployment replica is given to gracefully
-  # terminate. This should not be lower than configmap.worker-shutdown-timeout.
-  # The default value of 300 allows the draining of connections for up to
-  # five minutes
-  # for more info see https://github.com/kubernetes/ingress-nginx/pull/4487#issuecomment-525588554
-  # and important note in https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.26.0
-  terminationGracePeriodSeconds: 300
-
-  # controller.lifecycle
-  # Configures NGINX controller container lifecycle hooks.
-  lifecycle:
-    # Enable graceful shutdowns and rolling updates with zero-downtime
-    preStop:
-      exec:
-        command:
-        - /wait-shutdown
-
   # Mutually exclusive with keda autoscaling
   autoscaling:
     enabled: true
@@ -337,7 +379,6 @@ controller:
       #   - type: Pods
       #     value: 2
       #     periodSeconds: 60
-
   autoscalingTemplate: []
   # Custom or additional autoscaling metrics
   # ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
@@ -367,136 +408,35 @@ controller:
       #  annotations:
       # key: value
     triggers: []
- #     - type: prometheus
- #       metadata:
- #         serverAddress: http://<prometheus-host>:9090
- #         metricName: http_requests_total
- #         threshold: '100'
- #         query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
+    #   - type: prometheus
+    #     metadata:
+    #       serverAddress: http://<prometheus-host>:9090
+    #       metricName: http_requests_total
+    #       threshold: '100'
+    #       query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
 
     behavior: {}
- #     scaleDown:
- #       stabilizationWindowSeconds: 300
- #       policies:
- #       - type: Pods
- #         value: 1
- #         periodSeconds: 180
- #     scaleUp:
- #       stabilizationWindowSeconds: 300
- #       policies:
- #       - type: Pods
- #         value: 2
- #         periodSeconds: 60
+    #   scaleDown:
+    #     stabilizationWindowSeconds: 300
+    #     policies:
+    #       - type: Pods
+    #         value: 1
+    #         periodSeconds: 180
+    #   scaleUp:
+    #     stabilizationWindowSeconds: 300
+    #     policies:
+    #       - type: Pods
+    #         value: 2
+    #         periodSeconds: 60
 
-  # controller.annotationsPrefix
-  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
-  # container.
-  annotationsPrefix: nginx.ingress.kubernetes.io
-
-  # controller.defaultSSLCertificate
-  # The Secret referred to by this flag contains the default certificate to be
-  # used when accessing the catch-all server. If this flag is not provided NGINX
-  # will use a self-signed certificate.
-  # Example value: "default/foo-tls".
-  defaultSSLCertificate: ""
-
-  # -- Process Ingress objects without ingressClass annotation/ingressClassName field
-  # Overrides value for --watch-ingress-without-class flag of the controller binary
-  # Defaults to false
-  watchIngressWithoutClass: false
-
-  # -- Process IngressClass per name (additionally as per spec.controller).
-  ingressClassByName: false
-
-  # -- Required for use with CNI based kubernetes installations (such as ones set up by kubeadm),
-  # since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920
-  # is merged
-  hostNetwork: false
-
-  ## Use host ports 80 and 443
-  ## Disabled by default
-  hostPort:
-    # -- Enable 'hostPort' or not
-    enabled: false
-    ports:
-      # -- 'hostPort' http port
-      http: 80
-      # -- 'hostPort' https port
-      https: 443
-
-  # NetworkPolicy for controller component.
-  networkPolicy:
-    # -- Enable 'networkPolicy' or not
-    enabled: true
-
-  # -- Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader'
-  electionID: ""
-
-  ## This section refers to the creation of the IngressClass resource
-  ## IngressClass resources are supported since k8s >= 1.18 and required since k8s >= 1.19
-  ingressClassResource:
-    # -- Name of the ingressClass
-    name: nginx
-    # -- Is this ingressClass enabled or not
-    enabled: true
-    # -- Is this the default ingressClass for the cluster
-    default: false
-    # -- Controller-value of the controller that is processing this ingressClass
-    controllerValue: "k8s.io/ingress-nginx"
-
-    # -- Parameters is a link to a custom resource containing additional
-    # configuration for the controller. This is optional if the controller
-    # does not require extra parameters.
-    parameters: {}
-
-  # -- For backwards compatibility with ingress.class annotation, use ingressClass.
-  # Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation
-  ingressClass: nginx
-
-  # -- See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls
-  sysctls: {}
-  # sysctls:
-  #   "net.core.somaxconn": "8192"
-
-  # -- Allows customization of the source of the IP address or FQDN to report
-  # in the ingress status field. By default, it reads the information provided
-  # by the service. If disable, the status field reports the IP address of the
-  # node or nodes where an ingress controller pod is running.
-  publishService:
-    # -- Enable 'publishService' or not
-    enabled: true
-    # -- Allows overriding of the publish service to bind to
-    # Must be <namespace>/<service_name>
-    pathOverride: ""
-  # Limit the scope of the controller to a specific namespace
-  scope:
-    # -- Enable 'scope' or not
-    enabled: false
-    # -- Namespace to limit the controller to; defaults to $(POD_NAMESPACE)
-    namespace: ""
-    # -- When scope.enabled == false, instead of watching all namespaces, we watching namespaces whose labels
-    # only match with namespaceSelector. Format like foo=bar. Defaults to empty, means watching all namespaces.
-    namespaceSelector: ""
-
-  tcp:
-    # -- Allows customization of the tcp-services-configmap; defaults to $(POD_NAMESPACE)
-    configMapNamespace: ""
-    # -- Annotations to be added to the tcp config configmap
-    annotations: {}
-  udp:
-    # -- Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE)
-    configMapNamespace: ""
-    # -- Annotations to be added to the udp config configmap
-    annotations: {}
-
-  # controller.userID
-  # The userID that the container will run as. 101 is the www-data user.
-  userID: 101
-
-  # controller.groupID
-  # The groupID that the container will run as.
-  groupID: 101
-
+  # -- Enable mimalloc as a drop-in replacement for malloc.
+  ## ref: https://github.com/microsoft/mimalloc
+  ##
+  enableMimalloc: true
+  ## Override NGINX template
+  customTemplate:
+    configMapName: ""
+    configMapKey: ""
   service:
     enabled: true
 
@@ -627,6 +567,48 @@ controller:
         https: 30013
         tcp: {}
         udp: {}
+  # shareProcessNamespace enables process namespace sharing within the pod.
+  # This can be used for example to signal log rotation using `kill -USR1` from a sidecar.
+  shareProcessNamespace: false
+  # -- Additional containers to be added to the controller pod.
+  # See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example.
+  extraContainers: []
+  #  - name: my-sidecar
+  #    image: nginx:latest
+  #  - name: lemonldap-ng-controller
+  #    image: lemonldapng/lemonldap-ng-controller:0.2.0
+  #    args:
+  #      - /lemonldap-ng-controller
+  #      - --alsologtostderr
+  #      - --configmap=$(POD_NAMESPACE)/lemonldap-ng-configuration
+  #    env:
+  #      - name: POD_NAME
+  #        valueFrom:
+  #          fieldRef:
+  #            fieldPath: metadata.name
+  #      - name: POD_NAMESPACE
+  #        valueFrom:
+  #          fieldRef:
+  #            fieldPath: metadata.namespace
+  #    volumeMounts:
+  #    - name: copy-portal-skins
+  #      mountPath: /srv/var/lib/lemonldap-ng/portal/skins
+
+  # -- Additional volumeMounts to the controller main container.
+  extraVolumeMounts: []
+  #  - name: copy-portal-skins
+  #   mountPath: /var/lib/lemonldap-ng/portal/skins
+
+  # -- Additional volumes to the controller pod.
+  extraVolumes: []
+  #  - name: copy-portal-skins
+  #    emptyDir: {}
+
+  # -- Containers, which are run before the app containers are started.
+  extraInitContainers: []
+  # - name: init-myservice
+  #   image: busybox
+  #   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
 
   # -- Modules, which are mounted into the core nginx image. See values.yaml for a sample to add opentelemetry module
   extraModules: []
@@ -637,6 +619,11 @@ controller:
   # will be executed as initContainers, to move its config files within the
   # mounted volume.
 
+  opentelemetry:
+    enabled: false
+    image: registry.k8s.io/ingress-nginx/opentelemetry:v20230107-helm-chart-4.4.2-2-g96b3d2165@sha256:331b9bebd6acfcd2d3048abbdd86555f5be76b7e3d0b5af4300b04235c6056c9
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
   admissionWebhooks:
     annotations: {}
     # ignore-check.kube-linter.io/no-read-only-rootfs: "This deployment needs write access to root filesystem".
@@ -663,10 +650,8 @@ controller:
     objectSelector: {}
     # -- Labels to be added to admission webhooks
     labels: {}
-
     # -- Use an existing PSP instead of creating one
     existingPsp: ""
-
     service:
       annotations: {}
       # clusterIP: ""
@@ -675,7 +660,6 @@ controller:
       loadBalancerSourceRanges: []
       servicePort: 443
       type: ClusterIP
-
     createSecretJob:
       securityContext:
         allowPrivilegeEscalation: false
@@ -686,12 +670,10 @@ controller:
         # requests:
         #   cpu: 10m
         #   memory: 20Mi
-
     patchWebhookJob:
       securityContext:
         allowPrivilegeEscalation: false
       resources: {}
-
     patch:
       enabled: true
       image:
@@ -715,88 +697,119 @@ controller:
         runAsNonRoot: true
         runAsUser: 2000
         fsGroup: 2000
-
     # Use certmanager to generate webhook certs
     certManager:
       enabled: false
       # self-signed root certificate
       rootCert:
-        duration: ""  # default to be 5y
+        # default to be 5y
+        duration: ""
       admissionCert:
-        duration: ""  # default to be 1y
-      # issuerRef:
-      #   name: "issuer"
-      #   kind: "ClusterIssuer"
+        # default to be 1y
+        duration: ""
+        # issuerRef:
+        #   name: "issuer"
+        #   kind: "ClusterIssuer"
+  metrics:
+    port: 10254
+    portName: metrics
+    # if this port is changed, change healthz-port: in extraArgs: accordingly
+    enabled: true
+    service:
+      annotations: {}
+      # prometheus.io/scrape: "true"
+      # prometheus.io/port: "10254"
+      # -- Labels to be added to the metrics service resource
+      labels: {}
+      # clusterIP: ""
 
-  # controller.updateIngressStatus
-  # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
-  # managing DNS for ingresses via an external method, this should always be left enabled.
-  # Disabling updates of Ingress status allows two parallel NGINX IC deployments to reconcile the same Ingresses.
-  updateIngressStatus: true
-
-  # controller.enableMimalloc
-  # Enables mimalloc as a drop-in replacement for malloc, reduces the memory utilization.
-  # For additional options it provides see https://github.com/microsoft/mimalloc#environment-options
-  enableMimalloc: true
-
-  # controller.extraEnvs
-  # Additional environment variables to set for the controller.
-  extraEnvs: []
-  # extraEnvs:
-  #   - name: FOO
-  #     valueFrom:
-  #       secretKeyRef:
-  #         key: FOO
-  #         name: secret-resource
-
-  # controller.extraAnnotations
-  # Additional annotations to apply to the controller.
-  extraAnnotations:
-
-    # controller.extraAnnotations.deployment
-    # Add annotations to the overall controller Deployment
-    # (.metadata.annotations).
-    deployment: []
-
-    # controller.extraAnnotations.pod
-    # Add annotations to the controller deployment pod spec
-    # (.spec.template.metadata.annotations).
-    pod: []
-
-  # controller.disableExternalNameForwarding
-  # Enable or disable forwarding to ExternalName Services through
-  # --disable-svc-external-name flag
-  disableExternalNameForwarding: true
-
-  # This configuration defines if Ingress Controller should allow users to set
-  # their own *-snippet annotations, otherwise this is forbidden / dropped
-  # when users add those annotations.
-  # Global snippets in ConfigMap are still respected
-  allowSnippetAnnotations: false
-
-# image
-image:
-  registry: quay.io
-
-# initContainer
-# TODO: Explain and determine if this is a user level config or not.
-initContainer:
-  name: sysctl
-  image:
-    repository: giantswarm/alpine
-    tag: 3.15.5-giantswarm-sysctl
-  userID: 1000
-  groupID: 1000
-
+      # -- List of IP addresses at which the stats-exporter service is available
+      ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
+      ##
+      externalIPs: []
+      # loadBalancerIP: ""
+      loadBalancerSourceRanges: []
+      servicePort: 10254
+      type: ClusterIP
+      # externalTrafficPolicy: ""
+      # nodePort: ""
+    serviceMonitor:
+      enabled: false
+      additionalLabels: {}
+      ## The label to use to retrieve the job name from.
+      ## jobLabel: "app.kubernetes.io/name"
+      namespace: ""
+      namespaceSelector: {}
+      ## Default: scrape .Release.Namespace only
+      ## To scrape all, use the following:
+      ## namespaceSelector:
+      ##   any: true
+      scrapeInterval: 30s
+      # honorLabels: true
+      targetLabels: []
+      relabelings: []
+      metricRelabelings: []
+    prometheusRule:
+      enabled: false
+      additionalLabels: {}
+      # namespace: ""
+      rules: []
+      # # These are just examples rules, please adapt them to your needs
+      # - alert: NGINXConfigFailed
+      #   expr: count(nginx_ingress_controller_config_last_reload_successful == 0) > 0
+      #   for: 1s
+      #   labels:
+      #     severity: critical
+      #   annotations:
+      #     description: bad ingress config - nginx config test failed
+      #     summary: uninstall the latest ingress changes to allow config reloads to resume
+      # - alert: NGINXCertificateExpiry
+      #   expr: (avg(nginx_ingress_controller_ssl_expire_time_seconds) by (host) - time()) < 604800
+      #   for: 1s
+      #   labels:
+      #     severity: critical
+      #   annotations:
+      #     description: ssl certificate(s) will expire in less then a week
+      #     summary: renew expiring certificates to avoid downtime
+      # - alert: NGINXTooMany500s
+      #   expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"5.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
+      #   for: 1m
+      #   labels:
+      #     severity: warning
+      #   annotations:
+      #     description: Too many 5XXs
+      #     summary: More than 5% of all requests returned 5XX, this requires your attention
+      # - alert: NGINXTooMany400s
+      #   expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"4.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
+      #   for: 1m
+      #   labels:
+      #     severity: warning
+      #   annotations:
+      #     description: Too many 4XXs
+      #     summary: More than 5% of all requests returned 4XX, this requires your attention
+  # -- Improve connection draining when ingress controller pod is deleted using a lifecycle hook:
+  # With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds
+  # to 300, allowing the draining of connections up to five minutes.
+  # If the active connections end before that, the pod will terminate gracefully at that time.
+  # To effectively take advantage of this feature, the Configmap feature
+  # worker-shutdown-timeout new value is 240s instead of 10s.
+  ##
+  lifecycle:
+    preStop:
+      exec:
+        command:
+          - /wait-shutdown
+  priorityClassName: ""
+# -- Rollback limit
+##
+revisionHistoryLimit: 10
 ## Default 404 backend
 ##
 defaultBackend:
   ##
   enabled: false
-
   name: defaultbackend
   image:
-    registry: quay.io
     image: giantswarm/defaultbackend
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
@@ -808,21 +821,16 @@ defaultBackend:
     runAsNonRoot: true
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
-
   # -- Use an existing PSP instead of creating one
   existingPsp: ""
-
   extraArgs: {}
-
   serviceAccount:
     create: true
     name: ""
     automountServiceAccountToken: true
   # -- Additional environment variables to set for defaultBackend pods
   extraEnvs: []
-
   port: 8080
-
   ## Readiness and liveness probes for default backend
   ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
   ##
@@ -838,7 +846,6 @@ defaultBackend:
     periodSeconds: 5
     successThreshold: 1
     timeoutSeconds: 5
-
   # -- The update strategy to apply to the Deployment or DaemonSet
   ##
   updateStrategy: {}
@@ -849,7 +856,6 @@ defaultBackend:
   # -- `minReadySeconds` to avoid killing pods before we are ready
   ##
   minReadySeconds: 0
-
   # -- Node tolerations for server scheduling to nodes with taints
   ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   ##
@@ -860,19 +866,16 @@ defaultBackend:
   #    effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
 
   affinity: {}
-
   # -- Security Context policies for controller pods
   # See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
   # notes on enabling and using sysctls
   ##
   podSecurityContext: {}
-
   # -- Security Context policies for controller main container.
   # See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
   # notes on enabling and using sysctls
   ##
   containerSecurityContext: {}
-
   # -- Labels to add to the pod container metadata
   podLabels: {}
   #  key: value
@@ -882,15 +885,11 @@ defaultBackend:
   ##
   nodeSelector:
     kubernetes.io/os: linux
-
   # -- Annotations to be added to default backend pods
   ##
   podAnnotations: {}
-
   replicaCount: 1
-
   minAvailable: 1
-
   resources: {}
   # limits:
   #   cpu: 10m
@@ -916,42 +915,39 @@ defaultBackend:
     maxReplicas: 2
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
-
   service:
     annotations: {}
-
     # clusterIP: ""
 
     # -- List of IP addresses at which the default backend service is available
     ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
     ##
     externalIPs: []
-
     # loadBalancerIP: ""
     loadBalancerSourceRanges: []
     servicePort: 80
     type: ClusterIP
-
   priorityClassName: ""
   # -- Labels to be added to the default backend resources
   labels: {}
-
 ## Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266
 rbac:
   create: true
   scope: false
-
 ## If true, create & use Pod Security Policy resources
 ## https://kubernetes.io/docs/concepts/policy/pod-security-policy/
 podSecurityPolicy:
   enabled: true
-
 serviceAccount:
   create: true
   name: ""
   automountServiceAccountToken: true
   # -- Annotations for the controller service account
   annotations: {}
+# -- Optional array of imagePullSecrets containing private registry credentials
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets: []
+# - name: secretName
 
 # -- TCP service key-value pairs
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/exposing-tcp-udp-services.md
@@ -973,12 +969,52 @@ portNamePrefix: ""
 ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
 dhParam: ""
 
+# These values get applied directly to a configmap which configures the
+# nginx-ingress-controller
+# For all the nginx configmap config options see:
+# https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#configmaps
+configmap:
+
+  # configmap.error-log-level
+  # Configures the logging level of errors.
+  # Valid values: debug, info, notice, warn, error, crit, alert, or emerg
+  # References: http://nginx.org/en/docs/ngx_core_module.html#error_log
+  error-log-level: "notice"
+
+  # configmap.hsts
+  # Enables or disables the HTTP Strict Transport Security (HSTS) header in
+  # servers running SSL.
+  # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
+  hsts: "false"
+
+  # configmap.server-name-hash-bucket-size
+  # Sets the size of the bucket for the server names hash tables.
+  # Increase hash table size to allow more server names for stability reasons
+  server-name-hash-bucket-size: "1024"
+
+  # configmap.worker-processes
+  # Sets the number of worker processes.
+  worker-processes: "4"
+
+  # configmap.worker-shutdown-timeout
+  # Maximum amount of time NGINX worker processes should give active connections to drain.
+  # This should not be higher than controller.terminationGracePeriodSeconds
+  worker-shutdown-timeout: "240s"
+
+  # configmap.use-forwarded-headers
+  # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
+  use-forwarded-headers: "false"
+
 # Below are configuration values that you should not overwrite or set yourself.
+
+# image
+image:
+  registry: quay.io
 
 # baseDomain
 # The base domain for this ingress controller.
 # This value is set automatically. Do not overwrite this value.
-baseDomain:
+baseDomain: ""
 
 # provider (aws|capa|azure|kvm)
 # The provider that the cluster is running on.

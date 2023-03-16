@@ -22,7 +22,7 @@ spec:
   - {{ $sysctl }}
   {{- end }}
 {{- end }}
-  privileged: true
+  privileged: false
   allowPrivilegeEscalation: true
   # Allow core volume types.
   volumes:
