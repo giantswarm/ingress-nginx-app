@@ -96,6 +96,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE**: Please remove `controller.livenessProbe.enabled` from your overrides and remove/set `controller.livenessProbe` instead.
   - Deployment: Align `readinessProbe`.\
     **NOTE**: Please remove `controller.readinessProbe.enabled` from your overrides and remove/set `controller.readinessProbe` instead.
+  - Deployment: Update `controller.image.tag` to [`v1.6.4`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.6.4.md).
 
 ### Removed
 
