@@ -350,6 +350,9 @@
                 "extraVolumeMounts": {
                     "type": "array"
                 },
+                "extraVolumes": {
+                    "type": "array"
+                },
                 "healthCheckHost": {
                     "type": "string"
                 },

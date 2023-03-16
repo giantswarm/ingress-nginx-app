@@ -733,6 +733,11 @@ controller:
   #  - name: copy-portal-skins
   #   mountPath: /var/lib/lemonldap-ng/portal/skins
 
+  # -- Additional volumes to the controller pod.
+  extraVolumes: []
+  #  - name: copy-portal-skins
+  #    emptyDir: {}
+
   # -- Containers, which are run before the app containers are started.
   extraInitContainers: []
   # - name: init-myservice
