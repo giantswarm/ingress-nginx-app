@@ -71,29 +71,6 @@ controller:
   # Number of initial NGINX IC Deployment replicas.
   replicaCount: 2
 
-  # controller.topologySpreadConstraints
-  # Topology spread constraints for pod assignment (requires Kubernetes >= 1.19)
-  # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
-  # Important: We strongly suggest you review these settings before applying onto your clusters.
-  # This document https://docs.giantswarm.io/advanced/high-availability/multi-az/ gives more insight.
-  topologySpreadConstraints: |-
-    - labelSelector:
-        matchLabels:
-          app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
-          app.kubernetes.io/instance: {{ .Release.Name | quote }}
-          app.kubernetes.io/component: controller
-      topologyKey: topology.kubernetes.io/zone
-      maxSkew: 1
-      whenUnsatisfiable: ScheduleAnyway
-    - labelSelector:
-        matchLabels:
-          app.kubernetes.io/name: {{ include "ingress-nginx.name" . | quote }}
-          app.kubernetes.io/instance: {{ .Release.Name | quote }}
-          app.kubernetes.io/component: controller
-      topologyKey: kubernetes.io/hostname
-      maxSkew: 1
-      whenUnsatisfiable: ScheduleAnyway
-
   # -- Define either 'minAvailable' or 'maxUnavailable', never both.
   # minAvailable: 1
   # -- Define either 'minAvailable' or 'maxUnavailable', never both.
@@ -350,6 +327,25 @@ controller:
   #         values:
   #         - controller
   #     topologyKey: "kubernetes.io/hostname"
+
+  # -- Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in.
+  ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+  ##
+  topologySpreadConstraints: |-
+    - labelSelector:
+        matchLabels:
+          {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
+          app.kubernetes.io/component: controller
+      topologyKey: topology.kubernetes.io/zone
+      maxSkew: 1
+      whenUnsatisfiable: ScheduleAnyway
+    - labelSelector:
+        matchLabels:
+          {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
+          app.kubernetes.io/component: controller
+      topologyKey: kubernetes.io/hostname
+      maxSkew: 1
+      whenUnsatisfiable: ScheduleAnyway
 
   # -- `terminationGracePeriodSeconds` to avoid killing pods before we are ready
   ## wait up to five minutes for the drain of connections
