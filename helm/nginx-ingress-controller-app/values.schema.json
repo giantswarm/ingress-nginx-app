@@ -242,9 +242,6 @@
                 "annotationsPrefix": {
                     "type": "string"
                 },
-                "antiAffinityScheduling": {
-                    "type": "string"
-                },
                 "autoscaling": {
                     "type": "object",
                     "properties": {
@@ -633,9 +630,6 @@
                             "type": "boolean"
                         }
                     }
-                },
-                "nodeAffinity": {
-                    "type": ["object", "null"]
                 },
                 "nodeSelector": {
                     "type": "object"

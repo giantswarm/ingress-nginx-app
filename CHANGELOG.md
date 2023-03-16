@@ -119,6 +119,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE:** This is part of our alignment to upstream. Use `controller.image.runAsUser` instead.
   - Deployment: Remove `controller.groupID`.\
     **NOTE:** This is part of our alignment to upstream. There is no replacement for this key.
+  - Deployment: Remove `controller.antiAffinityScheduling` & `controller.nodeAffinity`.
+    **NOTE:** This is part of our alignment to upstream. Use `controller.affinity` instead.
 
 ## [2.26.0] - 2023-03-09
 
