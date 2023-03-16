@@ -140,6 +140,9 @@ spec:
           {{- if .Values.controller.scope.enabled }}
           - --watch-namespace={{ default "$(POD_NAMESPACE)" .Values.controller.scope.namespace }}
           {{- end }}
+          {{- if and (not .Values.controller.scope.enabled) .Values.controller.scope.namespaceSelector }}
+          - --watch-namespace-selector={{ default "" .Values.controller.scope.namespaceSelector }}
+          {{- end }}
           {{- if .Values.controller.admissionWebhooks.enabled }}
           - --validating-webhook=:{{ .Values.controller.admissionWebhooks.port }}
           - --validating-webhook-certificate=/usr/local/certificates/cert
