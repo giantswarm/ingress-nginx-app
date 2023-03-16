@@ -226,6 +226,9 @@ spec:
     {{- if .Values.controller.nodeSelector }}
       nodeSelector: {{ toYaml .Values.controller.nodeSelector | nindent 8 }}
     {{- end }}
+    {{- if .Values.controller.tolerations }}
+      tolerations: {{ toYaml .Values.controller.tolerations | nindent 8 }}
+    {{- end }}
       serviceAccountName: {{ template "ingress-nginx.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
       {{- if .Values.controller.admissionWebhooks.enabled }}

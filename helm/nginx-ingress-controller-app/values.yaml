@@ -136,11 +136,17 @@ controller:
   #    maxUnavailable: 1
   #  type: RollingUpdate
 
-  # controller.minReadySeconds
-  # minReadySeconds to avoid killing pods before we are ready
-  # Configures the minimum amount of time that a replica has to be
-  # ready before a rolling upgrade can proceed with the next replica.
+  # -- `minReadySeconds` to avoid killing pods before we are ready
+  ##
   minReadySeconds: 0
+  # -- Node tolerations for server scheduling to nodes with taints
+  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  ##
+  tolerations: []
+  #  - key: "key"
+  #    operator: "Equal|Exists"
+  #    value: "value"
+  #    effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
 
   image:
     ## Keep false as default for now!

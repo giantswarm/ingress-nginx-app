@@ -914,6 +914,9 @@
                 "terminationGracePeriodSeconds": {
                     "type": "integer"
                 },
+                "tolerations": {
+                    "type": "array"
+                },
                 "topologySpreadConstraints": {
                     "type": "string"
                 },

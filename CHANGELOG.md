@@ -70,6 +70,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.extraInitContainers`.
   - Deployment: Implement `controller.hostNetwork`.
   - Deployment: Implement `controller.nodeSelector`.
+  - Deployment: Implement `controller.tolerations`.
 
 ### Changed
 
