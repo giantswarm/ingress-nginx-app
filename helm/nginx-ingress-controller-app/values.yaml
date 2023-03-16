@@ -116,38 +116,6 @@ controller:
   # -- Define either 'minAvailable' or 'maxUnavailable', never both.
   maxUnavailable: "25%"
 
-  # -- Use a `DaemonSet` or `Deployment`
-  kind: Deployment
-  # -- Annotations to be added to the controller Deployment or DaemonSet
-  ##
-  annotations: {}
-  #  keel.sh/pollSchedule: "@every 60m"
-
-  # -- Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels
-  ##
-  labels: {}
-  #  keel.sh/policy: patch
-  #  keel.sh/trigger: poll
-
-  # -- The update strategy to apply to the Deployment or DaemonSet
-  ##
-  updateStrategy: {}
-  #  rollingUpdate:
-  #    maxUnavailable: 1
-  #  type: RollingUpdate
-
-  # -- `minReadySeconds` to avoid killing pods before we are ready
-  ##
-  minReadySeconds: 0
-  # -- Node tolerations for server scheduling to nodes with taints
-  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
-  ##
-  tolerations: []
-  #  - key: "key"
-  #    operator: "Equal|Exists"
-  #    value: "value"
-  #    effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
-
   image:
     ## Keep false as default for now!
     chroot: false
@@ -323,6 +291,38 @@ controller:
   # Enable or disable forwarding to ExternalName Services through
   # --disable-svc-external-name flag
   disableExternalNameForwarding: true
+
+  # -- Use a `DaemonSet` or `Deployment`
+  kind: Deployment
+  # -- Annotations to be added to the controller Deployment or DaemonSet
+  ##
+  annotations: {}
+  #  keel.sh/pollSchedule: "@every 60m"
+
+  # -- Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels
+  ##
+  labels: {}
+  #  keel.sh/policy: patch
+  #  keel.sh/trigger: poll
+
+  # -- The update strategy to apply to the Deployment or DaemonSet
+  ##
+  updateStrategy: {}
+  #  rollingUpdate:
+  #    maxUnavailable: 1
+  #  type: RollingUpdate
+
+  # -- `minReadySeconds` to avoid killing pods before we are ready
+  ##
+  minReadySeconds: 0
+  # -- Node tolerations for server scheduling to nodes with taints
+  ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+  ##
+  tolerations: []
+  #  - key: "key"
+  #    operator: "Equal|Exists"
+  #    value: "value"
+  #    effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
 
   # -- `terminationGracePeriodSeconds` to avoid killing pods before we are ready
   ## wait up to five minutes for the drain of connections
