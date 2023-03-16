@@ -1007,9 +1007,6 @@
                         "readOnlyRootFilesystem": {
                             "type": "boolean"
                         },
-                        "registry": {
-                            "type": "string"
-                        },
                         "runAsNonRoot": {
                             "type": "boolean"
                         },

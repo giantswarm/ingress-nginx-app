@@ -810,7 +810,6 @@ defaultBackend:
   enabled: false
   name: defaultbackend
   image:
-    registry: quay.io
     image: giantswarm/defaultbackend
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
