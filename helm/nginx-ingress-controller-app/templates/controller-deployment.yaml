@@ -26,10 +26,6 @@ spec:
   replicas: {{ .Values.controller.replicaCount }}
   {{- end }}
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: {{ .Values.controller.maxUnavailable }}
   minReadySeconds: {{ .Values.controller.minReadySeconds }}
   template:
     metadata:
