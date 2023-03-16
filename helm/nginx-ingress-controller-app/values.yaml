@@ -129,6 +129,13 @@ controller:
   #  keel.sh/policy: patch
   #  keel.sh/trigger: poll
 
+  # -- The update strategy to apply to the Deployment or DaemonSet
+  ##
+  updateStrategy: {}
+  #  rollingUpdate:
+  #    maxUnavailable: 1
+  #  type: RollingUpdate
+
   # controller.minReadySeconds
   # minReadySeconds to avoid killing pods before we are ready
   # Configures the minimum amount of time that a replica has to be

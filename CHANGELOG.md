@@ -37,6 +37,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Deployment: Implement `controller.podSecurityContext` & `controller.sysctls`.
   - Deployment: Implement `controller.shareProcessNamespace`.
   - Deployment: Implement `controller.containerName`.
+  - Deployment: Implement `controller.updateStrategy`.
 
 ### Changed
 

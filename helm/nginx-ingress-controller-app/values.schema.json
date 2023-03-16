@@ -931,6 +931,9 @@
                 "updateIngressStatus": {
                     "type": "boolean"
                 },
+                "updateStrategy": {
+                    "type": "object"
+                },
                 "userID": {
                     "type": "integer"
                 },
@@ -1137,20 +1140,7 @@
                     "type": "array"
                 },
                 "updateStrategy": {
-                    "type": "object",
-                    "properties": {
-                        "rollingUpdate": {
-                            "type": "object",
-                            "properties": {
-                                "maxUnavailable": {
-                                    "type": ["integer", "string"]
-                                }
-                            }
-                        },
-                        "type": {
-                            "type": "string"
-                        }
-                    }
+                    "type": "object"
                 }
             }
         },
