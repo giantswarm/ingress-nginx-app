@@ -1,14 +1,3 @@
-# Default values for the nginx-ingress-controller-app.
-# You can set some of these values by supplying your own values when creating
-# your app. See https://docs.giantswarm.io/reference/app-configuration/
-
-# -----------------------------------------------------------------------------#
-
-# DO NOT copy this entire file and use it as your values file. This will impede
-# upgrading and our own ability to correct issues with the base configuration.
-
-# -----------------------------------------------------------------------------#
-
 ## nginx configuration
 ## Ref: https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/index.md
 ##
@@ -24,58 +13,8 @@ commonLabels: {}
 # scmhash: abc123
 # myLabel: aakkmd
 
-# configmap
-# These values get applied directly to a configmap which configures the
-# nginx-ingress-controller
-# For all the nginx configmap config options see:
-# https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#configmaps
-configmap:
-
-  # configmap.error-log-level
-  # Configures the logging level of errors.
-  # Valid values: debug, info, notice, warn, error, crit, alert, or emerg
-  # References: http://nginx.org/en/docs/ngx_core_module.html#error_log
-  error-log-level: "notice"
-
-  # configmap.hsts
-  # Enables or disables the HTTP Strict Transport Security (HSTS) header in
-  # servers running SSL.
-  # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
-  hsts: "false"
-
-  # configmap.server-name-hash-bucket-size
-  # Sets the size of the bucket for the server names hash tables.
-  # Increase hash table size to allow more server names for stability reasons
-  server-name-hash-bucket-size: "1024"
-
-  # configmap.worker-processes
-  # Sets the number of worker processes.
-  worker-processes: "4"
-
-  # configmap.worker-shutdown-timeout
-  # Maximum amount of time NGINX worker processes should give active connections to drain.
-  # This should not be higher than controller.terminationGracePeriodSeconds
-  worker-shutdown-timeout: "240s"
-
-  # configmap.use-forwarded-headers
-  # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
-  use-forwarded-headers: "false"
-
-# controller
-# Contains mostly configuration values that get applied to the kubernetes
-# resources that make up the ingress controller.
 controller:
   name: controller
-
-  # controller.replicaCount
-  # Number of initial NGINX IC Deployment replicas.
-  replicaCount: 2
-
-  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
-  # minAvailable: 1
-  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
-  maxUnavailable: "25%"
-
   image:
     ## Keep false as default for now!
     chroot: false
@@ -399,6 +338,14 @@ controller:
   # It is better to set this option to the internal node address
   # if the ingress nginx controller is running in the `hostNetwork: true` mode.
   healthCheckHost: ""
+  # -- Annotations to be added to controller pods
+  ##
+  podAnnotations: {}
+  replicaCount: 2
+  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
+  # minAvailable: 1
+  # -- Define either 'minAvailable' or 'maxUnavailable', never both.
+  maxUnavailable: "25%"
 
   ## Define requests resources to avoid probe issues due to CPU utilization in busy nodes
   ## ref: https://github.com/kubernetes/ingress-nginx/issues/4735#issuecomment-551204903
@@ -411,89 +358,6 @@ controller:
     requests:
       cpu: 500m
       memory: 600Mi
-
-  metrics:
-    port: 10254
-    portName: metrics
-    # if this port is changed, change healthz-port: in extraArgs: accordingly
-    enabled: true
-    service:
-      annotations: {}
-      # prometheus.io/scrape: "true"
-      # prometheus.io/port: "10254"
-      # -- Labels to be added to the metrics service resource
-      labels: {}
-      # clusterIP: ""
-
-      # -- List of IP addresses at which the stats-exporter service is available
-      ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
-      ##
-      externalIPs: []
-      # loadBalancerIP: ""
-      loadBalancerSourceRanges: []
-      servicePort: 10254
-      type: ClusterIP
-      # externalTrafficPolicy: ""
-      # nodePort: ""
-    serviceMonitor:
-      enabled: false
-      additionalLabels: {}
-      ## The label to use to retrieve the job name from.
-      ## jobLabel: "app.kubernetes.io/name"
-      namespace: ""
-      namespaceSelector: {}
-      ## Default: scrape .Release.Namespace only
-      ## To scrape all, use the following:
-      ## namespaceSelector:
-      ##   any: true
-      scrapeInterval: 30s
-      # honorLabels: true
-      targetLabels: []
-      relabelings: []
-      metricRelabelings: []
-    prometheusRule:
-      enabled: false
-      additionalLabels: {}
-      # namespace: ""
-      rules: []
-      # # These are just examples rules, please adapt them to your needs
-      # - alert: NGINXConfigFailed
-      #   expr: count(nginx_ingress_controller_config_last_reload_successful == 0) > 0
-      #   for: 1s
-      #   labels:
-      #     severity: critical
-      #   annotations:
-      #     description: bad ingress config - nginx config test failed
-      #     summary: uninstall the latest ingress changes to allow config reloads to resume
-      # - alert: NGINXCertificateExpiry
-      #   expr: (avg(nginx_ingress_controller_ssl_expire_time_seconds) by (host) - time()) < 604800
-      #   for: 1s
-      #   labels:
-      #     severity: critical
-      #   annotations:
-      #     description: ssl certificate(s) will expire in less then a week
-      #     summary: renew expiring certificates to avoid downtime
-      # - alert: NGINXTooMany500s
-      #   expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"5.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
-      #   for: 1m
-      #   labels:
-      #     severity: warning
-      #   annotations:
-      #     description: Too many 5XXs
-      #     summary: More than 5% of all requests returned 5XX, this requires your attention
-      # - alert: NGINXTooMany400s
-      #   expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"4.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
-      #   for: 1m
-      #   labels:
-      #     severity: warning
-      #   annotations:
-      #     description: Too many 4XXs
-      #     summary: More than 5% of all requests returned 4XX, this requires your attention
-
-  # -- Annotations to be added to controller pods
-  ##
-  podAnnotations: {}
-
   # Mutually exclusive with keda autoscaling
   autoscaling:
     enabled: true
@@ -515,7 +379,6 @@ controller:
       #   - type: Pods
       #     value: 2
       #     periodSeconds: 60
-
   autoscalingTemplate: []
   # Custom or additional autoscaling metrics
   # ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
@@ -545,32 +408,35 @@ controller:
       #  annotations:
       # key: value
     triggers: []
- #     - type: prometheus
- #       metadata:
- #         serverAddress: http://<prometheus-host>:9090
- #         metricName: http_requests_total
- #         threshold: '100'
- #         query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
+    #   - type: prometheus
+    #     metadata:
+    #       serverAddress: http://<prometheus-host>:9090
+    #       metricName: http_requests_total
+    #       threshold: '100'
+    #       query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
 
     behavior: {}
- #     scaleDown:
- #       stabilizationWindowSeconds: 300
- #       policies:
- #       - type: Pods
- #         value: 1
- #         periodSeconds: 180
- #     scaleUp:
- #       stabilizationWindowSeconds: 300
- #       policies:
- #       - type: Pods
- #         value: 2
- #         periodSeconds: 60
+    #   scaleDown:
+    #     stabilizationWindowSeconds: 300
+    #     policies:
+    #       - type: Pods
+    #         value: 1
+    #         periodSeconds: 180
+    #   scaleUp:
+    #     stabilizationWindowSeconds: 300
+    #     policies:
+    #       - type: Pods
+    #         value: 2
+    #         periodSeconds: 60
 
+  # -- Enable mimalloc as a drop-in replacement for malloc.
+  ## ref: https://github.com/microsoft/mimalloc
+  ##
+  enableMimalloc: true
   ## Override NGINX template
   customTemplate:
     configMapName: ""
     configMapKey: ""
-
   service:
     enabled: true
 
@@ -844,12 +710,83 @@ controller:
         # issuerRef:
         #   name: "issuer"
         #   kind: "ClusterIssuer"
+  metrics:
+    port: 10254
+    portName: metrics
+    # if this port is changed, change healthz-port: in extraArgs: accordingly
+    enabled: true
+    service:
+      annotations: {}
+      # prometheus.io/scrape: "true"
+      # prometheus.io/port: "10254"
+      # -- Labels to be added to the metrics service resource
+      labels: {}
+      # clusterIP: ""
 
-  # controller.enableMimalloc
-  # Enables mimalloc as a drop-in replacement for malloc, reduces the memory utilization.
-  # For additional options it provides see https://github.com/microsoft/mimalloc#environment-options
-  enableMimalloc: true
-
+      # -- List of IP addresses at which the stats-exporter service is available
+      ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
+      ##
+      externalIPs: []
+      # loadBalancerIP: ""
+      loadBalancerSourceRanges: []
+      servicePort: 10254
+      type: ClusterIP
+      # externalTrafficPolicy: ""
+      # nodePort: ""
+    serviceMonitor:
+      enabled: false
+      additionalLabels: {}
+      ## The label to use to retrieve the job name from.
+      ## jobLabel: "app.kubernetes.io/name"
+      namespace: ""
+      namespaceSelector: {}
+      ## Default: scrape .Release.Namespace only
+      ## To scrape all, use the following:
+      ## namespaceSelector:
+      ##   any: true
+      scrapeInterval: 30s
+      # honorLabels: true
+      targetLabels: []
+      relabelings: []
+      metricRelabelings: []
+    prometheusRule:
+      enabled: false
+      additionalLabels: {}
+      # namespace: ""
+      rules: []
+      # # These are just examples rules, please adapt them to your needs
+      # - alert: NGINXConfigFailed
+      #   expr: count(nginx_ingress_controller_config_last_reload_successful == 0) > 0
+      #   for: 1s
+      #   labels:
+      #     severity: critical
+      #   annotations:
+      #     description: bad ingress config - nginx config test failed
+      #     summary: uninstall the latest ingress changes to allow config reloads to resume
+      # - alert: NGINXCertificateExpiry
+      #   expr: (avg(nginx_ingress_controller_ssl_expire_time_seconds) by (host) - time()) < 604800
+      #   for: 1s
+      #   labels:
+      #     severity: critical
+      #   annotations:
+      #     description: ssl certificate(s) will expire in less then a week
+      #     summary: renew expiring certificates to avoid downtime
+      # - alert: NGINXTooMany500s
+      #   expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"5.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
+      #   for: 1m
+      #   labels:
+      #     severity: warning
+      #   annotations:
+      #     description: Too many 5XXs
+      #     summary: More than 5% of all requests returned 5XX, this requires your attention
+      # - alert: NGINXTooMany400s
+      #   expr: 100 * ( sum( nginx_ingress_controller_requests{status=~"4.+"} ) / sum(nginx_ingress_controller_requests) ) > 5
+      #   for: 1m
+      #   labels:
+      #     severity: warning
+      #   annotations:
+      #     description: Too many 4XXs
+      #     summary: More than 5% of all requests returned 4XX, this requires your attention
   # -- Improve connection draining when ingress controller pod is deleted using a lifecycle hook:
   # With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds
   # to 300, allowing the draining of connections up to five minutes.
@@ -863,11 +800,6 @@ controller:
         command:
           - /wait-shutdown
   priorityClassName: ""
-
-# image
-image:
-  registry: quay.io
-
 # -- Rollback limit
 ##
 revisionHistoryLimit: 10
@@ -876,7 +808,6 @@ revisionHistoryLimit: 10
 defaultBackend:
   ##
   enabled: false
-
   name: defaultbackend
   image:
     registry: quay.io
@@ -891,21 +822,16 @@ defaultBackend:
     runAsNonRoot: true
     readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
-
   # -- Use an existing PSP instead of creating one
   existingPsp: ""
-
   extraArgs: {}
-
   serviceAccount:
     create: true
     name: ""
     automountServiceAccountToken: true
   # -- Additional environment variables to set for defaultBackend pods
   extraEnvs: []
-
   port: 8080
-
   ## Readiness and liveness probes for default backend
   ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
   ##
@@ -921,7 +847,6 @@ defaultBackend:
     periodSeconds: 5
     successThreshold: 1
     timeoutSeconds: 5
-
   # -- The update strategy to apply to the Deployment or DaemonSet
   ##
   updateStrategy: {}
@@ -932,7 +857,6 @@ defaultBackend:
   # -- `minReadySeconds` to avoid killing pods before we are ready
   ##
   minReadySeconds: 0
-
   # -- Node tolerations for server scheduling to nodes with taints
   ## Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
   ##
@@ -943,19 +867,16 @@ defaultBackend:
   #    effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
 
   affinity: {}
-
   # -- Security Context policies for controller pods
   # See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
   # notes on enabling and using sysctls
   ##
   podSecurityContext: {}
-
   # -- Security Context policies for controller main container.
   # See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
   # notes on enabling and using sysctls
   ##
   containerSecurityContext: {}
-
   # -- Labels to add to the pod container metadata
   podLabels: {}
   #  key: value
@@ -965,15 +886,11 @@ defaultBackend:
   ##
   nodeSelector:
     kubernetes.io/os: linux
-
   # -- Annotations to be added to default backend pods
   ##
   podAnnotations: {}
-
   replicaCount: 1
-
   minAvailable: 1
-
   resources: {}
   # limits:
   #   cpu: 10m
@@ -999,36 +916,29 @@ defaultBackend:
     maxReplicas: 2
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
-
   service:
     annotations: {}
-
     # clusterIP: ""
 
     # -- List of IP addresses at which the default backend service is available
     ## Ref: https://kubernetes.io/docs/user-guide/services/#external-ips
     ##
     externalIPs: []
-
     # loadBalancerIP: ""
     loadBalancerSourceRanges: []
     servicePort: 80
     type: ClusterIP
-
   priorityClassName: ""
   # -- Labels to be added to the default backend resources
   labels: {}
-
 ## Enable RBAC as per https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/rbac.md and https://github.com/kubernetes/ingress-nginx/issues/266
 rbac:
   create: true
   scope: false
-
 ## If true, create & use Pod Security Policy resources
 ## https://kubernetes.io/docs/concepts/policy/pod-security-policy/
 podSecurityPolicy:
   enabled: true
-
 serviceAccount:
   create: true
   name: ""
@@ -1060,7 +970,47 @@ portNamePrefix: ""
 ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
 dhParam: ""
 
+# These values get applied directly to a configmap which configures the
+# nginx-ingress-controller
+# For all the nginx configmap config options see:
+# https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#configmaps
+configmap:
+
+  # configmap.error-log-level
+  # Configures the logging level of errors.
+  # Valid values: debug, info, notice, warn, error, crit, alert, or emerg
+  # References: http://nginx.org/en/docs/ngx_core_module.html#error_log
+  error-log-level: "notice"
+
+  # configmap.hsts
+  # Enables or disables the HTTP Strict Transport Security (HSTS) header in
+  # servers running SSL.
+  # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
+  hsts: "false"
+
+  # configmap.server-name-hash-bucket-size
+  # Sets the size of the bucket for the server names hash tables.
+  # Increase hash table size to allow more server names for stability reasons
+  server-name-hash-bucket-size: "1024"
+
+  # configmap.worker-processes
+  # Sets the number of worker processes.
+  worker-processes: "4"
+
+  # configmap.worker-shutdown-timeout
+  # Maximum amount of time NGINX worker processes should give active connections to drain.
+  # This should not be higher than controller.terminationGracePeriodSeconds
+  worker-shutdown-timeout: "240s"
+
+  # configmap.use-forwarded-headers
+  # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
+  use-forwarded-headers: "false"
+
 # Below are configuration values that you should not overwrite or set yourself.
+
+# image
+image:
+  registry: quay.io
 
 # baseDomain
 # The base domain for this ingress controller.
