@@ -79,29 +79,6 @@ spec:
     {{- if .Values.controller.shareProcessNamespace }}
       shareProcessNamespace: {{ .Values.controller.shareProcessNamespace }}
     {{- end }}
-      affinity:
-        {{- with .Values.controller.nodeAffinity }}
-        nodeAffinity: {{ toYaml . | nindent 10 }}
-        {{- end }}
-        podAntiAffinity:
-          {{ .Values.controller.antiAffinityScheduling }}:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                - key: app.kubernetes.io/name
-                  operator: In
-                  values:
-                  - {{ include "ingress-nginx.name" . | quote }}
-                - key: app.kubernetes.io/instance
-                  operator: In
-                  values:
-                  - {{ .Release.Name | quote }}
-              topologyKey: kubernetes.io/hostname
-      {{- if .Values.controller.topologySpreadConstraints }}
-      topologySpreadConstraints:
-{{ tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
-      {{- end }}
       containers:
         - name: {{ .Values.controller.containerName }}
           {{- with .Values.controller.image }}
@@ -228,6 +205,29 @@ spec:
     {{- end }}
     {{- if .Values.controller.tolerations }}
       tolerations: {{ toYaml .Values.controller.tolerations | nindent 8 }}
+    {{- end }}
+      affinity:
+      {{- with .Values.controller.nodeAffinity }}
+        nodeAffinity: {{ toYaml . | nindent 10 }}
+      {{- end }}
+        podAntiAffinity:
+          {{ .Values.controller.antiAffinityScheduling }}:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                  - {{ include "ingress-nginx.name" . | quote }}
+                - key: app.kubernetes.io/instance
+                  operator: In
+                  values:
+                  - {{ .Release.Name | quote }}
+              topologyKey: kubernetes.io/hostname
+    {{- if .Values.controller.topologySpreadConstraints }}
+      topologySpreadConstraints:
+{{ tpl .Values.controller.topologySpreadConstraints . | indent 6 }}
     {{- end }}
       serviceAccountName: {{ template "ingress-nginx.serviceAccountName" . }}
       terminationGracePeriodSeconds: {{ .Values.controller.terminationGracePeriodSeconds }}
