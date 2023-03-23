@@ -7,6 +7,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+
+### Changed
+
+- Push to vsphere app collection.
+- Don't push to openstack app collection.
+
 ## [2.27.0] - 2023-03-22
 
 ### Added
