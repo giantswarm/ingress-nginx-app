@@ -12,6 +12,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Push to vsphere app collection.
 - Don't push to openstack app collection.
+- Set NodePorts in controller services also when type is `LoadBalancer`. This change aligns with upstream.
+  **NOTE**: Our default values for the NodePorts are set to `http: 30010` and `https: 30011`. Change those to your needs when upgrading.
 
 ## [2.27.0] - 2023-03-22
 
