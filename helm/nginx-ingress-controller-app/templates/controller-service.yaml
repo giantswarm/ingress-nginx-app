@@ -27,6 +27,8 @@ metadata:
     {{- if not .Values.controller.service.public }}
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
     {{- end }}
+  {{- else if eq .Values.provider "cloud-director" }}
+    service.beta.kubernetes.io/vcloud-avi-ssl-no-termination: "true"
   {{- end }}
   {{- end }}
   labels:
