@@ -23,6 +23,8 @@ metadata:
   {{- else if eq .Values.provider "azure" }}
     service.beta.kubernetes.io/azure-load-balancer-mixed-protocols: "true"
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+  {{- else if eq .Values.provider "cloud-director" }}
+    service.beta.kubernetes.io/vcloud-avi-ssl-no-termination: "true"
   {{- end }}
   {{- end }}
   labels:

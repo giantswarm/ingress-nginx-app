@@ -1016,7 +1016,7 @@ image:
 # This value is set automatically. Do not overwrite this value.
 baseDomain: ""
 
-# provider (aws|capa|azure|kvm)
+# provider (aws|capa|azure|kvm|cloud-director)
 # The provider that the cluster is running on.
 # This value is set automatically. Do not overwrite this value.
 provider: aws

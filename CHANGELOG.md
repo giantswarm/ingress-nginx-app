@@ -7,6 +7,9 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Set load balancer annotation cloud-director (capvcd) clusters.
 
 ### Changed
 
