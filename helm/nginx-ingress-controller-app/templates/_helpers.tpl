@@ -197,7 +197,6 @@ IngressClass parameters.
 Extra modules.
 */}}
 {{- define "extraModules" -}}
-
 - name: {{ .name }}
   image: {{ .image }}
   command: ['sh', '-c', '/usr/local/bin/init_module.sh']
@@ -207,5 +206,4 @@ Extra modules.
   volumeMounts:
     - name: {{ toYaml "modules"}}
       mountPath: {{ toYaml "/modules_mount"}}
-
 {{- end -}}

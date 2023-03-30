@@ -22,7 +22,7 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.6.4"
+    tag: "v1.7.0"
     digest: ""
     digestChroot: ""
     pullPolicy: IfNotPresent
@@ -367,18 +367,18 @@ controller:
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 80
     behavior: {}
-      # scaleDown:
-      #   stabilizationWindowSeconds: 300
-      #   policies:
-      #   - type: Pods
-      #     value: 1
-      #     periodSeconds: 180
-      # scaleUp:
-      #   stabilizationWindowSeconds: 300
-      #   policies:
-      #   - type: Pods
-      #     value: 2
-      #     periodSeconds: 60
+    # scaleDown:
+    #   stabilizationWindowSeconds: 300
+    #   policies:
+    #   - type: Pods
+    #     value: 1
+    #     periodSeconds: 180
+    # scaleUp:
+    #   stabilizationWindowSeconds: 300
+    #   policies:
+    #   - type: Pods
+    #     value: 2
+    #     periodSeconds: 60
   autoscalingTemplate: []
   # Custom or additional autoscaling metrics
   # ref: https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/#support-for-custom-metrics
@@ -408,26 +408,26 @@ controller:
       #  annotations:
       # key: value
     triggers: []
-    #   - type: prometheus
-    #     metadata:
-    #       serverAddress: http://<prometheus-host>:9090
-    #       metricName: http_requests_total
-    #       threshold: '100'
-    #       query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
+    # - type: prometheus
+    #   metadata:
+    #     serverAddress: http://<prometheus-host>:9090
+    #     metricName: http_requests_total
+    #     threshold: '100'
+    #     query: sum(rate(http_requests_total{deployment="my-deployment"}[2m]))
 
     behavior: {}
-    #   scaleDown:
-    #     stabilizationWindowSeconds: 300
-    #     policies:
-    #       - type: Pods
-    #         value: 1
-    #         periodSeconds: 180
-    #   scaleUp:
-    #     stabilizationWindowSeconds: 300
-    #     policies:
-    #       - type: Pods
-    #         value: 2
-    #         periodSeconds: 60
+    # scaleDown:
+    #   stabilizationWindowSeconds: 300
+    #   policies:
+    #   - type: Pods
+    #     value: 1
+    #     periodSeconds: 180
+    # scaleUp:
+    #   stabilizationWindowSeconds: 300
+    #   policies:
+    #   - type: Pods
+    #     value: 2
+    #     periodSeconds: 60
 
   # -- Enable mimalloc as a drop-in replacement for malloc.
   ## ref: https://github.com/microsoft/mimalloc
@@ -612,6 +612,8 @@ controller:
 
   # -- Modules, which are mounted into the core nginx image. See values.yaml for a sample to add opentelemetry module
   extraModules: []
+  # - name: mytestmodule
+  #   image: registry.k8s.io/ingress-nginx/mytestmodule
   #   containerSecurityContext:
   #     allowPrivilegeEscalation: false
   #
@@ -621,7 +623,7 @@ controller:
 
   opentelemetry:
     enabled: false
-    image: registry.k8s.io/ingress-nginx/opentelemetry:v20230107-helm-chart-4.4.2-2-g96b3d2165@sha256:331b9bebd6acfcd2d3048abbdd86555f5be76b7e3d0b5af4300b04235c6056c9
+    image: registry.k8s.io/ingress-nginx/opentelemetry:v20230312-helm-chart-4.5.2-28-g66a760794@sha256:40f766ac4a9832f36f217bb0e98d44c8d38faeccbfe861fbc1a76af7e9ab257f
     containerSecurityContext:
       allowPrivilegeEscalation: false
   admissionWebhooks:
@@ -664,12 +666,12 @@ controller:
       securityContext:
         allowPrivilegeEscalation: false
       resources: {}
-        # limits:
-        #   cpu: 10m
-        #   memory: 20Mi
-        # requests:
-        #   cpu: 10m
-        #   memory: 20Mi
+      # limits:
+      #   cpu: 10m
+      #   memory: 20Mi
+      # requests:
+      #   cpu: 10m
+      #   memory: 20Mi
     patchWebhookJob:
       securityContext:
         allowPrivilegeEscalation: false
@@ -681,7 +683,7 @@ controller:
         ## for backwards compatibility consider setting the full image url via the repository value below
         ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
         ## repository:
-        tag: v20220916-gd32f8c343
+        tag: v20230312-helm-chart-4.5.2-28-g66a760794
         digest: ""
         pullPolicy: IfNotPresent
       # -- Provide a priority class name to the webhook patching job

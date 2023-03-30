@@ -9,12 +9,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Added
 
-- Set load balancer annotation cloud-director (capvcd) clusters.
+- Service: Add vCloud AVI annotations. ([#439](https://github.com/giantswarm/nginx-ingress-controller-app/pull/439))
 
 ### Changed
 
-- Push to vsphere app collection.
-- Don't push to openstack app collection.
+- Image: Update to [`v1.7.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.7.0.md). ([#440](https://github.com/giantswarm/nginx-ingress-controller-app/pull/440))
 
 ## [2.27.0] - 2023-03-22
 
