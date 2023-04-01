@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.28.0] - 2023-04-01
+
 ### Added
 
 - Service: Add vCloud AVI annotations. ([#439](https://github.com/giantswarm/nginx-ingress-controller-app/pull/439))
@@ -1023,7 +1025,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.27.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.28.0...HEAD
+[2.28.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.27.0...v2.28.0
 [2.27.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.26.0...v2.27.0
 [2.26.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.25.1...v2.26.0
 [2.25.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.25.0...v2.25.1
