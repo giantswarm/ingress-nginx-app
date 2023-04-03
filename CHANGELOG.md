@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- DaemonSet: Align to `Deployment` (and vice versa). ([#442](https://github.com/giantswarm/nginx-ingress-controller-app/pull/442))
+
 ## [2.28.0] - 2023-04-01
 
 ### Added
