@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Default Backend: Add `NetworkPolicy`. ([#443](https://github.com/giantswarm/nginx-ingress-controller-app/pull/443))
+
 ### Changed
 
 - DaemonSet: Align to `Deployment` (and vice versa). ([#442](https://github.com/giantswarm/nginx-ingress-controller-app/pull/442))
