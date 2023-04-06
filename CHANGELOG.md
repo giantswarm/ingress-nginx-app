@@ -13,6 +13,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Removed
 
+- Service: Remove `controller.service.suffix` & `controller.service.internal.suffix`. ([#448](https://github.com/giantswarm/nginx-ingress-controller-app/pull/448))\
+  **NOTE:** This is part of our alignment to upstream. There is no replacement for this key.
 - Deployment/DaemonSet: Remove `cluster-autoscaler.kubernetes.io/safe-to-evict` annotation. ([#449](https://github.com/giantswarm/nginx-ingress-controller-app/pull/449))
 - Params: Align to upstream. ([#452](https://github.com/giantswarm/nginx-ingress-controller-app/pull/452))
   - Params: Remove `controller.annotationsPrefix`.\

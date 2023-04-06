@@ -295,7 +295,6 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.service.internal.nodePorts.tcp | object | `{}` |  |
 | controller.service.internal.nodePorts.udp | object | `{}` |  |
 | controller.service.internal.subdomain | string | `"ingress-internal"` |  |
-| controller.service.internal.suffix | string | `""` |  |
 | controller.service.ipFamilies | list | `["IPv4"]` | List of IP families (e.g. IPv4, IPv6) assigned to the service. This field is usually assigned automatically based on cluster configuration and the ipFamilyPolicy field. # Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/ |
 | controller.service.ipFamilyPolicy | string | `"SingleStack"` | Represents the dual-stack-ness requested or required by this Service. Possible values are SingleStack, PreferDualStack or RequireDualStack. The ipFamilies and clusterIPs fields depend on the value of this field. # Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/ |
 | controller.service.labels | object | `{}` |  |
@@ -309,7 +308,6 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.service.ports.https | int | `443` |  |
 | controller.service.public | bool | `true` |  |
 | controller.service.subdomain | string | `"ingress"` |  |
-| controller.service.suffix | string | `""` |  |
 | controller.service.targetPorts.http | string | `"http"` |  |
 | controller.service.targetPorts.https | string | `"https"` |  |
 | controller.service.type | string | `"LoadBalancer"` |  |
