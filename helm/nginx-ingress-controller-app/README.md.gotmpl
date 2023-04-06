@@ -1,16 +1,97 @@
 {{ template "chart.header" . }}
-{{ template "chart.deprecationWarning" . }}
+[ingress-nginx](https://github.com/giantswarm/ingress-nginx-app) Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 
-{{ template "chart.badgesSection" . }}
+{{ template "chart.versionBadge" . }}{{ template "chart.typeBadge" . }}{{ template "chart.appVersionBadge" . }}
 
-{{ template "chart.description" . }}
+To use, add `ingressClassName: nginx` spec field or the `kubernetes.io/ingress.class: nginx` annotation to your Ingress resources.
 
-{{ template "chart.homepageLine" . }}
-
-{{ template "chart.maintainersSection" . }}
-
-{{ template "chart.sourcesSection" . }}
+This chart bootstraps an ingress-nginx deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 {{ template "chart.requirementsSection" . }}
+
+### Migrating from giantswarm/nginx-ingress-controller-app
+
+There are two main ways to migrate a release from `giantswarm/nginx-ingress-controller-app` to `giantswarm/ingress-nginx` chart:
+
+1. For Nginx Ingress controllers used for non-critical services, the easiest method is to uninstall the old release and install the new one
+1. For critical services in production that require zero-downtime, you will want to:
+    1. Install a second Ingress controller
+    1. Redirect your DNS traffic from the old controller to the new controller
+    1. Log traffic from both controllers during this changeover
+    1. Uninstall the old controller once traffic has fully drained from it
+
+## Configuration
+
+_See [configuration](#configuration) below._
+
+To see all configurable options with detailed comments, visit the chart's [values.yaml](./values.yaml).
+
+### PodDisruptionBudget
+
+Note that the PodDisruptionBudget resource will only be defined if the replicaCount is greater than one,
+else it would make it impossible to evacuate a node. See [gh issue #7127](https://github.com/helm/charts/issues/7127) for more info.
+
+### Prometheus Metrics
+
+The Nginx ingress controller can export Prometheus metrics, by setting `controller.metrics.enabled` to `true`.
+
+You can add Prometheus annotations to the metrics service using `controller.metrics.service.annotations`.
+Alternatively, if you use the Prometheus Operator, you can enable ServiceMonitor creation using `controller.metrics.serviceMonitor.enabled`. And set `controller.metrics.serviceMonitor.additionalLabels.release="prometheus"`. "release=prometheus" should match the label configured in the prometheus servicemonitor ( see `kubectl get servicemonitor prometheus-kube-prom-prometheus -oyaml -n prometheus`)
+
+### ingress-nginx nginx\_status page/stats server
+
+Previous versions of this chart had a `controller.stats.*` configuration block, which is now obsolete.
+
+You can use `curl --unix-socket /tmp/nginx-status-server.sock http://localhost/nginx_status` inside the controller container to access it locally.
+
+### AWS L7 ELB with SSL Termination
+
+Annotate the controller as shown in the [docs](https://docs.giantswarm.io/advanced/ingress/service-type-loadbalancer/#ssl-termination-on-aws):
+
+```yaml
+controller:
+  service:
+    targetPorts:
+      http: http
+      https: http
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:XX-XXXX-X:XXXXXXXXX:certificate/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXX
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+      service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '3600'
+```
+
+### Additional Internal Load Balancer
+
+This setup is useful when you need both external and internal load balancers but don't want to have multiple ingress controllers and multiple ingress objects per application.
+
+By default, the ingress object will point to the external load balancer address, but if correctly configured, you can make use of the internal one if the URL you are looking up resolves to the internal load balancer's URL.
+
+You'll need to set the following value:
+
+`controller.service.internal.enabled`
+
+An use case for this scenario is having a split-view DNS setup where the public zone CNAME records point to the external balancer URL while the private zone CNAME records point to the internal balancer URL. This way, you only need one ingress kubernetes object.
+
+Optionally you can set `controller.service.loadBalancerIP` if you need a static IP for the resulting `LoadBalancer`.
+
+### Ingress Admission Webhooks
+
+The nginx ingress controller pod exposes an endpoint that will integrate with the `validatingwebhookconfiguration` Kubernetes feature to prevent bad ingress from being added to the cluster.
+
+#### How the Chart Configures the Hooks
+A validating and configuration requires the endpoint to which the request is sent to use TLS. It is possible to set up custom certificates to do this, but in most cases, a self-signed certificate is enough. The setup of this component requires some more complex orchestration when using helm. The steps are created to be idempotent and to allow turning the feature on and off without running into helm quirks.
+
+1. A pre-install hook provisions a certificate into the same namespace using a format compatible with provisioning using end user certificates. If the certificate already exists, the hook exits.
+2. The ingress nginx controller pod is configured to use a TLS proxy container, which will load that certificate.
+3. Validating and Mutating webhook configurations are created in the cluster.
+4. A post-install hook reads the CA from the secret created by step 1 and patches the Validating and Mutating webhook configurations. This process will allow a custom CA provisioned by some other process to also be patched into the webhook configurations. The chosen failure policy is also patched into the webhook configurations
+
+#### Alternatives
+It should be possible to use [giantswarm/cert-manager-app](https://github.com/giantswarm/cert-manager-app) if a more complete solution is required.
+
+You can enable automatic self-signed TLS certificate provisioning via cert-manager by setting the `controller.admissionWebhooks.certManager.enabled` value to true.
+
+Please ensure that cert-manager is correctly installed and configured.
 
 {{ template "chart.valuesSection" . }}
