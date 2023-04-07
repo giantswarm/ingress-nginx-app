@@ -30,9 +30,8 @@ spec:
   minReadySeconds: {{ .Values.controller.minReadySeconds }}
   template:
     metadata:
-      annotations:
-        cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     {{- if .Values.controller.podAnnotations }}
+      annotations:
       {{- range $key, $value := .Values.controller.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
       {{- end }}
