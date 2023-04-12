@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Removed
+
+- Deployment/DaemonSet: Remove `cluster-autoscaler.kubernetes.io/safe-to-evict` annotation. ([#449](https://github.com/giantswarm/nginx-ingress-controller-app/pull/449))
+
 ## [2.29.0] - 2023-04-03
 
 ### Added
