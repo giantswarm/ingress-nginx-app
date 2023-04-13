@@ -118,8 +118,7 @@ Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
 helm.sh/chart: {{ include "ingress-nginx.chart" . }}
-app.kubernetes.io/name: {{ include "ingress-nginx.name" . }}
-app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "ingress-nginx.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -130,15 +129,14 @@ application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantsw
 {{- if .Values.commonLabels}}
 {{ toYaml .Values.commonLabels }}
 {{- end }}
-app: {{ include "ingress-nginx.name" . }}
-{{ include "ingress-nginx.selectorLabels" . }}
 {{- end -}}
 
 {{/*
 Selector labels
 */}}
 {{- define "ingress-nginx.selectorLabels" -}}
-k8s-app: {{ .Release.Name }}
+app.kubernetes.io/name: {{ include "ingress-nginx.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
 {{/*

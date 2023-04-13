@@ -9,6 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
+- Helpers: Align labels to upstream. ([#450](https://github.com/giantswarm/nginx-ingress-controller-app/pull/450))
 - Values: Align CPU & memory requests to actual needs. ([#453](https://github.com/giantswarm/nginx-ingress-controller-app/pull/453))
 
 ### Removed
