@@ -62,9 +62,6 @@
 - --{{ $key }}={{ $value }}
 {{- end }}
 {{- end }}
-{{- if .Values.controller.annotationsPrefix }}
-- --annotations-prefix={{ .Values.controller.annotationsPrefix }}
-{{- end}}
 {{- if .Values.controller.defaultSSLCertificate }}
 - --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
 {{- end}}

@@ -168,10 +168,6 @@ controller:
   #         key: FOO
   #         name: secret-resource
 
-  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
-  # container.
-  annotationsPrefix: nginx.ingress.kubernetes.io
-
   # The Secret referred to by this flag contains the default certificate to be
   # used when accessing the catch-all server. If this flag is not provided NGINX
   # will use a self-signed certificate.
