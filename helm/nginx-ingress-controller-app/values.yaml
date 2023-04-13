@@ -420,13 +420,6 @@ controller:
     configMapKey: ""
   service:
     enabled: true
-
-    # controller.service.suffix
-    # Suffix to add to the LoadBalancer Service name. This is useful for
-    # OpenStack where cloud controller creates and references LBs by the name
-    # and the namespace of the Service.
-    suffix: ""
-
     # -- If enabled is adding an appProtocol option for Kubernetes service. An appProtocol field replacing annotations that were
     # using for setting a backend protocol. Here is an example for AWS: service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
     # It allows choosing the protocol for each backend specified in the Kubernetes service.
@@ -515,13 +508,6 @@ controller:
     internal:
       # -- Enables an additional internal load balancer (besides the external one).
       enabled: false
-
-      # controller.service.internal.suffix
-      # Suffix to add to the LoadBalancer Service name. This is useful for
-      # OpenStack where cloud controller creates and references LBs by the name
-      # and the namespace of the Service.
-      suffix: ""
-
       # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
       annotations: {}
       # loadBalancerIP: ""

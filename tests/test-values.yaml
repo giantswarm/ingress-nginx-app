@@ -10,5 +10,4 @@ controller:
       cpu: 100m
       memory: 90Mi
   service:
-    suffix: "-test"
     type: NodePort
