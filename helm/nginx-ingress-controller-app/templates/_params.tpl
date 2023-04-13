@@ -62,7 +62,6 @@
 - --{{ $key }}={{ $value }}
 {{- end }}
 {{- end }}
-- --update-status={{ .Values.controller.updateIngressStatus }}
 {{- if .Values.controller.disableExternalNameForwarding }}
 - --disable-svc-external-name
 {{- end }}
