@@ -168,25 +168,6 @@ controller:
   #         key: FOO
   #         name: secret-resource
 
-  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
-  # container.
-  annotationsPrefix: nginx.ingress.kubernetes.io
-
-  # The Secret referred to by this flag contains the default certificate to be
-  # used when accessing the catch-all server. If this flag is not provided NGINX
-  # will use a self-signed certificate.
-  # Example value: "default/foo-tls".
-  defaultSSLCertificate: ""
-
-  # Autocomplete SSL certificate chains with missing intermediate CA certificates.
-  # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
-  enableSSLChainCompletion: false
-
-  # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
-  # managing DNS for ingresses via an external method, this should always be left enabled.
-  # Disabling updates of Ingress status allows two parallel NGINX IC deployments to reconcile the same Ingresses.
-  updateIngressStatus: true
-
   # Enable or disable forwarding to ExternalName Services through
   # --disable-svc-external-name flag
   disableExternalNameForwarding: true

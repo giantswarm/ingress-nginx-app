@@ -62,14 +62,6 @@
 - --{{ $key }}={{ $value }}
 {{- end }}
 {{- end }}
-{{- if .Values.controller.annotationsPrefix }}
-- --annotations-prefix={{ .Values.controller.annotationsPrefix }}
-{{- end}}
-{{- if .Values.controller.defaultSSLCertificate }}
-- --default-ssl-certificate={{ .Values.controller.defaultSSLCertificate }}
-{{- end}}
-- --enable-ssl-chain-completion={{ .Values.controller.enableSSLChainCompletion }}
-- --update-status={{ .Values.controller.updateIngressStatus }}
 {{- if .Values.controller.disableExternalNameForwarding }}
 - --disable-svc-external-name
 {{- end }}
