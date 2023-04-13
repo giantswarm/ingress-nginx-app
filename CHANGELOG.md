@@ -13,6 +13,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Params: Align to upstream. ([#452](https://github.com/giantswarm/nginx-ingress-controller-app/pull/452))
   - Params: Remove `controller.annotationsPrefix`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
+  - Params: Remove `controller.defaultSSLCertificate`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
 
 ## [2.29.0] - 2023-04-03
 

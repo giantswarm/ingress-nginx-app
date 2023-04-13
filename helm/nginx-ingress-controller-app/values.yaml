@@ -168,12 +168,6 @@ controller:
   #         key: FOO
   #         name: secret-resource
 
-  # The Secret referred to by this flag contains the default certificate to be
-  # used when accessing the catch-all server. If this flag is not provided NGINX
-  # will use a self-signed certificate.
-  # Example value: "default/foo-tls".
-  defaultSSLCertificate: ""
-
   # Autocomplete SSL certificate chains with missing intermediate CA certificates.
   # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
   enableSSLChainCompletion: false
