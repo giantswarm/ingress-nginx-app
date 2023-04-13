@@ -62,7 +62,6 @@
 - --{{ $key }}={{ $value }}
 {{- end }}
 {{- end }}
-- --enable-ssl-chain-completion={{ .Values.controller.enableSSLChainCompletion }}
 - --update-status={{ .Values.controller.updateIngressStatus }}
 {{- if .Values.controller.disableExternalNameForwarding }}
 - --disable-svc-external-name

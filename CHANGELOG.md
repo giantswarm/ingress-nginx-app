@@ -15,6 +15,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
   - Params: Remove `controller.defaultSSLCertificate`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
+  - Params: Remove `controller.enableSSLChainCompletion`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
 
 ## [2.29.0] - 2023-04-03
 

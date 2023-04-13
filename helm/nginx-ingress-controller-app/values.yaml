@@ -168,10 +168,6 @@ controller:
   #         key: FOO
   #         name: secret-resource
 
-  # Autocomplete SSL certificate chains with missing intermediate CA certificates.
-  # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
-  enableSSLChainCompletion: false
-
   # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
   # managing DNS for ingresses via an external method, this should always be left enabled.
   # Disabling updates of Ingress status allows two parallel NGINX IC deployments to reconcile the same Ingresses.
