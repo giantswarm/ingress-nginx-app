@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Service: Remove deprecated & default annotations. ([#458](https://github.com/giantswarm/nginx-ingress-controller-app/pull/458))
+
 ### Removed
 
 - Deployment/DaemonSet: Remove `cluster-autoscaler.kubernetes.io/safe-to-evict` annotation. ([#449](https://github.com/giantswarm/nginx-ingress-controller-app/pull/449))
