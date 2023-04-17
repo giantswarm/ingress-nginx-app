@@ -989,11 +989,6 @@ configmap:
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
 
-  # configmap.server-name-hash-bucket-size
-  # Sets the size of the bucket for the server names hash tables.
-  # Increase hash table size to allow more server names for stability reasons
-  server-name-hash-bucket-size: "1024"
-
   # configmap.worker-processes
   # Sets the number of worker processes.
   worker-processes: "4"

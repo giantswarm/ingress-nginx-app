@@ -14,9 +14,6 @@
                 "hsts": {
                     "type": "string"
                 },
-                "server-name-hash-bucket-size": {
-                    "type": "string"
-                },
                 "use-forwarded-headers": {
                     "type": "string"
                 },

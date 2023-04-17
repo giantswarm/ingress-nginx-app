@@ -104,7 +104,6 @@ Please ensure that cert-manager is correctly installed and configured.
 | baseDomain | string | `""` |  |
 | commonLabels | object | `{}` |  |
 | configmap.hsts | string | `"false"` |  |
-| configmap.server-name-hash-bucket-size | string | `"1024"` |  |
 | configmap.use-forwarded-headers | string | `"false"` |  |
 | configmap.worker-processes | string | `"4"` |  |
 | configmap.worker-shutdown-timeout | string | `"240s"` |  |
