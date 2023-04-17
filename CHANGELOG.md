@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Removed
 
 - Deployment/DaemonSet: Remove `cluster-autoscaler.kubernetes.io/safe-to-evict` annotation. ([#449](https://github.com/giantswarm/nginx-ingress-controller-app/pull/449))
+- Deployment/DaemonSet: Remove duplicate Prometheus annotations. ([#455](https://github.com/giantswarm/nginx-ingress-controller-app/pull/455))
 
 ## [2.29.0] - 2023-04-03
 
