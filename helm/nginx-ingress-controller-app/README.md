@@ -149,13 +149,12 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.affinity | object | `{}` | Affinity and anti-affinity rules for server scheduling to nodes # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity # |
 | controller.allowSnippetAnnotations | bool | `false` | This configuration defines if Ingress Controller should allow users to set their own *-snippet annotations, otherwise this is forbidden / dropped when users add those annotations. Global snippets in ConfigMap are still respected |
 | controller.annotations | object | `{}` | Annotations to be added to the controller Deployment or DaemonSet # |
-| controller.annotationsPrefix | string | `"nginx.ingress.kubernetes.io"` |  |
 | controller.autoscaling.annotations | object | `{}` |  |
 | controller.autoscaling.behavior | object | `{}` |  |
 | controller.autoscaling.enabled | bool | `true` |  |
 | controller.autoscaling.maxReplicas | int | `20` |  |
 | controller.autoscaling.minReplicas | int | `2` |  |
-| controller.autoscaling.targetCPUUtilizationPercentage | int | `50` |  |
+| controller.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | controller.autoscaling.targetMemoryUtilizationPercentage | int | `80` |  |
 | controller.autoscalingTemplate | list | `[]` |  |
 | controller.config | object | `{}` | Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ |
@@ -165,13 +164,11 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.containerPort | object | `{"http":80,"https":443}` | Configures the ports that the nginx-controller listens on |
 | controller.customTemplate.configMapKey | string | `""` |  |
 | controller.customTemplate.configMapName | string | `""` |  |
-| controller.defaultSSLCertificate | string | `""` |  |
 | controller.disableExternalNameForwarding | bool | `true` | disable-svc-external-name flag |
 | controller.dnsConfig | object | `{}` | Optionally customize the pod dnsConfig. |
 | controller.dnsPolicy | string | `"ClusterFirst"` | Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet. |
 | controller.electionID | string | `""` | Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader' |
 | controller.enableMimalloc | bool | `true` | Enable mimalloc as a drop-in replacement for malloc. # ref: https://github.com/microsoft/mimalloc # |
-| controller.enableSSLChainCompletion | bool | `false` |  |
 | controller.enableTopologyAwareRouting | bool | `false` | This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-aware-hints="auto" Defaults to false |
 | controller.existingPsp | string | `""` | Use an existing PSP instead of creating one |
 | controller.extraArgs | object | `{}` | Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use |
@@ -271,8 +268,8 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.readinessProbe.timeoutSeconds | int | `1` |  |
 | controller.replicaCount | int | `2` |  |
 | controller.reportNodeInternalIp | bool | `false` | Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply |
-| controller.resources.requests.cpu | string | `"500m"` |  |
-| controller.resources.requests.memory | string | `"600Mi"` |  |
+| controller.resources.requests.cpu | string | `"250m"` |  |
+| controller.resources.requests.memory | string | `"500Mi"` |  |
 | controller.scope.enabled | bool | `false` | Enable 'scope' or not |
 | controller.scope.namespace | string | `""` | Namespace to limit the controller to; defaults to $(POD_NAMESPACE) |
 | controller.scope.namespaceSelector | string | `""` | When scope.enabled == false, instead of watching all namespaces, we watching namespaces whose labels only match with namespaceSelector. Format like foo=bar. Defaults to empty, means watching all namespaces. |
@@ -320,7 +317,6 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.topologySpreadConstraints | string | `"- labelSelector:\n    matchLabels:\n      {{- include \"ingress-nginx.selectorLabels\" . | nindent 6 }}\n      app.kubernetes.io/component: controller\n  topologyKey: topology.kubernetes.io/zone\n  maxSkew: 1\n  whenUnsatisfiable: ScheduleAnyway\n- labelSelector:\n    matchLabels:\n      {{- include \"ingress-nginx.selectorLabels\" . | nindent 6 }}\n      app.kubernetes.io/component: controller\n  topologyKey: kubernetes.io/hostname\n  maxSkew: 1\n  whenUnsatisfiable: ScheduleAnyway"` | Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ # |
 | controller.udp.annotations | object | `{}` | Annotations to be added to the udp config configmap |
 | controller.udp.configMapNamespace | string | `""` | Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE) |
-| controller.updateIngressStatus | bool | `true` |  |
 | controller.updateStrategy | object | `{}` | The update strategy to apply to the Deployment or DaemonSet # |
 | controller.watchIngressWithoutClass | bool | `false` | Process Ingress objects without ingressClass annotation/ingressClassName field Overrides value for --watch-ingress-without-class flag of the controller binary Defaults to false |
 | defaultBackend.affinity | object | `{}` |  |
