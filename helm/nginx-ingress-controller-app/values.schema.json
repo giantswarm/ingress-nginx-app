@@ -16,9 +16,6 @@
                 },
                 "use-forwarded-headers": {
                     "type": "string"
-                },
-                "worker-shutdown-timeout": {
-                    "type": "string"
                 }
             }
         },

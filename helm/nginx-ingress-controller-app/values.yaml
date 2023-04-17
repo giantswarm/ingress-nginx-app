@@ -989,11 +989,6 @@ configmap:
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
 
-  # configmap.worker-shutdown-timeout
-  # Maximum amount of time NGINX worker processes should give active connections to drain.
-  # This should not be higher than controller.terminationGracePeriodSeconds
-  worker-shutdown-timeout: "240s"
-
   # configmap.use-forwarded-headers
   # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
   use-forwarded-headers: "false"

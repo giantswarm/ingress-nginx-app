@@ -15,6 +15,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Values: Remove `configmap.error-log-level`.
   - Values: Remove `configmap.server-name-hash-bucket-size`.
   - Values: Remove `configmap.worker-processes`.
+  - Values: Remove `configmap.worker-shutdown-timeout`.
 
 ## [2.29.0] - 2023-04-03
 

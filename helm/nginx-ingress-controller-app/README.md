@@ -105,7 +105,6 @@ Please ensure that cert-manager is correctly installed and configured.
 | commonLabels | object | `{}` |  |
 | configmap.hsts | string | `"false"` |  |
 | configmap.use-forwarded-headers | string | `"false"` |  |
-| configmap.worker-shutdown-timeout | string | `"240s"` |  |
 | controller.addHeaders | object | `{}` | Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers |
 | controller.admissionWebhooks.annotations | object | `{}` |  |
 | controller.admissionWebhooks.certManager.admissionCert.duration | string | `""` |  |
