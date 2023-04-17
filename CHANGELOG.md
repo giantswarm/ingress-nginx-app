@@ -14,6 +14,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Values: Remove `configmap` keys matching defaults. ([#457](https://github.com/giantswarm/nginx-ingress-controller-app/pull/457))
   - Values: Remove `configmap.error-log-level`.
   - Values: Remove `configmap.server-name-hash-bucket-size`.
+  - Values: Remove `configmap.worker-processes`.
 
 ## [2.29.0] - 2023-04-03
 
