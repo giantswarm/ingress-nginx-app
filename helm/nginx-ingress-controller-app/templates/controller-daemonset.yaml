@@ -12,11 +12,8 @@ metadata:
     {{- end }}
   name: {{ include "ingress-nginx.controller.fullname" . }}
   namespace: {{ .Release.Namespace }}
-  annotations:
-    prometheus.io/port: "{{ .Values.controller.metrics.port }}"
-    prometheus.io/scrape: "true"
   {{- if .Values.controller.annotations }}
-    {{ toYaml .Values.controller.annotations | nindent 4 }}
+  annotations: {{ toYaml .Values.controller.annotations | nindent 4 }}
   {{- end }}
 spec:
   selector:

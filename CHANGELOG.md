@@ -26,6 +26,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
   - Params: Remove `controller.updateIngressStatus`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
+- Deployment/DaemonSet: Remove duplicate Prometheus annotations. ([#455](https://github.com/giantswarm/nginx-ingress-controller-app/pull/455))
 
 ## [2.29.0] - 2023-04-03
 
