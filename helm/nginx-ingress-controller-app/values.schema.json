@@ -13,9 +13,6 @@
             "properties": {
                 "hsts": {
                     "type": "string"
-                },
-                "use-forwarded-headers": {
-                    "type": "string"
                 }
             }
         },

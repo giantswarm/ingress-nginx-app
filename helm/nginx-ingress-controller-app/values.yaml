@@ -989,10 +989,6 @@ configmap:
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
 
-  # configmap.use-forwarded-headers
-  # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
-  use-forwarded-headers: "false"
-
 # Below are configuration values that you should not overwrite or set yourself.
 
 # image
