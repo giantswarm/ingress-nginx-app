@@ -983,35 +983,11 @@ dhParam: ""
 # https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#configmaps
 configmap:
 
-  # configmap.error-log-level
-  # Configures the logging level of errors.
-  # Valid values: debug, info, notice, warn, error, crit, alert, or emerg
-  # References: http://nginx.org/en/docs/ngx_core_module.html#error_log
-  error-log-level: "notice"
-
   # configmap.hsts
   # Enables or disables the HTTP Strict Transport Security (HSTS) header in
   # servers running SSL.
   # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
   hsts: "false"
-
-  # configmap.server-name-hash-bucket-size
-  # Sets the size of the bucket for the server names hash tables.
-  # Increase hash table size to allow more server names for stability reasons
-  server-name-hash-bucket-size: "1024"
-
-  # configmap.worker-processes
-  # Sets the number of worker processes.
-  worker-processes: "4"
-
-  # configmap.worker-shutdown-timeout
-  # Maximum amount of time NGINX worker processes should give active connections to drain.
-  # This should not be higher than controller.terminationGracePeriodSeconds
-  worker-shutdown-timeout: "240s"
-
-  # configmap.use-forwarded-headers
-  # If true, NGINX passes the incoming X-Forwarded-* headers to upstreams.
-  use-forwarded-headers: "false"
 
 # Below are configuration values that you should not overwrite or set yourself.
 

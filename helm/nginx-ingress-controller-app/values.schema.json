@@ -11,22 +11,7 @@
         "configmap": {
             "type": "object",
             "properties": {
-                "error-log-level": {
-                    "type": "string"
-                },
                 "hsts": {
-                    "type": "string"
-                },
-                "server-name-hash-bucket-size": {
-                    "type": "string"
-                },
-                "use-forwarded-headers": {
-                    "type": "string"
-                },
-                "worker-processes": {
-                    "type": "string"
-                },
-                "worker-shutdown-timeout": {
                     "type": "string"
                 }
             }
