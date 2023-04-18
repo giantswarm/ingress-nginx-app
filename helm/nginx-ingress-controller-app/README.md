@@ -2,7 +2,7 @@
 
 [ingress-nginx](https://github.com/giantswarm/ingress-nginx-app) Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 
-![Version: 2.29.0](https://img.shields.io/badge/Version-2.29.0-informational?style=flat-square) ![AppVersion: 1.7.0](https://img.shields.io/badge/AppVersion-1.7.0-informational?style=flat-square)
+![Version: 2.30.0](https://img.shields.io/badge/Version-2.30.0-informational?style=flat-square) ![AppVersion: 1.7.0](https://img.shields.io/badge/AppVersion-1.7.0-informational?style=flat-square)
 
 To use, add `ingressClassName: nginx` spec field or the `kubernetes.io/ingress.class: nginx` annotation to your Ingress resources.
 
@@ -103,12 +103,7 @@ Please ensure that cert-manager is correctly installed and configured.
 |-----|------|---------|-------------|
 | baseDomain | string | `""` |  |
 | commonLabels | object | `{}` |  |
-| configmap.error-log-level | string | `"notice"` |  |
 | configmap.hsts | string | `"false"` |  |
-| configmap.server-name-hash-bucket-size | string | `"1024"` |  |
-| configmap.use-forwarded-headers | string | `"false"` |  |
-| configmap.worker-processes | string | `"4"` |  |
-| configmap.worker-shutdown-timeout | string | `"240s"` |  |
 | controller.addHeaders | object | `{}` | Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers |
 | controller.admissionWebhooks.annotations | object | `{}` |  |
 | controller.admissionWebhooks.certManager.admissionCert.duration | string | `""` |  |

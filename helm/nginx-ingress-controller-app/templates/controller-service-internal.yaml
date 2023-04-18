@@ -7,7 +7,7 @@ metadata:
     {{ $key }}: {{ $value | quote }}
   {{- end }}
   {{- if and .Values.controller.service.externalDNS.enabled .Values.baseDomain }}
-    external-dns.alpha.kubernetes.io/hostname: "{{ .Values.controller.service.internal.subdomain }}.{{ .Values.baseDomain }}"
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.controller.service.internal.subdomain }}.{{ .Values.baseDomain }}
     {{- if .Values.controller.service.externalDNS.annotation }}
     {{ .Values.controller.service.externalDNS.annotation }}
     {{- end }}
@@ -15,13 +15,11 @@ metadata:
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
   {{- if or (eq .Values.provider "aws") (eq .Values.provider "capa") }}
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
-    service.beta.kubernetes.io/aws-load-balancer-scheme: "internal"
     {{- if ne (index .Values.configmap "use-proxy-protocol") "false" }}
     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
     {{- end }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
   {{- else if eq .Values.provider "azure" }}
-    service.beta.kubernetes.io/azure-load-balancer-mixed-protocols: "true"
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
   {{- else if eq .Values.provider "cloud-director" }}
     service.beta.kubernetes.io/vcloud-avi-ssl-no-termination: "true"

@@ -16,7 +16,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Service: Remove `controller.service.suffix` & `controller.service.internal.suffix`. ([#448](https://github.com/giantswarm/nginx-ingress-controller-app/pull/448))\
   **NOTE:** This is part of our alignment to upstream. There is no replacement for this key.
-- Deployment/DaemonSet: Remove `cluster-autoscaler.kubernetes.io/safe-to-evict` annotation. ([#449](https://github.com/giantswarm/nginx-ingress-controller-app/pull/449))
 - Params: Align to upstream. ([#452](https://github.com/giantswarm/nginx-ingress-controller-app/pull/452))
   - Params: Remove `controller.annotationsPrefix`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
@@ -26,7 +25,24 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
   - Params: Remove `controller.updateIngressStatus`.\
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
+
+## [2.30.0] - 2023-04-18
+
+Since we started working on aligning this chart to upstream as much as possible a while ago, this might be the last non-breaking release.
+
+We're currently working on releasing v3.0.0, including several breaking changes and requiring to re-install the chart.
+
+### Removed
+
+- Deployment/DaemonSet: Remove `cluster-autoscaler.kubernetes.io/safe-to-evict` annotation. ([#449](https://github.com/giantswarm/nginx-ingress-controller-app/pull/449))
 - Deployment/DaemonSet: Remove duplicate Prometheus annotations. ([#455](https://github.com/giantswarm/nginx-ingress-controller-app/pull/455))
+- Values: Remove `configmap` keys matching defaults. ([#457](https://github.com/giantswarm/nginx-ingress-controller-app/pull/457))
+  - Values: Remove `configmap.error-log-level`.
+  - Values: Remove `configmap.server-name-hash-bucket-size`.
+  - Values: Remove `configmap.worker-processes`.
+  - Values: Remove `configmap.worker-shutdown-timeout`.
+  - Values: Remove `configmap.use-forwarded-headers`.
+- Service: Remove deprecated & default annotations. ([#458](https://github.com/giantswarm/nginx-ingress-controller-app/pull/458))
 
 ## [2.29.0] - 2023-04-03
 
@@ -1056,7 +1072,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.29.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.30.0...HEAD
+[2.30.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.29.0...v2.30.0
 [2.29.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.28.0...v2.29.0
 [2.28.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.27.0...v2.28.0
 [2.27.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.26.0...v2.27.0
