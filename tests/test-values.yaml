@@ -11,3 +11,10 @@ controller:
       memory: 90Mi
   service:
     type: NodePort
+    nodePorts:
+      http: 30010
+      https: 30011
+    internal:
+      nodePorts:
+        http: 30012
+        https: 30013
