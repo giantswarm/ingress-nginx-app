@@ -19,6 +19,7 @@ spec:
   selector:
     matchLabels:
       {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: controller
   {{- if not .Values.controller.autoscaling.enabled }}
   replicas: {{ .Values.controller.replicaCount }}
   {{- end }}

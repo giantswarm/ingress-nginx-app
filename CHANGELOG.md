@@ -7,6 +7,25 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Helpers: Align labels to upstream. ([#450](https://github.com/giantswarm/nginx-ingress-controller-app/pull/450))
+- Values: Align CPU & memory requests to actual needs. ([#453](https://github.com/giantswarm/nginx-ingress-controller-app/pull/453))
+
+### Removed
+
+- Service: Remove `controller.service.suffix` & `controller.service.internal.suffix`. ([#448](https://github.com/giantswarm/nginx-ingress-controller-app/pull/448))\
+  **NOTE:** This is part of our alignment to upstream. There is no replacement for this key.
+- Params: Align to upstream. ([#452](https://github.com/giantswarm/nginx-ingress-controller-app/pull/452))
+  - Params: Remove `controller.annotationsPrefix`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
+  - Params: Remove `controller.defaultSSLCertificate`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
+  - Params: Remove `controller.enableSSLChainCompletion`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
+  - Params: Remove `controller.updateIngressStatus`.\
+    **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
+    
 ## [2.30.0] - 2023-04-18
 
 Since we started working on aligning this chart to upstream as much as possible a while ago, this might be the last non-breaking release.

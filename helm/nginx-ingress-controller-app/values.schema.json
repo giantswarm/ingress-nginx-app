@@ -224,9 +224,6 @@
                 "annotations": {
                     "type": "object"
                 },
-                "annotationsPrefix": {
-                    "type": "string"
-                },
                 "autoscaling": {
                     "type": "object",
                     "properties": {
@@ -290,9 +287,6 @@
                         }
                     }
                 },
-                "defaultSSLCertificate": {
-                    "type": "string"
-                },
                 "disableExternalNameForwarding": {
                     "type": "boolean"
                 },
@@ -306,9 +300,6 @@
                     "type": "string"
                 },
                 "enableMimalloc": {
-                    "type": "boolean"
-                },
-                "enableSSLChainCompletion": {
                     "type": "boolean"
                 },
                 "enableTopologyAwareRouting": {
@@ -795,9 +786,6 @@
                                 },
                                 "subdomain": {
                                     "type": "string"
-                                },
-                                "suffix": {
-                                    "type": "string"
                                 }
                             }
                         },
@@ -858,9 +846,6 @@
                         "subdomain": {
                             "type": "string"
                         },
-                        "suffix": {
-                            "type": "string"
-                        },
                         "targetPorts": {
                             "type": "object",
                             "properties": {
@@ -916,9 +901,6 @@
                             "type": "string"
                         }
                     }
-                },
-                "updateIngressStatus": {
-                    "type": "boolean"
                 },
                 "updateStrategy": {
                     "type": "object"

@@ -168,25 +168,6 @@ controller:
   #         key: FOO
   #         name: secret-resource
 
-  # The value for the "--annotations-prefix" flag given to the nginx-ingress-controller
-  # container.
-  annotationsPrefix: nginx.ingress.kubernetes.io
-
-  # The Secret referred to by this flag contains the default certificate to be
-  # used when accessing the catch-all server. If this flag is not provided NGINX
-  # will use a self-signed certificate.
-  # Example value: "default/foo-tls".
-  defaultSSLCertificate: ""
-
-  # Autocomplete SSL certificate chains with missing intermediate CA certificates.
-  # Certificates uploaded to Kubernetes must have the "Authority Information Access" X.509 v3 extension for this to succeed.
-  enableSSLChainCompletion: false
-
-  # Enables updating of the loadbalancer status of Ingress objects which this controller is reconciling. Unless you are
-  # managing DNS for ingresses via an external method, this should always be left enabled.
-  # Disabling updates of Ingress status allows two parallel NGINX IC deployments to reconcile the same Ingresses.
-  updateIngressStatus: true
-
   # Enable or disable forwarding to ExternalName Services through
   # --disable-svc-external-name flag
   disableExternalNameForwarding: true
@@ -356,15 +337,15 @@ controller:
     ##    cpu: 100m
     ##    memory: 90Mi
     requests:
-      cpu: 500m
-      memory: 600Mi
+      cpu: 250m
+      memory: 500Mi
   # Mutually exclusive with keda autoscaling
   autoscaling:
     enabled: true
     annotations: {}
     minReplicas: 2
     maxReplicas: 20
-    targetCPUUtilizationPercentage: 50
+    targetCPUUtilizationPercentage: 80
     targetMemoryUtilizationPercentage: 80
     behavior: {}
     # scaleDown:
@@ -439,13 +420,6 @@ controller:
     configMapKey: ""
   service:
     enabled: true
-
-    # controller.service.suffix
-    # Suffix to add to the LoadBalancer Service name. This is useful for
-    # OpenStack where cloud controller creates and references LBs by the name
-    # and the namespace of the Service.
-    suffix: ""
-
     # -- If enabled is adding an appProtocol option for Kubernetes service. An appProtocol field replacing annotations that were
     # using for setting a backend protocol. Here is an example for AWS: service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
     # It allows choosing the protocol for each backend specified in the Kubernetes service.
@@ -534,13 +508,6 @@ controller:
     internal:
       # -- Enables an additional internal load balancer (besides the external one).
       enabled: false
-
-      # controller.service.internal.suffix
-      # Suffix to add to the LoadBalancer Service name. This is useful for
-      # OpenStack where cloud controller creates and references LBs by the name
-      # and the namespace of the Service.
-      suffix: ""
-
       # -- Annotations are mandatory for the load balancer to come up. Varies with the cloud service.
       annotations: {}
       # loadBalancerIP: ""
