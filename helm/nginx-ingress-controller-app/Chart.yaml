@@ -13,4 +13,4 @@ kubeVersion: '>=1.20.0-0'
 name: nginx-ingress-controller-app
 sources:
   - https://github.com/kubernetes/ingress-nginx
-version: 2.29.0
+version: 2.30.0
