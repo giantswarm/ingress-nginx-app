@@ -17,6 +17,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Values: Remove `configmap.worker-processes`.
   - Values: Remove `configmap.worker-shutdown-timeout`.
   - Values: Remove `configmap.use-forwarded-headers`.
+- Service: Remove deprecated & default annotations. ([#458](https://github.com/giantswarm/nginx-ingress-controller-app/pull/458))
 
 ## [2.29.0] - 2023-04-03
 
