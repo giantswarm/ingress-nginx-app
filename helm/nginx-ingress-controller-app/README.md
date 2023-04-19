@@ -282,8 +282,8 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.service.internal.enabled | bool | `false` | Enables an additional internal load balancer (besides the external one). |
 | controller.service.internal.externalTrafficPolicy | string | `"Local"` |  |
 | controller.service.internal.loadBalancerSourceRanges | list | `[]` | Restrict access For LoadBalancer service. Defaults to 0.0.0.0/0. |
-| controller.service.internal.nodePorts.http | int | `30012` |  |
-| controller.service.internal.nodePorts.https | int | `30013` |  |
+| controller.service.internal.nodePorts.http | string | `""` |  |
+| controller.service.internal.nodePorts.https | string | `""` |  |
 | controller.service.internal.nodePorts.tcp | object | `{}` |  |
 | controller.service.internal.nodePorts.udp | object | `{}` |  |
 | controller.service.internal.subdomain | string | `"ingress-internal"` |  |
@@ -292,8 +292,8 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.service.labels | object | `{}` |  |
 | controller.service.loadBalancerIP | string | `""` | Used by cloud providers to connect the resulting `LoadBalancer` to a pre-existing static IP according to https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer |
 | controller.service.loadBalancerSourceRanges | list | `[]` |  |
-| controller.service.nodePorts.http | int | `30010` |  |
-| controller.service.nodePorts.https | int | `30011` |  |
+| controller.service.nodePorts.http | string | `""` |  |
+| controller.service.nodePorts.https | string | `""` |  |
 | controller.service.nodePorts.tcp | object | `{}` |  |
 | controller.service.nodePorts.udp | object | `{}` |  |
 | controller.service.ports.http | int | `80` |  |

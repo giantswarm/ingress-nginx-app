@@ -499,8 +499,8 @@ controller:
     ##   tcp:
     ##     8080: 32808
     nodePorts:
-      http: 30010
-      https: 30011
+      http: ""
+      https: ""
       tcp: {}
       udp: {}
     external:
@@ -530,8 +530,8 @@ controller:
       ##   tcp:
       ##     8080: 31808
       nodePorts:
-        http: 30012
-        https: 30013
+        http: ""
+        https: ""
         tcp: {}
         udp: {}
   # shareProcessNamespace enables process namespace sharing within the pod.

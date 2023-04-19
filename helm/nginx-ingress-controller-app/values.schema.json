@@ -771,10 +771,10 @@
                                     "type": "object",
                                     "properties": {
                                         "http": {
-                                            "type": "integer"
+                                            "type": ["string", "integer"]
                                         },
                                         "https": {
-                                            "type": "integer"
+                                            "type": ["string", "integer"]
                                         },
                                         "tcp": {
                                             "type": "object"
@@ -812,10 +812,10 @@
                             "type": "object",
                             "properties": {
                                 "http": {
-                                    "type": "integer"
+                                    "type": ["string", "integer"]
                                 },
                                 "https": {
-                                    "type": "integer"
+                                    "type": ["string", "integer"]
                                 },
                                 "tcp": {
                                     "type": "object"
