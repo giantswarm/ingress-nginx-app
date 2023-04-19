@@ -62,7 +62,4 @@
 - --{{ $key }}={{ $value }}
 {{- end }}
 {{- end }}
-{{- if .Values.controller.disableExternalNameForwarding }}
-- --disable-svc-external-name
-{{- end }}
 {{- end -}}
