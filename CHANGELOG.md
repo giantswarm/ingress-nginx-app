@@ -27,6 +27,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
     **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
 - Service: Remove default values for `controller.service.nodePorts` & `controller.service.internal.nodePorts`. ([#461](https://github.com/giantswarm/nginx-ingress-controller-app/pull/461))\
   **NOTE:** If you are running on our KVM product, please make sure to manually set those keys to their prior values.
+- Params: Remove `controller.disableExternalNameForwarding`. ([#462](https://github.com/giantswarm/nginx-ingress-controller-app/pull/462))\
+  **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
 
 ## [2.30.0] - 2023-04-18
 

@@ -168,10 +168,6 @@ controller:
   #         key: FOO
   #         name: secret-resource
 
-  # Enable or disable forwarding to ExternalName Services through
-  # --disable-svc-external-name flag
-  disableExternalNameForwarding: true
-
   # -- Use a `DaemonSet` or `Deployment`
   kind: Deployment
   # -- Annotations to be added to the controller Deployment or DaemonSet

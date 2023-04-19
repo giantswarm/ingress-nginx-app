@@ -287,9 +287,6 @@
                         }
                     }
                 },
-                "disableExternalNameForwarding": {
-                    "type": "boolean"
-                },
                 "dnsConfig": {
                     "type": "object"
                 },
