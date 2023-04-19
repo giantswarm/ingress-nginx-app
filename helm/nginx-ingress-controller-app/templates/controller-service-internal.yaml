@@ -15,7 +15,7 @@ metadata:
   {{- if eq .Values.controller.service.type "LoadBalancer" }}
   {{- if or (eq .Values.provider "aws") (eq .Values.provider "capa") }}
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
-    {{- if ne (index .Values.configmap "use-proxy-protocol") "false" }}
+    {{- if ne (index (merge .Values.controller.config .Values.configmap) "use-proxy-protocol") "false" }}
     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
     {{- end }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
