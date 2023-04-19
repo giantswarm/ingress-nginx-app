@@ -9,12 +9,7 @@
             "type": "object"
         },
         "configmap": {
-            "type": "object",
-            "properties": {
-                "hsts": {
-                    "type": "string"
-                }
-            }
+            "type": "object"
         },
         "controller": {
             "type": "object",

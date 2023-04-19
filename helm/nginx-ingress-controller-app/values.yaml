@@ -38,7 +38,10 @@ controller:
     http: 80
     https: 443
   # -- Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
-  config: {}
+  config:
+    # -- Enable HSTS or not. Disabled by default due to possible serious consequences.
+    # Ref: https://github.com/kubernetes/ingress-nginx/issues/549
+    hsts: "false"
   # -- Annotations to be added to the controller config configuration configmap.
   configAnnotations: {}
   # -- Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers
@@ -940,17 +943,8 @@ portNamePrefix: ""
 ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
 dhParam: ""
 
-# These values get applied directly to a configmap which configures the
-# nginx-ingress-controller
-# For all the nginx configmap config options see:
-# https://github.com/kubernetes/ingress-nginx/blob/main/docs/user-guide/nginx-configuration/configmap.md#configmaps
-configmap:
-
-  # configmap.hsts
-  # Enables or disables the HTTP Strict Transport Security (HSTS) header in
-  # servers running SSL.
-  # See https://github.com/kubernetes/ingress-nginx/issues/549#issuecomment-291894246
-  hsts: "false"
+# -- Deprecated, use `controller.config` instead.
+configmap: {}
 
 # Below are configuration values that you should not overwrite or set yourself.
 
