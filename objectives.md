@@ -1,8 +1,8 @@
-# NGINX Ingress Controller Service Level Objectives and Shared Responsibilities with Customers
+# Ingress NGINX Controller Service Level Objectives and Shared Responsibilities with Customers
 
 Last updated: 21. Oct 2020
 
-To supplement our [General Service Level Objectives](https://www.giantswarm.io/blog/the-radical-way-giant-swarm-handles-service-level-objectives), Giant Swarm and its customers have a shared objective to keep the NGINX Ingress Controller app up and running.
+To supplement our [General Service Level Objectives](https://www.giantswarm.io/blog/the-radical-way-giant-swarm-handles-service-level-objectives), Giant Swarm and its customers have a shared objective to keep the Ingress NGINX Controller app up and running.
 
 This doc clarifies what Giant Swarm and customer need to do in order to accomplish that.
 
@@ -16,7 +16,7 @@ In essence:
 **First, monitoring and alerting.**
 
 In production, we monitor and alert on these basic metrics:
-*   For each workload, when at least one nginx-ingress-controller pod was unavailable for more than 5 minutes. In addition, when the error budget’s burn rate
+*   For each workload, when at least one ingress-nginx pod was unavailable for more than 5 minutes. In addition, when the error budget’s burn rate
     *   Was in the last 10mins, higher than 1%
     *   Was in the last hour, higher than the max allowable rate
     *   Will run out in ~3 days
@@ -41,7 +41,7 @@ General Quality Assurance
     *   Platform Compatibility Testing, with latest platform releases across providers (AWS, CAPA, Azure and KVM)
     *   End-to-End smoke tests to make sure Ingress traffic gets routed when (1) installing a new app, and (2) upgrading an app
 
-Implementation details regarding performance tests and general quality assurance can be found in [performance test files](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/test/kat), [integration test files](https://github.com/giantswarm/nginx-ingress-controller-app/tree/main/integration) and [CircleCI configuration](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/.circleci/config.yml).
+Implementation details regarding performance tests and general quality assurance can be found in [performance test files](https://github.com/giantswarm/ingress-nginx-app/blob/main/test/kat), [integration test files](https://github.com/giantswarm/ingress-nginx-app/tree/main/integration) and [CircleCI configuration](https://github.com/giantswarm/ingress-nginx-app/blob/main/.circleci/config.yml).
 
 
 **Third, 30 day upgrade objective.**
@@ -62,7 +62,7 @@ As part of this we:
 *   We evaluate upstream changes and communicate to our best knowledge potential customer-impacting changes (e.g. configuration defaults changes, breaking features)
 *   Provide support through Solution Engineers, with migration paths and scripts, as well as guidance to mitigate breaking changes (where possible)
 
-The above applies only to the Optional NGINX Ingress Controller in AWS 10+, Azure 12+, and KVM 12.2.x+. (Preinstalled NGINX IC in legacy releases are supported on an as-needed basis.)
+The above applies only to the Optional Ingress NGINX Controller in AWS 10+, Azure 12+, and KVM 12.2.x+. (Preinstalled NGINX IC in legacy releases are supported on an as-needed basis.)
 
 ## Customer’s responsibility
 

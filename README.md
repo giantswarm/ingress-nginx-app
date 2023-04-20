@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/giantswarm/nginx-ingress-controller-app.svg?style=shield)](https://circleci.com/gh/giantswarm/nginx-ingress-controller-app)
+[![CircleCI](https://circleci.com/gh/giantswarm/ingress-nginx-app.svg?style=shield)](https://circleci.com/gh/giantswarm/ingress-nginx-app)
 
 -----
 
@@ -8,9 +8,9 @@ Read more in: [What is this repo?](#what-is-this-repo)
 
 ----
 
-# nginx Ingress Controller App
+# Ingress NGINX Controller
 
-This App installs the [nginx ingress controller] onto your workload cluster.
+This App installs the [Ingress NGINX Controller] onto your workload cluster.
 
 Its job is to satisfy external requests to services running in the cluster.
 See the [kubernetes ingress docs] for a higher level overview.
@@ -24,7 +24,7 @@ updates to the Ingress resource.
 
 **Table of Contents:**
 
-- [nginx Ingress Controller App](#nginx-ingress-controller-app)
+- [Ingress NGINX Controller](#ingress-nginx-controller)
 - [Installing](#installing)
   - [Sample values files for the web interface and API](#sample-values-files-for-the-web-interface-and-api)
   - [Sample App CR and ConfigMap for the management cluster](#sample-app-cr-and-configmap-for-the-management-cluster)
@@ -39,21 +39,21 @@ updates to the Ingress resource.
 
 ## Upgrading notes
 
-Version [v2.26.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/CHANGELOG.md#2260---2023-03-09) drops support for the following `values.yaml` keys:
+Version [v2.26.0](https://github.com/giantswarm/ingress-nginx-app/blob/main/CHANGELOG.md#2260---2023-03-09) drops support for the following `values.yaml` keys:
 
 - `controller.service.internal.labels`: Replaced by `controller.service.labels`.
 - `controller.service.internal.type`: Replaced by `controller.service.type`.
 - `controller.service.internal.ports.http`: Replaced by `controller.service.ports.http`.
 - `controller.service.internal.ports.https`: Replaced by `controller.service.ports.https`.
 
-In most deployments the replacement `values.yaml` keys are already defined and, in some cases, might not meet your requirements. Please check the [default values](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/helm/nginx-ingress-controller-app/values.yaml) included in the release you're upgrading to and those defined in your environment for these `values.yaml` keys to prevent any unintended changes to your deployment, especially the `Service` objects managed by this chart.
+In most deployments the replacement `values.yaml` keys are already defined and, in some cases, might not meet your requirements. Please check the [default values](https://github.com/giantswarm/ingress-nginx-app/blob/main/helm/ingress-nginx/values.yaml) included in the release you're upgrading to and those defined in your environment for these `values.yaml` keys to prevent any unintended changes to your deployment, especially the `Service` objects managed by this chart.
 
-Version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/CHANGELOG.md#220---2021-09-09) of the nginx Ingress Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
+Version [2.2.0](https://github.com/giantswarm/ingress-nginx-app/blob/main/CHANGELOG.md#220---2021-09-09) of the Ingress NGINX Controller app contains version [1.0.0](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v1.0.0)
 
 ### Prerequisites
 - kubernetes version >= 1.19
 - requires `networking.k8s.io/v1` (`extensions/v1beta1` or `networking.k8s.io/v1beta1` are no longer supported)
-- An IngressClass (One will be created when installing app version [2.2.0](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/CHANGELOG.md#220---2021-09-09))
+- An IngressClass (One will be created when installing app version [2.2.0](https://github.com/giantswarm/ingress-nginx-app/blob/main/CHANGELOG.md#220---2021-09-09))
 
 Additionally, you'll have to make sure your Ingress resources are using the `spec.IngressClassName` (or the deprecated `kubernetes.io/ingress.class` annotation) matching the name of your IngressClass (default `nginx`).
 
@@ -61,7 +61,7 @@ In case it is not possible to update all Ingress resources to specify the `spec.
 
 You can find more information in the upstream [migration to networking.k8s.io/v1 FAQ](https://github.com/kubernetes/ingress-nginx/blob/main/docs/index.md#faq---migration-to-apiversion-networkingk8siov1).
 
-If you are installing [multiple nginx ingress controllers](https://docs.giantswarm.io/advanced/ingress/multi-nginx-ic/)
+If you are installing [multiple Ingress NGINX Controllers](https://docs.giantswarm.io/advanced/ingress/multi-nginx-ic/)
 each needs to have a unique ingress class. You also need to use the values structure below.
 **Note:** This is a **breaking change** from older releases which used `controller.ingressClass`.
 
@@ -112,7 +112,7 @@ structure but formatted as JSON:
 If you have access to the Kubernetes API on the management cluster, you could create
 the App CR and ConfigMap directly.
 
-Here is an example that would install the nginx-ingress-controller-app to
+Here is an example that would install the ingress-nginx to
 workload cluster `abc12`:
 
 ```
@@ -121,21 +121,21 @@ apiVersion: application.giantswarm.io/v1alpha1
 kind: App
 metadata:
   labels:
-  name: nginx-ingress-controller-app
+  name: ingress-nginx
 
   # workload cluster resources live in a namespace with the same ID as the
   # workload cluster.
   namespace: abc12
 
 spec:
-  name: nginx-ingress-controller-app
+  name: ingress-nginx
   namespace: kube-system
   catalog: giantswarm
   version: 2.2.0
 
   userConfig:
     configMap:
-      name: nginx-ingress-controller-app-user-values
+      name: ingress-nginx-user-values
       namespace: abc12
 ```
 
@@ -146,7 +146,7 @@ apiVersion: v1
 kind: ConfigMap
 
 metadata:
-  name: nginx-ingress-controller-app-user-values
+  name: ingress-nginx-user-values
   namespace: abc12
 
 data:
@@ -160,7 +160,7 @@ you can also provide a secret. For this app we don't think there are any
 configuration values that need to be encrypted.
 
 It is a convention to call the user level configmap `{app-name}-user-values`.
-So in this case we called the ConfigMap `nginx-ingress-controller-app-user-values`
+So in this case we called the ConfigMap `ingress-nginx-user-values`
 
 If you place these files in a folder called `foldername`, you could use the
 command: `kubectl apply foldername`, to deploy this app to a workload cluster
@@ -172,7 +172,7 @@ See our [full reference page on how to configure applications](https://docs.gian
 
 #### Version 2.17 and above.
 
-Starting from version 2.17, the nginx-ingress-controller-app does not require the dedicated 
+Starting from version 2.17, the ingress-nginx does not require the dedicated
 `ingress-controller-values` ConfigMap. Instead, it can make use of the `<CLUSTER_NAME>-cluster-values`.
 
 When creating this App using our web interface or our API, `spec.config` will be set automatically, 
@@ -190,11 +190,11 @@ yourself you must remember to do this.
 
 ## Configuration Options
 
-All configuration options are documented in the [values.yaml](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/helm/nginx-ingress-controller-app/values.yaml) file.
+All configuration options are documented in the [values.yaml](https://github.com/giantswarm/ingress-nginx-app/blob/main/helm/ingress-nginx/values.yaml) file.
 
 ### Internal nginx IC options
 
-This chart contains a template for an additional [internal service](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/helm/nginx-ingress-controller-app/templates/controller-service-internal.yaml) to cover the use case of having separate internal and external ingress routes with a single nginx IC instance.
+This chart contains a template for an additional [internal service](https://github.com/giantswarm/ingress-nginx-app/blob/main/helm/ingress-nginx/templates/controller-service-internal.yaml) to cover the use case of having separate internal and external ingress routes with a single nginx IC instance.
 
 Valid configuration options are as follows:
 
@@ -204,7 +204,7 @@ This is the default behavior. No additional configuration required.
 
  **Make default service internal**
 
-This configures the [default service](https://github.com/giantswarm/nginx-ingress-controller-app/blob/main/helm/nginx-ingress-controller-app/templates/controller-service.yaml) to spawn an internal facing load balancer. This disables the external ingress.
+This configures the [default service](https://github.com/giantswarm/ingress-nginx-app/blob/main/helm/ingress-nginx/templates/controller-service.yaml) to spawn an internal facing load balancer. This disables the external ingress.
  ```yaml
 controller:
   service:
@@ -246,15 +246,15 @@ Not following these limitations will most likely result in a broken deployment.
 To install the chart locally:
 
 ```bash
-$ git clone https://github.com/giantswarm/nginx-ingress-controller-app.git
-$ cd nginx-ingress-controller-app
-$ helm install helm/nginx-ingress-controller-app
+$ git clone https://github.com/giantswarm/ingress-nginx-app.git
+$ cd ingress-nginx-app
+$ helm install helm/ingress-nginx
 ```
 
 Provide a custom `values.yaml`:
 
 ```bash
-$ helm install nginx-ingress-controller-app -f values.yaml
+$ helm install ingress-nginx -f values.yaml
 ```
 
 ### Release Process
@@ -275,12 +275,12 @@ It is available as an `App` in the `giantswarm-catalog` and `giantswarm-test-cat
 
 You will also find it in the `default-catalog` and the `default-test-catalog`,
 those catalogs are not visible in our web interface. This is to support the
-platforms and cluster versions where the nginx ingress controller is still a
+platforms and cluster versions where the Ingress NGINX Controller is still a
 default app (i.e. it gets installed automatically during cluster creation)
 
 [app-operator]: https://github.com/giantswarm/app-operator
 [giantswarm-catalog]: https://github.com/giantswarm/giantswarm-catalog
 [giantswarm-test-catalog]: https://github.com/giantswarm/giantswarm-test-catalog
-[nginx ingress controller]: https://github.com/kubernetes/ingress-nginx
+[Ingress NGINX Controller]: https://github.com/kubernetes/ingress-nginx
 [Giant Swarm App Platform]: https://docs.giantswarm.io/app-platform/overview/
 [Kubernetes Ingress docs]: https://kubernetes.io/docs/concepts/services-networking/ingress/

@@ -4,13 +4,13 @@ apiVersion: v2
 appVersion: 1.7.1
 description: Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 engine: gotpl
-home: https://github.com/giantswarm/nginx-ingress-controller-app
-icon: https://s.giantswarm.io/app-icons/nginx-ingress-controller/2/icon_dark.svg
+home: https://github.com/giantswarm/ingress-nginx-app
+icon: https://s.giantswarm.io/app-icons/ingress-nginx/2/icon_dark.svg
 keywords:
   - ingress
   - nginx
 kubeVersion: '>=1.20.0-0'
-name: nginx-ingress-controller-app
+name: ingress-nginx
 sources:
   - https://github.com/kubernetes/ingress-nginx
 version: 2.30.1

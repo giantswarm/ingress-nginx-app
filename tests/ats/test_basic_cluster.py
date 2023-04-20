@@ -14,7 +14,7 @@ from pytest_helm_charts.k8s.deployment import wait_for_deployments_to_run
 
 logger = logging.getLogger(__name__)
 
-app_name = "nginx-ingress-controller-app"
+app_name = "ingress-nginx"
 namespace_name = "kube-system"
 catalog_name = "chartmuseum"
 
