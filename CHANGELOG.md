@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Service: Align features from external service to internal one. ([#467](https://github.com/giantswarm/nginx-ingress-controller-app/pull/467))
+
 ### Changed
 
 - Helpers: Align labels to upstream. ([#450](https://github.com/giantswarm/nginx-ingress-controller-app/pull/450))
