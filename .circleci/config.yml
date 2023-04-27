@@ -41,62 +41,62 @@ workflows:
           requires:
             - push-to-giantswarm-app-catalog
 
-      - architect/push-to-app-collection:
-          name: push-to-cloud-director-app-collection
-          context: architect
-          app_catalog: giantswarm
-          app_name: ingress-nginx
-          app_namespace: kube-system
-          app_collection_repo: cloud-director-app-collection
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-          requires:
-            - push-to-giantswarm-app-catalog
+      # - architect/push-to-app-collection:
+      #     name: push-to-cloud-director-app-collection
+      #     context: architect
+      #     app_catalog: giantswarm
+      #     app_name: ingress-nginx
+      #     app_namespace: kube-system
+      #     app_collection_repo: cloud-director-app-collection
+      #     filters:
+      #       branches:
+      #         ignore: /.*/
+      #       tags:
+      #         only: /^v.*/
+      #     requires:
+      #       - push-to-giantswarm-app-catalog
 
-      - architect/push-to-app-collection:
-          name: push-to-capa-app-collection
-          context: architect
-          app_catalog: giantswarm
-          app_name: ingress-nginx
-          app_namespace: kube-system
-          app_collection_repo: capa-app-collection
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-          requires:
-            - push-to-giantswarm-app-catalog
+      # - architect/push-to-app-collection:
+      #     name: push-to-capa-app-collection
+      #     context: architect
+      #     app_catalog: giantswarm
+      #     app_name: ingress-nginx
+      #     app_namespace: kube-system
+      #     app_collection_repo: capa-app-collection
+      #     filters:
+      #       branches:
+      #         ignore: /.*/
+      #       tags:
+      #         only: /^v.*/
+      #     requires:
+      #       - push-to-giantswarm-app-catalog
 
-      - architect/push-to-app-collection:
-          name: push-to-gcp-app-collection
-          context: architect
-          app_catalog: giantswarm
-          app_name: ingress-nginx
-          app_namespace: kube-system
-          app_collection_repo: gcp-app-collection
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-          requires:
-            - push-to-giantswarm-app-catalog
+      # - architect/push-to-app-collection:
+      #     name: push-to-gcp-app-collection
+      #     context: architect
+      #     app_catalog: giantswarm
+      #     app_name: ingress-nginx
+      #     app_namespace: kube-system
+      #     app_collection_repo: gcp-app-collection
+      #     filters:
+      #       branches:
+      #         ignore: /.*/
+      #       tags:
+      #         only: /^v.*/
+      #     requires:
+      #       - push-to-giantswarm-app-catalog
 
-      - architect/push-to-app-collection:
-          name: push-to-vsphere-app-collection
-          context: architect
-          app_catalog: giantswarm
-          app_name: ingress-nginx
-          app_namespace: kube-system
-          app_collection_repo: vsphere-app-collection
-          filters:
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v.*/
-          requires:
-            - push-to-giantswarm-app-catalog
+      # - architect/push-to-app-collection:
+      #     name: push-to-vsphere-app-collection
+      #     context: architect
+      #     app_catalog: giantswarm
+      #     app_name: ingress-nginx
+      #     app_namespace: kube-system
+      #     app_collection_repo: vsphere-app-collection
+      #     filters:
+      #       branches:
+      #         ignore: /.*/
+      #       tags:
+      #         only: /^v.*/
+      #     requires:
+      #       - push-to-giantswarm-app-catalog
