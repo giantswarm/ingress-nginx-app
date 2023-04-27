@@ -731,11 +731,14 @@
                             }
                         },
                         "externalIPs": {
-                            "type": "array"
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         },
                         "externalTrafficPolicy": {
                             "type": "string",
-                            "enum": ["Cluster", "Local"]
+                            "enum": ["", "Cluster", "Local"]
                         },
                         "healthCheckNodePort": {
                             "type": "integer"
@@ -746,18 +749,43 @@
                                 "annotations": {
                                     "type": "object"
                                 },
+                                "appProtocol": {
+                                    "type": "boolean"
+                                },
+                                "clusterIP": {
+                                    "type": "string"
+                                },
                                 "enabled": {
                                     "type": "boolean"
                                 },
+                                "externalIPs": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
                                 "externalTrafficPolicy": {
                                     "type": "string",
-                                    "enum": ["Cluster", "Local"]
+                                    "enum": ["", "Cluster", "Local"]
+                                },
+                                "ipFamilies": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "ipFamilyPolicy": {
+                                    "type": "string",
+                                    "enum": ["SingleStack", "PreferDualStack", "RequireDualStack"]
                                 },
                                 "loadBalancerIP": {
                                     "type": "string"
                                 },
                                 "loadBalancerSourceRanges": {
-                                    "type": "array"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
                                 },
                                 "nodePorts": {
                                     "type": "object",
@@ -775,6 +803,10 @@
                                             "type": "object"
                                         }
                                     }
+                                },
+                                "sessionAffinity": {
+                                    "type": "string",
+                                    "enum": ["", "None", "ClientIP"]
                                 },
                                 "subdomain": {
                                     "type": "string"
@@ -798,7 +830,10 @@
                             "type": "string"
                         },
                         "loadBalancerSourceRanges": {
-                            "type": "array"
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
                         },
                         "nodePorts": {
                             "type": "object",
@@ -833,7 +868,7 @@
                         },
                         "sessionAffinity": {
                             "type": "string",
-                            "enum": ["None", "ClientIP"]
+                            "enum": ["", "None", "ClientIP"]
                         },
                         "subdomain": {
                             "type": "string"
