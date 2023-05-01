@@ -491,15 +491,15 @@ controller:
     enableHttps: true
 
     ports:
-      # -- Port the HTTP listener is published with.
+      # -- Port the external HTTP listener is published with.
       http: 80
-      # -- Port the HTTPS listener is published with.
+      # -- Port the external HTTPS listener is published with.
       https: 443
 
     targetPorts:
-      # -- Port of the ingress controller the HTTP listener is mapped to.
+      # -- Port of the ingress controller the external HTTP listener is mapped to.
       http: http
-      # -- Port of the ingress controller the HTTPS listener is mapped to.
+      # -- Port of the ingress controller the external HTTPS listener is mapped to.
       https: https
 
     # -- Declare the app protocol of the external HTTP and HTTPS listeners or not. Supersedes provider-specific annotations for declaring the backend protocol.
@@ -569,6 +569,22 @@ controller:
       # Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services
       ipFamilies:
         - IPv4
+
+      ports: {}
+        # -- Port the internal HTTP listener is published with.
+        # Defaults to the value of `controller.service.ports.http`.
+        # http: 80
+        # -- Port the internal HTTPS listener is published with.
+        # Defaults to the value of `controller.service.ports.https`.
+        # https: 443
+
+      targetPorts: {}
+        # -- Port of the ingress controller the internal HTTP listener is mapped to.
+        # Defaults to the value of `controller.service.targetPorts.http`.
+        # http: http
+        # -- Port of the ingress controller the internal HTTPS listener is mapped to.
+        # Defaults to the value of `controller.service.targetPorts.https`.
+        # https: https
 
       # -- Declare the app protocol of the internal HTTP and HTTPS listeners or not. Supersedes provider-specific annotations for declaring the backend protocol.
       # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol

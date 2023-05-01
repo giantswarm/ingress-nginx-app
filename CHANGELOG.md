@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - Service: Align features from external service to internal one. ([#467](https://github.com/giantswarm/nginx-ingress-controller-app/pull/467))
+- Service: Add `controller.service.internal.ports` & `controller.service.internal.targetPorts`. ([#469](https://github.com/giantswarm/nginx-ingress-controller-app/pull/469))
 
 ### Changed
 
