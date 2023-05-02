@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: other-ingress
+  namespace: default
+data:
+  values: |
+    provider: kind
+    nameOverride: other-ingress
+    controller:
+      replicaCount: 1
+      resources:
+        requests:
+          cpu: 50m
+          memory: 100Mi
+      autoscaling:
+        enabled: false
+      ingressClassResource:
+        name: other-ingress
+        controllerValue: k8s.io/other-ingress
+      service:
+        type: NodePort
+        nodePorts:
+          http: 30012
+          https: 30013
+---
+apiVersion: application.giantswarm.io/v1alpha1
+kind: App
+metadata:
+  name: other-ingress
+  namespace: default
+  labels:
+    app-operator.giantswarm.io/version: 0.0.0
+spec:
+  catalog: chartmuseum
+  name: ingress-nginx
+  version: 0.0.0
+  config:
+    configMap:
+      name: other-ingress
+      namespace: default
+  kubeConfig:
+    inCluster: true
+  namespace: other-ingress

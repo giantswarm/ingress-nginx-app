@@ -3,12 +3,11 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-[packages]
-pytest-helm-charts = "~=0.7.0"
-pytest = "~=6.2.5"
-pykube-ng = "~=21.3.0"
-pytest-rerunfailures = "~=10.1"
-requests = "~=2.26.0"
-
 [requires]
 python_version = "3.9"
+
+[packages]
+pykube-ng = "~=22.9"
+pytest = "~=6.2"
+pytest-helm-charts = "~=0.7"
+requests = "~=2.29"
