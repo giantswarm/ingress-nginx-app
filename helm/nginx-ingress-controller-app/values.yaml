@@ -530,7 +530,7 @@ controller:
       # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
       annotations: {}
 
-      # -- Defines the sub-domain prepended to the base domain in the FQDN of the external controller service reconciled by ExternalDNS.
+      # -- Defines the sub-domain prepended to the base domain in the FQDN of the internal controller service reconciled by ExternalDNS.
       subdomain: ingress-internal
 
       # -- Pre-defined cluster internal IP address of the internal controller service. Take care of collisions with existing services.
