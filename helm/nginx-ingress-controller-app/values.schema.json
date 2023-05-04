@@ -804,12 +804,18 @@
                                         }
                                     }
                                 },
+                                "ports": {
+                                    "type": "object"
+                                },
                                 "sessionAffinity": {
                                     "type": "string",
                                     "enum": ["", "None", "ClientIP"]
                                 },
                                 "subdomain": {
                                     "type": "string"
+                                },
+                                "targetPorts": {
+                                    "type": "object"
                                 }
                             }
                         },
