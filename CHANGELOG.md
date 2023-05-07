@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Image: Update to [`v1.7.1`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.7.1.md). ([#473](https://github.com/giantswarm/nginx-ingress-controller-app/pull/473))
+
 ## [2.30.0] - 2023-04-18
 
 Since we started working on aligning this chart to upstream as much as possible a while ago, this might be the last non-breaking release.
