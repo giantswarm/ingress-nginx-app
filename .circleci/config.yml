@@ -13,6 +13,7 @@ workflows:
           app_catalog_test: "giantswarm-test-catalog"
           chart: "nginx-ingress-controller-app"
           executor: "app-build-suite"
+          explicit_allow_chart_name_mismatch: true
           persist_chart_archive: true
           filters:
             # Trigger the job also on git tag.
@@ -27,6 +28,7 @@ workflows:
           app_catalog_test: "control-plane-test-catalog"
           chart: "nginx-ingress-controller-app"
           executor: "app-build-suite"
+          explicit_allow_chart_name_mismatch: true
           persist_chart_archive: false
           filters:
             # Trigger the job also on git tag.
