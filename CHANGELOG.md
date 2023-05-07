@@ -37,6 +37,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Params: Remove `controller.disableExternalNameForwarding`. ([#462](https://github.com/giantswarm/nginx-ingress-controller-app/pull/462))\
   **NOTE:** This is part of our alignment to upstream. Use `controller.extraArgs` instead.
 
+## [2.30.1] - 2023-05-07
+
+### Changed
+
+- Image: Update to [`v1.7.1`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.7.1.md). ([#473](https://github.com/giantswarm/nginx-ingress-controller-app/pull/473))
+
 ## [2.30.0] - 2023-04-18
 
 Since we started working on aligning this chart to upstream as much as possible a while ago, this might be the last non-breaking release.
@@ -1083,7 +1089,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.30.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.30.1...HEAD
+[2.30.1]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.30.0...v2.30.1
 [2.30.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.29.0...v2.30.0
 [2.29.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.28.0...v2.29.0
 [2.28.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.27.0...v2.28.0
