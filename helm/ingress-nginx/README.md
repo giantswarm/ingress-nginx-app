@@ -1,4 +1,4 @@
-# nginx-ingress-controller-app
+# ingress-nginx
 
 [ingress-nginx](https://github.com/giantswarm/ingress-nginx-app) Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 
