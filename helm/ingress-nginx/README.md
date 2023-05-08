@@ -36,7 +36,7 @@ else it would make it impossible to evacuate a node. See [gh issue #7127](https:
 
 ### Prometheus Metrics
 
-The Nginx ingress controller can export Prometheus metrics, by setting `controller.metrics.enabled` to `true`.
+The Ingress-Nginx Controller can export Prometheus metrics, by setting `controller.metrics.enabled` to `true`.
 
 You can add Prometheus annotations to the metrics service using `controller.metrics.service.annotations`.
 Alternatively, if you use the Prometheus Operator, you can enable ServiceMonitor creation using `controller.metrics.serviceMonitor.enabled`. And set `controller.metrics.serviceMonitor.additionalLabels.release="prometheus"`. "release=prometheus" should match the label configured in the prometheus servicemonitor ( see `kubectl get servicemonitor prometheus-kube-prom-prometheus -oyaml -n prometheus`)
@@ -80,13 +80,13 @@ Optionally you can set `controller.service.loadBalancerIP` if you need a static 
 
 ### Ingress Admission Webhooks
 
-The nginx ingress controller pod exposes an endpoint that will integrate with the `validatingwebhookconfiguration` Kubernetes feature to prevent bad ingress from being added to the cluster.
+The Ingress-Nginx Controller pod exposes an endpoint that will integrate with the `validatingwebhookconfiguration` Kubernetes feature to prevent bad ingress from being added to the cluster.
 
 #### How the Chart Configures the Hooks
 A validating and configuration requires the endpoint to which the request is sent to use TLS. It is possible to set up custom certificates to do this, but in most cases, a self-signed certificate is enough. The setup of this component requires some more complex orchestration when using helm. The steps are created to be idempotent and to allow turning the feature on and off without running into helm quirks.
 
 1. A pre-install hook provisions a certificate into the same namespace using a format compatible with provisioning using end user certificates. If the certificate already exists, the hook exits.
-2. The ingress nginx controller pod is configured to use a TLS proxy container, which will load that certificate.
+2. The Ingress-Nginx Controller pod is configured to use a TLS proxy container, which will load that certificate.
 3. Validating and Mutating webhook configurations are created in the cluster.
 4. A post-install hook reads the CA from the secret created by step 1 and patches the Validating and Mutating webhook configurations. This process will allow a custom CA provisioned by some other process to also be patched into the webhook configurations. The chosen failure policy is also patched into the webhook configurations
 
@@ -166,14 +166,14 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.enableMimalloc | bool | `true` | Enable mimalloc as a drop-in replacement for malloc. # ref: https://github.com/microsoft/mimalloc # |
 | controller.enableTopologyAwareRouting | bool | `false` | This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-aware-hints="auto" Defaults to false |
 | controller.existingPsp | string | `""` | Use an existing PSP instead of creating one |
-| controller.extraArgs | object | `{}` | Additional command line arguments to pass to nginx-ingress-controller E.g. to specify the default SSL certificate you can use |
+| controller.extraArgs | object | `{}` | Additional command line arguments to pass to Ingress-Nginx Controller E.g. to specify the default SSL certificate you can use |
 | controller.extraContainers | list | `[]` | Additional containers to be added to the controller pod. See https://github.com/lemonldap-ng-controller/lemonldap-ng-controller as example. |
 | controller.extraEnvs | list | `[]` | Additional environment variables to set |
 | controller.extraInitContainers | list | `[]` | Containers, which are run before the app containers are started. |
 | controller.extraModules | list | `[]` | Modules, which are mounted into the core nginx image. See values.yaml for a sample to add opentelemetry module |
 | controller.extraVolumeMounts | list | `[]` | Additional volumeMounts to the controller main container. |
 | controller.extraVolumes | list | `[]` | Additional volumes to the controller pod. |
-| controller.healthCheckHost | string | `""` | Address to bind the health check endpoint. It is better to set this option to the internal node address if the ingress nginx controller is running in the `hostNetwork: true` mode. |
+| controller.healthCheckHost | string | `""` | Address to bind the health check endpoint. It is better to set this option to the internal node address if the Ingress-Nginx Controller is running in the `hostNetwork: true` mode. |
 | controller.healthCheckPath | string | `"/healthz"` | Path of the health check endpoint. All requests received on the port defined by the healthz-port parameter are forwarded internally to this path. |
 | controller.hostNetwork | bool | `false` | Required for use with CNI based kubernetes installations (such as ones set up by kubeadm), since CNI and hostport don't mix yet. Can be deprecated once https://github.com/kubernetes/kubernetes/issues/23920 is merged |
 | controller.hostPort.enabled | bool | `false` | Enable 'hostPort' or not |
@@ -262,7 +262,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.readinessProbe.successThreshold | int | `1` |  |
 | controller.readinessProbe.timeoutSeconds | int | `1` |  |
 | controller.replicaCount | int | `2` |  |
-| controller.reportNodeInternalIp | bool | `false` | Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network Ingress status was blank because there is no Service exposing the NGINX Ingress controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply |
+| controller.reportNodeInternalIp | bool | `false` | Bare-metal considerations via the host network https://kubernetes.github.io/ingress-nginx/deploy/baremetal/#via-the-host-network Ingress status was blank because there is no Service exposing the Ingress-Nginx Controller in a configuration using the host network, the default --publish-service flag used in standard cloud setups does not apply |
 | controller.resources.requests.cpu | string | `"250m"` |  |
 | controller.resources.requests.memory | string | `"500Mi"` |  |
 | controller.scope.enabled | bool | `false` | Enable 'scope' or not |
