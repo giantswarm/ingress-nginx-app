@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [3.0.0-alpha1] - 2023-05-09
+
 ### Added
 
 - Service: Align features from external service to internal one. ([#467](https://github.com/giantswarm/ingress-nginx-app/pull/467))
@@ -1090,7 +1092,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.1...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0-alpha1...HEAD
+[3.0.0-alpha1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.1...v3.0.0-alpha1
 [2.30.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.0...v2.30.1
 [2.30.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.29.0...v2.30.0
 [2.29.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.28.0...v2.29.0
