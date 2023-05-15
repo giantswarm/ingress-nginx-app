@@ -138,7 +138,7 @@ To disable this behavior, it is still possible to set `controller.config.use-pro
 
 ## Migration from `nginx-ingress-controller-app`
 
-TODO
+Please see our [migration guide](https://github.com/giantswarm/ingress-nginx-app/blob/main/migration.md) if you want to update your `nginx-ingress-controller-app` deployment to the new `ingress-nginx` chart.
 
 ## Development
 
