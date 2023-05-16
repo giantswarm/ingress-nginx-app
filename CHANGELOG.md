@@ -317,6 +317,12 @@ We're currently working on releasing v3.0.0, including several breaking changes 
 
 - Align to upstream: Allow configuring the default backend.
 
+## [2.22.2] - 2023-05-16
+
+### Changed
+
+- Jobs: Remove image digest.
+
 ## [2.22.1] - 2023-01-18
 
 ### Added
@@ -1119,7 +1125,8 @@ Previous versions changelog can be found [here](https://github.com/giantswarm/ku
 [2.24.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.24.0...v2.24.1
 [2.24.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.23.1...v2.24.0
 [2.23.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.23.0...v2.23.1
-[2.23.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.1...v2.23.0
+[2.23.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.2...v2.23.0
+[2.22.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.1...v2.22.2
 [2.22.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.0...v2.22.1
 [2.22.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.21.1...v2.22.0
 [2.21.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.21.0...v2.21.1
