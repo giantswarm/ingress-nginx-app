@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+- Jobs: Remove image digest. ([#485](https://github.com/giantswarm/nginx-ingress-controller-app/pull/485))
+
 ## [2.21.0] - 2023-01-02
 
 ### Added
