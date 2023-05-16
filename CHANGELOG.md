@@ -305,6 +305,12 @@ We're currently working on releasing v3.0.0, including several breaking changes 
 
 - Change `PodDisruptionBudget` to move from `maxUnavailable: 1` to `maxUnavailable: 25%` for better scaling
 
+## [2.23.2] - 2023-05-16
+
+### Changed
+
+- Jobs: Remove image digest.
+
 ## [2.23.1] - 2023-02-10
 
 ### Fixed
@@ -1123,7 +1129,8 @@ Previous versions changelog can be found [here](https://github.com/giantswarm/ku
 [2.25.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.25.0...v2.25.1
 [2.25.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.24.1...v2.25.0
 [2.24.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.24.0...v2.24.1
-[2.24.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.23.1...v2.24.0
+[2.24.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.23.2...v2.24.0
+[2.23.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.23.1...v2.23.2
 [2.23.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.23.0...v2.23.1
 [2.23.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.2...v2.23.0
 [2.22.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.1...v2.22.2
