@@ -356,6 +356,10 @@ We're currently working on releasing v3.0.0, including several breaking changes 
   - Service: Rename from `-monitoring` to `-metrics`.
   - Service: Align indention of `ports`.
 
+## [2.21.1] - 2023-05-16
+
+- Jobs: Remove image digest. ([#485](https://github.com/giantswarm/nginx-ingress-controller-app/pull/485))
+
 ## [2.21.0] - 2023-01-02
 
 ### Added
@@ -1117,7 +1121,8 @@ Previous versions changelog can be found [here](https://github.com/giantswarm/ku
 [2.23.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.23.0...v2.23.1
 [2.23.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.1...v2.23.0
 [2.22.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.0...v2.22.1
-[2.22.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.21.0...v2.22.0
+[2.22.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.21.1...v2.22.0
+[2.21.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.21.0...v2.21.1
 [2.21.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.20.1...v2.21.0
 [2.20.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.20.0...v2.20.1
 [2.20.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.19.0...v2.20.0
