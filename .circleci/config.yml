@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  architect: giantswarm/architect@4.25.0
+  architect: giantswarm/architect@4.29.0
 
 workflows:
   version: 2
@@ -12,6 +12,7 @@ workflows:
           app_catalog: "giantswarm-catalog"
           app_catalog_test: "giantswarm-test-catalog"
           chart: "nginx-ingress-controller-app"
+          explicit_allow_chart_name_mismatch: true
           executor: "app-build-suite"
           persist_chart_archive: true
           filters:
@@ -26,6 +27,7 @@ workflows:
           app_catalog: "control-plane-catalog"
           app_catalog_test: "control-plane-test-catalog"
           chart: "nginx-ingress-controller-app"
+          explicit_allow_chart_name_mismatch: true
           executor: "app-build-suite"
           persist_chart_archive: false
           filters:
@@ -50,7 +52,7 @@ workflows:
               only: /^v.*/
 
       - architect/run-tests-with-ats:
-          name: execute chart tests
+          name: run-tests-with-ats
           filters:
             # Do not trigger the job on merge to main.
             branches:
