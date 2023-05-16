@@ -423,6 +423,12 @@ We're currently working on releasing v3.0.0, including several breaking changes 
   - RBAC: Reorder & indent `PodSecurityPolicy`.
   - RBAC: Align `PodSecurityPolicy` to upstream.
 
+## [2.20.1] - 2023-05-16
+
+### Changed
+
+- Jobs: Remove image digest. ([#482](https://github.com/giantswarm/nginx-ingress-controller-app/pull/482))
+
 ## [2.20.0] - 2022-11-02
 
 ### Added
@@ -1112,7 +1118,8 @@ Previous versions changelog can be found [here](https://github.com/giantswarm/ku
 [2.23.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.1...v2.23.0
 [2.22.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.22.0...v2.22.1
 [2.22.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.21.0...v2.22.0
-[2.21.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.20.0...v2.21.0
+[2.21.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.20.1...v2.21.0
+[2.20.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.20.0...v2.20.1
 [2.20.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.19.0...v2.20.0
 [2.19.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.18.2...v2.19.0
 [2.18.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.18.1...v2.18.2
