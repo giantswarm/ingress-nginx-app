@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Jobs: Remove image digest.
+
 ## [2.22.1] - 2023-01-18
 
 ### Added
