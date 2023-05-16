@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [2.21.1] - 2023-05-16
+
 - Jobs: Remove image digest. ([#485](https://github.com/giantswarm/nginx-ingress-controller-app/pull/485))
 
 ## [2.21.0] - 2023-01-02
@@ -749,7 +751,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.21.0...HEAD
+[Unreleased]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.21.1...HEAD
+[2.21.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.21.0...v2.21.1
 [2.21.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.20.0...v2.21.0
 [2.20.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.19.0...v2.20.0
 [2.19.0]: https://github.com/giantswarm/nginx-ingress-controller-app/compare/v2.18.2...v2.19.0
