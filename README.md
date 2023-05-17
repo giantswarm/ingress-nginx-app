@@ -6,7 +6,7 @@ This app installs the [Ingress NGINX Controller](https://github.com/kubernetes/i
 
 Its job is to satisfy external requests to services running in the cluster. See the [Kubernetes Ingress documentation](https://kubernetes.io/docs/concepts/services-networking/ingress) for a higher level overview.
 
-**Table of Contents**
+## Table of Contents
 
 - [Ingress NGINX Controller](#ingress-nginx-controller)
 - [Prerequisites](#prerequisites)
