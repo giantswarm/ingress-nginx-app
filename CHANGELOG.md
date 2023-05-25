@@ -11,6 +11,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - PDB: Add `controller.annotations`. ([#481](https://github.com/giantswarm/ingress-nginx-app/pull/481))
 
+### Changed
+
+- PDB: Improve checks. ([#487](https://github.com/giantswarm/ingress-nginx-app/pull/487))
+
 ## [3.0.0-alpha1] - 2023-05-09
 
 ### Added

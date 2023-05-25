@@ -216,7 +216,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.livenessProbe.periodSeconds | int | `10` |  |
 | controller.livenessProbe.successThreshold | int | `1` |  |
 | controller.livenessProbe.timeoutSeconds | int | `1` |  |
-| controller.maxUnavailable | string | `"25%"` | Define either 'minAvailable' or 'maxUnavailable', never both. |
+| controller.maxUnavailable | string | `"25%"` | Maximum unavalaile pods set in PodDisruptionBudget. If set, 'minAvailable' is ignored. |
 | controller.maxmindLicenseKey | string | `""` | Maxmind license key to download GeoLite2 Databases. # https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases |
 | controller.metrics.enabled | bool | `true` |  |
 | controller.metrics.port | int | `10254` |  |
