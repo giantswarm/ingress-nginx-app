@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Added
 
 - PDB: Add `controller.annotations`. ([#481](https://github.com/giantswarm/ingress-nginx-app/pull/481))
+- Images: Update OpenTelemetry & kube-webhook-certgen image. ([#488](https://github.com/giantswarm/ingress-nginx-app/pull/488))
 
 ### Changed
 
