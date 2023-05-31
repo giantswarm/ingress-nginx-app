@@ -15,6 +15,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - PDB: Improve checks. ([#487](https://github.com/giantswarm/ingress-nginx-app/pull/487))
+- Image: Update to [`v1.8.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.0.md). ([#489](https://github.com/giantswarm/ingress-nginx-app/pull/489))
 
 ## [3.0.0-alpha1] - 2023-05-09
 

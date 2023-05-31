@@ -2,7 +2,7 @@
 
 [ingress-nginx](https://github.com/giantswarm/ingress-nginx-app) Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 
-![Version: 3.0.0-alpha1](https://img.shields.io/badge/Version-3.0.0--alpha1-informational?style=flat-square) ![AppVersion: 1.7.1](https://img.shields.io/badge/AppVersion-1.7.1-informational?style=flat-square)
+![Version: 3.0.0-alpha1](https://img.shields.io/badge/Version-3.0.0--alpha1-informational?style=flat-square) ![AppVersion: 1.8.0](https://img.shields.io/badge/AppVersion-1.8.0-informational?style=flat-square)
 
 To use, add `ingressClassName: nginx` spec field or the `kubernetes.io/ingress.class: nginx` annotation to your Ingress resources.
 
@@ -187,7 +187,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.image.image | string | `"giantswarm/ingress-nginx-controller"` |  |
 | controller.image.pullPolicy | string | `"IfNotPresent"` |  |
 | controller.image.runAsUser | int | `101` |  |
-| controller.image.tag | string | `"v1.7.1"` |  |
+| controller.image.tag | string | `"v1.8.0"` |  |
 | controller.ingressClass | string | `"nginx"` | For backwards compatibility with ingress.class annotation, use ingressClass. Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation |
 | controller.ingressClassByName | bool | `false` | Process IngressClass per name (additionally as per spec.controller). |
 | controller.ingressClassResource.controllerValue | string | `"k8s.io/ingress-nginx"` | Controller-value of the controller that is processing this ingressClass |
