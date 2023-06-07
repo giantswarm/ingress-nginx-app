@@ -23,6 +23,9 @@ data:
         nodePorts:
           http: 30012
           https: 30013
+      metrics:
+        serviceMonitor:
+          enabled: false
 ---
 apiVersion: application.giantswarm.io/v1alpha1
 kind: App
