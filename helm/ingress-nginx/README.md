@@ -231,8 +231,10 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.metrics.service.servicePort | int | `10254` |  |
 | controller.metrics.service.type | string | `"ClusterIP"` |  |
 | controller.metrics.serviceMonitor.additionalLabels | object | `{}` |  |
-| controller.metrics.serviceMonitor.enabled | bool | `false` |  |
-| controller.metrics.serviceMonitor.metricRelabelings | list | `[]` |  |
+| controller.metrics.serviceMonitor.enabled | bool | `true` |  |
+| controller.metrics.serviceMonitor.metricRelabelings[0].action | string | `"drop"` |  |
+| controller.metrics.serviceMonitor.metricRelabelings[0].regex | string | `"nginx_ingress_controller_(bytes_sent_bucket|request_size_bucket|response_duration_seconds_bucket|response_size_bucket|request_duration_seconds_count|connect_duration_seconds_bucket|header_duration_seconds_bucket|bytes_sent_count|request_duration_seconds_sum|bytes_sent_sum|request_size_count|response_size_count|response_duration_seconds_sum|response_duration_seconds_count|ingress_upstream_latency_seconds|ingress_upstream_latency_seconds_sum|ingress_upstream_latency_seconds_count)"` |  |
+| controller.metrics.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | controller.metrics.serviceMonitor.namespace | string | `""` |  |
 | controller.metrics.serviceMonitor.namespaceSelector | object | `{}` |  |
 | controller.metrics.serviceMonitor.relabelings | list | `[]` |  |
