@@ -20,6 +20,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Image: Update to [`v1.8.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.0.md). ([#489](https://github.com/giantswarm/ingress-nginx-app/pull/489))
 - HPA: Partially revert [#465](https://github.com/giantswarm/ingress-nginx-app/pull/465). ([#493](https://github.com/giantswarm/ingress-nginx-app/pull/493))
 - Metrics: Use `ServiceMonitor`. ([#494](https://github.com/giantswarm/ingress-nginx-app/pull/494))
+- Tests: Update dependencies. ([#499](https://github.com/giantswarm/ingress-nginx-app/pull/499))
 
 ## [3.0.0-alpha1] - 2023-05-09
 
