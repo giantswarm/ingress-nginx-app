@@ -7,7 +7,7 @@ verify_ssl = true
 python_version = "3.9"
 
 [packages]
-pykube-ng = "~=22.9"
-pytest = "~=6.2"
-pytest-helm-charts = "~=0.7"
-requests = "~=2.29"
+pykube-ng = "~=22.9.0"
+pytest = "~=7.4.0"
+pytest-helm-charts = "~=1.1.1"
+requests = "~=2.31.0"

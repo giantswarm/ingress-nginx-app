@@ -52,7 +52,7 @@ def test_ingress(request, kube_cluster: Cluster, deployments: List[Deployment]):
 @pytest.mark.functional
 def test_other_ingress(request, kube_cluster: Cluster, deployments: List[Deployment], chart_version):
     kube_cluster.kubectl("apply", filename = Path(request.fspath.dirname) / "manifests" / "other-ingress.yaml")
-    kube_cluster.kubectl("patch app other-ingress", type = "merge", patch = json.dumps({ "spec": { "version": chart_version } }))
+    kube_cluster.kubectl("patch app other-ingress", namespace = "other-ingress", type = "merge", patch = json.dumps({ "spec": { "version": chart_version } }))
     kube_cluster.kubectl("apply", filename = Path(request.fspath.dirname) / "manifests" / "hello-world.yaml")
     kube_cluster.kubectl("apply", filename = Path(request.fspath.dirname) / "manifests" / "ciao-world.yaml")
 
