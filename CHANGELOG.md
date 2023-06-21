@@ -380,7 +380,7 @@ We're currently working on releasing v3.0.0, including several breaking changes 
 
 ## [2.21.1] - 2023-05-16
 
-- Jobs: Remove image digest. ([#485](https://github.com/giantswarm/nginx-ingress-controller-app/pull/485))
+- Jobs: Remove image digest. ([#485](https://github.com/giantswarm/ingress-nginx-app/pull/485))
 
 ## [2.21.0] - 2023-01-02
 
@@ -453,7 +453,7 @@ We're currently working on releasing v3.0.0, including several breaking changes 
 
 ### Changed
 
-- Jobs: Remove image digest. ([#482](https://github.com/giantswarm/nginx-ingress-controller-app/pull/482))
+- Jobs: Remove image digest. ([#482](https://github.com/giantswarm/ingress-nginx-app/pull/482))
 
 ## [2.20.0] - 2022-11-02
 
