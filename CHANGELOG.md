@@ -13,6 +13,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Images: Update OpenTelemetry & kube-webhook-certgen image. ([#488](https://github.com/giantswarm/ingress-nginx-app/pull/488))
 - KEDA: Add `fallback`. ([#497](https://github.com/giantswarm/ingress-nginx-app/pull/497))
 - OpenTelemetry: Add distroless `init_module`. ([#498](https://github.com/giantswarm/ingress-nginx-app/pull/498))
+- Chart: Add logo. ([#502](https://github.com/giantswarm/ingress-nginx-app/pull/502))
 
 ### Changed
 
