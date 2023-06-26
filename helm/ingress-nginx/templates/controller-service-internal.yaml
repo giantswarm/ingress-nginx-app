@@ -47,6 +47,9 @@ spec:
 {{- if .Values.controller.service.internal.loadBalancerSourceRanges }}
   loadBalancerSourceRanges: {{ toYaml .Values.controller.service.internal.loadBalancerSourceRanges | nindent 4 }}
 {{- end }}
+{{- if .Values.controller.service.internal.loadBalancerClass }}
+  loadBalancerClass: {{ toYaml .Values.controller.service.internal.loadBalancerClass }}
+{{- end }}
 {{- if .Values.controller.service.internal.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.controller.service.internal.externalTrafficPolicy }}
 {{- end }}

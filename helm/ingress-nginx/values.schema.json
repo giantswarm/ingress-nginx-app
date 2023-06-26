@@ -778,6 +778,9 @@
                                     "type": "string",
                                     "enum": ["SingleStack", "PreferDualStack", "RequireDualStack"]
                                 },
+                                "loadBalancerClass": {
+                                    "type": "string"
+                                },
                                 "loadBalancerIP": {
                                     "type": "string"
                                 },
@@ -831,6 +834,9 @@
                         },
                         "labels": {
                             "type": "object"
+                        },
+                        "loadBalancerClass": {
+                            "type": "string"
                         },
                         "loadBalancerIP": {
                             "type": "string"
