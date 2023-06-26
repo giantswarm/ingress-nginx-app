@@ -14,6 +14,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - KEDA: Add `fallback`. ([#497](https://github.com/giantswarm/ingress-nginx-app/pull/497))
 - OpenTelemetry: Add distroless `init_module`. ([#498](https://github.com/giantswarm/ingress-nginx-app/pull/498))
 - Chart: Add logo. ([#502](https://github.com/giantswarm/ingress-nginx-app/pull/502))
+- Service: Add `controller.service.loadBalancerClass`. ([#503](https://github.com/giantswarm/ingress-nginx-app/pull/503))\
+  **NOTE:** The load balancer class of existing services can not be changed. The app deployment might fail when defining this for already installed app instances.
 
 ### Changed
 
