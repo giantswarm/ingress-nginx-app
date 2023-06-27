@@ -12,6 +12,3 @@ controller:
     nodePorts:
       http: 30010
       https: 30011
-  metrics:
-    serviceMonitor:
-      enabled: false

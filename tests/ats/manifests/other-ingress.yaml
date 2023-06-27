@@ -1,8 +1,13 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Namespace
 metadata:
   name: other-ingress
-  namespace: default
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: other-ingress-user-config
+  namespace: other-ingress
 data:
   values: |
     provider: kind
@@ -23,15 +28,12 @@ data:
         nodePorts:
           http: 30012
           https: 30013
-      metrics:
-        serviceMonitor:
-          enabled: false
 ---
 apiVersion: application.giantswarm.io/v1alpha1
 kind: App
 metadata:
   name: other-ingress
-  namespace: default
+  namespace: other-ingress
   labels:
     app-operator.giantswarm.io/version: 0.0.0
 spec:
@@ -40,8 +42,8 @@ spec:
   version: 0.0.0
   config:
     configMap:
-      name: other-ingress
-      namespace: default
+      name: other-ingress-user-config
+      namespace: other-ingress
   kubeConfig:
     inCluster: true
   namespace: other-ingress
