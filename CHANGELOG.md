@@ -7,6 +7,20 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [3.0.0-beta1] - 2023-07-13
+
+This is the first public beta release of our new `ingress-nginx` chart.
+
+Even though we put a lot of effort into testing every change, we do not recommend you that you install this release in a production environment.
+
+If you are currently using `v2.x.x`, this release includes breaking changes from [`v3.0.0-alpha1`](https://github.com/giantswarm/ingress-nginx-app/releases/tag/v3.0.0-alpha1). We set up a [migration guide](https://github.com/giantswarm/ingress-nginx-app/blob/v3.0.0-beta1/migration.md) to make the upgrade as smooth as possible.
+
+All feedback regarding this release, its changes, or our [migration guide](https://github.com/giantswarm/ingress-nginx-app/blob/v3.0.0-beta1/migration.md) is very welcome!
+
+The stable release `v3.0.0` will be cut as soon as all possible bugs have been fixed and improvements have been implemented.
+
+Please also take care of the changelog of [`v3.0.0-alpha1`](https://github.com/giantswarm/ingress-nginx-app/releases/tag/v3.0.0-alpha1) as those changes are not explicitly included here.
+
 ### Added
 
 - PDB: Add `controller.annotations`. ([#481](https://github.com/giantswarm/ingress-nginx-app/pull/481))
@@ -1132,7 +1146,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0-alpha1...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0-beta1...HEAD
+[3.0.0-beta1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0-alpha1...v3.0.0-beta1
 [3.0.0-alpha1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.1...v3.0.0-alpha1
 [2.30.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.0...v2.30.1
 [2.30.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.29.0...v2.30.0
