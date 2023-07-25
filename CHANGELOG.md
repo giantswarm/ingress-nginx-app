@@ -9,7 +9,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Added
 
-- Repository: Implement `vendir` sync. ([#508](https://github.com/giantswarm/ingress-nginx-app/pull/508))
+- Repository: Implement `vendir` sync. ([#509](https://github.com/giantswarm/ingress-nginx-app/pull/509))
+- Vendir: Ignore paths. ([#511](https://github.com/giantswarm/ingress-nginx-app/pull/511))
 
 ## [3.0.0-beta1] - 2023-07-13
 
