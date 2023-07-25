@@ -180,9 +180,9 @@ controller:
 
   # -- Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels
   ##
-  labels: {}
-  #  keel.sh/policy: patch
-  #  keel.sh/trigger: poll
+  labels:
+    # -- Enable Deployment or DaemonSet for SLI monitoring or not. Enabled by default.
+    giantswarm.io/monitoring_basic_sli: "true"
 
   # -- The update strategy to apply to the Deployment or DaemonSet
   ##

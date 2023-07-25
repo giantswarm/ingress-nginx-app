@@ -11,6 +11,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Repository: Implement `vendir` sync. ([#509](https://github.com/giantswarm/ingress-nginx-app/pull/509))
 - Vendir: Ignore paths. ([#511](https://github.com/giantswarm/ingress-nginx-app/pull/511))
+- Deployment: Move `giantswarm.io/monitoring_basic_sli` label to values. ([#512](https://github.com/giantswarm/ingress-nginx-app/pull/512))
 
 ## [3.0.0-beta1] - 2023-07-13
 

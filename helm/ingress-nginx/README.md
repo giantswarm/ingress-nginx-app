@@ -206,7 +206,8 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.keda.scaledObject.annotations | object | `{}` |  |
 | controller.keda.triggers | list | `[]` |  |
 | controller.kind | string | `"Deployment"` | Use a `DaemonSet` or `Deployment` |
-| controller.labels | object | `{}` | Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels # |
+| controller.labels | object | `{"giantswarm.io/monitoring_basic_sli":"true"}` | Labels to be added to the controller Deployment or DaemonSet and other resources that do not have option to specify labels # |
+| controller.labels."giantswarm.io/monitoring_basic_sli" | string | `"true"` | Enable Deployment or DaemonSet for SLI monitoring or not. Enabled by default. |
 | controller.lifecycle | object | `{"preStop":{"exec":{"command":["/wait-shutdown"]}}}` | Improve connection draining when ingress controller pod is deleted using a lifecycle hook: With this new hook, we increased the default terminationGracePeriodSeconds from 30 seconds to 300, allowing the draining of connections up to five minutes. If the active connections end before that, the pod will terminate gracefully at that time. To effectively take advantage of this feature, the Configmap feature worker-shutdown-timeout new value is 240s instead of 10s. # |
 | controller.livenessProbe.failureThreshold | int | `5` |  |
 | controller.livenessProbe.httpGet.path | string | `"/healthz"` |  |
