@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Repository: Implement `vendir` sync. ([#508](https://github.com/giantswarm/ingress-nginx-app/pull/508))
+
 ## [3.0.0-beta1] - 2023-07-13
 
 This is the first public beta release of our new `ingress-nginx` chart.
