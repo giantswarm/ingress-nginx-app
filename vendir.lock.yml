@@ -1,0 +1,9 @@
+apiVersion: vendir.k14s.io/v1alpha1
+directories:
+- contents:
+  - git:
+      commitTitle: Squashed commit of the following:...
+      sha: 65326211c344b925172a24ef40defadfd1b98547
+    path: ingress-nginx
+  path: helm
+kind: LockConfig
