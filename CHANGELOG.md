@@ -13,6 +13,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Vendir: Ignore paths. ([#511](https://github.com/giantswarm/ingress-nginx-app/pull/511))
 - Deployment: Ignore `replicaCount` with KEDA enabled. ([#513](https://github.com/giantswarm/ingress-nginx-app/pull/513))
 - Service: Template annotations. ([#514](https://github.com/giantswarm/ingress-nginx-app/pull/514))
+- Vendir: Do not ignore README.md. ([#515](https://github.com/giantswarm/ingress-nginx-app/pull/515))
 
 ## [3.0.0-beta1] - 2023-07-13
 
