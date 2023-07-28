@@ -16,5 +16,4 @@ directories:
     newRootPath: charts/ingress-nginx
     ignorePaths:
     - .kube-linter.yaml
-    - README.md
     - values.schema.json
