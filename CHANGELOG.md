@@ -15,6 +15,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Service: Template annotations. ([#514](https://github.com/giantswarm/ingress-nginx-app/pull/514))
 - Vendir: Do not ignore README.md. ([#515](https://github.com/giantswarm/ingress-nginx-app/pull/515))
 
+### Changed
+
+- OpenTelemetry: Update image to `v20230721-3e2062ee5`. ([#522](https://github.com/giantswarm/ingress-nginx-app/pull/522))
+
 ## [3.0.0-beta1] - 2023-07-13
 
 This is the first public beta release of our new `ingress-nginx` chart.
