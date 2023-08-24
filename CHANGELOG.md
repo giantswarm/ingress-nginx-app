@@ -20,6 +20,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Values: Update docs about `controller.enableTopologyAwareRouting`. ([#520](https://github.com/giantswarm/ingress-nginx-app/pull/520))
 
+### Changed
+
+- OpenTelemetry: Update image to `v20230721-3e2062ee5`. ([#522](https://github.com/giantswarm/ingress-nginx-app/pull/522))
+
 ## [3.0.0-beta1] - 2023-07-13
 
 This is the first public beta release of our new `ingress-nginx` chart.
