@@ -7,67 +7,47 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
-### Added
+## [3.0.0] - 2023-08-28
 
-- Repository: Implement `vendir` sync. ([#509](https://github.com/giantswarm/ingress-nginx-app/pull/509))
-- Vendir: Ignore paths. ([#511](https://github.com/giantswarm/ingress-nginx-app/pull/511))
-- Deployment: Ignore `replicaCount` with KEDA enabled. ([#513](https://github.com/giantswarm/ingress-nginx-app/pull/513))
-- Service: Template annotations. ([#514](https://github.com/giantswarm/ingress-nginx-app/pull/514))
-- Vendir: Do not ignore README.md. ([#515](https://github.com/giantswarm/ingress-nginx-app/pull/515))
-- Deployment/DaemonSet: Add `controller.hostAliases`. ([#521](https://github.com/giantswarm/ingress-nginx-app/pull/521))
+This is the first public stable release of our new `ingress-nginx` chart.
 
-### Changed
+If you are currently using `v2.x.x`, this release includes breaking changes. We set up a [migration guide](https://github.com/giantswarm/ingress-nginx-app/blob/v3.0.0/migration.md) to make the upgrade as smooth as possible. Notable changes requiring your attention and/or manual intervention, like renaming, deprecation or removal of values, have been highlighted below.
 
-- Values: Update docs about `controller.enableTopologyAwareRouting`. ([#520](https://github.com/giantswarm/ingress-nginx-app/pull/520))
-- OpenTelemetry: Update image to `v20230721-3e2062ee5`. ([#522](https://github.com/giantswarm/ingress-nginx-app/pull/522))
-- ServiceMonitor: Explicitly set namespace. ([#523](https://github.com/giantswarm/ingress-nginx-app/pull/523))
+Even though we highly recommend to upgrade to this and future releases, `v2.x.x` will continue to receive bugfixes as long as possible.
 
-## [3.0.0-beta1] - 2023-07-13
-
-This is the first public beta release of our new `ingress-nginx` chart.
-
-Even though we put a lot of effort into testing every change, we do not recommend you that you install this release in a production environment.
-
-If you are currently using `v2.x.x`, this release includes breaking changes from [`v3.0.0-alpha1`](https://github.com/giantswarm/ingress-nginx-app/releases/tag/v3.0.0-alpha1). We set up a [migration guide](https://github.com/giantswarm/ingress-nginx-app/blob/v3.0.0-beta1/migration.md) to make the upgrade as smooth as possible.
-
-All feedback regarding this release, its changes, or our [migration guide](https://github.com/giantswarm/ingress-nginx-app/blob/v3.0.0-beta1/migration.md) is very welcome!
-
-The stable release `v3.0.0` will be cut as soon as all possible bugs have been fixed and improvements have been implemented.
-
-Please also take care of the changelog of [`v3.0.0-alpha1`](https://github.com/giantswarm/ingress-nginx-app/releases/tag/v3.0.0-alpha1) as those changes are not explicitly included here.
-
-### Added
-
-- PDB: Add `controller.annotations`. ([#481](https://github.com/giantswarm/ingress-nginx-app/pull/481))
-- Images: Update OpenTelemetry & kube-webhook-certgen image. ([#488](https://github.com/giantswarm/ingress-nginx-app/pull/488))
-- KEDA: Add `fallback`. ([#497](https://github.com/giantswarm/ingress-nginx-app/pull/497))
-- OpenTelemetry: Add distroless `init_module`. ([#498](https://github.com/giantswarm/ingress-nginx-app/pull/498))
-- Chart: Add logo. ([#502](https://github.com/giantswarm/ingress-nginx-app/pull/502))
-- Service: Add `controller.service.loadBalancerClass`. ([#503](https://github.com/giantswarm/ingress-nginx-app/pull/503))\
-  **NOTE:** The load balancer class of existing services can not be changed. The app deployment might fail when defining this for already installed app instances.
-
-### Changed
-
-- PDB: Improve checks. ([#487](https://github.com/giantswarm/ingress-nginx-app/pull/487))
-- Image: Update to [`v1.8.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.0.md). ([#489](https://github.com/giantswarm/ingress-nginx-app/pull/489))
-- HPA: Partially revert [#465](https://github.com/giantswarm/ingress-nginx-app/pull/465). ([#493](https://github.com/giantswarm/ingress-nginx-app/pull/493))
-- Metrics: Use `ServiceMonitor`. ([#494](https://github.com/giantswarm/ingress-nginx-app/pull/494))
-- Image: Update to [`v1.8.1`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.1.md). ([#505](https://github.com/giantswarm/ingress-nginx-app/pull/505))
-
-## [3.0.0-alpha1] - 2023-05-09
+All feedback regarding this release, its changes, or our [migration guide](https://github.com/giantswarm/ingress-nginx-app/blob/v3.0.0/migration.md) is very welcome!
 
 ### Added
 
 - Service: Align features from external service to internal one. ([#467](https://github.com/giantswarm/ingress-nginx-app/pull/467))
 - Service: Add `controller.service.internal.ports` & `controller.service.internal.targetPorts`. ([#469](https://github.com/giantswarm/ingress-nginx-app/pull/469))
+- PDB: Add `controller.annotations`. ([#481](https://github.com/giantswarm/ingress-nginx-app/pull/481))
+- KEDA: Add `fallback`. ([#497](https://github.com/giantswarm/ingress-nginx-app/pull/497))
+- OpenTelemetry: Add distroless `init_module`. ([#498](https://github.com/giantswarm/ingress-nginx-app/pull/498))
+- Service: Add `controller.service.loadBalancerClass`. ([#503](https://github.com/giantswarm/ingress-nginx-app/pull/503))\
+  **NOTE:** The load balancer class of existing services can not be changed. The app deployment might fail when defining this for already installed app instances.
+- Deployment: Ignore `replicaCount` with KEDA enabled. ([#513](https://github.com/giantswarm/ingress-nginx-app/pull/513))
+- Service: Template annotations. ([#514](https://github.com/giantswarm/ingress-nginx-app/pull/514))
+- Deployment/DaemonSet: Add `controller.hostAliases`. ([#521](https://github.com/giantswarm/ingress-nginx-app/pull/521))
 
 ### Changed
 
 - Helpers: Align labels to upstream. ([#450](https://github.com/giantswarm/ingress-nginx-app/pull/450))
-- Values: Align CPU & memory requests to actual needs. ([#453](https://github.com/giantswarm/ingress-nginx-app/pull/453))
-- Values: Deprecate `configmap`, use `controller.config` instead. ([#463](https://github.com/giantswarm/ingress-nginx-app/pull/463))
+- Values: Align CPU & memory requests to actual needs. ([#453](https://github.com/giantswarm/ingress-nginx-app/pull/453))\
+  **NOTE:** This reduces the default resource requests. Please review & configure them to your actual needs.
+- Values: Deprecate `configmap`, use `controller.config` instead. ([#463](https://github.com/giantswarm/ingress-nginx-app/pull/463))\
+  **NOTE:** This is part of our alignment to upstream. Use `controller.config` instead.
 - Chart: Rename to `ingress-nginx`. ([#464](https://github.com/giantswarm/ingress-nginx-app/pull/464))
 - HPA: Align to upstream. ([#465](https://github.com/giantswarm/ingress-nginx-app/pull/465))
+- PDB: Improve checks. ([#487](https://github.com/giantswarm/ingress-nginx-app/pull/487))
+- Images: Update OpenTelemetry & kube-webhook-certgen image. ([#488](https://github.com/giantswarm/ingress-nginx-app/pull/488))
+- Image: Update to [`v1.8.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.0.md). ([#489](https://github.com/giantswarm/ingress-nginx-app/pull/489))
+- HPA: Partially revert [#465](https://github.com/giantswarm/ingress-nginx-app/pull/465). ([#493](https://github.com/giantswarm/ingress-nginx-app/pull/493))
+- Metrics: Use `ServiceMonitor`. ([#494](https://github.com/giantswarm/ingress-nginx-app/pull/494))
+- Image: Update to [`v1.8.1`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.1.md). ([#505](https://github.com/giantswarm/ingress-nginx-app/pull/505))
+- Values: Update docs about `controller.enableTopologyAwareRouting`. ([#520](https://github.com/giantswarm/ingress-nginx-app/pull/520))
+- OpenTelemetry: Update image to `v20230721-3e2062ee5`. ([#522](https://github.com/giantswarm/ingress-nginx-app/pull/522))
+- ServiceMonitor: Explicitly set namespace. ([#523](https://github.com/giantswarm/ingress-nginx-app/pull/523))
 
 ### Removed
 
@@ -1161,9 +1141,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0-beta1...HEAD
-[3.0.0-beta1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0-alpha1...v3.0.0-beta1
-[3.0.0-alpha1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.1...v3.0.0-alpha1
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0...HEAD
+[3.0.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.1...v3.0.0
 [2.30.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.0...v2.30.1
 [2.30.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.29.0...v2.30.0
 [2.29.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.28.0...v2.29.0
