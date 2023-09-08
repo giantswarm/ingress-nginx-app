@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Service Account: Align annotation format. ([#526](https://github.com/giantswarm/ingress-nginx-app/pull/526))
+
 ## [3.0.0] - 2023-08-28
 
 This is the first public stable release of our new `ingress-nginx` chart.
