@@ -15,6 +15,7 @@ commonLabels: {}
 
 controller:
   name: controller
+  enableAnnotationValidations: false
   image:
     ## Keep false as default for now!
     chroot: false
@@ -22,7 +23,7 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.8.1"
+    tag: "v1.8.2"
     digest: ""
     digestChroot: ""
     pullPolicy: IfNotPresent
@@ -260,21 +261,23 @@ controller:
   # -- Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in.
   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
   ##
-  topologySpreadConstraints: |-
-    - labelSelector:
-        matchLabels:
-          {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
-          app.kubernetes.io/component: controller
-      topologyKey: topology.kubernetes.io/zone
-      maxSkew: 1
-      whenUnsatisfiable: ScheduleAnyway
-    - labelSelector:
-        matchLabels:
-          {{- include "ingress-nginx.selectorLabels" . | nindent 6 }}
-          app.kubernetes.io/component: controller
-      topologyKey: kubernetes.io/hostname
-      maxSkew: 1
-      whenUnsatisfiable: ScheduleAnyway
+  topologySpreadConstraints:
+  - labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+        app.kubernetes.io/instance: '{{ .Release.Name }}'
+        app.kubernetes.io/component: controller
+    topologyKey: topology.kubernetes.io/zone
+    maxSkew: 1
+    whenUnsatisfiable: ScheduleAnyway
+  - labelSelector:
+      matchLabels:
+        app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+        app.kubernetes.io/instance: '{{ .Release.Name }}'
+        app.kubernetes.io/component: controller
+    topologyKey: kubernetes.io/hostname
+    maxSkew: 1
+    whenUnsatisfiable: ScheduleAnyway
 
   # -- `terminationGracePeriodSeconds` to avoid killing pods before we are ready
   ## wait up to five minutes for the drain of connections
@@ -684,6 +687,7 @@ controller:
     image: registry.k8s.io/ingress-nginx/opentelemetry:v20230721-3e2062ee5@sha256:13bee3f5223883d3ca62fee7309ad02d22ec00ff0d7033e3e9aca7a9f60fd472
     containerSecurityContext:
       allowPrivilegeEscalation: false
+    resources: {}
   admissionWebhooks:
     annotations: {}
     # ignore-check.kube-linter.io/no-read-only-rootfs: "This deployment needs write access to root filesystem".

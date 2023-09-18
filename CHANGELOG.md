@@ -7,9 +7,18 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Controller: Add `controller.enableAnnotationValidations`. ([#531](https://github.com/giantswarm/ingress-nginx-app/pull/531))
+- OpenTelemetry: Add `controller.opentelemetry.resources`. ([#531](https://github.com/giantswarm/ingress-nginx-app/pull/531))
+
 ### Changed
 
 - Service Account: Align annotation format. ([#526](https://github.com/giantswarm/ingress-nginx-app/pull/526))
+- Image: Update to [`v1.8.2`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.2.md). ([#531](https://github.com/giantswarm/ingress-nginx-app/pull/531))
+- Deployment/DaemonSet: Make `controller.topologySpreadConstraints` an array. ([#531](https://github.com/giantswarm/ingress-nginx-app/pull/531))\
+  **NOTE:** Please convert your value of `controller.topologySpreadConstraints` to an array, too, if you're currently overriding it.
+
 
 ## [3.0.0] - 2023-08-28
 

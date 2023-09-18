@@ -291,6 +291,9 @@
                 "electionID": {
                     "type": "string"
                 },
+                "enableAnnotationValidations": {
+                    "type": "boolean"
+                },
                 "enableMimalloc": {
                     "type": "boolean"
                 },
@@ -326,6 +329,9 @@
                 },
                 "healthCheckPath": {
                     "type": "string"
+                },
+                "hostAliases": {
+                    "type": "array"
                 },
                 "hostNetwork": {
                     "type": "boolean"
@@ -565,7 +571,10 @@
                                     "type": "boolean"
                                 },
                                 "metricRelabelings": {
-                                    "type": "array"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
                                 },
                                 "namespace": {
                                     "type": "string"
@@ -622,6 +631,9 @@
                         },
                         "image": {
                             "type": "string"
+                        },
+                        "resources": {
+                            "type": "object"
                         }
                     }
                 },
@@ -928,7 +940,10 @@
                     "type": "array"
                 },
                 "topologySpreadConstraints": {
-                    "type": "string"
+                    "type": "array",
+                    "items": {
+                        "type": "object"
+                    }
                 },
                 "udp": {
                     "type": "object",
