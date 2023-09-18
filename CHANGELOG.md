@@ -10,6 +10,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Service Account: Align annotation format. ([#526](https://github.com/giantswarm/ingress-nginx-app/pull/526))
+- Image: Update to [`v1.8.2`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.2.md). ([#532](https://github.com/giantswarm/ingress-nginx-app/pull/532))
 
 ## [3.0.0] - 2023-08-28
 
