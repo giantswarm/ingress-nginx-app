@@ -622,6 +622,9 @@
                         },
                         "image": {
                             "type": "string"
+                        },
+                        "resources": {
+                            "type": "object"
                         }
                     }
                 },

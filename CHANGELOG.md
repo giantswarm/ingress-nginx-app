@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- OpenTelemetry: Add resources. ([#530](https://github.com/giantswarm/ingress-nginx-app/pull/530))
+
 ### Changed
 
 - Service Account: Align annotation format. ([#526](https://github.com/giantswarm/ingress-nginx-app/pull/526))
