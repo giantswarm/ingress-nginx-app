@@ -327,6 +327,9 @@
                 "healthCheckPath": {
                     "type": "string"
                 },
+                "hostAliases": {
+                    "type": "array"
+                },
                 "hostNetwork": {
                     "type": "boolean"
                 },
@@ -565,7 +568,10 @@
                                     "type": "boolean"
                                 },
                                 "metricRelabelings": {
-                                    "type": "array"
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
                                 },
                                 "namespace": {
                                     "type": "string"
