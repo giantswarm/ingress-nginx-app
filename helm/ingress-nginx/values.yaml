@@ -29,7 +29,7 @@ controller:
     pullPolicy: IfNotPresent
     # www-data -> uid 101
     runAsUser: 101
-    allowPrivilegeEscalation: true
+    allowPrivilegeEscalation: false
   # -- Use an existing PSP instead of creating one
   existingPsp: ""
   # -- Configures the controller container name
@@ -127,7 +127,10 @@ controller:
   #  key: value
 
   # -- Security Context policies for controller pods
-  podSecurityContext: {}
+  podSecurityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
   # -- See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls
   sysctls: {}
   # sysctls:
@@ -938,7 +941,10 @@ defaultBackend:
   # See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
   # notes on enabling and using sysctls
   ##
-  podSecurityContext: {}
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
+
   # -- Security Context policies for controller main container.
   # See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
   # notes on enabling and using sysctls
