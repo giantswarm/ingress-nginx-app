@@ -124,7 +124,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.admissionWebhooks.patch.image.digest | string | `""` |  |
 | controller.admissionWebhooks.patch.image.image | string | `"giantswarm/ingress-nginx-kube-webhook-certgen"` |  |
 | controller.admissionWebhooks.patch.image.pullPolicy | string | `"IfNotPresent"` |  |
-| controller.admissionWebhooks.patch.image.tag | string | `"v20230407"` |  |
+| controller.admissionWebhooks.patch.image.tag | string | `"v20231011-8b53cabe0"` |  |
 | controller.admissionWebhooks.patch.labels | object | `{}` | Labels to be added to patch job resources |
 | controller.admissionWebhooks.patch.nodeSelector."kubernetes.io/os" | string | `"linux"` |  |
 | controller.admissionWebhooks.patch.podAnnotations | object | `{}` |  |

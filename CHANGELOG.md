@@ -21,6 +21,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Service: Fix wildcard subdomain. ([#539](https://github.com/giantswarm/ingress-nginx-app/pull/539))
 - Chart: Tighten `securityContext`s and Pod Security Policies. ([#540](https://github.com/giantswarm/ingress-nginx-app/pull/540))
 - OpenTelemetry: Use own registry. ([#541](https://github.com/giantswarm/ingress-nginx-app/pull/541))
+- Admission Webhooks: Update `kube-webhook-certgen` image to `v20231011-8b53cabe0`. ([#542](https://github.com/giantswarm/ingress-nginx-app/pull/542))
 
 ## [3.0.1] - 2023-09-18
 
