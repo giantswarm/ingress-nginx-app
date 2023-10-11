@@ -30,14 +30,19 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 {{- end -}}
 
-
 {{/*
-Container SecurityContext.
+Controller container security context.
 */}}
-{{- define "controller.containerSecurityContext" -}}
+{{- define "ingress-nginx.controller.containerSecurityContext" -}}
 {{- if .Values.controller.containerSecurityContext -}}
 {{- toYaml .Values.controller.containerSecurityContext -}}
 {{- else -}}
+runAsNonRoot: {{ .Values.controller.image.runAsNonRoot }}
+runAsUser: {{ .Values.controller.image.runAsUser }}
+allowPrivilegeEscalation: {{ .Values.controller.image.allowPrivilegeEscalation }}
+{{- if .Values.controller.image.seccompProfile }}
+seccompProfile: {{ toYaml .Values.controller.image.seccompProfile | nindent 2 }}
+{{- end }}
 capabilities:
   drop:
   - ALL
@@ -46,9 +51,8 @@ capabilities:
   {{- if .Values.controller.image.chroot }}
   - SYS_CHROOT
   {{- end }}
-runAsUser: {{ .Values.controller.image.runAsUser }}
-allowPrivilegeEscalation: {{ .Values.controller.image.allowPrivilegeEscalation }}
-{{- end }}
+readOnlyRootFilesystem: {{ .Values.controller.image.readOnlyRootFilesystem }}
+{{- end -}}
 {{- end -}}
 
 {{/*
@@ -111,14 +115,6 @@ Users can provide an override for an explicit service they want bound via `.Valu
 {{- end -}}
 
 {{/*
-Create a default fully qualified default backend name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-*/}}
-{{- define "ingress-nginx.defaultBackend.fullname" -}}
-{{- printf "%s-%s" (include "ingress-nginx.fullname" .) .Values.defaultBackend.name | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
 Common labels
 */}}
 {{- define "ingress-nginx.labels" -}}
@@ -156,6 +152,14 @@ Create the name of the controller service account to use
 {{- end -}}
 
 {{/*
+Create a default fully qualified default backend name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ingress-nginx.defaultBackend.fullname" -}}
+{{- printf "%s-%s" (include "ingress-nginx.fullname" .) .Values.defaultBackend.name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
 Create the name of the backend service account to use - only used when podsecuritypolicy is also enabled
 */}}
 {{- define "ingress-nginx.defaultBackend.serviceAccountName" -}}
@@ -163,6 +167,26 @@ Create the name of the backend service account to use - only used when podsecuri
     {{ default (printf "%s-backend" (include "ingress-nginx.fullname" .)) .Values.defaultBackend.serviceAccount.name }}
 {{- else -}}
     {{ default "default-backend" .Values.defaultBackend.serviceAccount.name }}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Default backend container security context.
+*/}}
+{{- define "ingress-nginx.defaultBackend.containerSecurityContext" -}}
+{{- if .Values.defaultBackend.containerSecurityContext -}}
+{{- toYaml .Values.defaultBackend.containerSecurityContext -}}
+{{- else -}}
+runAsNonRoot: {{ .Values.defaultBackend.image.runAsNonRoot }}
+runAsUser: {{ .Values.defaultBackend.image.runAsUser }}
+allowPrivilegeEscalation: {{ .Values.defaultBackend.image.allowPrivilegeEscalation }}
+{{- if .Values.defaultBackend.image.seccompProfile }}
+seccompProfile: {{ toYaml .Values.defaultBackend.image.seccompProfile | nindent 2 }}
+{{- end }}
+capabilities:
+  drop:
+  - ALL
+readOnlyRootFilesystem: {{ .Values.defaultBackend.image.readOnlyRootFilesystem }}
 {{- end -}}
 {{- end -}}
 
@@ -202,18 +226,21 @@ Extra modules.
 {{- define "extraModules" -}}
 - name: {{ .name }}
   image: {{ .image }}
-  {{- if .distroless | default false }}
-  command: ['/init_module']
+  command:
+  {{- if .distroless }}
+    - /init_module
   {{- else }}
-  command: ['sh', '-c', '/usr/local/bin/init_module.sh']
+    - sh
+    - -c
+    - /usr/local/bin/init_module.sh
   {{- end }}
   {{- if .containerSecurityContext }}
-  securityContext: {{ .containerSecurityContext | toYaml | nindent 4 }}
+  securityContext: {{ toYaml .containerSecurityContext | nindent 4 }}
   {{- end }}
   {{- if .resources }}
-  resources: {{ .resources | toYaml | nindent 4 }}
+  resources: {{ toYaml .resources | nindent 4 }}
   {{- end }}
   volumeMounts:
-    - name: {{ toYaml "modules"}}
-      mountPath: {{ toYaml "/modules_mount"}}
+    - name: modules
+      mountPath: /modules_mount
 {{- end -}}
