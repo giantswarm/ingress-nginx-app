@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Image: Update to [`v1.9.1`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.9.1.md). ([#543](https://github.com/giantswarm/ingress-nginx-app/pull/543))
+
 ### Added
 
 - Controller: Add `controller.enableAnnotationValidations`. ([#536](https://github.com/giantswarm/ingress-nginx-app/pull/536))

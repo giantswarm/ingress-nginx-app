@@ -3,7 +3,7 @@ directories:
 - contents:
   - git:
       commitTitle: 'Chart: Tighten `securityContext`s and Pod Security Policies. (#10)...'
-      sha: 121ea3b8d0392b1867997619bdb8169e190b44df
+      sha: 8ce755704ca1ce2826cabb3746c5a9c4fd279ca3
     path: ingress-nginx
   path: helm
 kind: LockConfig
