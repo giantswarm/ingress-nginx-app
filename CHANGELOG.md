@@ -18,6 +18,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Deployment/DaemonSet: Make `controller.topologySpreadConstraints` an array. ([#536](https://github.com/giantswarm/ingress-nginx-app/pull/536))\
   **NOTE:** This is part of our alignment to upstream. Please convert any overrides of `controller.topologySpreadConstraints` to an array, too.
 - Tests: Upgrade dependencies & remove explicit ATS version. ([#538](https://github.com/giantswarm/ingress-nginx-app/pull/538))
+- Service: Fix wildcard subdomain. ([#539](https://github.com/giantswarm/ingress-nginx-app/pull/539))
 
 ## [3.0.1] - 2023-09-18
 
