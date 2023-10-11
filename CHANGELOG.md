@@ -17,6 +17,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Image: Update to [`v1.9.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.9.0.md). ([#536](https://github.com/giantswarm/ingress-nginx-app/pull/536))
 - Deployment/DaemonSet: Make `controller.topologySpreadConstraints` an array. ([#536](https://github.com/giantswarm/ingress-nginx-app/pull/536))\
   **NOTE:** This is part of our alignment to upstream. Please convert any overrides of `controller.topologySpreadConstraints` to an array, too.
+- Tests: Upgrade dependencies & remove explicit ATS version. ([#538](https://github.com/giantswarm/ingress-nginx-app/pull/538))
 
 ## [3.0.1] - 2023-09-18
 
