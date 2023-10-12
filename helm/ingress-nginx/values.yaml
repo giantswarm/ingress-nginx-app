@@ -1088,16 +1088,21 @@ configmap: {}
 
 # Below are configuration values that you should not overwrite or set yourself.
 
-# image
+global:
+  podSecurityStandards:
+    # -- Wether Pod Security Standards are being used or not.
+    # This value is set automatically. Do not overwrite it.
+    enforced: false
+
 image:
+  # -- Registry host to pull images from.
+  # This value is set automatically. Do not overwrite it.
   registry: quay.io
 
-# baseDomain
-# The base domain for this ingress controller.
-# This value is set automatically. Do not overwrite this value.
+# -- Domain of the service's FQDN.
+# This value is set automatically. Do not overwrite it.
 baseDomain: ""
 
-# provider (aws|capa|azure|kvm|cloud-director)
-# The provider that the cluster is running on.
-# This value is set automatically. Do not overwrite this value.
+# -- Provider the cluster is running on.
+# This value is set automatically. Do not overwrite it.
 provider: aws

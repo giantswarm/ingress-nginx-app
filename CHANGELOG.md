@@ -11,6 +11,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Controller: Add `controller.enableAnnotationValidations`. ([#536](https://github.com/giantswarm/ingress-nginx-app/pull/536))
 - OpenTelemetry: Add `controller.opentelemetry.resources`. ([#536](https://github.com/giantswarm/ingress-nginx-app/pull/536))
+- Values: Add `global.podSecurityStandards.enforced`. ([#544](https://github.com/giantswarm/ingress-nginx-app/pull/544))
 
 ### Changed
 

@@ -101,7 +101,7 @@ Please ensure that cert-manager is correctly installed and configured.
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| baseDomain | string | `""` |  |
+| baseDomain | string | `""` | Domain of the service's FQDN. This value is set automatically. Do not overwrite it. |
 | commonLabels | object | `{}` |  |
 | configmap | object | `{}` | Deprecated, use `controller.config` instead. |
 | controller.addHeaders | object | `{}` | Will add custom headers before sending response traffic to the client according to: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#add-headers |
@@ -397,11 +397,12 @@ Please ensure that cert-manager is correctly installed and configured.
 | defaultBackend.tolerations | list | `[]` | Node tolerations for server scheduling to nodes with taints # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ # |
 | defaultBackend.updateStrategy | object | `{}` | The update strategy to apply to the Deployment or DaemonSet # |
 | dhParam | string | `""` | A base64-encoded Diffie-Hellman parameter. This can be generated with: `openssl dhparam 4096 2> /dev/null | base64` # Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param |
-| image.registry | string | `"quay.io"` |  |
+| global.podSecurityStandards.enforced | bool | `false` | Wether Pod Security Standards are being used or not. This value is set automatically. Do not overwrite it. |
+| image.registry | string | `"quay.io"` | Registry host to pull images from. This value is set automatically. Do not overwrite it. |
 | imagePullSecrets | list | `[]` | Optional array of imagePullSecrets containing private registry credentials # Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
 | podSecurityPolicy.enabled | bool | `true` |  |
 | portNamePrefix | string | `""` | Prefix for TCP and UDP ports names in ingress controller service # Some cloud providers, like Yandex Cloud may have a requirements for a port name regex to support cloud load balancer integration |
-| provider | string | `"aws"` |  |
+| provider | string | `"aws"` | Provider the cluster is running on. This value is set automatically. Do not overwrite it. |
 | rbac.create | bool | `true` |  |
 | rbac.scope | bool | `false` |  |
 | revisionHistoryLimit | int | `10` | Rollback limit # |
