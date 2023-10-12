@@ -23,7 +23,7 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.9.0"
+    tag: "v1.9.3"
     digest: ""
     digestChroot: ""
     pullPolicy: IfNotPresent
@@ -1023,12 +1023,10 @@ defaultBackend:
     maxReplicas: 2
     targetCPUUtilizationPercentage: 50
     targetMemoryUtilizationPercentage: 50
-
   # NetworkPolicy for default backend component.
   networkPolicy:
     # -- Enable 'networkPolicy' or not
     enabled: true
-
   service:
     annotations: {}
     # clusterIP: ""
