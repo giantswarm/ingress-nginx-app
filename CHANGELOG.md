@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [3.0.2] - 2023-10-12
+
 ### Changed
 
 - Image: Update to [`v1.8.4`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.8.4.md). ([#545](https://github.com/giantswarm/ingress-nginx-app/pull/545))
@@ -1153,7 +1155,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.1...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.2...HEAD
+[3.0.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0...v3.0.1
 [3.0.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.1...v3.0.0
 [2.30.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v2.30.0...v2.30.1
