@@ -25,6 +25,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Admission Webhooks: Update `kube-webhook-certgen` image to `v20231011-8b53cabe0`. ([#542](https://github.com/giantswarm/ingress-nginx-app/pull/542))
 - Image: Update to [`v1.9.3`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/Changelog-1.9.3.md). ([#547](https://github.com/giantswarm/ingress-nginx-app/pull/547))
 
+### Removed
+
+- Controller: Drop support for `controller.kind: Both`. ([#547](https://github.com/giantswarm/ingress-nginx-app/pull/547))
+
 ## [3.0.2] - 2023-10-12
 
 ### Changed

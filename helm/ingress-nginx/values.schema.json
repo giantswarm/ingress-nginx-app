@@ -489,7 +489,7 @@
                 },
                 "kind": {
                     "type": "string",
-                    "enum": ["Deployment", "DaemonSet", "Both"]
+                    "enum": ["Deployment", "DaemonSet"]
                 },
                 "labels": {
                     "type": "object"
