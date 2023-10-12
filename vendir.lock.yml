@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Service: Align internal to external. (#8)'
-      sha: f23fe74630f8e9704c91c363246f688cf8ec8e86
+      commitTitle: 'Chart: Tighten `securityContext`s and Pod Security Policies. (#10)...'
+      sha: 121ea3b8d0392b1867997619bdb8169e190b44df
     path: ingress-nginx
   path: helm
 kind: LockConfig

@@ -27,9 +27,13 @@ controller:
     digest: ""
     digestChroot: ""
     pullPolicy: IfNotPresent
+    runAsNonRoot: true
     # www-data -> uid 101
     runAsUser: 101
-    allowPrivilegeEscalation: true
+    allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+    readOnlyRootFilesystem: false
   # -- Use an existing PSP instead of creating one
   existingPsp: ""
   # -- Configures the controller container name
@@ -126,12 +130,15 @@ controller:
   podLabels: {}
   #  key: value
 
-  # -- Security Context policies for controller pods
+  # -- Security context for controller pods
   podSecurityContext: {}
-  # -- See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for notes on enabling and using sysctls
+  # -- sysctls for controller pods
+  ## Ref: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/
   sysctls: {}
   # sysctls:
   #   "net.core.somaxconn": "8192"
+  # -- Security context for controller containers
+  containerSecurityContext: {}
 
   # -- Allows customization of the source of the IP address or FQDN to report
   # in the ingress status field. By default, it reads the information provided
@@ -675,8 +682,18 @@ controller:
   extraModules: []
   # - name: mytestmodule
   #   image: registry.k8s.io/ingress-nginx/mytestmodule
+  #   distroless: false
   #   containerSecurityContext:
+  #     runAsNonRoot: true
+  #     runAsUser: <user-id>
   #     allowPrivilegeEscalation: false
+  #     seccompProfile:
+  #       type: RuntimeDefault
+  #     capabilities:
+  #       drop:
+  #       - ALL
+  #     readOnlyRootFilesystem: true
+  #   resources: {}
   #
   # The image must contain a `/usr/local/bin/init_module.sh` executable, which
   # will be executed as initContainers, to move its config files within the
@@ -684,9 +701,20 @@ controller:
 
   opentelemetry:
     enabled: false
+    name: opentelemetry
     image: registry.k8s.io/ingress-nginx/opentelemetry:v20230721-3e2062ee5@sha256:13bee3f5223883d3ca62fee7309ad02d22ec00ff0d7033e3e9aca7a9f60fd472
+    distroless: true
     containerSecurityContext:
+      runAsNonRoot: true
+      # -- The image's default user, inherited from its base image `cgr.dev/chainguard/static`.
+      runAsUser: 65532
       allowPrivilegeEscalation: false
+      seccompProfile:
+        type: RuntimeDefault
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
     resources: {}
   admissionWebhooks:
     annotations: {}
@@ -725,8 +753,17 @@ controller:
       servicePort: 443
       type: ClusterIP
     createSecretJob:
+      # -- Security context for secret creation containers
       securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
         allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
       resources: {}
       # limits:
       #   cpu: 10m
@@ -735,8 +772,17 @@ controller:
       #   cpu: 10m
       #   memory: 20Mi
     patchWebhookJob:
+      # -- Security context for webhook patch containers
       securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
         allowPrivilegeEscalation: false
+        seccompProfile:
+          type: RuntimeDefault
+        capabilities:
+          drop:
+          - ALL
+        readOnlyRootFilesystem: true
       resources: {}
     patch:
       enabled: true
@@ -757,10 +803,8 @@ controller:
       tolerations: []
       # -- Labels to be added to patch job resources
       labels: {}
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 2000
-        fsGroup: 2000
+      # -- Security context for secret creation & webhook patch pods
+      securityContext: {}
     # Use certmanager to generate webhook certs
     certManager:
       enabled: false
@@ -884,11 +928,13 @@ defaultBackend:
     ## repository:
     tag: "1.5"
     pullPolicy: IfNotPresent
+    runAsNonRoot: true
     # nobody user -> uid 65534
     runAsUser: 65534
-    runAsNonRoot: true
-    readOnlyRootFilesystem: true
     allowPrivilegeEscalation: false
+    seccompProfile:
+      type: RuntimeDefault
+    readOnlyRootFilesystem: true
   # -- Use an existing PSP instead of creating one
   existingPsp: ""
   extraArgs: {}
@@ -934,15 +980,9 @@ defaultBackend:
   #    effect: "NoSchedule|PreferNoSchedule|NoExecute(1.6 only)"
 
   affinity: {}
-  # -- Security Context policies for controller pods
-  # See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
-  # notes on enabling and using sysctls
-  ##
+  # -- Security context for default backend pods
   podSecurityContext: {}
-  # -- Security Context policies for controller main container.
-  # See https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ for
-  # notes on enabling and using sysctls
-  ##
+  # -- Security context for default backend containers
   containerSecurityContext: {}
   # -- Labels to add to the pod container metadata
   podLabels: {}
