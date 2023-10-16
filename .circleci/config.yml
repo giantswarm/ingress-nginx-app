@@ -1,13 +1,13 @@
 version: 2.1
+
 orbs:
   architect: giantswarm/architect@4.33.0
 
 workflows:
-  version: 2
   build:
     jobs:
       - architect/push-to-app-catalog:
-          name: push-to-giantswarm-app-catalog
+          name: push-to-giantswarm-catalog
           context: architect
           executor: app-build-suite
           chart: ingress-nginx
@@ -20,7 +20,7 @@ workflows:
               only: /^v.*/
 
       - architect/push-to-app-catalog:
-          name: push-to-control-plane-app-catalog
+          name: push-to-control-plane-catalog
           context: architect
           executor: app-build-suite
           chart: ingress-nginx
@@ -39,7 +39,7 @@ workflows:
               ignore:
                 - main
           requires:
-            - push-to-giantswarm-app-catalog
+            - push-to-giantswarm-catalog
 
       # - architect/push-to-app-collection:
       #     name: push-to-cloud-director-app-collection
