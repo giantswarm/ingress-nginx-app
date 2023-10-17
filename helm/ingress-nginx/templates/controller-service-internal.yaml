@@ -63,8 +63,6 @@ spec:
 {{- if .Values.controller.service.internal.ipFamilyPolicy }}
   ipFamilyPolicy: {{ .Values.controller.service.internal.ipFamilyPolicy }}
 {{- end }}
-{{- end }}
-{{- if semverCompare ">=1.21.0-0" .Capabilities.KubeVersion.Version -}}
 {{- if .Values.controller.service.internal.ipFamilies }}
   ipFamilies: {{ toYaml .Values.controller.service.internal.ipFamilies | nindent 4 }}
 {{- end }}
