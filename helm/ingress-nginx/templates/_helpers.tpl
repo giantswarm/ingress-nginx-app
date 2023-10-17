@@ -39,7 +39,7 @@ Controller container security context.
 {{- else -}}
 runAsNonRoot: {{ .Values.controller.image.runAsNonRoot }}
 runAsUser: {{ .Values.controller.image.runAsUser }}
-allowPrivilegeEscalation: {{ .Values.controller.image.allowPrivilegeEscalation }}
+allowPrivilegeEscalation: {{ or .Values.controller.image.allowPrivilegeEscalation .Values.controller.image.chroot }}
 {{- if .Values.controller.image.seccompProfile }}
 seccompProfile: {{ toYaml .Values.controller.image.seccompProfile | nindent 2 }}
 {{- end }}
@@ -49,6 +49,9 @@ capabilities:
   add:
   - NET_BIND_SERVICE
   {{- if .Values.controller.image.chroot }}
+  {{- if .Values.controller.image.seccompProfile }}
+  - SYS_ADMIN
+  {{- end }}
   - SYS_CHROOT
   {{- end }}
 readOnlyRootFilesystem: {{ .Values.controller.image.readOnlyRootFilesystem }}
