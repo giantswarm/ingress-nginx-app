@@ -14,7 +14,6 @@ workflows:
           app_catalog: giantswarm-catalog
           app_catalog_test: giantswarm-test-catalog
           persist_chart_archive: true
-          push_to_oci_registry: true
           filters:
             tags:
               only: /^v.*/
@@ -26,8 +25,6 @@ workflows:
           chart: ingress-nginx
           app_catalog: control-plane-catalog
           app_catalog_test: control-plane-test-catalog
-          persist_chart_archive: false
-          push_to_oci_registry: true
           filters:
             tags:
               only: /^v.*/
