@@ -47,6 +47,9 @@ controller:
     # -- Enable HSTS or not. Disabled by default due to possible serious consequences.
     # Ref: https://github.com/kubernetes/ingress-nginx/issues/549
     hsts: "false"
+    # -- Enable strict path type validation or not. Enabled by default for security reasons.
+    # Ref: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#strict-validate-path-type
+    strict-validate-path-type: "true"
   # -- Annotations to be added to the controller config configuration configmap.
   configAnnotations: {}
   # -- Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers

@@ -150,8 +150,9 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | controller.autoscaling.targetMemoryUtilizationPercentage | int | `80` |  |
 | controller.autoscalingTemplate | list | `[]` |  |
-| controller.config | object | `{"hsts":"false"}` | Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ |
+| controller.config | object | `{"hsts":"false","strict-validate-path-type":"true"}` | Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ |
 | controller.config.hsts | string | `"false"` | Enable HSTS or not. Disabled by default due to possible serious consequences. Ref: https://github.com/kubernetes/ingress-nginx/issues/549 |
+| controller.config.strict-validate-path-type | string | `"true"` | Enable strict path type validation or not. Enabled by default for security reasons. Ref: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#strict-validate-path-type |
 | controller.configAnnotations | object | `{}` | Annotations to be added to the controller config configuration configmap. |
 | controller.configMapNamespace | string | `""` | Allows customization of the configmap / nginx-configmap namespace; defaults to $(POD_NAMESPACE) |
 | controller.containerName | string | `"controller"` | Configures the controller container name |
