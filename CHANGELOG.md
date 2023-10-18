@@ -11,6 +11,9 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 - Values: Enable `controller.enableAnnotationValidations` by default. ([#552](https://github.com/giantswarm/ingress-nginx-app/pull/552))\
   **NOTE:** This change affects existing, new & updated `Ingress` resources. Upstream is enabling this by default, too: https://github.com/kubernetes/ingress-nginx/issues/10186.
+- Values: Enable `controller.config.strict-validate-path-type` by default. ([#553](https://github.com/giantswarm/ingress-nginx-app/pull/553))\
+  **NOTE:** This change affects new & updated `Ingress` resources only. Upstream is enabling this by default, too: https://github.com/kubernetes/ingress-nginx/issues/10186.\
+  See https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#strict-validate-path-type for further information.
 
 ## [3.1.1] - 2023-10-18
 
