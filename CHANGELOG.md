@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [3.1.1] - 2023-10-18
+
 ### Changed
 
 - Controller: Fix `chroot` mode. ([#550](https://github.com/giantswarm/ingress-nginx-app/pull/550))
@@ -1187,7 +1189,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.1.0...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.1.1...HEAD
+[3.1.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.2...v3.1.0
 [3.0.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.1...v3.0.2
 [3.0.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.0.0...v3.0.1
