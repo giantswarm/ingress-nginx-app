@@ -7,6 +7,14 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Controller: Fix `chroot` mode. ([#550](https://github.com/giantswarm/ingress-nginx-app/pull/550))
+
+### Removed
+
+- Service: Remove redundant version check. ([#550](https://github.com/giantswarm/ingress-nginx-app/pull/550))
+
 ## [3.1.0] - 2023-10-12
 
 ### Added
