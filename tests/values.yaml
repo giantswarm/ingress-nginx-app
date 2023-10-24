@@ -1,14 +1,11 @@
 provider: kind
 controller:
-  replicaCount: 1
   resources:
     requests:
       cpu: 50m
       memory: 100Mi
-  autoscaling:
-    enabled: false
   service:
     type: NodePort
     nodePorts:
-      http: 30010
-      https: 30011
+      http: 30080
+      https: 30443
