@@ -1,6 +1,5 @@
 checks:
   exclude:
   - no-read-only-root-fs
-  - privilege-escalation-container
   - unset-cpu-requirements
   - unset-memory-requirements

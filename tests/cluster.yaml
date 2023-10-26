@@ -3,11 +3,7 @@ kind: Cluster
 nodes:
 - role: control-plane
   extraPortMappings:
-  - listenAddress: 127.0.0.1
-    protocol: TCP
-    hostPort: 8080
-    containerPort: 30010
-  - listenAddress: 127.0.0.1
-    protocol: TCP
-    hostPort: 8081
-    containerPort: 30012
+  - hostPort: 30080
+    containerPort: 30080
+  - hostPort: 30443
+    containerPort: 30443
