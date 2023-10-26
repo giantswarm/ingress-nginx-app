@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Chart: Tighten `securityContext`s and Pod Security Policies....'
-      sha: efcdfe703debd75960486fc0017f61ba48971ae3
+      commitTitle: 'Chart: Improve #10539....'
+      sha: 5b7b5c33dc387e9f3943a5d7e1431fe4324d0618
     path: ingress-nginx
   path: helm
 kind: LockConfig
