@@ -31,5 +31,5 @@ def test_hello_world(kube_cluster: Cluster, request: FixtureRequest) -> None:
 @mark.upgrade
 def test_requests() -> None:
     # Assert responses.
-    assert get(f"http://127.0.0.1:30080", headers = { "Host": "hello-world" }).status_code == 200
-    assert get(f"http://127.0.0.1:30080", headers = { "Host": "not-found" }).status_code == 404
+    assert get(f"http://127.0.0.1", headers = { "Host": "hello-world" }).status_code == 200
+    assert get(f"http://127.0.0.1", headers = { "Host": "not-found" }).status_code == 404
