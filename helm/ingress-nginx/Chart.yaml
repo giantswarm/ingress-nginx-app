@@ -13,4 +13,4 @@ kubeVersion: '>=1.20.0-0'
 name: ingress-nginx
 sources:
   - https://github.com/kubernetes/ingress-nginx
-version: 3.2.0
+version: 3.2.1
