@@ -16,13 +16,12 @@ def test_ingress_nginx(kube_cluster: Cluster) -> None:
     # Wait for ingress-nginx-controller deployment to run.
     wait_for_deployments_to_run(kube_cluster.kube_client, [ "ingress-nginx-controller" ], "ingress-nginx", 60)
 
-@mark.functional
-@mark.upgrade
+@mark.smoke
 def test_hello_world(kube_cluster: Cluster, request: FixtureRequest) -> None:
     assert kube_cluster.kube_client is not None
 
-    # Apply hello-world manifests.
-    kube_cluster.kubectl("apply", filename = str(request.path.parent / "manifests" / "hello-world.yaml"))
+    # Create hello-world manifests.
+    kube_cluster.kubectl("create", filename = str(request.path.parent / "manifests" / "hello-world.yaml"), output_format = "")
 
     # Wait for hello-world deployment to run.
     wait_for_deployments_to_run(kube_cluster.kube_client, [ "hello-world" ], "default", 60)
