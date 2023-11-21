@@ -31,6 +31,14 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{/*
+Expand the namespace of the release.
+Allows overriding it for multi-namespace deployments in combined charts.
+*/}}
+{{- define "ingress-nginx.namespace" -}}
+{{- default .Release.Namespace .Values.namespaceOverride | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
 Controller container security context.
 */}}
 {{- define "ingress-nginx.controller.containerSecurityContext" -}}
@@ -109,7 +117,6 @@ By convention this will simply use the <namespace>/<controller-name> to match th
 service generated.
 
 Users can provide an override for an explicit service they want bound via `.Values.controller.publishService.pathOverride`
-
 */}}
 {{- define "ingress-nginx.controller.publishServicePath" -}}
 {{- $defServiceName := printf "%s/%s" "$(POD_NAMESPACE)" (include "ingress-nginx.controller.fullname" .) -}}
@@ -152,6 +159,30 @@ Create the name of the controller service account to use
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}
+{{- end -}}
+
+{{/*
+Create a default fully qualified admission webhook name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ingress-nginx.admissionWebhooks.fullname" -}}
+{{- printf "%s-%s" (include "ingress-nginx.fullname" .) .Values.controller.admissionWebhooks.name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a default fully qualified admission webhook secret creation job name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ingress-nginx.admissionWebhooks.createSecretJob.fullname" -}}
+{{- printf "%s-%s" (include "ingress-nginx.admissionWebhooks.fullname" .) .Values.controller.admissionWebhooks.createSecretJob.name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create a default fully qualified admission webhook patch job name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+*/}}
+{{- define "ingress-nginx.admissionWebhooks.patchWebhookJob.fullname" -}}
+{{- printf "%s-%s" (include "ingress-nginx.admissionWebhooks.fullname" .) .Values.controller.admissionWebhooks.patchWebhookJob.name | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*

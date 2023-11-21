@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Chart: Improve #10539....'
-      sha: 5b7b5c33dc387e9f3943a5d7e1431fe4324d0618
+      commitTitle: 'Service: Align internal to external....'
+      sha: 03c958b3eb3933df91154e9e3f99474957bc94db
     path: ingress-nginx
   path: helm
 kind: LockConfig
