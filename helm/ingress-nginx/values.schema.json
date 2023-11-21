@@ -64,6 +64,9 @@
                         "createSecretJob": {
                             "type": "object",
                             "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
                                 "resources": {
                                     "type": "object"
                                 },
@@ -110,6 +113,9 @@
                         },
                         "labels": {
                             "type": "object"
+                        },
+                        "name": {
+                            "type": "string"
                         },
                         "namespaceSelector": {
                             "type": "object"
@@ -166,6 +172,9 @@
                         "patchWebhookJob": {
                             "type": "object",
                             "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
                                 "resources": {
                                     "type": "object"
                                 },
@@ -757,6 +766,9 @@
                 "service": {
                     "type": "object",
                     "properties": {
+                        "allocateLoadBalancerNodePorts": {
+                            "type": "boolean"
+                        },
                         "annotations": {
                             "type": "object"
                         },
@@ -810,6 +822,9 @@
                         "internal": {
                             "type": "object",
                             "properties": {
+                                "allocateLoadBalancerNodePorts": {
+                                    "type": "boolean"
+                                },
                                 "annotations": {
                                     "type": "object"
                                 },
@@ -1257,6 +1272,9 @@
             "type": "array"
         },
         "nameOverride": {
+            "type": "string"
+        },
+        "namespaceOverride": {
             "type": "string"
         },
         "podSecurityPolicy": {

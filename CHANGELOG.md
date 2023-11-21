@@ -7,6 +7,15 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Chart: Add `namespaceOverride`. ([#565](https://github.com/giantswarm/ingress-nginx-app/pull/565))
+- Service: Add `controller.service.allocateLoadBalancerNodePorts` & `controller.service.internal.allocateLoadBalancerNodePorts`. ([#565](https://github.com/giantswarm/ingress-nginx-app/pull/565))
+
+### Changed
+
+- Admission Webhook: Truncate name. ([#565](https://github.com/giantswarm/ingress-nginx-app/pull/565))
+
 ## [3.2.1] - 2023-10-26
 
 ### Changed

@@ -110,6 +110,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.admissionWebhooks.certManager.enabled | bool | `false` |  |
 | controller.admissionWebhooks.certManager.rootCert.duration | string | `""` |  |
 | controller.admissionWebhooks.certificate | string | `"/usr/local/certificates/cert"` |  |
+| controller.admissionWebhooks.createSecretJob.name | string | `"create"` |  |
 | controller.admissionWebhooks.createSecretJob.resources | object | `{}` |  |
 | controller.admissionWebhooks.createSecretJob.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":65532,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for secret creation containers |
 | controller.admissionWebhooks.enabled | bool | `true` |  |
@@ -118,6 +119,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.admissionWebhooks.failurePolicy | string | `"Fail"` | Admission Webhook failure policy to use |
 | controller.admissionWebhooks.key | string | `"/usr/local/certificates/key"` |  |
 | controller.admissionWebhooks.labels | object | `{}` | Labels to be added to admission webhooks |
+| controller.admissionWebhooks.name | string | `"admission"` |  |
 | controller.admissionWebhooks.namespaceSelector | object | `{}` |  |
 | controller.admissionWebhooks.objectSelector | object | `{}` |  |
 | controller.admissionWebhooks.patch.enabled | bool | `true` |  |
@@ -131,6 +133,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.admissionWebhooks.patch.priorityClassName | string | `""` | Provide a priority class name to the webhook patching job # |
 | controller.admissionWebhooks.patch.securityContext | object | `{}` | Security context for secret creation & webhook patch pods |
 | controller.admissionWebhooks.patch.tolerations | list | `[]` |  |
+| controller.admissionWebhooks.patchWebhookJob.name | string | `"patch"` |  |
 | controller.admissionWebhooks.patchWebhookJob.resources | object | `{}` |  |
 | controller.admissionWebhooks.patchWebhookJob.securityContext | object | `{"allowPrivilegeEscalation":false,"capabilities":{"drop":["ALL"]},"readOnlyRootFilesystem":true,"runAsNonRoot":true,"runAsUser":65532,"seccompProfile":{"type":"RuntimeDefault"}}` | Security context for webhook patch containers |
 | controller.admissionWebhooks.port | int | `8443` |  |
@@ -221,7 +224,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.livenessProbe.periodSeconds | int | `10` |  |
 | controller.livenessProbe.successThreshold | int | `1` |  |
 | controller.livenessProbe.timeoutSeconds | int | `1` |  |
-| controller.maxUnavailable | string | `"25%"` | Maximum unavalaile pods set in PodDisruptionBudget. If set, 'minAvailable' is ignored. |
+| controller.maxUnavailable | string | `"25%"` | Maximum unavailable pods set in PodDisruptionBudget. If set, 'minAvailable' is ignored. |
 | controller.maxmindLicenseKey | string | `""` | Maxmind license key to download GeoLite2 Databases. # https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases |
 | controller.metrics.enabled | bool | `true` |  |
 | controller.metrics.port | int | `10254` |  |
@@ -401,6 +404,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | global.podSecurityStandards.enforced | bool | `false` | Wether Pod Security Standards are being used or not. This value is set automatically. Do not overwrite it. |
 | image.registry | string | `"quay.io"` | Registry host to pull images from. This value is set automatically. Do not overwrite it. |
 | imagePullSecrets | list | `[]` | Optional array of imagePullSecrets containing private registry credentials # Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
+| namespaceOverride | string | `""` | Override the deployment namespace; defaults to .Release.Namespace |
 | podSecurityPolicy.enabled | bool | `true` |  |
 | portNamePrefix | string | `""` | Prefix for TCP and UDP ports names in ingress controller service # Some cloud providers, like Yandex Cloud may have a requirements for a port name regex to support cloud load balancer integration |
 | provider | string | `"aws"` | Provider the cluster is running on. This value is set automatically. Do not overwrite it. |

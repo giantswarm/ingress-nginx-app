@@ -36,7 +36,7 @@ metadata:
     {{- toYaml .Values.controller.service.labels | nindent 4 }}
   {{- end }}
   name: {{ include "ingress-nginx.controller.fullname" . }}
-  namespace: {{ .Release.Namespace }}
+  namespace: {{ include "ingress-nginx.namespace" . }}
 spec:
   type: {{ .Values.controller.service.type }}
 {{- if .Values.controller.service.clusterIP }}
@@ -53,6 +53,9 @@ spec:
 {{- end }}
 {{- if .Values.controller.service.loadBalancerClass }}
   loadBalancerClass: {{ .Values.controller.service.loadBalancerClass }}
+{{- end }}
+{{- if hasKey .Values.controller.service "allocateLoadBalancerNodePorts" }}
+  allocateLoadBalancerNodePorts: {{ .Values.controller.service.allocateLoadBalancerNodePorts }}
 {{- end }}
 {{- if .Values.controller.service.externalTrafficPolicy }}
   externalTrafficPolicy: {{ .Values.controller.service.externalTrafficPolicy }}
