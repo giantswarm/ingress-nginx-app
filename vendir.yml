@@ -9,9 +9,7 @@ directories:
       ref: main
       depth: 1
     excludePaths:
-    - charts/ingress-nginx/CHANGELOG.md
     - charts/ingress-nginx/OWNERS
-    - charts/ingress-nginx/changelog.md.gotmpl
     - charts/ingress-nginx/changelog/*
     newRootPath: charts/ingress-nginx
     ignorePaths:
