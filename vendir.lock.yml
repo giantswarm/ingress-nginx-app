@@ -3,7 +3,7 @@ directories:
 - contents:
   - git:
       commitTitle: 'Service: Align internal to external....'
-      sha: 03c958b3eb3933df91154e9e3f99474957bc94db
+      sha: a325fce145c0a28c827d0f18d29143df3ba36005
     path: ingress-nginx
   path: helm
 kind: LockConfig

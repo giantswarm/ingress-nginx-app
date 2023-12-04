@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Admission Webhook: Add `controller.admissionWebhooks.patch.networkPolicy.enabled`. ([#568](https://github.com/giantswarm/ingress-nginx-app/pull/568))
+
 ## [3.3.0] - 2023-11-21
 
 ### Added
