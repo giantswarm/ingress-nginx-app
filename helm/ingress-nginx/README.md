@@ -317,6 +317,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.service.internal.sessionAffinity | string | `""` | Session affinity of the internal controller service. Must be either "None" or "ClientIP" if set. Defaults to "None". Ref: https://kubernetes.io/docs/reference/networking/virtual-ips/#session-affinity |
 | controller.service.internal.subdomain | string | `"ingress-internal"` | Defines the sub-domain prepended to the base domain in the FQDN of the internal controller service reconciled by ExternalDNS. |
 | controller.service.internal.targetPorts | object | `{}` |  |
+| controller.service.internal.type | string | `""` | Type of the internal controller service. Defaults to the value of `controller.service.type`. Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
 | controller.service.ipFamilies | list | `["IPv4"]` | List of IP families (e.g. IPv4, IPv6) assigned to the external controller service. This field is usually assigned automatically based on cluster configuration and the `ipFamilyPolicy` field. Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services |
 | controller.service.ipFamilyPolicy | string | `"SingleStack"` | Represents the dual-stack capabilities of the external controller service. Possible values are SingleStack, PreferDualStack or RequireDualStack. Fields `ipFamilies` and `clusterIP` depend on the value of this field. Ref: https://kubernetes.io/docs/concepts/services-networking/dual-stack/#services |
 | controller.service.labels | object | `{}` | Labels to be added to both controller services. |
@@ -334,7 +335,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.service.subdomain | string | `"ingress"` | Defines the sub-domain prepended to the base domain in the FQDN of the external controller service reconciled by ExternalDNS. |
 | controller.service.targetPorts.http | string | `"http"` | Port of the ingress controller the external HTTP listener is mapped to. |
 | controller.service.targetPorts.https | string | `"https"` | Port of the ingress controller the external HTTPS listener is mapped to. |
-| controller.service.type | string | `"LoadBalancer"` | Type of both controller services. Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
+| controller.service.type | string | `"LoadBalancer"` | Type of the external controller service. Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types |
 | controller.shareProcessNamespace | bool | `false` |  |
 | controller.sysctls | object | `{}` | sysctls for controller pods # Ref: https://kubernetes.io/docs/tasks/administer-cluster/sysctl-cluster/ |
 | controller.tcp.annotations | object | `{}` | Annotations to be added to the tcp config configmap |

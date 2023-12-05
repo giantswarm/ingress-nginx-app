@@ -906,6 +906,9 @@
                                 },
                                 "targetPorts": {
                                     "type": "object"
+                                },
+                                "type": {
+                                    "type": "string"
                                 }
                             }
                         },

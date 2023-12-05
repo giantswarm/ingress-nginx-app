@@ -7,6 +7,14 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Service: Add `controller.service.internal.type`. ([#571](https://github.com/giantswarm/ingress-nginx-app/pull/571))
+
+### Changed
+
+- Chart: Simplify image templating. ([#571](https://github.com/giantswarm/ingress-nginx-app/pull/571))
+
 ## [3.3.1] - 2023-12-05
 
 ### Added
