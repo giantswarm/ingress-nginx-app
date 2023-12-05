@@ -476,7 +476,7 @@ controller:
     # -- Makes the external controller service public or not. Adds annotations for making it internal if disabled.
     public: true
 
-    # -- Type of both controller services.
+    # -- Type of the external controller service.
     # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
     type: LoadBalancer
 
@@ -571,6 +571,11 @@ controller:
 
       # -- Defines the sub-domain prepended to the base domain in the FQDN of the internal controller service reconciled by ExternalDNS.
       subdomain: ingress-internal
+
+      # -- Type of the internal controller service.
+      # Defaults to the value of `controller.service.type`.
+      # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+      type: ""
 
       # -- Pre-defined cluster internal IP address of the internal controller service. Take care of collisions with existing services.
       # This value is immutable. Set once, it can not be changed without deleting and re-creating the service.

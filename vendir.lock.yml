@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Service: Align internal to external....'
-      sha: a325fce145c0a28c827d0f18d29143df3ba36005
+      commitTitle: 'Helm Service: Align internal to external. (#10239)...'
+      sha: 7e54daa9097ade586595150b2de0caf3e205a7cb
     path: ingress-nginx
   path: helm
 kind: LockConfig
