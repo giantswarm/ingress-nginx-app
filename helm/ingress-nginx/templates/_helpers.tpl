@@ -259,7 +259,8 @@ Extra modules.
 */}}
 {{- define "extraModules" -}}
 - name: {{ .name }}
-  image: {{ .image }}
+  {{- with .image }}
+  image: {{ if .repository }}{{ .repository }}{{ else }}{{ .registry }}/{{ .image }}{{ end }}:{{ .tag }}{{ if .digest }}@{{ .digest }}{{ end }}
   command:
   {{- if .distroless }}
     - /init_module
@@ -267,6 +268,7 @@ Extra modules.
     - sh
     - -c
     - /usr/local/bin/init_module.sh
+  {{- end }}
   {{- end }}
   {{- if .containerSecurityContext }}
   securityContext: {{ toYaml .containerSecurityContext | nindent 4 }}
