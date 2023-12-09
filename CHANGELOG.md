@@ -14,6 +14,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Chart: Simplify image templating. ([#571](https://github.com/giantswarm/ingress-nginx-app/pull/571))
+- Deployment: Make extra modules image more configurable. ([#572](https://github.com/giantswarm/ingress-nginx-app/pull/572))\
+  **NOTE:** This changes the schema of `controller.extraModules.image` & `controller.opentelemetry.image`. Please update any overrides.
 
 ## [3.3.1] - 2023-12-05
 

@@ -259,9 +259,11 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.opentelemetry.containerSecurityContext.runAsNonRoot | bool | `true` |  |
 | controller.opentelemetry.containerSecurityContext.runAsUser | int | `65532` | The image's default user, inherited from its base image `cgr.dev/chainguard/static`. |
 | controller.opentelemetry.containerSecurityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
-| controller.opentelemetry.distroless | bool | `true` |  |
 | controller.opentelemetry.enabled | bool | `false` |  |
-| controller.opentelemetry.image | string | `"quay.io/giantswarm/ingress-nginx-opentelemetry:v20230721-3e2062ee5"` |  |
+| controller.opentelemetry.image.digest | string | `""` |  |
+| controller.opentelemetry.image.distroless | bool | `true` |  |
+| controller.opentelemetry.image.image | string | `"giantswarm/ingress-nginx-opentelemetry"` |  |
+| controller.opentelemetry.image.tag | string | `"v20230721-3e2062ee5"` |  |
 | controller.opentelemetry.name | string | `"opentelemetry"` |  |
 | controller.opentelemetry.resources | object | `{}` |  |
 | controller.podAnnotations | object | `{}` | Annotations to be added to controller pods # |
