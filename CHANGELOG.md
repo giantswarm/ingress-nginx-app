@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Configure `gsoci.azurecr.io` as the default container image registry. ([#574](https://github.com/giantswarm/ingress-nginx-app/pull/574))
+
 ### Added
 
 - Service: Add `controller.service.internal.type`. ([#571](https://github.com/giantswarm/ingress-nginx-app/pull/571))
