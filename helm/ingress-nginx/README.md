@@ -360,6 +360,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | defaultBackend.enabled | bool | `false` |  |
 | defaultBackend.existingPsp | string | `""` | Use an existing PSP instead of creating one |
 | defaultBackend.extraArgs | object | `{}` |  |
+| defaultBackend.extraConfigMaps | list | `[]` |  |
 | defaultBackend.extraEnvs | list | `[]` | Additional environment variables to set for defaultBackend pods |
 | defaultBackend.extraVolumeMounts | list | `[]` |  |
 | defaultBackend.extraVolumes | list | `[]` |  |
