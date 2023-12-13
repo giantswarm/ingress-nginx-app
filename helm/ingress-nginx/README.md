@@ -406,7 +406,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | defaultBackend.updateStrategy | object | `{}` | The update strategy to apply to the Deployment or DaemonSet # |
 | dhParam | string | `""` | A base64-encoded Diffie-Hellman parameter. This can be generated with: `openssl dhparam 4096 2> /dev/null | base64` # Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param |
 | global.podSecurityStandards.enforced | bool | `false` | Wether Pod Security Standards are being used or not. This value is set automatically. Do not overwrite it. |
-| image.registry | string | `"quay.io"` | Registry host to pull images from. This value is set automatically. Do not overwrite it. |
+| image.registry | string | `"gsoci.azurecr.io"` | Registry host to pull images from. This value is set automatically. Do not overwrite it. |
 | imagePullSecrets | list | `[]` | Optional array of imagePullSecrets containing private registry credentials # Ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/ |
 | namespaceOverride | string | `""` | Override the deployment namespace; defaults to .Release.Namespace |
 | podSecurityPolicy.enabled | bool | `true` |  |

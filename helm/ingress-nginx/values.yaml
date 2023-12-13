@@ -1146,7 +1146,7 @@ global:
 image:
   # -- Registry host to pull images from.
   # This value is set automatically. Do not overwrite it.
-  registry: quay.io
+  registry: gsoci.azurecr.io
 
 # -- Domain of the service's FQDN.
 # This value is set automatically. Do not overwrite it.
