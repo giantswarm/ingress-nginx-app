@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: otel distroless (#10741)
-      sha: 7c998b5937826b880aab7a56d5081fffcc29e191
+      commitTitle: 'Docs: Keep title in navbar in upcase (#10755)'
+      sha: 6ff70f015dd8b12d5e96adc6ef3c16e1c9060944
     path: ingress-nginx
   path: helm
 kind: LockConfig
