@@ -1094,6 +1094,9 @@
                 "extraArgs": {
                     "type": "object"
                 },
+                "extraConfigMaps": {
+                    "type": "array"
+                },
                 "extraEnvs": {
                     "type": "array"
                 },

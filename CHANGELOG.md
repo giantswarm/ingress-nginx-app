@@ -7,19 +7,17 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
-### Changed
-
-- Configure `gsoci.azurecr.io` as the default container image registry. ([#574](https://github.com/giantswarm/ingress-nginx-app/pull/574))
-
 ### Added
 
 - Service: Add `controller.service.internal.type`. ([#571](https://github.com/giantswarm/ingress-nginx-app/pull/571))
+- Default Backend: Add `defaultBackend.extraConfigMaps`. ([#576](https://github.com/giantswarm/ingress-nginx-app/pull/576))
 
 ### Changed
 
 - Chart: Simplify image templating. ([#571](https://github.com/giantswarm/ingress-nginx-app/pull/571))
 - Deployment: Make extra modules image more configurable. ([#572](https://github.com/giantswarm/ingress-nginx-app/pull/572))\
   **NOTE:** This changes the schema of `controller.extraModules.image` & `controller.opentelemetry.image`. Please update any overrides.
+- Configure `gsoci.azurecr.io` as the default container image registry. ([#574](https://github.com/giantswarm/ingress-nginx-app/pull/574))
 
 ## [3.3.1] - 2023-12-05
 
