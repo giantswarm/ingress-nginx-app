@@ -3,7 +3,7 @@ directories:
 - contents:
   - git:
       commitTitle: 'Chart: Improve #10673 and add changelog.'
-      sha: 7b267acef0107d847d95bf3b2c0ea6fe697c220d
+      sha: 44fc1be9a2e121ceea3645a847fdd38efa37c71e
     path: ingress-nginx
   path: helm
 kind: LockConfig
