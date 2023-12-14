@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Chart: Add Helm unit tests from upstream. ([#578](https://github.com/giantswarm/ingress-nginx-app/pull/578))
+
 ## [3.4.0] - 2023-12-13
 
 ### Added
