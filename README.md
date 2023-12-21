@@ -70,7 +70,7 @@ metadata:
 spec:
   catalog: giantswarm
   name: ingress-nginx
-  version: 3.4.1
+  version: 3.4.2
   userConfig:
     configMap:
       name: ingress-nginx-user-values
