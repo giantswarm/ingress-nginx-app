@@ -612,6 +612,9 @@
                                 "additionalLabels": {
                                     "type": "object"
                                 },
+                                "annotations": {
+                                    "type": "object"
+                                },
                                 "enabled": {
                                     "type": "boolean"
                                 },

@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Chart: Improve #10673 and add changelog.'
-      sha: d0a6efaaea9da20a36bba16f2cad0c578d8c000a
+      commitTitle: 'Merge pull request #10795 from strongjz/release-1.9.5...'
+      sha: be46124ccc9e8158165f06e3f7d2ebd0cbbb284f
     path: ingress-nginx
   path: helm
 kind: LockConfig
