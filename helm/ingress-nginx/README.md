@@ -2,7 +2,7 @@
 
 [ingress-nginx](https://github.com/giantswarm/ingress-nginx-app) Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 
-![Version: 3.4.1](https://img.shields.io/badge/Version-3.4.1-informational?style=flat-square) ![AppVersion: 1.9.4](https://img.shields.io/badge/AppVersion-1.9.4-informational?style=flat-square)
+![Version: 3.4.1](https://img.shields.io/badge/Version-3.4.1-informational?style=flat-square) ![AppVersion: 1.9.5](https://img.shields.io/badge/AppVersion-1.9.5-informational?style=flat-square)
 
 To use, add `ingressClassName: nginx` spec field or the `kubernetes.io/ingress.class: nginx` annotation to your Ingress resources.
 
@@ -196,7 +196,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.image.runAsNonRoot | bool | `true` |  |
 | controller.image.runAsUser | int | `101` |  |
 | controller.image.seccompProfile.type | string | `"RuntimeDefault"` |  |
-| controller.image.tag | string | `"v1.9.4"` |  |
+| controller.image.tag | string | `"v1.9.5"` |  |
 | controller.ingressClass | string | `"nginx"` | For backwards compatibility with ingress.class annotation, use ingressClass. Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation |
 | controller.ingressClassByName | bool | `false` | Process IngressClass per name (additionally as per spec.controller). |
 | controller.ingressClassResource.controllerValue | string | `"k8s.io/ingress-nginx"` | Controller-value of the controller that is processing this ingressClass |
@@ -240,6 +240,7 @@ Please ensure that cert-manager is correctly installed and configured.
 | controller.metrics.service.servicePort | int | `10254` |  |
 | controller.metrics.service.type | string | `"ClusterIP"` |  |
 | controller.metrics.serviceMonitor.additionalLabels | object | `{}` |  |
+| controller.metrics.serviceMonitor.annotations | object | `{}` |  |
 | controller.metrics.serviceMonitor.enabled | bool | `true` |  |
 | controller.metrics.serviceMonitor.metricRelabelings[0].action | string | `"drop"` |  |
 | controller.metrics.serviceMonitor.metricRelabelings[0].regex | string | `"nginx_ingress_controller_(bytes_sent_bucket|request_size_bucket|response_duration_seconds_bucket|response_size_bucket|request_duration_seconds_count|connect_duration_seconds_bucket|header_duration_seconds_bucket|bytes_sent_count|request_duration_seconds_sum|bytes_sent_sum|request_size_count|response_size_count|response_duration_seconds_sum|response_duration_seconds_count|ingress_upstream_latency_seconds|ingress_upstream_latency_seconds_sum|ingress_upstream_latency_seconds_count)"` |  |

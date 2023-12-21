@@ -7,6 +7,15 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Service Monitor: Add `controller.metrics.serviceMonitor.annotations`. ([#584](https://github.com/giantswarm/ingress-nginx-app/pull/584))
+
+### Changed
+
+- Image: Update to [`v1.9.5`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.9.5.md). ([#584](https://github.com/giantswarm/ingress-nginx-app/pull/584))
+- Default Backend: Label pods with `ingress-nginx.labels` instead of `ingress-nginx.selectorLabels`. ([#584](https://github.com/giantswarm/ingress-nginx-app/pull/584))
+
 ## [3.4.1] - 2023-12-15
 
 ### Added
