@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [3.4.2] - 2023-12-21
+
 ### Added
 
 - Service Monitor: Add `controller.metrics.serviceMonitor.annotations`. ([#584](https://github.com/giantswarm/ingress-nginx-app/pull/584))
@@ -1263,7 +1265,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.4.1...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.4.2...HEAD
+[3.4.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.4.1...v3.4.2
 [3.4.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.4.0...v3.4.1
 [3.4.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.3.1...v3.4.0
 [3.3.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.3.0...v3.3.1
