@@ -787,7 +787,7 @@ controller:
           type: RuntimeDefault
         capabilities:
           drop:
-          - ALL
+            - ALL
         readOnlyRootFilesystem: true
       resources: {}
     patch:
