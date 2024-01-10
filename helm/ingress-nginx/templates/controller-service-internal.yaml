@@ -19,7 +19,7 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
     {{- end }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
-  {{- else if eq .Values.provider "azure" }}
+  {{- else if or (eq .Values.provider "azure") (eq .Values.provider "capz") }}
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
   {{- else if eq .Values.provider "cloud-director" }}
     service.beta.kubernetes.io/vcloud-avi-ssl-no-termination: "true"

@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Service: Add CAPZ support. ([#587](https://github.com/giantswarm/ingress-nginx-app/pull/587))
+
 ## [3.4.2] - 2023-12-21
 
 ### Added
