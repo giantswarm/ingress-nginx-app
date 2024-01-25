@@ -31,12 +31,12 @@ workflows:
 
       - architect/run-tests-with-ats:
           name: run-tests-with-ats
+          requires:
+            - push-to-giantswarm-catalog
           filters:
             branches:
               ignore:
                 - main
-          requires:
-            - push-to-giantswarm-catalog
 
       - architect/push-to-app-collection:
           name: push-to-capa-app-collection
