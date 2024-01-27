@@ -26,7 +26,7 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.9.5"
+    tag: "v1.9.6"
     digest: ""
     digestChroot: ""
     pullPolicy: IfNotPresent
@@ -798,7 +798,7 @@ controller:
         ## for backwards compatibility consider setting the full image url via the repository value below
         ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
         ## repository:
-        tag: v20231011-8b53cabe0
+        tag: v20231226-1a7112e06
         digest: ""
         pullPolicy: IfNotPresent
       # -- Provide a priority class name to the webhook patching job

@@ -2,8 +2,9 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Merge pull request #10795 from strongjz/release-1.9.5...'
-      sha: be46124ccc9e8158165f06e3f7d2ebd0cbbb284f
+      commitTitle: 'docs: update annotations docs with missing session-cookie section
+        (#10917)'
+      sha: c295cd1c4bdb385f0a97371a4f4fad6470b39751
     path: ingress-nginx
   path: helm
 kind: LockConfig
