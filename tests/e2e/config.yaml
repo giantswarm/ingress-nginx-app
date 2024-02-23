@@ -1,0 +1,3 @@
+appName: ingress-nginx
+repoName: nginx-ingress-controller-app
+appCatalog: giantswarm
