@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Metrics: Really disable them when told to. ([#592](https://github.com/giantswarm/ingress-nginx-app/pull/592))
+
 ## [3.5.1] - 2024-01-27
 
 ### Changed
