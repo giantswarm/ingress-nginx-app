@@ -2,9 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'docs: update annotations docs with missing session-cookie section
-        (#10917)'
-      sha: c295cd1c4bdb385f0a97371a4f4fad6470b39751
+      commitTitle: Update ingress-path-matching.md (#11008)
+      sha: 536c4e7e068390282bd1239fdb70983e891edad1
     path: ingress-nginx
   path: helm
 kind: LockConfig
