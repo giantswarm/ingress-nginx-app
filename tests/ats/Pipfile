@@ -7,4 +7,4 @@ verify_ssl = true
 python_version = "3.9"
 
 [packages]
-pytest-helm-charts = "~=1.1.2"
+pytest-helm-charts = "~=1.2.0"
