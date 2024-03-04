@@ -2,8 +2,6 @@ module e2e
 
 go 1.21
 
-// replace github.com/giantswarm/apptest-framework => /Users/marcus/Code/GiantSwarm/apptest-framework
-
 require github.com/giantswarm/apptest-framework v0.0.1
 
 require (
