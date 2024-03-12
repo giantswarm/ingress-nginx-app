@@ -20,6 +20,7 @@ If you are using Flux or any comparable solution to apply and reconcile configur
 
 During the upgrade, two Ingress NGINX Controller instances will coexist, each deploying a `ValidatingWebhookConfiguration` with identical rules targeting the same `apiGroups`. Consequently, a request must pass both sets of validations to proceed. For example, difficulties arose when enabling the `OpenTelemetry` plugin on the new instance, requiring extra configuration and module loading, leading to validation failures that prevented the new instance from starting.
 To prevent conflicts, it's advisable to postpone any new configurations until the upgrade completes and the previous instance is removed. If retaining the old instance is necessary, disabling its `ValidatingWebhookConfiguration` is recommended to prevent validation issues:
+
 ```
 controller:
   admissionWebhooks:
