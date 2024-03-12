@@ -12,7 +12,7 @@ Please read the following steps thoroughly and reach out to our support if you a
 
 ## Caveats
 
-**Configuration management tools**
+### Configuration management tools
 
 If you are using Flux or any comparable solution to apply and reconcile configurations to your cluster, we recommend suspending it for the duration of this maintenance and update the according configuration source before resuming it. You can still implement all of the following changes using your tooling step by step, but you should thorougly test this in a non-production environment and suspend ExternalDNS in the second step since this is a time critical part in the whole procedure.
 
