@@ -16,7 +16,7 @@ Please read the following steps thoroughly and reach out to our support if you a
 
 If you are using Flux or any comparable solution to apply and reconcile configurations to your cluster, we recommend suspending it for the duration of this maintenance and update the according configuration source before resuming it. You can still implement all of the following changes using your tooling step by step, but you should thorougly test this in a non-production environment and suspend ExternalDNS in the second step since this is a time critical part in the whole procedure.
 
-**ValidatingWebhookConfiguration**
+### ValidatingWebhookConfiguration
 
 During the upgrade, two Ingress NGINX Controller instances will coexist, each deploying a `ValidatingWebhookConfiguration` with identical rules targeting the same `apiGroups`. Consequently, a request must pass both sets of validations to proceed. For example, difficulties arose when enabling the `OpenTelemetry` Plugin on the new instance, requiring extra configuration and module loading, leading to validation failures that prevented the new instance from starting.
 To prevent conflicts, it's advisable to postpone any new configurations until the upgrade completes and the previous instance is removed. If retaining the old instance is necessary, disabling its `ValidatingWebhookConfiguration` is recommended to prevent validation issues:
