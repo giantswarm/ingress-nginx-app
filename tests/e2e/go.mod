@@ -2,7 +2,7 @@ module e2e
 
 go 1.21
 
-require github.com/giantswarm/apptest-framework v0.0.1
+require github.com/giantswarm/apptest-framework v0.0.5
 
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230106234847-43070de90fa1 // indirect

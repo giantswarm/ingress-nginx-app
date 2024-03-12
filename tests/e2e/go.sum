@@ -211,8 +211,8 @@ github.com/fsnotify/fsnotify v1.6.0/go.mod h1:sl3t1tCWJFWoRz9R8WJCbQihKKwmorjAbS
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/giantswarm/apiextensions-application v0.6.0 h1:ZPIiq27zJ2VatrWH21/dK6jR9rJrr4VJUP/Fo0GvsPE=
 github.com/giantswarm/apiextensions-application v0.6.0/go.mod h1:O6mg+EdXC9CyTLgi0d3rf6QTXrQX/79iw4kjMJRinig=
-github.com/giantswarm/apptest-framework v0.0.1 h1:cwMn2BA2XgEiNhw29IY/R2G1LuQtn1y5DL21UWe4zMg=
-github.com/giantswarm/apptest-framework v0.0.1/go.mod h1:to1I1IA6b8COCtxT0H/RDKBbpfXSgKLB3POQazOb0Ro=
+github.com/giantswarm/apptest-framework v0.0.5 h1:JVSQnhOsTCFOFXSOL9uh0qKqQSBSj3g86AiLI6KbdDg=
+github.com/giantswarm/apptest-framework v0.0.5/go.mod h1:to1I1IA6b8COCtxT0H/RDKBbpfXSgKLB3POQazOb0Ro=
 github.com/giantswarm/clustertest v0.15.0 h1:E2yXLA//kbmYYT5acApr9vSKMLcCkPx8gmVx2jSEXYQ=
 github.com/giantswarm/clustertest v0.15.0/go.mod h1:/4+y200XUFT72ajVmeUcYqx+hXblukQ9C4QOKo4iisw=
 github.com/giantswarm/k8smetadata v0.23.0 h1:iGwa1Nb45Sfcd5wqJEKBvxY1u5yXFg3Sq5Fw62nyRGA=
