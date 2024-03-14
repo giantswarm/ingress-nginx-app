@@ -12,7 +12,6 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Metrics: Really disable them when told to. ([#592](https://github.com/giantswarm/ingress-nginx-app/pull/592))
-- Update migration.md with caveat ValidatingWebhookConfiguration
 
 ## [3.5.1] - 2024-01-27
 
