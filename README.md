@@ -1,3 +1,5 @@
+IGNORE
+
 [![CircleCI](https://circleci.com/gh/giantswarm/ingress-nginx-app.svg?style=shield)](https://circleci.com/gh/giantswarm/ingress-nginx-app)
 
 # Ingress NGINX Controller
