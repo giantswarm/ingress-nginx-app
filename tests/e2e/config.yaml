@@ -1,3 +1,6 @@
 appName: ingress-nginx
 repoName: ingress-nginx-app
 appCatalog: giantswarm
+providers:
+- capa
+- capv
