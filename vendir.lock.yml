@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Update ingress-path-matching.md (#11008)
-      sha: 536c4e7e068390282bd1239fdb70983e891edad1
+      commitTitle: 'feature(geoip2_autoreload): Enable GeoIP2 auto_reload config  (#11079)...'
+      sha: 3c4e78e6b755eb33821c4477106f424bd8792d8f
     path: ingress-nginx
   path: helm
 kind: LockConfig

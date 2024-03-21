@@ -91,7 +91,7 @@ rules:
       - list
       - watch
       - get
-{{- if and .Values.podSecurityPolicy.enabled (not .Values.global.podSecurityStandards.enforced) }}
+{{- if .Values.podSecurityPolicy.enabled }}
   - apiGroups:      [{{ template "podSecurityPolicy.apiGroup" . }}]
     resources:      ['podsecuritypolicies']
     verbs:          ['use']

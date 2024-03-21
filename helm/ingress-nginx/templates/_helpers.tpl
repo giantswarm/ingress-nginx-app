@@ -135,8 +135,6 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/part-of: {{ template "ingress-nginx.name" . }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
-giantswarm.io/service-type: managed
-application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
 {{- if .Values.commonLabels}}
 {{ toYaml .Values.commonLabels }}
 {{- end }}
@@ -242,16 +240,6 @@ Check the ingress controller version tag is at most three versions behind the la
 {{- if not (semverCompare ">=0.27.0-0" .Values.controller.image.tag) -}}
 {{- fail "Controller container image tag should be 0.27.0 or higher" -}}
 {{- end -}}
-{{- end -}}
-
-{{/*
-IngressClass parameters.
-*/}}
-{{- define "ingressClass.parameters" -}}
-  {{- if .Values.controller.ingressClassResource.parameters -}}
-          parameters:
-{{ toYaml .Values.controller.ingressClassResource.parameters | indent 4}}
-  {{ end }}
 {{- end -}}
 
 {{/*
