@@ -447,6 +447,9 @@
                 "ingressClassResource": {
                     "type": "object",
                     "properties": {
+                        "aliases": {
+                            "type": "array"
+                        },
                         "controllerValue": {
                             "type": "string"
                         },
