@@ -1,22 +1,15 @@
 annotations:
-  artifacthub.io/changes: |-
-    - "Update Ingress-Nginx version controller-v1.10.0"
-  artifacthub.io/prerelease: "false"
+  application.giantswarm.io/team: team-cabbage
+  ui.giantswarm.io/logo: https://s.giantswarm.io/app-icons/ingress-nginx/2/logo_dark.svg
 apiVersion: v2
 appVersion: 1.10.0
-description: Ingress controller for Kubernetes using NGINX as a reverse proxy and
-  load balancer
-home: https://github.com/kubernetes/ingress-nginx
-icon: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Nginx_logo.svg/500px-Nginx_logo.svg.png
+description: Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
+home: https://github.com/giantswarm/ingress-nginx-app
+icon: https://s.giantswarm.io/app-icons/ingress-nginx/2/icon_dark.svg
 keywords:
 - ingress
 - nginx
 kubeVersion: '>=1.20.0-0'
-maintainers:
-- name: Gacko
-- name: rikatz
-- name: strongjz
-- name: tao12345666333
 name: ingress-nginx
 sources:
 - https://github.com/kubernetes/ingress-nginx
