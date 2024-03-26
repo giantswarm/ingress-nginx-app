@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Bump the all group with 3 updates (#11157)...
-      sha: aedb13c9faead3f486d1e5f451a37dfd72e53b77
+      commitTitle: 'Chart: Implement Giant Swarm changes. (#12)'
+      sha: 2d6e8e27ee501673868d3d74dbbd62d3712da52f
     path: ingress-nginx
   path: helm
 kind: LockConfig
