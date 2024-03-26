@@ -7,6 +7,20 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Chart: Add IngressClass aliases. ([#609](https://github.com/giantswarm/ingress-nginx-app/pull/609))
+
+### Changed
+
+- Image: Update to [`v1.10.0`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.10.0.md). ([#609](https://github.com/giantswarm/ingress-nginx-app/pull/609))\
+  **NOTE:** Upstream does not provide a `chroot` image for this version, yet.
+- Chart: Always deploy `PrometheusRule` when asked to. ([#609](https://github.com/giantswarm/ingress-nginx-app/pull/609))
+- Chart: Deploy `PodDisruptionBudget` with KEDA. ([#609](https://github.com/giantswarm/ingress-nginx-app/pull/609))
+- Chart: Improve IngressClass documentation. ([#609](https://github.com/giantswarm/ingress-nginx-app/pull/609))
+- Chart: Align HPA & KEDA conditions. ([#609](https://github.com/giantswarm/ingress-nginx-app/pull/609))
+- Chart: Render `controller.ingressClassResource.parameters` natively. ([#609](https://github.com/giantswarm/ingress-nginx-app/pull/609))
+
 ## [3.5.2] - 2024-02-23
 
 ### Changed
