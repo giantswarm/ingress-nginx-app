@@ -7,6 +7,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [3.6.0] - 2024-03-26
+
+Since upstream did not release a `chroot` variant of the controller image for v1.10.0, one can not enable `controller.image.chroot` in the chart values. If you although try to do so, your pods will not come up due to a missing image.
+
+We are sorry for that inconvenience and hopefully bring back support for that in a future version!
+
 ### Added
 
 - Chart: Add IngressClass aliases. ([#609](https://github.com/giantswarm/ingress-nginx-app/pull/609))
@@ -1297,7 +1303,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.5.2...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.6.0...HEAD
+[3.6.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.5.2...v3.6.0
 [3.5.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.5.1...v3.5.2
 [3.5.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.5.0...v3.5.1
 [3.5.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.4.2...v3.5.0
