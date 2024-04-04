@@ -286,7 +286,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | controller.autoscaling.targetMemoryUtilizationPercentage | int | `80` |  |
 | controller.autoscalingTemplate | list | `[]` |  |
-| controller.config | object | `{"hsts":"false","strict-validate-path-type":"true"}` | Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ |
+| controller.config | object | `{"hsts":"false","strict-validate-path-type":"true"}` | Global configuration passed to the ConfigMap consumed by the controller. Values may contain Helm templates. Ref.: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ |
 | controller.config.hsts | string | `"false"` | Enable HSTS or not. Disabled by default due to possible serious consequences. Ref: https://github.com/kubernetes/ingress-nginx/issues/549 |
 | controller.config.strict-validate-path-type | string | `"true"` | Enable strict path type validation or not. Enabled by default for security reasons. Ref: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#strict-validate-path-type |
 | controller.configAnnotations | object | `{}` | Annotations to be added to the controller config configuration configmap. |
