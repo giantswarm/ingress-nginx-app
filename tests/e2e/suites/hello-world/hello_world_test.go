@@ -84,7 +84,7 @@ func TestBasic(t *testing.T) {
 						WithClusterName(state.GetCluster().Name).
 						WithInCluster(false).
 						WithInstallNamespace("default").
-						MustWithValuesFile("../../test_data/helloworld_values.yaml", &application.TemplateValues{
+						MustWithValuesFile("./test_data/helloworld_values.yaml", &application.TemplateValues{
 							ClusterName:  state.GetCluster().Name,
 							Organization: state.GetCluster().Organization.Name,
 							ExtraValues:  helloAppValues,
