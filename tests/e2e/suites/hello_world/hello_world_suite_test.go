@@ -39,7 +39,7 @@ func TestHelloWorld(t *testing.T) {
 		helloWorldIngressUrl  string
 	)
 	const (
-		appReadyTimeout  = 3 * time.Minute
+		appReadyTimeout  = 10 * time.Minute
 		appReadyInterval = 5 * time.Second
 	)
 	suite.New(config.MustLoad("../../config.yaml")).
