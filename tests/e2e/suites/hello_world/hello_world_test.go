@@ -1,4 +1,4 @@
-package basic
+package hello_world
 
 import (
 	"context"
@@ -204,7 +204,7 @@ func TestBasic(t *testing.T) {
 				})
 			})
 		}).
-		Run(t, "Basic Test")
+		Run(t, "Hello World Test")
 }
 
 func getWorkloadClusterDnsZone() string {
