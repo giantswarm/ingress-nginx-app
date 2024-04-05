@@ -31,7 +31,7 @@ const (
 	isUpgrade = false
 )
 
-func TestBasic(t *testing.T) {
+func TestHelloWorld(t *testing.T) {
 
 	var (
 		helloWorldApp         *application.Application
