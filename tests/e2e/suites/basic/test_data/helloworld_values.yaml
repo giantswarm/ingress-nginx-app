@@ -1,14 +1,11 @@
 clusterName: {{ .ClusterName }}
 organization: {{ .Organization }}
 ingress:
-  annotations:
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: letsencrypt-giantswarm
   hosts:
     - host: {{ index .ExtraValues "IngressUrl" }}
       paths:
         - path: /
-          pathType: ImplementationSpecific
+          pathType: Prefix
   tls:
     - secretName: hello-world-tls
       hosts:
