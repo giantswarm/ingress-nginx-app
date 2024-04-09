@@ -25,9 +25,9 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func getHelloWorldApp(ingressUrl string) (*application.Application, error) {
+func getHelloWorldApp(ingressHost string) (*application.Application, error) {
 	org := state.GetCluster().Organization
-	helloWorldAppValues := map[string]string{"IngressUrl": ingressUrl}
+	helloWorldAppValues := map[string]string{"IngressHost": ingressHost}
 	helloWorldApp := application.New(fmt.Sprintf("%s-hello-world", state.GetCluster().Name), "hello-world").
 		WithCatalog("giantswarm").
 		WithOrganization(*org).
@@ -112,7 +112,7 @@ func getHttpClientWithProxy() *http.Client {
 	return httpClient
 }
 
-func getWorkloadClusterDnsZone() string {
+func getWorkloadClusterBaseDomain() string {
 	values := &application.DefaultAppsValues{}
 	err := state.GetFramework().MC().GetHelmValues(state.GetCluster().Name, state.GetCluster().GetNamespace(), values)
 	Expect(err).NotTo(HaveOccurred())

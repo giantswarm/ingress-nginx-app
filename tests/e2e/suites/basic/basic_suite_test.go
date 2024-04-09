@@ -62,7 +62,7 @@ func TestBasic(t *testing.T) {
 				helloWorldIngressUrl  string
 			)
 			BeforeEach(func() {
-				helloWorldIngressHost = fmt.Sprintf("hello-world.%s", getWorkloadClusterDnsZone())
+				helloWorldIngressHost = fmt.Sprintf("hello-world.%s", getWorkloadClusterBaseDomain())
 				helloWorldIngressUrl = fmt.Sprintf("https://%s", helloWorldIngressHost)
 				// org := state.GetCluster().Organization
 			})
@@ -71,7 +71,7 @@ func TestBasic(t *testing.T) {
 				// STEP
 				By("creating the app CR")
 
-				helloWorldApp, err := getHelloWorldApp(helloWorldIngressUrl)
+				helloWorldApp, err := getHelloWorldApp(helloWorldIngressHost)
 				Expect(err).To(BeNil())
 				Eventually(func() (bool, error) {
 					// The `ingress-nginx` app has an admission webhooks for `Ingress` resources. While the controller
