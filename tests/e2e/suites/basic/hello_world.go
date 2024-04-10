@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"time"
 
-	// "io"
 	"net"
 	"net/http"
 	"net/url"
@@ -35,7 +34,7 @@ func newHelloWorldApp(ingressHost string) (*application.Application, error) {
 		WithClusterName(state.GetCluster().Name).
 		WithInCluster(false).
 		WithInstallNamespace("default").
-		MustWithValuesFile("./test_data/helloworld_values.yaml", &application.TemplateValues{
+		MustWithValuesFile("./test_data/hello-world_values.yaml", &application.TemplateValues{
 			ClusterName:  state.GetCluster().Name,
 			Organization: state.GetCluster().Organization.Name,
 			ExtraValues:  helloWorldAppValues,
