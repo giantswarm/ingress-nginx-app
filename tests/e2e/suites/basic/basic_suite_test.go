@@ -67,7 +67,7 @@ func TestBasic(t *testing.T) {
 				// STEP
 				By("creating the hello-world app CR")
 
-				helloWorldApp, err := getHelloWorldApp(helloWorldIngressHost)
+				helloWorldApp, err := newHelloWorldApp(helloWorldIngressHost)
 				Expect(err).To(BeNil())
 				Eventually(func() (bool, error) {
 					// The `ingress-nginx` app has an admission webhooks for `Ingress` resources. While the controller
@@ -75,7 +75,7 @@ func TestBasic(t *testing.T) {
 					// The `hello-world-app` fails to install during this time because it creates an Ingress resource.
 					// We must wait until the deployment succeeds.
 
-					return waitWithPatch(helloWorldApp)
+					return patchAndWait(helloWorldApp)
 				}).
 					WithTimeout(6 * time.Minute).
 					WithPolling(5 * time.Second).
@@ -94,7 +94,7 @@ func TestBasic(t *testing.T) {
 				// STEP
 				By("serving responses from the backend")
 
-				httpClient := getHttpClientWithProxy()
+				httpClient := newHttpClientWithProxy()
 				Eventually(func() (string, error) {
 					logger.Log("Trying to get a successful response from %s", helloWorldIngressUrl)
 					resp, err := httpClient.Get(helloWorldIngressUrl)

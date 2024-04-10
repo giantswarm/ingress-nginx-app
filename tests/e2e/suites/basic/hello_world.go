@@ -25,7 +25,7 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
-func getHelloWorldApp(ingressHost string) (*application.Application, error) {
+func newHelloWorldApp(ingressHost string) (*application.Application, error) {
 	org := state.GetCluster().Organization
 	helloWorldAppValues := map[string]string{"IngressHost": ingressHost}
 	helloWorldApp := application.New(fmt.Sprintf("%s-hello-world", state.GetCluster().Name), "hello-world").
@@ -71,7 +71,7 @@ func ingressHasLB(ingressNamespace, ingressName string) (bool, error) {
 	return false, nil
 }
 
-func getHttpClientWithProxy() *http.Client {
+func newHttpClientWithProxy() *http.Client {
 	transport := &http.Transport{
 		DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
 			dialer := &net.Dialer{
@@ -124,7 +124,7 @@ func getWorkloadClusterBaseDomain() string {
 	return fmt.Sprintf("%s.%s", state.GetCluster().Name, values.BaseDomain)
 }
 
-func waitWithPatch(app *application.Application) (bool, error) {
+func patchAndWait(app *application.Application) (bool, error) {
 	// We keep patching the `App` CR by adding a label. This way, we trigger reconciliation loops in chart-operator.
 	mcKubeClient := state.GetFramework().MC()
 
