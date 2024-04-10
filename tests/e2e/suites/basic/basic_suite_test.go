@@ -10,16 +10,12 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	// "github.com/giantswarm/apiextensions-application/api/v1alpha1"
 	"github.com/giantswarm/apptest-framework/pkg/config"
 	"github.com/giantswarm/apptest-framework/pkg/state"
 	"github.com/giantswarm/apptest-framework/pkg/suite"
 
 	"github.com/giantswarm/clustertest/pkg/logger"
 	"github.com/giantswarm/clustertest/pkg/wait"
-	// networkingv1 "k8s.io/api/networking/v1"
-	// "k8s.io/apimachinery/pkg/types"
-	// ctrl "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
 const (
@@ -69,7 +65,7 @@ func TestBasic(t *testing.T) {
 
 			It("should serve traffic from hello-wolrd", func() {
 				// STEP
-				By("creating the app CR")
+				By("creating the hello-world app CR")
 
 				helloWorldApp, err := getHelloWorldApp(helloWorldIngressHost)
 				Expect(err).To(BeNil())
