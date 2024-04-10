@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Tests: Add e2e test with hello-world app.
+
 ## [3.6.0] - 2024-03-26
 
 Since upstream did not release a `chroot` variant of the controller image for v1.10.0, one can not enable `controller.image.chroot` in the chart values. If you although try to do so, your pods will not come up due to a missing image.
