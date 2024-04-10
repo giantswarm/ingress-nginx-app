@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Added
 
-- Tests: Add e2e test with hello-world app.
+- Tests: Add E2E test with `hello-world` app. ([#615](https://github.com/giantswarm/ingress-nginx-app/pull/615))
 
 ## [3.6.0] - 2024-03-26
 
