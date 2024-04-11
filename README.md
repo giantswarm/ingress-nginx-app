@@ -158,6 +158,21 @@ Provide a custom `values.yaml`:
 $ helm install helm/ingress-nginx --values values.yaml
 ```
 
+### Testing
+
+This App includes E2E tests using the [apptest-framework](https://github.com/giantswarm/apptest-framework). You can trigger the configured tests on any open PR by adding the following as a comment:
+
+```
+/run app-test-suites
+```
+
+E2E tests include:
+
+| Suite | Test        | Description                                                                 | Providers |
+|-------|-------------|-----------------------------------------------------------------------------|-----------|
+| Basic | App install | Check if the App is installed correctly and marked as `deployed`            | CAPA      |
+| Basic | Hello World | Deploy `hello-world` app and verify that it's reachable through the Ingress | CAPA      |
+
 ### Release process
 
 * Ensure CHANGELOG.md is up to date.

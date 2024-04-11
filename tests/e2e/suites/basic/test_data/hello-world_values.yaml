@@ -1,0 +1,12 @@
+clusterName: {{ .ClusterName }}
+organization: {{ .Organization }}
+ingress:
+  hosts:
+    - host: {{ index .ExtraValues "IngressHost" }}
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: hello-world-tls
+      hosts:
+        - {{ index .ExtraValues "IngressHost" }}

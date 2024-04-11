@@ -1,6 +1,18 @@
-I performed the following tests using the `hello-world` app to verify my changes in live environments:
+<!--
+@team-cabbage will automatically be requested for review once this PR has been submitted.
+-->
 
-- [ ] Fresh installation
-- [ ] Fresh `Ingress` resources are reconciled
-- [ ] Upgrade from previous version
-- [ ] Existing `Ingress` resources are reconciled
+This PR:
+
+- _Adds/changes/fixes/removes ..._
+
+---
+
+## Checklist
+
+- [ ] I added a CHANGELOG entry
+- [ ] I ran E2E tests in the CI pipelines
+
+Add the following comment to trigger the E2E tests:
+
+`/run app-test-suites`
