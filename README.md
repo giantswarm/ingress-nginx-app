@@ -168,10 +168,10 @@ This App includes E2E tests using the [apptest-framework](https://github.com/gia
 
 E2E tests include:
 
-| Suite | Test        | Description                                                                | Providers |
-|-------|-------------|----------------------------------------------------------------------------|-----------|
-| Basic | App install | Check if the App is installed correctly and marked as `deployed`           | CAPA      |
-| Basic | Hello World | Deploy `hello-world` app and verify that it's reachable trough the Ingress | CAPA      |
+| Suite | Test        | Description                                                                 | Providers |
+|-------|-------------|-----------------------------------------------------------------------------|-----------|
+| Basic | App install | Check if the App is installed correctly and marked as `deployed`            | CAPA      |
+| Basic | Hello World | Deploy `hello-world` app and verify that it's reachable through the Ingress | CAPA      |
 
 ### Release process
 
