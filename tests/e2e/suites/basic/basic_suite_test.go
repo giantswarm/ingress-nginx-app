@@ -31,7 +31,7 @@ func TestBasic(t *testing.T) {
 		WithInstallNamespace("kube-system").
 		WithIsUpgrade(isUpgrade).
 		WithValuesFile("./values.yaml").
-		BeforeInstall(func() {
+		AfterClusterReady(func() {
 			It("should have cert-manager and external-dns deployed", func() {
 				org := state.GetCluster().Organization
 
