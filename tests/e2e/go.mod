@@ -7,7 +7,7 @@ require (
 	github.com/giantswarm/apptest-framework v0.0.7
 	github.com/giantswarm/clustertest v0.18.0
 	github.com/onsi/ginkgo/v2 v2.17.2
-	github.com/onsi/gomega v1.33.0
+	github.com/onsi/gomega v1.33.1
 	k8s.io/api v0.26.3
 	k8s.io/apimachinery v0.26.3
 	sigs.k8s.io/controller-runtime v0.14.5
