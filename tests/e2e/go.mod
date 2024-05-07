@@ -2,6 +2,8 @@ module e2e
 
 go 1.21
 
+replace github.com/giantswarm/apptest-framework => github.com/giantswarm/apptest-framework v1.0.1-0.20240507082002-7bbab9814999
+
 require (
 	github.com/giantswarm/apiextensions-application v0.6.1
 	github.com/giantswarm/apptest-framework v1.0.0
