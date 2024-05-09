@@ -2,13 +2,11 @@ module e2e
 
 go 1.21
 
-replace github.com/giantswarm/apptest-framework => github.com/giantswarm/apptest-framework v1.0.1-0.20240507082002-7bbab9814999
-
 require (
 	github.com/giantswarm/apiextensions-application v0.6.1
-	github.com/giantswarm/apptest-framework v1.0.0
-	github.com/giantswarm/clustertest v0.18.0
-	github.com/onsi/ginkgo/v2 v2.17.2
+	github.com/giantswarm/apptest-framework v1.1.0
+	github.com/giantswarm/clustertest v0.19.0
+	github.com/onsi/ginkgo/v2 v2.17.3
 	github.com/onsi/gomega v1.33.1
 	k8s.io/api v0.26.3
 	k8s.io/apimachinery v0.26.3
@@ -49,7 +47,7 @@ require (
 	github.com/exponent-io/jsonpath v0.0.0-20210407135951-1de76d718b3f // indirect
 	github.com/fatih/color v1.15.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
-	github.com/giantswarm/cluster-standup-teardown v1.0.2 // indirect
+	github.com/giantswarm/cluster-standup-teardown v1.0.3 // indirect
 	github.com/giantswarm/k8smetadata v0.23.0 // indirect
 	github.com/giantswarm/kubectl-gs/v2 v2.45.0 // indirect
 	github.com/giantswarm/microerror v0.4.0 // indirect

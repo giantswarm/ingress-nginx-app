@@ -213,10 +213,12 @@ github.com/fsnotify/fsnotify v1.6.0/go.mod h1:sl3t1tCWJFWoRz9R8WJCbQihKKwmorjAbS
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/giantswarm/apiextensions-application v0.6.1 h1:X1uzWBSrF4QsyyzaV46QkPJa+rXKBr9e0p+6nd8aw3A=
 github.com/giantswarm/apiextensions-application v0.6.1/go.mod h1:O6mg+EdXC9CyTLgi0d3rf6QTXrQX/79iw4kjMJRinig=
-github.com/giantswarm/cluster-standup-teardown v1.0.2 h1:+5wL7Pt/zlH1R7e1yu/ze2LgYUJTx3VmWv+9u7k8D/w=
-github.com/giantswarm/cluster-standup-teardown v1.0.2/go.mod h1:hREsAWG9OVP/wMiLdiNx1koWdC4XUsg0tPt8Zz1gf2o=
-github.com/giantswarm/clustertest v0.18.0 h1:OeiRuM3aOSzH/LzoS0FvsF8aGggc7BuRQOTB6wa+ToM=
-github.com/giantswarm/clustertest v0.18.0/go.mod h1:/lKOF0DBZs9ln8CXiq/gqIQL/rUBGXDiWHb+Q0QNlMk=
+github.com/giantswarm/apptest-framework v1.1.0 h1:syLCwK3Bv02uHzuXmEUnkVHmgqXcMqRTyrJ+y1Q9VdU=
+github.com/giantswarm/apptest-framework v1.1.0/go.mod h1:mtz5zXgmzhVsSyITN4d9cMAvyctVLKt+lJdnP94YDNk=
+github.com/giantswarm/cluster-standup-teardown v1.0.3 h1:yy30DaT1Py5h4YsL7tZQ0tildFK4a4lHaMVEaokSuFY=
+github.com/giantswarm/cluster-standup-teardown v1.0.3/go.mod h1:/uovQzJa8oT8DU0Vfi6iPozehj8cfzLIAronnHvU9Bw=
+github.com/giantswarm/clustertest v0.19.0 h1:pogTFxyW8lgHu3aiH0WToiWK07JJGBdISMO/jpdANHM=
+github.com/giantswarm/clustertest v0.19.0/go.mod h1:/DpW/3J5Y1DhOqC9Cy7ETNVMuQcdKUlSWv8ldgOQXBU=
 github.com/giantswarm/k8smetadata v0.23.0 h1:iGwa1Nb45Sfcd5wqJEKBvxY1u5yXFg3Sq5Fw62nyRGA=
 github.com/giantswarm/k8smetadata v0.23.0/go.mod h1:QiQAyaZnwco1U0lENLF0Kp4bSN4dIPwIlHWEvUo3ES8=
 github.com/giantswarm/kubectl-gs/v2 v2.45.0 h1:4g1Fnpkf4gjxiZtFPCEIfEnEWVIpoTXj1yij4hxaOok=
@@ -555,8 +557,8 @@ github.com/nelsam/hel/v2 v2.3.2/go.mod h1:1ZTGfU2PFTOd5mx22i5O0Lc2GY933lQ2wb/ggy
 github.com/nelsam/hel/v2 v2.3.3/go.mod h1:1ZTGfU2PFTOd5mx22i5O0Lc2GY933lQ2wb/ggy+rL3w=
 github.com/oklog/ulid v1.3.1/go.mod h1:CirwcVhetQ6Lv90oh/F+FBtV6XMibvdAFo93nm5qn4U=
 github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
-github.com/onsi/ginkgo/v2 v2.17.2 h1:7eMhcy3GimbsA3hEnVKdw/PQM9XN9krpKVXsZdph0/g=
-github.com/onsi/ginkgo/v2 v2.17.2/go.mod h1:nP2DPOQoNsQmsVyv5rDA8JkXQoCs6goXIvr/PRJ1eCc=
+github.com/onsi/ginkgo/v2 v2.17.3 h1:oJcvKpIb7/8uLpDDtnQuf18xVnwKp8DTD7DQ6gTd/MU=
+github.com/onsi/ginkgo/v2 v2.17.3/go.mod h1:nP2DPOQoNsQmsVyv5rDA8JkXQoCs6goXIvr/PRJ1eCc=
 github.com/onsi/gomega v1.33.1 h1:dsYjIxxSR755MDmKVsaFQTE22ChNBcuuTWgkUDSubOk=
 github.com/onsi/gomega v1.33.1/go.mod h1:U4R44UsT+9eLIaYRB2a5qajjtQYn0hauxvRm16AVYg0=
 github.com/opencontainers/go-digest v1.0.0 h1:apOUWs51W5PlhuyGyz9FCeeBIOUDA/6nW8Oi/yOhh5U=
