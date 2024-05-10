@@ -112,7 +112,7 @@ func newHttpClientWithProxy() *http.Client {
 }
 
 func getWorkloadClusterBaseDomain() string {
-	values := &application.DefaultAppsValues{}
+	values := &application.ClusterValues{}
 	err := state.GetFramework().MC().GetHelmValues(state.GetCluster().Name, state.GetCluster().GetNamespace(), values)
 	Expect(err).NotTo(HaveOccurred())
 
