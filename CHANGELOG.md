@@ -14,6 +14,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 ### Changed
 
 - Tests: Bumped `apptest-framework` to latest v1.0.0 release
+- Change E2E tests to pull baseDomain from Cluster values instead of default-apps values
 
 ## [3.6.0] - 2024-03-26
 
