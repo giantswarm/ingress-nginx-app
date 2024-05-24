@@ -4,8 +4,8 @@ go 1.21
 
 require (
 	github.com/giantswarm/apiextensions-application v0.6.1
-	github.com/giantswarm/apptest-framework v1.1.1
-	github.com/giantswarm/clustertest v0.21.0
+	github.com/giantswarm/apptest-framework v1.1.3
+	github.com/giantswarm/clustertest v0.22.0
 	github.com/onsi/ginkgo/v2 v2.18.0
 	github.com/onsi/gomega v1.33.1
 	k8s.io/api v0.26.3
@@ -47,7 +47,7 @@ require (
 	github.com/exponent-io/jsonpath v0.0.0-20210407135951-1de76d718b3f // indirect
 	github.com/fatih/color v1.15.0 // indirect
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
-	github.com/giantswarm/cluster-standup-teardown v1.0.3 // indirect
+	github.com/giantswarm/cluster-standup-teardown v1.4.0 // indirect
 	github.com/giantswarm/k8smetadata v0.23.0 // indirect
 	github.com/giantswarm/kubectl-gs/v2 v2.45.0 // indirect
 	github.com/giantswarm/microerror v0.4.0 // indirect
@@ -73,7 +73,7 @@ require (
 	github.com/google/go-github/v62 v62.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
-	github.com/google/pprof v0.0.0-20240424215950-a892ee059fd6 // indirect
+	github.com/google/pprof v0.0.0-20240509144519-723abb6459b7 // indirect
 	github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 // indirect
 	github.com/google/uuid v1.3.1 // indirect
 	github.com/gorilla/mux v1.8.0 // indirect
