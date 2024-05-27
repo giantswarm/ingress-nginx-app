@@ -213,8 +213,8 @@ github.com/fsnotify/fsnotify v1.6.0/go.mod h1:sl3t1tCWJFWoRz9R8WJCbQihKKwmorjAbS
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/giantswarm/apiextensions-application v0.6.1 h1:X1uzWBSrF4QsyyzaV46QkPJa+rXKBr9e0p+6nd8aw3A=
 github.com/giantswarm/apiextensions-application v0.6.1/go.mod h1:O6mg+EdXC9CyTLgi0d3rf6QTXrQX/79iw4kjMJRinig=
-github.com/giantswarm/apptest-framework v1.1.3 h1:wynUQa+/mJ37ZDq916zqkcJmPeX4q8Q8cuJfe8787Y8=
-github.com/giantswarm/apptest-framework v1.1.3/go.mod h1:hdIP7VktKbNXSVTmbJ/6YDKHqSU3NPgcGHpK1x10RWY=
+github.com/giantswarm/apptest-framework v1.1.4 h1:6HwaIi4Xm5+hq/QH7Hx9xAuPLpTisupot1eP2veNArg=
+github.com/giantswarm/apptest-framework v1.1.4/go.mod h1:q4n6bdSGArPaQbRtiu1WEuZve8nfAl6wU2p30+JdqfM=
 github.com/giantswarm/cluster-standup-teardown v1.4.0 h1:gsz42aRmF3kEIvtlainchqi+g5T5cv/Xc+pgAZ9L0gY=
 github.com/giantswarm/cluster-standup-teardown v1.4.0/go.mod h1:Vkxbf3NYOHIIbDyZsqYqrB3CQu4gd5ewjhcHqqWPioc=
 github.com/giantswarm/clustertest v0.22.0 h1:WmTGIgPEYMfEMQwz+DrRj9V1/4V8aoKUcBGha4qvh3Q=
