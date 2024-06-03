@@ -169,8 +169,30 @@
                                 "priorityClassName": {
                                     "type": "string"
                                 },
+                                "rbac": {
+                                    "type": "object",
+                                    "properties": {
+                                        "create": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                },
                                 "securityContext": {
                                     "type": "object"
+                                },
+                                "serviceAccount": {
+                                    "type": "object",
+                                    "properties": {
+                                        "automountServiceAccountToken": {
+                                            "type": "boolean"
+                                        },
+                                        "create": {
+                                            "type": "boolean"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "tolerations": {
                                     "type": "array"
@@ -449,6 +471,9 @@
                     "properties": {
                         "aliases": {
                             "type": "array"
+                        },
+                        "annotations": {
+                            "type": "object"
                         },
                         "controllerValue": {
                             "type": "string"
@@ -1265,6 +1290,9 @@
                     }
                 },
                 "tolerations": {
+                    "type": "array"
+                },
+                "topologySpreadConstraints": {
                     "type": "array"
                 },
                 "updateStrategy": {

@@ -10,7 +10,7 @@ This chart bootstraps an ingress-nginx deployment on a [Kubernetes](http://kuber
 
 ## Requirements
 
-Kubernetes: `>=1.20.0-0`
+Kubernetes: `>=1.21.0-0`
 
 ## Get Repo Info
 
@@ -258,13 +258,19 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.admissionWebhooks.patch.image.digest | string | `""` |  |
 | controller.admissionWebhooks.patch.image.image | string | `"giantswarm/ingress-nginx-kube-webhook-certgen"` |  |
 | controller.admissionWebhooks.patch.image.pullPolicy | string | `"IfNotPresent"` |  |
-| controller.admissionWebhooks.patch.image.tag | string | `"v1.4.0"` |  |
+| controller.admissionWebhooks.patch.image.tag | string | `"v1.4.1"` |  |
 | controller.admissionWebhooks.patch.labels | object | `{}` | Labels to be added to patch job resources |
 | controller.admissionWebhooks.patch.networkPolicy.enabled | bool | `true` | Enable 'networkPolicy' or not |
 | controller.admissionWebhooks.patch.nodeSelector."kubernetes.io/os" | string | `"linux"` |  |
 | controller.admissionWebhooks.patch.podAnnotations | object | `{}` |  |
 | controller.admissionWebhooks.patch.priorityClassName | string | `""` | Provide a priority class name to the webhook patching job # |
+| controller.admissionWebhooks.patch.rbac | object | `{"create":true}` | Admission webhook patch job RBAC |
+| controller.admissionWebhooks.patch.rbac.create | bool | `true` | Create RBAC or not |
 | controller.admissionWebhooks.patch.securityContext | object | `{}` | Security context for secret creation & webhook patch pods |
+| controller.admissionWebhooks.patch.serviceAccount | object | `{"automountServiceAccountToken":true,"create":true,"name":""}` | Admission webhook patch job service account |
+| controller.admissionWebhooks.patch.serviceAccount.automountServiceAccountToken | bool | `true` | Auto-mount service account token or not |
+| controller.admissionWebhooks.patch.serviceAccount.create | bool | `true` | Create a service account or not |
+| controller.admissionWebhooks.patch.serviceAccount.name | string | `""` | Custom service account name |
 | controller.admissionWebhooks.patch.tolerations | list | `[]` |  |
 | controller.admissionWebhooks.patchWebhookJob.name | string | `"patch"` |  |
 | controller.admissionWebhooks.patchWebhookJob.resources | object | `{}` |  |
@@ -286,7 +292,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | controller.autoscaling.targetMemoryUtilizationPercentage | int | `80` |  |
 | controller.autoscalingTemplate | list | `[]` |  |
-| controller.config | object | `{"hsts":"false","strict-validate-path-type":"true"}` | Will add custom configuration options to Nginx https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ |
+| controller.config | object | `{"hsts":"false","strict-validate-path-type":"true"}` | Global configuration passed to the ConfigMap consumed by the controller. Values may contain Helm templates. Ref.: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/ |
 | controller.config.hsts | string | `"false"` | Enable HSTS or not. Disabled by default due to possible serious consequences. Ref: https://github.com/kubernetes/ingress-nginx/issues/549 |
 | controller.config.strict-validate-path-type | string | `"true"` | Enable strict path type validation or not. Enabled by default for security reasons. Ref: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#strict-validate-path-type |
 | controller.configAnnotations | object | `{}` | Annotations to be added to the controller config configuration configmap. |
@@ -331,8 +337,9 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.image.tag | string | `"v1.10.1"` |  |
 | controller.ingressClass | string | `"nginx"` | For backwards compatibility with ingress.class annotation, use ingressClass. Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation |
 | controller.ingressClassByName | bool | `false` | Process IngressClass per name (additionally as per spec.controller). |
-| controller.ingressClassResource | object | `{"aliases":[],"controllerValue":"k8s.io/ingress-nginx","default":false,"enabled":true,"name":"nginx","parameters":{}}` | This section refers to the creation of the IngressClass resource. IngressClasses are immutable and cannot be changed after creation. We do not support namespaced IngressClasses, yet, so a ClusterRole and a ClusterRoleBinding is required. |
+| controller.ingressClassResource | object | `{"aliases":[],"annotations":{},"controllerValue":"k8s.io/ingress-nginx","default":false,"enabled":true,"name":"nginx","parameters":{}}` | This section refers to the creation of the IngressClass resource. IngressClasses are immutable and cannot be changed after creation. We do not support namespaced IngressClasses, yet, so a ClusterRole and a ClusterRoleBinding is required. |
 | controller.ingressClassResource.aliases | list | `[]` | Aliases of this IngressClass. Creates copies with identical settings but the respective alias as name. Useful for development environments with only one Ingress Controller but production-like Ingress resources. `default` gets enabled on the original IngressClass only. |
+| controller.ingressClassResource.annotations | object | `{}` | Annotations to be added to the IngressClass resource. |
 | controller.ingressClassResource.controllerValue | string | `"k8s.io/ingress-nginx"` | Controller of the IngressClass. An Ingress Controller looks for IngressClasses it should reconcile by this value. This value is also being set as the `--controller-class` argument of this Ingress Controller. Ref: https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class |
 | controller.ingressClassResource.default | bool | `false` | If true, Ingresses without `ingressClassName` get assigned to this IngressClass on creation. Ingress creation gets rejected if there are multiple default IngressClasses. Ref: https://kubernetes.io/docs/concepts/services-networking/ingress/#default-ingress-class |
 | controller.ingressClassResource.enabled | bool | `true` | Create the IngressClass or not |
@@ -539,6 +546,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | defaultBackend.serviceAccount.create | bool | `true` |  |
 | defaultBackend.serviceAccount.name | string | `""` |  |
 | defaultBackend.tolerations | list | `[]` | Node tolerations for server scheduling to nodes with taints # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ # |
+| defaultBackend.topologySpreadConstraints | list | `[]` | Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. Ref.: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ |
 | defaultBackend.updateStrategy | object | `{}` | The update strategy to apply to the Deployment or DaemonSet # |
 | dhParam | string | `""` | A base64-encoded Diffie-Hellman parameter. This can be generated with: `openssl dhparam 4096 2> /dev/null | base64` # Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param |
 | global.podSecurityStandards.enforced | bool | `false` | Wether Pod Security Standards are being used or not. This value is set automatically. Do not overwrite it. |
