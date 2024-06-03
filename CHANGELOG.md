@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [3.7.0] - 2024-06-03
+
 ### Added
 
 - Ingress Class: Make annotations configurable. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
@@ -1323,7 +1325,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.6.1...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.7.0...HEAD
+[3.7.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.6.1...v3.7.0
 [3.6.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.6.0...v3.6.1
 [3.6.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.5.2...v3.6.0
 [3.5.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.5.1...v3.5.2

@@ -11,11 +11,11 @@ keywords:
   - nginx
 kubeVersion: '>=1.21.0-0'
 maintainers:
-- name: Gacko
-- name: rikatz
-- name: strongjz
-- name: tao12345666333
+  - name: Gacko
+  - name: rikatz
+  - name: strongjz
+  - name: tao12345666333
 name: ingress-nginx
 sources:
-- https://github.com/kubernetes/ingress-nginx
-version: 3.6.1
+  - https://github.com/kubernetes/ingress-nginx
+version: 3.7.0
