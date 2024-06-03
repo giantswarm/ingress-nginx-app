@@ -7,6 +7,20 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Ingress Class: Make annotations configurable. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
+- Admission Webhook: Make patch job RBAC configurable. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
+- Default Backend: Add topology spread constraints. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
+
+### Changed
+
+- Chart: Require Kubernetes version >= 1.21.0-0. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
+- Config Map: Support templates in values. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
+- Service: Fix app protocol semver comparison. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
+- Admission Webhook: Update patch job image to `v1.4.1`. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
+- Default Backend: Reorder HPA. ([#639](https://github.com/giantswarm/ingress-nginx-app/pull/639))
+
 ## [3.6.1] - 2024-06-03
 
 ### Changed
