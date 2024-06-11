@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: hello-world
-        image: quay.io/giantswarm/helloworld:0.2.0
+        image: quay.io/giantswarm/helloworld:0.2.1
         livenessProbe:
           httpGet:
             port: 8080
