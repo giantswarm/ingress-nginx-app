@@ -7,7 +7,7 @@ toolchain go1.22.4
 require (
 	github.com/giantswarm/apiextensions-application v0.6.1
 	github.com/giantswarm/apptest-framework v1.3.0
-	github.com/giantswarm/clustertest v1.0.0
+	github.com/giantswarm/clustertest v1.0.1
 	github.com/onsi/ginkgo/v2 v2.19.0
 	github.com/onsi/gomega v1.33.1
 	k8s.io/api v0.26.3
@@ -55,7 +55,7 @@ require (
 	github.com/giantswarm/microerror v0.4.1 // indirect
 	github.com/giantswarm/organization-operator v1.6.3 // indirect
 	github.com/giantswarm/release-operator/v4 v4.1.0 // indirect
-	github.com/giantswarm/releases/sdk v0.2.0 // indirect
+	github.com/giantswarm/releases/sdk v0.3.0 // indirect
 	github.com/go-errors/errors v1.4.2 // indirect
 	github.com/go-gorp/gorp/v3 v3.1.0 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
