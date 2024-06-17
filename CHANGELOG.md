@@ -9,7 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- ServiceMonitor: Add `node` and `app` labels. ([]())
+- ServiceMonitor: Add `node` and `app` labels. ([#652](https://github.com/giantswarm/ingress-nginx-app/pull/652))
 
 ## [3.7.0] - 2024-06-03
 
