@@ -388,7 +388,12 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.metrics.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | controller.metrics.serviceMonitor.namespace | string | `""` |  |
 | controller.metrics.serviceMonitor.namespaceSelector | object | `{}` |  |
-| controller.metrics.serviceMonitor.relabelings | list | `[]` |  |
+| controller.metrics.serviceMonitor.relabelings[0].action | string | `"replace"` |  |
+| controller.metrics.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"__meta_kubernetes_pod_label_app"` |  |
+| controller.metrics.serviceMonitor.relabelings[0].targetLabel | string | `"app"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].action | string | `"replace"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].sourceLabels[0] | string | `"__meta_kubernetes_pod_node_name"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].targetLabel | string | `"node"` |  |
 | controller.metrics.serviceMonitor.scrapeInterval | string | `"30s"` |  |
 | controller.metrics.serviceMonitor.targetLabels | list | `[]` |  |
 | controller.minReadySeconds | int | `0` | `minReadySeconds` to avoid killing pods before we are ready # |
