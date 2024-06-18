@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Deployments/DaemonSets: Make pod affinity templatable. ([#654](https://github.com/giantswarm/ingress-nginx-app/pull/654))
+- ServiceMonitor: Relabel app & node. ([#654](https://github.com/giantswarm/ingress-nginx-app/pull/654))
+
 ## [3.7.0] - 2024-06-03
 
 ### Added

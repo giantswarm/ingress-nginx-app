@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Chart: Implement Giant Swarm changes. (#12)'
-      sha: e8f89f47fa9c5d6aeae6a3bb8d80d6c63d2f13f5
+      commitTitle: 'ServiceMonitor: Configure relabelings. (#13)'
+      sha: 657fb5774a65fc62bab41dbe0af56aa8b4460791
     path: ingress-nginx
   path: helm
 kind: LockConfig
