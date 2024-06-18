@@ -2,7 +2,7 @@
 
 [ingress-nginx](https://github.com/kubernetes/ingress-nginx) Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 
-![Version: 3.7.0](https://img.shields.io/badge/Version-3.7.0-informational?style=flat-square) ![AppVersion: 1.10.1](https://img.shields.io/badge/AppVersion-1.10.1-informational?style=flat-square)
+![Version: 4.10.1](https://img.shields.io/badge/Version-4.10.1-informational?style=flat-square) ![AppVersion: 1.10.1](https://img.shields.io/badge/AppVersion-1.10.1-informational?style=flat-square)
 
 To use, add `ingressClassName: nginx` spec field or the `kubernetes.io/ingress.class: nginx` annotation to your Ingress resources.
 
@@ -302,9 +302,11 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.containerSecurityContext | object | `{}` | Security context for controller containers |
 | controller.customTemplate.configMapKey | string | `""` |  |
 | controller.customTemplate.configMapName | string | `""` |  |
+| controller.disableLeaderElection | bool | `false` | This configuration disable Nginx Controller Leader Election |
 | controller.dnsConfig | object | `{}` | Optionally customize the pod dnsConfig. |
 | controller.dnsPolicy | string | `"ClusterFirst"` | Optionally change this to ClusterFirstWithHostNet in case you have 'hostNetwork: true'. By default, while using host network, name resolution uses the host's DNS. If you wish nginx-controller to keep resolving names inside the k8s network, use ClusterFirstWithHostNet. |
 | controller.electionID | string | `""` | Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader' |
+| controller.electionTTL | string | `""` | Duration a leader election is valid before it's getting re-elected, e.g. `15s`, `10m` or `1h`. (Default: 30s) |
 | controller.enableAnnotationValidations | bool | `true` |  |
 | controller.enableMimalloc | bool | `true` | Enable mimalloc as a drop-in replacement for malloc. # ref: https://github.com/microsoft/mimalloc # |
 | controller.enableTopologyAwareRouting | bool | `false` | This configuration enables Topology Aware Routing feature, used together with service annotation service.kubernetes.io/topology-mode="auto" Defaults to false |
@@ -388,7 +390,12 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.metrics.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | controller.metrics.serviceMonitor.namespace | string | `""` |  |
 | controller.metrics.serviceMonitor.namespaceSelector | object | `{}` |  |
-| controller.metrics.serviceMonitor.relabelings | list | `[]` |  |
+| controller.metrics.serviceMonitor.relabelings[0].action | string | `"replace"` |  |
+| controller.metrics.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"__meta_kubernetes_pod_label_app"` |  |
+| controller.metrics.serviceMonitor.relabelings[0].targetLabel | string | `"app"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].action | string | `"replace"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].sourceLabels[0] | string | `"__meta_kubernetes_pod_node_name"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].targetLabel | string | `"node"` |  |
 | controller.metrics.serviceMonitor.scrapeInterval | string | `"30s"` |  |
 | controller.metrics.serviceMonitor.targetLabels | list | `[]` |  |
 | controller.minReadySeconds | int | `0` | `minReadySeconds` to avoid killing pods before we are ready # |
@@ -491,7 +498,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.udp.configMapNamespace | string | `""` | Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE) |
 | controller.updateStrategy | object | `{}` | The update strategy to apply to the Deployment or DaemonSet # |
 | controller.watchIngressWithoutClass | bool | `false` | Process Ingress objects without ingressClass annotation/ingressClassName field Overrides value for --watch-ingress-without-class flag of the controller binary Defaults to false |
-| defaultBackend.affinity | object | `{}` |  |
+| defaultBackend.affinity | object | `{}` | Affinity and anti-affinity rules for server scheduling to nodes # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity |
 | defaultBackend.autoscaling.annotations | object | `{}` |  |
 | defaultBackend.autoscaling.enabled | bool | `false` |  |
 | defaultBackend.autoscaling.maxReplicas | int | `2` |  |
