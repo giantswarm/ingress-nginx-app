@@ -7,6 +7,15 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- ServiceMonitor: Add `node` and `app` labels. ([#653](https://github.com/giantswarm/ingress-nginx-app/pull/653))
+
+### Changed
+
+- Controller: Make pod affinity templatable. ([#653](https://github.com/giantswarm/ingress-nginx-app/pull/653))
+- Controller: Make Leader Election TTL configurable. ([#653](https://github.com/giantswarm/ingress-nginx-app/pull/653))
+
 ## [3.7.0] - 2024-06-03
 
 ### Added
