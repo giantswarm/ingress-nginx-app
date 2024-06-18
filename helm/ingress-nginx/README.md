@@ -388,7 +388,12 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.metrics.serviceMonitor.metricRelabelings[0].sourceLabels[0] | string | `"__name__"` |  |
 | controller.metrics.serviceMonitor.namespace | string | `""` |  |
 | controller.metrics.serviceMonitor.namespaceSelector | object | `{}` |  |
-| controller.metrics.serviceMonitor.relabelings | list | `[]` |  |
+| controller.metrics.serviceMonitor.relabelings[0].action | string | `"replace"` |  |
+| controller.metrics.serviceMonitor.relabelings[0].sourceLabels[0] | string | `"__meta_kubernetes_pod_label_app"` |  |
+| controller.metrics.serviceMonitor.relabelings[0].targetLabel | string | `"app"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].action | string | `"replace"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].sourceLabels[0] | string | `"__meta_kubernetes_pod_node_name"` |  |
+| controller.metrics.serviceMonitor.relabelings[1].targetLabel | string | `"node"` |  |
 | controller.metrics.serviceMonitor.scrapeInterval | string | `"30s"` |  |
 | controller.metrics.serviceMonitor.targetLabels | list | `[]` |  |
 | controller.minReadySeconds | int | `0` | `minReadySeconds` to avoid killing pods before we are ready # |
@@ -491,7 +496,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.udp.configMapNamespace | string | `""` | Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE) |
 | controller.updateStrategy | object | `{}` | The update strategy to apply to the Deployment or DaemonSet # |
 | controller.watchIngressWithoutClass | bool | `false` | Process Ingress objects without ingressClass annotation/ingressClassName field Overrides value for --watch-ingress-without-class flag of the controller binary Defaults to false |
-| defaultBackend.affinity | object | `{}` |  |
+| defaultBackend.affinity | object | `{}` | Affinity and anti-affinity rules for server scheduling to nodes # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity |
 | defaultBackend.autoscaling.annotations | object | `{}` |  |
 | defaultBackend.autoscaling.enabled | bool | `false` |  |
 | defaultBackend.autoscaling.maxReplicas | int | `2` |  |
