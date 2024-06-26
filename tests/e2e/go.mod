@@ -6,7 +6,7 @@ toolchain go1.22.4
 
 require (
 	github.com/giantswarm/apiextensions-application v0.6.2
-	github.com/giantswarm/apptest-framework v1.4.0
+	github.com/giantswarm/apptest-framework v1.5.0
 	github.com/giantswarm/clustertest v1.5.0
 	github.com/onsi/ginkgo/v2 v2.19.0
 	github.com/onsi/gomega v1.33.1
