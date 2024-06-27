@@ -49,8 +49,8 @@ github.com/bugsnag/osext v0.0.0-20130617224835-0dd3f918b21b h1:otBG+dV+YK+Soembj
 github.com/bugsnag/osext v0.0.0-20130617224835-0dd3f918b21b/go.mod h1:obH5gd0BsqsP2LwDJ9aOkm/6J86V6lyAXCoQWGw3K50=
 github.com/bugsnag/panicwrap v0.0.0-20151223152923-e2c28503fcd0 h1:nvj0OLI3YqYXer/kZD8Ri1aaunCxIEsOst1BVJswV0o=
 github.com/bugsnag/panicwrap v0.0.0-20151223152923-e2c28503fcd0/go.mod h1:D/8v3kj0zr8ZAKg1AQ6crr+5VwKN5eIywRkfhyM/+dE=
-github.com/cert-manager/cert-manager v1.15.0 h1:xVL8tzdQECMypoYQa9rv4DLjkn2pJXJLTqH4JUsxfko=
-github.com/cert-manager/cert-manager v1.15.0/go.mod h1:Vxq6yNKAbgQeMtzu5gqU8n0vXDiZcGTa5LDyCJRbmXE=
+github.com/cert-manager/cert-manager v1.15.1 h1:HSG4k2GlJ2YgTLkZfQzrArNaQpM9+ehDDg550IxAD94=
+github.com/cert-manager/cert-manager v1.15.1/go.mod h1:p98JoGv3J9JhdKU9ngsj2EhWGI6/GlU7kpjWu5lf2js=
 github.com/cespare/xxhash/v2 v2.3.0 h1:UL815xU9SqsFlibzuggzjXhog7bL6oX9BbNZnL2UFvs=
 github.com/cespare/xxhash/v2 v2.3.0/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/chai2010/gettext-go v1.0.3 h1:9liNh8t+u26xl5ddmWLmsOsdNLwkdRTg5AG+JnTiM80=
@@ -119,8 +119,8 @@ github.com/giantswarm/apptest-framework v1.5.0 h1:7n5i3MIgwMt7oFxlSzx9K23oGNx8we
 github.com/giantswarm/apptest-framework v1.5.0/go.mod h1:5butun5gRHB3TF+Ye0X54PI2XJBUUYM0fQl6zEHK0qk=
 github.com/giantswarm/cluster-standup-teardown v1.10.0 h1:0Ka7KI6kgGZ+/efHiJFc+xStnCehm9NbuPp0gw4czyI=
 github.com/giantswarm/cluster-standup-teardown v1.10.0/go.mod h1:3mUvYQR776LcnfX4wDZnHmWVGvznVQ3Ays/z5YVzIeo=
-github.com/giantswarm/clustertest v1.6.0 h1:P3CxAUeegOFxVuctgxDiO+hkXMcIBVD/hsd0k9ZmRUU=
-github.com/giantswarm/clustertest v1.6.0/go.mod h1:GB9W0Rz3dwYurYFj0kBOqXiXA4C2n2zljd3CmY69AHk=
+github.com/giantswarm/clustertest v1.7.0 h1:qs5Jg1NZDxJFlcSlEvYnknrBbqhCxGMN6uhDj+92F7Q=
+github.com/giantswarm/clustertest v1.7.0/go.mod h1:549o+JD/bwCn3hy9+OgswBA6WVA2so58aaKM0Jom2cA=
 github.com/giantswarm/k8smetadata v0.25.0 h1:6mKmmm4xHPuBvxDMAkIhU5oj6KJkJSaR2s5esIsnHs4=
 github.com/giantswarm/k8smetadata v0.25.0/go.mod h1:QiQAyaZnwco1U0lENLF0Kp4bSN4dIPwIlHWEvUo3ES8=
 github.com/giantswarm/kubectl-gs/v2 v2.57.0 h1:IMmho55Qq+WE+frJXcTBhx19+J54xwu/j4+pGU5YecA=
@@ -273,8 +273,8 @@ github.com/mitchellh/go-wordwrap v1.0.1/go.mod h1:R62XHJLzvMFRBbcrT7m7WgmE1eOyTS
 github.com/mitchellh/reflectwalk v1.0.0/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx0jmZXqmk4esnw=
 github.com/mitchellh/reflectwalk v1.0.2 h1:G2LzWKi524PWgd3mLHV8Y5k7s6XUvT0Gef6zxSIeXaQ=
 github.com/mitchellh/reflectwalk v1.0.2/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx0jmZXqmk4esnw=
-github.com/mittwald/go-helm-client v0.12.9 h1:tfI5ECgrbfAolA9TnlCeA5F2TEIvdsOxVmoSyW80lCI=
-github.com/mittwald/go-helm-client v0.12.9/go.mod h1:ukR3Et5zbfBij7bFL1ZnLvPytsbBXCrI2qQYr2yVi9I=
+github.com/mittwald/go-helm-client v0.12.10 h1:NvDXzBM0enPtrAHirZQ0D9Zx80yp2cGWcR19i0CleZY=
+github.com/mittwald/go-helm-client v0.12.10/go.mod h1:HA3eMOaUhqa4EXUfj94f6L0v4aUEKHuVV977hVl1KWU=
 github.com/moby/locker v1.0.1 h1:fOXqR41zeveg4fFODix+1Ch4mj/gT0NE1XJbp/epuBg=
 github.com/moby/locker v1.0.1/go.mod h1:S7SDdo5zpBK84bzzVlKr2V0hz+7x9hWbYC/kq7oQppc=
 github.com/moby/spdystream v0.2.0 h1:cjW1zVyyoiM0T7b6UoySUFqzXMoqRckQtXwGPiBhOM8=
