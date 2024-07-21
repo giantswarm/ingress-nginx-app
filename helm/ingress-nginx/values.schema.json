@@ -343,6 +343,9 @@
                         }
                     }
                 },
+                "disableLeaderElection": {
+                    "type": "boolean"
+                },
                 "dnsConfig": {
                     "type": "object"
                 },
@@ -350,6 +353,9 @@
                     "type": "string"
                 },
                 "electionID": {
+                    "type": "string"
+                },
+                "electionTTL": {
                     "type": "string"
                 },
                 "enableAnnotationValidations": {
