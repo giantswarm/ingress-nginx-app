@@ -7,6 +7,17 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Chart: Sync to upstream. ([#673](https://github.com/giantswarm/ingress-nginx-app/pull/673))
+  - Values: Add `controller.disableLeaderElection`.
+  - Values: Add `controller.electionTTL`.
+
+### Changed
+
+- Chart: Sync to upstream. ([#673](https://github.com/giantswarm/ingress-nginx-app/pull/673))
+  - Controller: Update image to [`v1.11.1`](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.11.1.md).
+
 ## [3.8.1] - 2024-07-21
 
 ### Changed
