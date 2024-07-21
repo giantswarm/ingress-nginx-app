@@ -20,4 +20,4 @@ maintainers:
 name: ingress-nginx
 sources:
   - https://github.com/kubernetes/ingress-nginx
-version: 3.8.0
+version: 3.8.1
