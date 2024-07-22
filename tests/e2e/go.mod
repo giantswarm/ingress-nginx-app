@@ -8,7 +8,7 @@ replace github.com/imdario/mergo => github.com/imdario/mergo v0.3.16
 
 require (
 	github.com/giantswarm/apiextensions-application v0.6.2
-	github.com/giantswarm/apptest-framework v1.5.0
+	github.com/giantswarm/apptest-framework v1.6.0
 	github.com/giantswarm/clustertest v1.15.0
 	github.com/onsi/ginkgo/v2 v2.19.0
 	github.com/onsi/gomega v1.33.1
@@ -53,7 +53,7 @@ require (
 	github.com/fatih/color v1.17.0 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
-	github.com/giantswarm/cluster-standup-teardown v1.10.0 // indirect
+	github.com/giantswarm/cluster-standup-teardown v1.14.0 // indirect
 	github.com/giantswarm/k8smetadata v0.25.0 // indirect
 	github.com/giantswarm/kubectl-gs/v2 v2.57.0 // indirect
 	github.com/giantswarm/microerror v0.4.1 // indirect
