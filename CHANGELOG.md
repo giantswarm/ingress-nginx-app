@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Chart: Add `controller.image.runAsGroup` value for setting the `runAsGroup` field in the container `securityContext`.
+
 ## [3.9.0] - 2024-07-21
 
 ### Added

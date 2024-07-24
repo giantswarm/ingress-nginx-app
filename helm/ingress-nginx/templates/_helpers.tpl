@@ -47,6 +47,7 @@ Controller container security context.
 {{- else -}}
 runAsNonRoot: {{ .Values.controller.image.runAsNonRoot }}
 runAsUser: {{ .Values.controller.image.runAsUser }}
+runAsGroup: {{ .Values.controller.image.runAsGroup }}
 allowPrivilegeEscalation: {{ or .Values.controller.image.allowPrivilegeEscalation .Values.controller.image.chroot }}
 {{- if .Values.controller.image.seccompProfile }}
 seccompProfile: {{ toYaml .Values.controller.image.seccompProfile | nindent 2 }}

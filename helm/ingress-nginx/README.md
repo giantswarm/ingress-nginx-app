@@ -333,6 +333,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.image.image | string | `"giantswarm/ingress-nginx-controller"` |  |
 | controller.image.pullPolicy | string | `"IfNotPresent"` |  |
 | controller.image.readOnlyRootFilesystem | bool | `false` |  |
+| controller.image.runAsGroup | int | `101` |  |
 | controller.image.runAsNonRoot | bool | `true` |  |
 | controller.image.runAsUser | int | `101` |  |
 | controller.image.seccompProfile.type | string | `"RuntimeDefault"` |  |

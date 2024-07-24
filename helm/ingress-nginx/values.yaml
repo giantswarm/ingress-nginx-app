@@ -33,6 +33,7 @@ controller:
     runAsNonRoot: true
     # www-data -> uid 101
     runAsUser: 101
+    runAsGroup: 101
     allowPrivilegeEscalation: false
     seccompProfile:
       type: RuntimeDefault
