@@ -7,6 +7,11 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Chart: Sync to upstream. ([#687](https://github.com/giantswarm/ingress-nginx-app/pull/687))
+  - Chart: Explicitly set `runAsGroup`.
+
 ## [3.9.0] - 2024-07-21
 
 ### Added
