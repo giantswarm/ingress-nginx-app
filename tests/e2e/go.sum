@@ -119,8 +119,8 @@ github.com/giantswarm/apptest-framework v1.6.0 h1:ttyiJ9PmnHVMYnony/wg+faaAk1Tqb
 github.com/giantswarm/apptest-framework v1.6.0/go.mod h1:32gW7m72XdjqhustOUSaHlHQjLLqmTaljxsoh2ugntA=
 github.com/giantswarm/cluster-standup-teardown v1.14.0 h1:5bOkkV21U477u04wCEdn0/R0WCYmTHSnGCF4911hq9A=
 github.com/giantswarm/cluster-standup-teardown v1.14.0/go.mod h1:yTGCDE+018kFVKtSGE2W/oYphaxg0+6stkYv/seSg2k=
-github.com/giantswarm/clustertest v1.17.0 h1:yT3AExMPNq6Go6Cf3pT4JjGwiHOmOsmhNjoH0P++XH0=
-github.com/giantswarm/clustertest v1.17.0/go.mod h1:yPGQghS+QAEmxrXzMRiO6Sx/WjMl0+5wCfiEy93L4/Q=
+github.com/giantswarm/clustertest v1.17.1 h1:D9lLew8wwHg4xUvqpuB8YfxcMqz/mwRqlmVdBQNLzKM=
+github.com/giantswarm/clustertest v1.17.1/go.mod h1:AkjPKRKm7BJlXd2Fe4BDfrwgpF30YDk4Mgfp0/tYME0=
 github.com/giantswarm/k8smetadata v0.25.0 h1:6mKmmm4xHPuBvxDMAkIhU5oj6KJkJSaR2s5esIsnHs4=
 github.com/giantswarm/k8smetadata v0.25.0/go.mod h1:QiQAyaZnwco1U0lENLF0Kp4bSN4dIPwIlHWEvUo3ES8=
 github.com/giantswarm/kubectl-gs/v2 v2.57.0 h1:IMmho55Qq+WE+frJXcTBhx19+J54xwu/j4+pGU5YecA=
@@ -275,8 +275,8 @@ github.com/mitchellh/go-wordwrap v1.0.1/go.mod h1:R62XHJLzvMFRBbcrT7m7WgmE1eOyTS
 github.com/mitchellh/reflectwalk v1.0.0/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx0jmZXqmk4esnw=
 github.com/mitchellh/reflectwalk v1.0.2 h1:G2LzWKi524PWgd3mLHV8Y5k7s6XUvT0Gef6zxSIeXaQ=
 github.com/mitchellh/reflectwalk v1.0.2/go.mod h1:mSTlrgnPZtwu0c4WaC2kGObEpuNDbx0jmZXqmk4esnw=
-github.com/mittwald/go-helm-client v0.12.10 h1:NvDXzBM0enPtrAHirZQ0D9Zx80yp2cGWcR19i0CleZY=
-github.com/mittwald/go-helm-client v0.12.10/go.mod h1:HA3eMOaUhqa4EXUfj94f6L0v4aUEKHuVV977hVl1KWU=
+github.com/mittwald/go-helm-client v0.12.11 h1:fjJysS2pyEXUsgHP9OAQyFIZB67sU6uo+w4vM6JePJM=
+github.com/mittwald/go-helm-client v0.12.11/go.mod h1:HA3eMOaUhqa4EXUfj94f6L0v4aUEKHuVV977hVl1KWU=
 github.com/moby/locker v1.0.1 h1:fOXqR41zeveg4fFODix+1Ch4mj/gT0NE1XJbp/epuBg=
 github.com/moby/locker v1.0.1/go.mod h1:S7SDdo5zpBK84bzzVlKr2V0hz+7x9hWbYC/kq7oQppc=
 github.com/moby/spdystream v0.2.0 h1:cjW1zVyyoiM0T7b6UoySUFqzXMoqRckQtXwGPiBhOM8=
