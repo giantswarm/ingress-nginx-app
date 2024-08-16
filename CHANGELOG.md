@@ -7,6 +7,18 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Sync to upstream. ([#687](https://github.com/giantswarm/ingress-nginx-app/pull/687))
+  - Controller: Update image to [v1.11.2](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.11.2.md).
+  - OpenTelemetry: Update image to v20240813-b933310d.
+  - Kube Webhook CertGen: Update image to v1.4.3.
+
+### Removed
+
+- Chart: Sync to upstream. ([#687](https://github.com/giantswarm/ingress-nginx-app/pull/687))
+  - Helpers: Remove useless `isControllerTagValid`.
+
 ## [3.9.1] - 2024-07-29
 
 ### Added
