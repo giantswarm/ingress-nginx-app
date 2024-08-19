@@ -6,7 +6,7 @@ toolchain go1.23.0
 
 replace github.com/imdario/mergo => github.com/imdario/mergo v0.3.16
 
-replace github.com/alessio/shellescape => al.essio.dev/pkg/shellescape v1.4.2
+replace github.com/alessio/shellescape => al.essio.dev/pkg/shellescape v1.5.0
 
 require (
 	github.com/giantswarm/apiextensions-application v0.6.2
