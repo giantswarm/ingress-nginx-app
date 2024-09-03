@@ -118,10 +118,10 @@ github.com/fxamacker/cbor/v2 v2.7.0 h1:iM5WgngdRBanHcxugY4JySA0nk1wZorNOpTgCMedv
 github.com/fxamacker/cbor/v2 v2.7.0/go.mod h1:pxXPTn3joSm21Gbwsv0w9OSA2y1HFR9qXEeXQVeNoDQ=
 github.com/giantswarm/apiextensions-application v0.6.2 h1:XL86OrpprWl5Wp38EUvUXt3ztTo25+V63oDVlFwDpNg=
 github.com/giantswarm/apiextensions-application v0.6.2/go.mod h1:8ylqSmDSzFblCppRQTFo8v9s/F6MX6RTusVVoDDfWso=
-github.com/giantswarm/apptest-framework v1.7.0 h1:5R8s2b5itQfqsR9JMkjI1w2wHgaGMyY/QpubSrVvMM0=
-github.com/giantswarm/apptest-framework v1.7.0/go.mod h1:SEalHwaMtvHvnC6GCrL2l7nxNBDyHCWHdZ3VQEMqE0c=
-github.com/giantswarm/cluster-standup-teardown v1.19.0 h1:1752stdSiZyFLkS/XkOHvw7IVt5G80VIEeOdQzwE6h0=
-github.com/giantswarm/cluster-standup-teardown v1.19.0/go.mod h1:F5Qt/u5L+pNrkb/y1eXDOVeBkHRGkDj0Ejzdc3Gb5Zc=
+github.com/giantswarm/apptest-framework v1.7.1 h1:Pa5230ASv0hN0euICH1WSsG9jlGP9uYoffgZbyF17e8=
+github.com/giantswarm/apptest-framework v1.7.1/go.mod h1:Aa9n4Semh1xKgopFuTuDc3td6nzLgvXN4VHTU2x5YBo=
+github.com/giantswarm/cluster-standup-teardown v1.23.1 h1:KXZj2bxo4LiwICqbWN0gC2t9K6R56/oOwAYT9z4ixrg=
+github.com/giantswarm/cluster-standup-teardown v1.23.1/go.mod h1:U/4kJ2Sb7iPllRn5oJPXXGL4uEjfm7TZ5CX8zEgGoP4=
 github.com/giantswarm/clustertest v1.21.1 h1:5uc6kVLvCx5LZFxfwrkHlSrAVt0IZovIPz5ESL7b/5o=
 github.com/giantswarm/clustertest v1.21.1/go.mod h1:DduJUOzBTLku9jbwR/cLy0xHjLh+hcPOyDsq//MH4ow=
 github.com/giantswarm/k8smetadata v0.25.0 h1:6mKmmm4xHPuBvxDMAkIhU5oj6KJkJSaR2s5esIsnHs4=
