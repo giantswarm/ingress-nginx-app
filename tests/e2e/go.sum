@@ -123,10 +123,10 @@ github.com/fxamacker/cbor/v2 v2.7.0 h1:iM5WgngdRBanHcxugY4JySA0nk1wZorNOpTgCMedv
 github.com/fxamacker/cbor/v2 v2.7.0/go.mod h1:pxXPTn3joSm21Gbwsv0w9OSA2y1HFR9qXEeXQVeNoDQ=
 github.com/giantswarm/apiextensions-application v0.6.2 h1:XL86OrpprWl5Wp38EUvUXt3ztTo25+V63oDVlFwDpNg=
 github.com/giantswarm/apiextensions-application v0.6.2/go.mod h1:8ylqSmDSzFblCppRQTFo8v9s/F6MX6RTusVVoDDfWso=
-github.com/giantswarm/apptest-framework v1.7.1 h1:Pa5230ASv0hN0euICH1WSsG9jlGP9uYoffgZbyF17e8=
-github.com/giantswarm/apptest-framework v1.7.1/go.mod h1:Aa9n4Semh1xKgopFuTuDc3td6nzLgvXN4VHTU2x5YBo=
-github.com/giantswarm/cluster-standup-teardown v1.23.1 h1:KXZj2bxo4LiwICqbWN0gC2t9K6R56/oOwAYT9z4ixrg=
-github.com/giantswarm/cluster-standup-teardown v1.23.1/go.mod h1:U/4kJ2Sb7iPllRn5oJPXXGL4uEjfm7TZ5CX8zEgGoP4=
+github.com/giantswarm/apptest-framework v1.8.0 h1:jOLK1qIqs1PWnHf2MN9h1WglIfsWQvPb2kxKjZSbR0A=
+github.com/giantswarm/apptest-framework v1.8.0/go.mod h1:kxCDI6gWUmO2XDsk32zceEpmihSkB3Jj/zqfOVPbKoA=
+github.com/giantswarm/cluster-standup-teardown v1.24.0 h1:GFYETlb/16IFx+69x0fvOcrpBpkZD7UtbMmlSas3iZU=
+github.com/giantswarm/cluster-standup-teardown v1.24.0/go.mod h1:ycmygNAMtUd4yjviHYakUSLdtKaRJ6ddj1Vw7i4tCho=
 github.com/giantswarm/clustertest v1.23.0 h1:CXSh6OS/VN83XkmQKap9OYMAvh4Crg84mtmznU7XzDI=
 github.com/giantswarm/clustertest v1.23.0/go.mod h1:5T0XwUvDsZQJzDvV+1UGjFDpEf3qLH4E8dmKJGYVDtM=
 github.com/giantswarm/k8smetadata v0.25.0 h1:6mKmmm4xHPuBvxDMAkIhU5oj6KJkJSaR2s5esIsnHs4=
@@ -198,8 +198,8 @@ github.com/google/go-querystring v1.1.0/go.mod h1:Kcdr2DB4koayq7X8pmAG4sNG59So17
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
 github.com/google/gofuzz v1.2.0 h1:xRy4A+RhZaiKjJ1bPfwQ8sedCA+YS2YcCHW6ec7JMi0=
 github.com/google/gofuzz v1.2.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
-github.com/google/pprof v0.0.0-20240827171923-fa2c70bbbfe5 h1:5iH8iuqE5apketRbSFBy+X1V0o+l+8NF1avt4HWl7cA=
-github.com/google/pprof v0.0.0-20240827171923-fa2c70bbbfe5/go.mod h1:vavhavw2zAxS5dIdcRluK6cSGGPlZynqzFM8NdvU144=
+github.com/google/pprof v0.0.0-20240903155634-a8630aee4ab9 h1:q5g0N9eal4bmJwXHC5z0QCKs8qhS35hFfq0BAYsIwZI=
+github.com/google/pprof v0.0.0-20240903155634-a8630aee4ab9/go.mod h1:vavhavw2zAxS5dIdcRluK6cSGGPlZynqzFM8NdvU144=
 github.com/google/safetext v0.0.0-20240722112252-5a72de7e7962 h1:+9C/TgFfcCmZBV7Fjb3kQCGlkpFrhtvFDgbdQHB9RaA=
 github.com/google/safetext v0.0.0-20240722112252-5a72de7e7962/go.mod h1:H3K1Iu/utuCfa10JO+GsmKUYSWi7ug57Rk6GaDRHaaQ=
 github.com/google/shlex v0.0.0-20191202100458-e7afc7fbc510 h1:El6M4kTTCOh6aBiKaUGG7oYTSPP8MxqL4YI3kZKwcP4=
