@@ -17,6 +17,10 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+            branches:
+              ignore:
+                - main
+                - master
 
       - architect/push-to-app-catalog:
           name: push-to-control-plane-catalog
@@ -28,6 +32,10 @@ workflows:
           filters:
             tags:
               only: /^v.*/
+            branches:
+              ignore:
+                - main
+                - master
 
       - architect/run-tests-with-ats:
           name: run-tests-with-ats
