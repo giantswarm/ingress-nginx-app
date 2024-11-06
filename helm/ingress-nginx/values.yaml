@@ -26,7 +26,7 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.11.2"
+    tag: "v1.11.3"
     digest: ""
     digestChroot: ""
     pullPolicy: IfNotPresent
@@ -204,7 +204,7 @@ controller:
     # -- Annotations to be added to the udp config configmap
     annotations: {}
   # -- Maxmind license key to download GeoLite2 Databases.
-  ## https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases
+  ## https://blog.maxmind.com/2019/12/significant-changes-to-accessing-and-using-geolite2-databases/
   maxmindLicenseKey: ""
   # -- Additional command line arguments to pass to Ingress-Nginx Controller
   # E.g. to specify the default SSL certificate you can use
@@ -309,6 +309,8 @@ controller:
           app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
           app.kubernetes.io/instance: '{{ .Release.Name }}'
           app.kubernetes.io/component: controller
+      matchLabelKeys:
+      - pod-template-hash
       topologyKey: topology.kubernetes.io/zone
       maxSkew: 1
       whenUnsatisfiable: ScheduleAnyway
@@ -317,6 +319,8 @@ controller:
           app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
           app.kubernetes.io/instance: '{{ .Release.Name }}'
           app.kubernetes.io/component: controller
+      matchLabelKeys:
+      - pod-template-hash
       topologyKey: kubernetes.io/hostname
       maxSkew: 1
       whenUnsatisfiable: ScheduleAnyway
@@ -829,7 +833,7 @@ controller:
         ## for backwards compatibility consider setting the full image url via the repository value below
         ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
         ## repository:
-        tag: v1.4.3
+        tag: v1.4.4
         digest: ""
         pullPolicy: IfNotPresent
       # -- Provide a priority class name to the webhook patching job
@@ -898,6 +902,7 @@ controller:
     serviceMonitor:
       enabled: true
       additionalLabels: {}
+      # -- Annotations to be added to the ServiceMonitor.
       annotations: {}
       ## The label to use to retrieve the job name from.
       ## jobLabel: "app.kubernetes.io/name"
@@ -1100,6 +1105,8 @@ defaultBackend:
   #       app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
   #       app.kubernetes.io/instance: '{{ .Release.Name }}'
   #       app.kubernetes.io/component: default-backend
+  #   matchLabelKeys:
+  #   - pod-template-hash
   #   topologyKey: topology.kubernetes.io/zone
   #   maxSkew: 1
   #   whenUnsatisfiable: ScheduleAnyway
@@ -1108,6 +1115,8 @@ defaultBackend:
   #       app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
   #       app.kubernetes.io/instance: '{{ .Release.Name }}'
   #       app.kubernetes.io/component: default-backend
+  #   matchLabelKeys:
+  #   - pod-template-hash
   #   topologyKey: kubernetes.io/hostname
   #   maxSkew: 1
   #   whenUnsatisfiable: ScheduleAnyway
@@ -1128,6 +1137,7 @@ defaultBackend:
   ##
   podAnnotations: {}
   replicaCount: 1
+  # -- Minimum available pods set in PodDisruptionBudget.
   minAvailable: 1
   resources: {}
   # limits:

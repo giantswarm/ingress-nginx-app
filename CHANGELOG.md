@@ -7,6 +7,16 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Sync to upstream. ([#741](https://github.com/giantswarm/ingress-nginx-app/pull/741))
+  - Controller: Update image to [v1.11.3](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.11.3.md).
+  - Kube Webhook CertGen: Update image to v1.4.4.
+  - Chart: Implement `controller.admissionWebhooks.service.servicePort`.
+  - Chart: Rework ServiceMonitor.
+  - Chart: Align default backend `PodDisruptionBudget`.
+  - Chart: Specify `matchLabelKeys` in Topology Spread Constraints.
+
 ## [3.9.2] - 2024-08-20
 
 ### Changed
