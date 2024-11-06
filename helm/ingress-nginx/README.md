@@ -2,7 +2,7 @@
 
 [ingress-nginx](https://github.com/kubernetes/ingress-nginx) Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 
-![Version: 3.9.2](https://img.shields.io/badge/Version-3.9.2-informational?style=flat-square) ![AppVersion: 1.11.2](https://img.shields.io/badge/AppVersion-1.11.2-informational?style=flat-square)
+![Version: 3.9.2](https://img.shields.io/badge/Version-3.9.2-informational?style=flat-square) ![AppVersion: 1.11.3](https://img.shields.io/badge/AppVersion-1.11.3-informational?style=flat-square)
 
 To use, add `ingressClassName: nginx` spec field or the `kubernetes.io/ingress.class: nginx` annotation to your Ingress resources.
 
@@ -229,6 +229,24 @@ Detail of how and why are in [this issue](https://github.com/helm/charts/pull/13
 
 As of version `1.26.0` of this chart, by simply not providing any clusterIP value, `invalid: spec.clusterIP: Invalid value: "": field is immutable` will no longer occur since `clusterIP: ""` will not be rendered.
 
+### Pod Security Admission
+
+You can use Pod Security Admission by applying labels to the `ingress-nginx` namespace as instructed by the [documentation](https://kubernetes.io/docs/tasks/configure-pod-container/enforce-standards-namespace-labels).
+
+Example:
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ingress-nginx
+  labels:
+    kubernetes.io/metadata.name: ingress-nginx
+    name: ingress-nginx
+    pod-security.kubernetes.io/enforce: restricted
+    pod-security.kubernetes.io/enforce-version: v1.31
+```
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -258,7 +276,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.admissionWebhooks.patch.image.digest | string | `""` |  |
 | controller.admissionWebhooks.patch.image.image | string | `"giantswarm/ingress-nginx-kube-webhook-certgen"` |  |
 | controller.admissionWebhooks.patch.image.pullPolicy | string | `"IfNotPresent"` |  |
-| controller.admissionWebhooks.patch.image.tag | string | `"v1.4.3"` |  |
+| controller.admissionWebhooks.patch.image.tag | string | `"v1.4.4"` |  |
 | controller.admissionWebhooks.patch.labels | object | `{}` | Labels to be added to patch job resources |
 | controller.admissionWebhooks.patch.networkPolicy.enabled | bool | `true` | Enable 'networkPolicy' or not |
 | controller.admissionWebhooks.patch.nodeSelector."kubernetes.io/os" | string | `"linux"` |  |
@@ -337,7 +355,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.image.runAsNonRoot | bool | `true` |  |
 | controller.image.runAsUser | int | `101` | This value must not be changed using the official image. uid=101(www-data) gid=82(www-data) groups=82(www-data) |
 | controller.image.seccompProfile.type | string | `"RuntimeDefault"` |  |
-| controller.image.tag | string | `"v1.11.2"` |  |
+| controller.image.tag | string | `"v1.11.3"` |  |
 | controller.ingressClass | string | `"nginx"` | For backwards compatibility with ingress.class annotation, use ingressClass. Algorithm is as follows, first ingressClassName is considered, if not present, controller looks for ingress.class annotation |
 | controller.ingressClassByName | bool | `false` | Process IngressClass per name (additionally as per spec.controller). |
 | controller.ingressClassResource | object | `{"aliases":[],"annotations":{},"controllerValue":"k8s.io/ingress-nginx","default":false,"enabled":true,"name":"nginx","parameters":{}}` | This section refers to the creation of the IngressClass resource. IngressClasses are immutable and cannot be changed after creation. We do not support namespaced IngressClasses, yet, so a ClusterRole and a ClusterRoleBinding is required. |
@@ -370,7 +388,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.livenessProbe.successThreshold | int | `1` |  |
 | controller.livenessProbe.timeoutSeconds | int | `1` |  |
 | controller.maxUnavailable | string | `"25%"` | Maximum unavailable pods set in PodDisruptionBudget. If set, 'minAvailable' is ignored. |
-| controller.maxmindLicenseKey | string | `""` | Maxmind license key to download GeoLite2 Databases. # https://blog.maxmind.com/2019/12/18/significant-changes-to-accessing-and-using-geolite2-databases |
+| controller.maxmindLicenseKey | string | `""` | Maxmind license key to download GeoLite2 Databases. # https://blog.maxmind.com/2019/12/significant-changes-to-accessing-and-using-geolite2-databases/ |
 | controller.metrics.enabled | bool | `true` |  |
 | controller.metrics.port | int | `10254` |  |
 | controller.metrics.portName | string | `"metrics"` |  |
@@ -384,7 +402,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.metrics.service.servicePort | int | `10254` |  |
 | controller.metrics.service.type | string | `"ClusterIP"` |  |
 | controller.metrics.serviceMonitor.additionalLabels | object | `{}` |  |
-| controller.metrics.serviceMonitor.annotations | object | `{}` |  |
+| controller.metrics.serviceMonitor.annotations | object | `{}` | Annotations to be added to the ServiceMonitor. |
 | controller.metrics.serviceMonitor.enabled | bool | `true` |  |
 | controller.metrics.serviceMonitor.metricRelabelings[0].action | string | `"drop"` |  |
 | controller.metrics.serviceMonitor.metricRelabelings[0].regex | string | `"nginx_ingress_controller_(bytes_sent_bucket|request_size_bucket|response_duration_seconds_bucket|response_size_bucket|request_duration_seconds_count|connect_duration_seconds_bucket|header_duration_seconds_bucket|bytes_sent_count|request_duration_seconds_sum|bytes_sent_sum|request_size_count|response_size_count|response_duration_seconds_sum|response_duration_seconds_count|ingress_upstream_latency_seconds|ingress_upstream_latency_seconds_sum|ingress_upstream_latency_seconds_count)"` |  |
@@ -495,7 +513,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | controller.tcp.configMapNamespace | string | `""` | Allows customization of the tcp-services-configmap; defaults to $(POD_NAMESPACE) |
 | controller.terminationGracePeriodSeconds | int | `300` | `terminationGracePeriodSeconds` to avoid killing pods before we are ready # wait up to five minutes for the drain of connections # |
 | controller.tolerations | list | `[]` | Node tolerations for server scheduling to nodes with taints # Ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/ # |
-| controller.topologySpreadConstraints | list | `[{"labelSelector":{"matchLabels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"{{ .Release.Name }}","app.kubernetes.io/name":"{{ include \"ingress-nginx.name\" . }}"}},"maxSkew":1,"topologyKey":"topology.kubernetes.io/zone","whenUnsatisfiable":"ScheduleAnyway"},{"labelSelector":{"matchLabels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"{{ .Release.Name }}","app.kubernetes.io/name":"{{ include \"ingress-nginx.name\" . }}"}},"maxSkew":1,"topologyKey":"kubernetes.io/hostname","whenUnsatisfiable":"ScheduleAnyway"}]` | Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ # |
+| controller.topologySpreadConstraints | list | `[{"labelSelector":{"matchLabels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"{{ .Release.Name }}","app.kubernetes.io/name":"{{ include \"ingress-nginx.name\" . }}"}},"matchLabelKeys":["pod-template-hash"],"maxSkew":1,"topologyKey":"topology.kubernetes.io/zone","whenUnsatisfiable":"ScheduleAnyway"},{"labelSelector":{"matchLabels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"{{ .Release.Name }}","app.kubernetes.io/name":"{{ include \"ingress-nginx.name\" . }}"}},"matchLabelKeys":["pod-template-hash"],"maxSkew":1,"topologyKey":"kubernetes.io/hostname","whenUnsatisfiable":"ScheduleAnyway"}]` | Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in. # Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/ # |
 | controller.udp.annotations | object | `{}` | Annotations to be added to the udp config configmap |
 | controller.udp.configMapNamespace | string | `""` | Allows customization of the udp-services-configmap; defaults to $(POD_NAMESPACE) |
 | controller.updateStrategy | object | `{}` | The update strategy to apply to the Deployment or DaemonSet # |
@@ -530,7 +548,7 @@ As of version `1.26.0` of this chart, by simply not providing any clusterIP valu
 | defaultBackend.livenessProbe.periodSeconds | int | `10` |  |
 | defaultBackend.livenessProbe.successThreshold | int | `1` |  |
 | defaultBackend.livenessProbe.timeoutSeconds | int | `5` |  |
-| defaultBackend.minAvailable | int | `1` |  |
+| defaultBackend.minAvailable | int | `1` | Minimum available pods set in PodDisruptionBudget. |
 | defaultBackend.minReadySeconds | int | `0` | `minReadySeconds` to avoid killing pods before we are ready # |
 | defaultBackend.name | string | `"defaultbackend"` |  |
 | defaultBackend.networkPolicy.enabled | bool | `true` | Enable 'networkPolicy' or not |
