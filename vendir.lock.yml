@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Chart: Implement Giant Swarm changes. (#12)...'
-      sha: a54846b6bd384690ed6504f67804f3be7a8a66da
+      commitTitle: 'Chart: Implement Giant Swarm changes.'
+      sha: 61169cb75495d535e670a57f0d24b71dceec063d
     path: ingress-nginx
   path: helm
 kind: LockConfig
