@@ -13,7 +13,9 @@ metadata:
   name: {{ include "ingress-nginx.controller.fullname" . }}
   namespace: {{ include "ingress-nginx.namespace" . }}
 data:
-  allow-snippet-annotations: "{{ .Values.controller.allowSnippetAnnotations }}"
+{{- if .Values.controller.allowSnippetAnnotations }}
+  allow-snippet-annotations: "true"
+{{- end }}
 {{- if .Values.controller.addHeaders }}
   add-headers: {{ include "ingress-nginx.namespace" . }}/{{ include "ingress-nginx.fullname" . }}-custom-add-headers
 {{- end }}
@@ -23,7 +25,7 @@ data:
 {{- if .Values.dhParam }}
   ssl-dh-param: {{ include "ingress-nginx.namespace" . }}/{{ include "ingress-nginx.controller.fullname" . }}
 {{- end }}
-{{- range $key, $value := merge .Values.controller.config .Values.configmap }}
+{{- range $key, $value := .Values.controller.config }}
   {{- $key | nindent 2 }}: {{ tpl (toString $value) $ | quote }}
 {{- end }}
 {{- if and (or (eq .Values.provider "aws") (eq .Values.provider "capa")) (not (index .Values.controller.config "use-proxy-protocol")) }}
