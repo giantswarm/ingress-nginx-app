@@ -7,6 +7,30 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Chart: Sync to upstream. ([#768]()https://github.com/giantswarm/ingress-nginx-app/pull/768)
+  - Deployment: Add `controller.progressDeadlineSeconds`.
+  - Pod Disruption Budget: Add `controller.unhealthyPodEvictionPolicy`.
+  - Prometheus Rule: Add `controller.metrics.prometheusRule.annotations`.
+  - Metrics Service: Add `controller.metrics.service.enabled`.
+  - Default Backend: Add `defaultBackend.maxUnavailable`.
+  - Default Backend: Add `defaultBackend.unhealthyPodEvictionPolicy`.
+
+### Changed
+
+- Chart: Sync to upstream. ([#768]()https://github.com/giantswarm/ingress-nginx-app/pull/768)
+  - Controller: Update image to [v1.12.0](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.0.md).
+  - Values: Rename `image` to `global.image`.
+
+### Removed
+
+- Chart: Sync to upstream. ([#768]()https://github.com/giantswarm/ingress-nginx-app/pull/768)
+  - Chart: Remove Pod Security Policies.
+  - Values: Remove `configmap`.
+  - Deployment: Remove `giantswarm.io/monitoring_basic_sli` label.
+  - Deployment: Remove OpenTelemetry init container.
+
 ## [3.9.4] - 2025-01-06
 
 ### Changed

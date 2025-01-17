@@ -8,9 +8,6 @@
         "commonLabels": {
             "type": "object"
         },
-        "configmap": {
-            "type": "object"
-        },
         "controller": {
             "type": "object",
             "properties": {
@@ -100,9 +97,6 @@
                         },
                         "enabled": {
                             "type": "boolean"
-                        },
-                        "existingPsp": {
-                            "type": "string"
                         },
                         "extraEnvs": {
                             "type": "array"
@@ -373,9 +367,6 @@
                 "enableTopologyAwareRouting": {
                     "type": "boolean"
                 },
-                "existingPsp": {
-                    "type": "string"
-                },
                 "extraArgs": {
                     "type": "object"
                 },
@@ -602,6 +593,9 @@
                                 "additionalLabels": {
                                     "type": "object"
                                 },
+                                "annotations": {
+                                    "type": "object"
+                                },
                                 "enabled": {
                                     "type": "boolean"
                                 },
@@ -621,6 +615,9 @@
                                 },
                                 "clusterIP": {
                                     "type": "string"
+                                },
+                                "enabled": {
+                                    "type": "boolean"
                                 },
                                 "externalIPs": {
                                     "type": "array"
@@ -709,63 +706,6 @@
                 "nodeSelector": {
                     "type": "object"
                 },
-                "opentelemetry": {
-                    "type": "object",
-                    "properties": {
-                        "containerSecurityContext": {
-                            "type": "object",
-                            "properties": {
-                                "allowPrivilegeEscalation": {
-                                    "type": "boolean"
-                                },
-                                "capabilities": {
-                                    "type": "object"
-                                },
-                                "readOnlyRootFilesystem": {
-                                    "type": "boolean"
-                                },
-                                "runAsGroup": {
-                                    "type": "integer"
-                                },
-                                "runAsNonRoot": {
-                                    "type": "boolean"
-                                },
-                                "runAsUser": {
-                                    "type": "integer"
-                                },
-                                "seccompProfile": {
-                                    "type": "object"
-                                }
-                            }
-                        },
-                        "enabled": {
-                            "type": "boolean"
-                        },
-                        "image": {
-                            "type": "object",
-                            "properties": {
-                                "digest": {
-                                    "type": "string"
-                                },
-                                "distroless": {
-                                    "type": "boolean"
-                                },
-                                "image": {
-                                    "type": "string"
-                                },
-                                "tag": {
-                                    "type": "string"
-                                }
-                            }
-                        },
-                        "name": {
-                            "type": "string"
-                        },
-                        "resources": {
-                            "type": "object"
-                        }
-                    }
-                },
                 "podAnnotations": {
                     "type": "object"
                 },
@@ -777,6 +717,9 @@
                 },
                 "priorityClassName": {
                     "type": "string"
+                },
+                "progressDeadlineSeconds": {
+                    "type": "integer"
                 },
                 "proxySetHeaders": {
                     "type": "object"
@@ -1094,6 +1037,9 @@
                         }
                     }
                 },
+                "unhealthyPodEvictionPolicy": {
+                    "type": "string"
+                },
                 "updateStrategy": {
                     "type": "object"
                 },
@@ -1136,9 +1082,6 @@
                 },
                 "enabled": {
                     "type": "boolean"
-                },
-                "existingPsp": {
-                    "type": "string"
                 },
                 "extraArgs": {
                     "type": "object"
@@ -1316,6 +1259,9 @@
                 "topologySpreadConstraints": {
                     "type": "array"
                 },
+                "unhealthyPodEvictionPolicy": {
+                    "type": "string"
+                },
                 "updateStrategy": {
                     "type": "object"
                 }
@@ -1330,21 +1276,13 @@
         "global": {
             "type": "object",
             "properties": {
-                "podSecurityStandards": {
+                "image": {
                     "type": "object",
                     "properties": {
-                        "enforced": {
-                            "type": "boolean"
+                        "registry": {
+                            "type": "string"
                         }
                     }
-                }
-            }
-        },
-        "image": {
-            "type": "object",
-            "properties": {
-                "registry": {
-                    "type": "string"
                 }
             }
         },
@@ -1356,14 +1294,6 @@
         },
         "namespaceOverride": {
             "type": "string"
-        },
-        "podSecurityPolicy": {
-            "type": "object",
-            "properties": {
-                "enabled": {
-                    "type": "boolean"
-                }
-            }
         },
         "portNamePrefix": {
             "type": "string"

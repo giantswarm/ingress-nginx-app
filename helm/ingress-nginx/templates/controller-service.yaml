@@ -17,7 +17,7 @@ metadata:
     {{- if not .Values.controller.service.public }}
     service.beta.kubernetes.io/aws-load-balancer-internal: "true"
     {{- end }}
-    {{- if ne (index (merge .Values.controller.config .Values.configmap) "use-proxy-protocol") "false" }}
+    {{- if ne (index .Values.controller.config "use-proxy-protocol") "false" }}
     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
     {{- end }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
