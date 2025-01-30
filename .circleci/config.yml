@@ -15,12 +15,12 @@ workflows:
           app_catalog_test: giantswarm-test-catalog
           persist_chart_archive: true
           filters:
-            tags:
-              only: /^v.*/
             branches:
               ignore:
                 - main
                 - master
+            tags:
+              only: /^v.*/
 
       - architect/push-to-app-catalog:
           name: push-to-control-plane-catalog
@@ -30,12 +30,12 @@ workflows:
           app_catalog: control-plane-catalog
           app_catalog_test: control-plane-test-catalog
           filters:
-            tags:
-              only: /^v.*/
             branches:
               ignore:
                 - main
                 - master
+            tags:
+              only: /^v.*/
 
       - architect/run-tests-with-ats:
           name: run-tests-with-ats
@@ -45,6 +45,9 @@ workflows:
             branches:
               ignore:
                 - main
+                - master
+            tags:
+              only: /^v.*/
 
       # - architect/push-to-app-collection:
       #     name: push-to-capa-app-collection
