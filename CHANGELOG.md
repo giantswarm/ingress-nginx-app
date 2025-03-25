@@ -7,6 +7,12 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Sync to upstream. ([#788](https://github.com/giantswarm/ingress-nginx-app/pull/788))
+  - Controller: Update image to [v1.12.1](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.1.md).
+  - Kube Webhook CertGen: Update image to v1.5.2.
+
 ## [4.0.0-alpha1] - 2025-01-30
 
 Depending on your current setup, this release may contain breaking changes. We go into these in more detail below and therefore ask you to read them carefully and check whether and to what extent they affect your setup.
