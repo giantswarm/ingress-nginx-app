@@ -7,11 +7,44 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [4.0.0] - 2025-03-25
+
+Depending on your current setup, this release may contain breaking changes. We go into these in more detail below and therefore ask you to read them carefully and check whether and to what extent they affect your setup.
+
+### Added
+
+- Chart: Sync to upstream. ([#768]()https://github.com/giantswarm/ingress-nginx-app/pull/768)
+  - Deployment: Add `controller.progressDeadlineSeconds`.
+  - Pod Disruption Budget: Add `controller.unhealthyPodEvictionPolicy`.
+  - Prometheus Rule: Add `controller.metrics.prometheusRule.annotations`.
+  - Metrics Service: Add `controller.metrics.service.enabled`.
+  - Default Backend: Add `defaultBackend.maxUnavailable`.
+  - Default Backend: Add `defaultBackend.unhealthyPodEvictionPolicy`.
+
 ### Changed
 
+- Chart: Sync to upstream. ([#768]()https://github.com/giantswarm/ingress-nginx-app/pull/768)
+  - Controller: Update image to [v1.12.0](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.0.md).\
+    **NOTE:** Please read the upstream changelog carefully, especially the entries marked with ⚠️. In addition, the following should be noted:
+    - The `--enable-annotation-validation` CLI flag is already enabled by default in this app since v3.2.0.
+    - The `allow-cross-namespace-resources` ConfigMap option getting deactivated affects you if you are currently referencing resources such as Secrets in Ingress resource annotations from namespaces other than the Ingress resource itself.
+    - The `annotations-risk-level` ConfigMap option getting lowered to `High` affects you if you are currently using annotations with an annotation risk level of `Critical`. Especially snippet annotations belong to this annotation risk level. So even though you activated snippet annotations via ConfigMap option in the past, you now also need to increase the `annotations-risk-level` ConfigMap option back to `Critical`.
+    - The `strict-validate-path-type` ConfigMap option is already enabled by default in this app since v3.2.0.
+  - Values: Rename `image` to `global.image`.
 - Chart: Sync to upstream. ([#788](https://github.com/giantswarm/ingress-nginx-app/pull/788))
   - Controller: Update image to [v1.12.1](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.1.md).
   - Kube Webhook CertGen: Update image to v1.5.2.
+
+### Removed
+
+- Chart: Sync to upstream. ([#768]()https://github.com/giantswarm/ingress-nginx-app/pull/768)
+  - Chart: Remove Pod Security Policies.\
+    **NOTE:** Pod Security Policies have already been removed from Kubernetes in v1.25. Therefore, this version is not compatible with Kubernetes v1.24 and below.
+  - Values: Remove `configmap`.\
+    **NOTE:** The `configmap` value is deprecated since v3.0.0. Please use `controller.config` instead.
+  - Deployment: Remove `giantswarm.io/monitoring_basic_sli` label.
+  - Deployment: Remove OpenTelemetry init container.\
+    **NOTE:** OpenTelemetry is still supported, but since the module is built into the controller image since v1.10, we hereby remove the init container and image which were used to install it upon controller startup.
 
 ## [4.0.0-alpha1] - 2025-01-30
 
@@ -1434,7 +1467,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.0-alpha1...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.0-alpha1...v4.0.0
 [4.0.0-alpha1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.4...v4.0.0-alpha1
 [3.9.4]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.3...v3.9.4
 [3.9.3]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.2...v3.9.3
