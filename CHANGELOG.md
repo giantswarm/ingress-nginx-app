@@ -82,6 +82,14 @@ Depending on your current setup, this release may contain breaking changes. We g
   - Deployment: Remove OpenTelemetry init container.\
     **NOTE:** OpenTelemetry is still supported, but since the module is built into the controller image since v1.10, we hereby remove the init container and image which were used to install it upon controller startup.
 
+## [3.9.5] - 2025-03-25
+
+### Changed
+
+- Chart: Sync to upstream. ([#789](https://github.com/giantswarm/ingress-nginx-app/pull/789))
+  - Controller: Update image to [v1.11.5](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.11.5.md).
+  - Kube Webhook CertGen: Update image to v1.5.2.
+
 ## [3.9.4] - 2025-01-06
 
 ### Changed
@@ -1469,7 +1477,8 @@ Previous versions changelog can be found [here](https://github.com/giantswarm/ku
 
 [Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.0...HEAD
 [4.0.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.0-alpha1...v4.0.0
-[4.0.0-alpha1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.4...v4.0.0-alpha1
+[4.0.0-alpha1]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.5...v4.0.0-alpha1
+[3.9.5]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.4...v3.9.5
 [3.9.4]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.3...v3.9.4
 [3.9.3]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.2...v3.9.3
 [3.9.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.1...v3.9.2
