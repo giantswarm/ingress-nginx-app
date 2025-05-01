@@ -274,7 +274,7 @@ metadata:
 | controller.admissionWebhooks.patch.image.digest | string | `""` |  |
 | controller.admissionWebhooks.patch.image.image | string | `"giantswarm/ingress-nginx-kube-webhook-certgen"` |  |
 | controller.admissionWebhooks.patch.image.pullPolicy | string | `"IfNotPresent"` |  |
-| controller.admissionWebhooks.patch.image.tag | string | `"v1.5.2"` |  |
+| controller.admissionWebhooks.patch.image.tag | string | `"v1.5.3"` |  |
 | controller.admissionWebhooks.patch.labels | object | `{}` | Labels to be added to patch job resources |
 | controller.admissionWebhooks.patch.networkPolicy.enabled | bool | `true` | Enable 'networkPolicy' or not |
 | controller.admissionWebhooks.patch.nodeSelector."kubernetes.io/os" | string | `"linux"` |  |
