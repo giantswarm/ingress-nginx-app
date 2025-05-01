@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [3.9.6] - 2025-05-01
+
 ### Changed
 
 - Chart: Sync to upstream. ([#803](https://github.com/giantswarm/ingress-nginx-app/pull/803))
@@ -1406,7 +1408,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.5...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.6...HEAD
+[3.9.6]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.5...v3.9.6
 [3.9.5]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.4...v3.9.5
 [3.9.4]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.3...v3.9.4
 [3.9.3]: https://github.com/giantswarm/ingress-nginx-app/compare/v3.9.2...v3.9.3
