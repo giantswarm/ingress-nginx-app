@@ -28,6 +28,9 @@
                                     "properties": {
                                         "duration": {
                                             "type": "string"
+                                        },
+                                        "revisionHistoryLimit": {
+                                            "type": "integer"
                                         }
                                     }
                                 },
@@ -50,6 +53,9 @@
                                     "properties": {
                                         "duration": {
                                             "type": "string"
+                                        },
+                                        "revisionHistoryLimit": {
+                                            "type": "integer"
                                         }
                                     }
                                 }
@@ -61,6 +67,9 @@
                         "createSecretJob": {
                             "type": "object",
                             "properties": {
+                                "activeDeadlineSeconds": {
+                                    "type": "integer"
+                                },
                                 "name": {
                                     "type": "string"
                                 },
@@ -174,6 +183,9 @@
                                         }
                                     }
                                 },
+                                "runtimeClassName": {
+                                    "type": "string"
+                                },
                                 "securityContext": {
                                     "type": "object"
                                 },
@@ -199,6 +211,9 @@
                         "patchWebhookJob": {
                             "type": "object",
                             "properties": {
+                                "activeDeadlineSeconds": {
+                                    "type": "integer"
+                                },
                                 "name": {
                                     "type": "string"
                                 },
@@ -661,6 +676,15 @@
                                 "honorLabels": {
                                     "type": "boolean"
                                 },
+                                "labelLimit": {
+                                    "type": "integer"
+                                },
+                                "labelNameLengthLimit": {
+                                    "type": "integer"
+                                },
+                                "labelValueLengthLimit": {
+                                    "type": "integer"
+                                },
                                 "metricRelabelings": {
                                     "type": "array",
                                     "items": {
@@ -676,11 +700,17 @@
                                 "relabelings": {
                                     "type": "array"
                                 },
+                                "sampleLimit": {
+                                    "type": "integer"
+                                },
                                 "scrapeInterval": {
                                     "type": "string"
                                 },
                                 "targetLabels": {
                                     "type": "array"
+                                },
+                                "targetLimit": {
+                                    "type": "integer"
                                 }
                             }
                         }
@@ -760,6 +790,9 @@
                         }
                     }
                 },
+                "runtimeClassName": {
+                    "type": "string"
+                },
                 "scope": {
                     "type": "object",
                     "properties": {
@@ -789,6 +822,9 @@
                         "clusterIP": {
                             "type": "string"
                         },
+                        "clusterIPs": {
+                            "type": "array"
+                        },
                         "enableHttp": {
                             "type": "boolean"
                         },
@@ -803,6 +839,9 @@
                             "properties": {
                                 "enabled": {
                                     "type": "boolean"
+                                },
+                                "labels": {
+                                    "type": "object"
                                 }
                             }
                         },
@@ -845,6 +884,9 @@
                                 "clusterIP": {
                                     "type": "string"
                                 },
+                                "clusterIPs": {
+                                    "type": "array"
+                                },
                                 "enabled": {
                                     "type": "boolean"
                                 },
@@ -867,6 +909,9 @@
                                 "ipFamilyPolicy": {
                                     "type": "string",
                                     "enum": ["SingleStack", "PreferDualStack", "RequireDualStack"]
+                                },
+                                "labels": {
+                                    "type": "object"
                                 },
                                 "loadBalancerClass": {
                                     "type": "string"
@@ -909,6 +954,9 @@
                                 },
                                 "targetPorts": {
                                     "type": "object"
+                                },
+                                "trafficDistribution": {
+                                    "type": "string"
                                 },
                                 "type": {
                                     "type": "string"
@@ -988,6 +1036,9 @@
                                     "type": "string"
                                 }
                             }
+                        },
+                        "trafficDistribution": {
+                            "type": "string"
                         },
                         "type": {
                             "type": "string"
@@ -1219,11 +1270,17 @@
                 "resources": {
                     "type": "object"
                 },
+                "runtimeClassName": {
+                    "type": "string"
+                },
                 "service": {
                     "type": "object",
                     "properties": {
                         "annotations": {
                             "type": "object"
+                        },
+                        "clusterIPs": {
+                            "type": "array"
                         },
                         "externalIPs": {
                             "type": "array"
