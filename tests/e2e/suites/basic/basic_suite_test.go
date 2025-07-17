@@ -10,7 +10,6 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/giantswarm/apptest-framework/pkg/config"
 	"github.com/giantswarm/apptest-framework/pkg/state"
 	"github.com/giantswarm/apptest-framework/pkg/suite"
 
@@ -27,7 +26,7 @@ func TestBasic(t *testing.T) {
 		appReadyTimeout  = 10 * time.Minute
 		appReadyInterval = 5 * time.Second
 	)
-	suite.New(config.MustLoad("../../config.yaml")).
+	suite.New().
 		WithInstallNamespace("kube-system").
 		WithIsUpgrade(isUpgrade).
 		WithValuesFile("./values.yaml").

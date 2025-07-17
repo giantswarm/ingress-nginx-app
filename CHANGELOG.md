@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Updated E2E tests to use apptest-framework v1.14.0
+
 ## [4.0.3] - 2025-07-17
 
 ### Changed
