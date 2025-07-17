@@ -6,7 +6,7 @@ directories:
   - path: ingress-nginx
     git:
       url: https://github.com/giantswarm/ingress-nginx-upstream
-      ref: release-1.12
+      ref: release-1.13
       depth: 1
     excludePaths:
     - charts/ingress-nginx/OWNERS
