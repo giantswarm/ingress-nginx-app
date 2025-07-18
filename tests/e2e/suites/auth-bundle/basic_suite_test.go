@@ -8,7 +8,6 @@ import (
 	. "github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/api/errors"
 
-	"github.com/giantswarm/apptest-framework/pkg/config"
 	"github.com/giantswarm/apptest-framework/pkg/state"
 	"github.com/giantswarm/apptest-framework/pkg/suite"
 	"github.com/giantswarm/clustertest/pkg/logger"
@@ -20,7 +19,7 @@ const (
 )
 
 func TestBasic(t *testing.T) {
-	suite.New(config.MustLoad("../../config.yaml")).
+	suite.New().
 		InAppBundle("auth-bundle").
 		WithInstallNamespace("kube-system").
 		WithIsUpgrade(isUpgrade).
