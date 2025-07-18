@@ -7,9 +7,25 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [4.1.0] - 2025-07-18
+
+### Added
+
+- Chart: Sync to upstream. ([#833](https://github.com/giantswarm/ingress-nginx-app/pull/833))
+  - Chart: Implement ServiceMonitor limits.
+  - Chart: Add service cluster IPs.
+  - Chart: Set `automountServiceAccountToken` in workloads.
+  - Chart: Add `controller.service.trafficDistribution`.
+  - Chart: Add `controller.service.external.labels` & `controller.service.internal.labels`.
+  - Chart: Add `controller.admissionWebhooks.certManager.*.revisionHistoryLimit`.
+  - Chart: Implement `runtimeClassName`.
+  - Chart: Add `activeDeadlineSeconds`.
+
 ### Changed
 
 - Updated E2E tests to use apptest-framework v1.14.0
+- Chart: Sync to upstream. ([#833](https://github.com/giantswarm/ingress-nginx-app/pull/833))
+  - Controller: Update image to [v1.13.0](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.13.0.md).
 
 ## [4.0.3] - 2025-07-17
 
@@ -1527,7 +1543,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.3...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.0...HEAD
+[4.1.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.3...v4.1.0
 [4.0.3]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.2...v4.0.3
 [4.0.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.1...v4.0.2
 [4.0.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.0...v4.0.1
