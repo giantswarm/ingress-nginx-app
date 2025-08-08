@@ -106,8 +106,8 @@ github.com/giantswarm/apptest-framework v1.14.1 h1:Eh2llUMBWJHrqZO61pPFSATcSI3t2
 github.com/giantswarm/apptest-framework v1.14.1/go.mod h1:a92cz7PlsHUwFjKDzUHUKU3D4ou8GEOkNH9JBsRHw6I=
 github.com/giantswarm/cluster-standup-teardown v1.34.1 h1:qfI7l0zGBNcVq1pqQqAFN6QJ25f5IBQTb8G7z7KF6Qc=
 github.com/giantswarm/cluster-standup-teardown v1.34.1/go.mod h1:Cs5df5YRbe0BJPt/d//Rvyz30VXiqwMzCLJRKAEIZkM=
-github.com/giantswarm/clustertest v1.38.1 h1:tFqMNfFWio2oiUbBcpcu3tA2BBgeVETJ1dPPXscFRuo=
-github.com/giantswarm/clustertest v1.38.1/go.mod h1:JLE/hHQnAwgP59jIF2EtV4OOzrxzav+jslnTAO6tynw=
+github.com/giantswarm/clustertest v1.38.2 h1:XwDRTHpfWHHvfSsmv/CoMXR7y8MkEvsPE1ceA9EI87Y=
+github.com/giantswarm/clustertest v1.38.2/go.mod h1:y3xZXtrWaFpRr7N3hL3/2SBgPYaRtWcDSvIZk0sEeko=
 github.com/giantswarm/k8smetadata v0.25.0 h1:6mKmmm4xHPuBvxDMAkIhU5oj6KJkJSaR2s5esIsnHs4=
 github.com/giantswarm/k8smetadata v0.25.0/go.mod h1:QiQAyaZnwco1U0lENLF0Kp4bSN4dIPwIlHWEvUo3ES8=
 github.com/giantswarm/kubectl-gs/v2 v2.57.0 h1:IMmho55Qq+WE+frJXcTBhx19+J54xwu/j4+pGU5YecA=
