@@ -30,9 +30,9 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.12.4"
-    digest: ""
-    digestChroot: ""
+    tag: "v1.12.5"
+    digest: sha256:f4a204a39ce99e7d297c54b02e64e421d872675c5ee29ab1b6edb62d4d69be5c
+    digestChroot: sha256:5bee417e81f5478b166e35b66b62824275fba150cb737adf665ba05c61ff4632
     pullPolicy: IfNotPresent
     runAsNonRoot: true
     # -- This value must not be changed using the official image.
@@ -810,8 +810,8 @@ controller:
         ## for backwards compatibility consider setting the full image url via the repository value below
         ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
         ## repository:
-        tag: v1.6.0
-        digest: ""
+        tag: v1.6.1
+        digest: sha256:e63459ec5965840af34d6d6a2f4c017eb6e212db83e054908d0bd148e1f35489
         pullPolicy: IfNotPresent
       # -- Provide a priority class name to the webhook patching job
       ##
