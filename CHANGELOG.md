@@ -33,6 +33,14 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Chart: Sync to upstream. ([#833](https://github.com/giantswarm/ingress-nginx-app/pull/833))
   - Controller: Update image to [v1.13.0](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.13.0.md).
 
+## [4.0.4] - 2025-08-16
+
+### Changed
+
+- Chart: Sync to upstream. ([#848](https://github.com/giantswarm/ingress-nginx-app/pull/848))
+  - Controller: Update image to [v1.12.5](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.5.md).
+  - Kube Webhook CertGen: Update image to v1.6.1.
+
 ## [4.0.3] - 2025-07-17
 
 ### Changed
@@ -1550,7 +1558,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
 [Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.0...HEAD
-[4.1.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.3...v4.1.0
+[4.1.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.4...v4.1.0
+[4.0.4]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.3...v4.0.4
 [4.0.3]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.2...v4.0.3
 [4.0.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.1...v4.0.2
 [4.0.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.0...v4.0.1
