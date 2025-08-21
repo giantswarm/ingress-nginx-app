@@ -76,8 +76,8 @@ github.com/docker/go-events v0.0.0-20190806004212-e31b211e4f1c h1:+pKlWGMw7gf6bQ
 github.com/docker/go-events v0.0.0-20190806004212-e31b211e4f1c/go.mod h1:Uw6UezgYA44ePAFQYUehOuCzmy5zmg/+nl2ZfMWGkpA=
 github.com/docker/go-metrics v0.0.1 h1:AgB/0SvBxihN0X8OR4SjsblXkbMvalQ8cjmtKQ2rQV8=
 github.com/docker/go-metrics v0.0.1/go.mod h1:cG1hvH2utMXtqgqqYE9plW6lDxS3/5ayHzueweSI3Vw=
-github.com/emicklei/go-restful/v3 v3.12.2 h1:DhwDP0vY3k8ZzE0RunuJy8GhNpPL6zqLkDf9B/a0/xU=
-github.com/emicklei/go-restful/v3 v3.12.2/go.mod h1:6n3XBCmQQb25CM2LCACGz8ukIrRry+4bhvbpWn3mrbc=
+github.com/emicklei/go-restful/v3 v3.13.0 h1:C4Bl2xDndpU6nJ4bc1jXd+uTmYPVUwkD6bFY/oTyCes=
+github.com/emicklei/go-restful/v3 v3.13.0/go.mod h1:6n3XBCmQQb25CM2LCACGz8ukIrRry+4bhvbpWn3mrbc=
 github.com/evanphx/json-patch v5.9.11+incompatible h1:ixHHqfcGvxhWkniF1tWxBHA0yb4Z+d1UQi45df52xW8=
 github.com/evanphx/json-patch v5.9.11+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/evanphx/json-patch/v5 v5.9.11 h1:/8HVnzMq13/3x9TPvjG08wUGqBTmZBsCWzjTM0wiaDU=
@@ -104,8 +104,8 @@ github.com/fxamacker/cbor/v2 v2.9.0 h1:NpKPmjDBgUfBms6tr6JZkTHtfFGcMKsw3eGcmD/sa
 github.com/fxamacker/cbor/v2 v2.9.0/go.mod h1:vM4b+DJCtHn+zz7h3FFp/hDAI9WNWCsZj23V5ytsSxQ=
 github.com/giantswarm/apiextensions-application v0.6.2 h1:XL86OrpprWl5Wp38EUvUXt3ztTo25+V63oDVlFwDpNg=
 github.com/giantswarm/apiextensions-application v0.6.2/go.mod h1:8ylqSmDSzFblCppRQTFo8v9s/F6MX6RTusVVoDDfWso=
-github.com/giantswarm/apptest-framework v1.15.0 h1:RwCAr+21fR4nMsJ9TwjwimM2GZWP6CZn5+xSMN3yIpQ=
-github.com/giantswarm/apptest-framework v1.15.0/go.mod h1:opwBT366FPBYj3zNgCnJZsUhPWmpP8xxmzzV53lemNw=
+github.com/giantswarm/apptest-framework v1.15.1 h1:D+sUJjQ21C+er53uEzA+dwUnR+fDYfl1k5fhlYxqOvQ=
+github.com/giantswarm/apptest-framework v1.15.1/go.mod h1:bNl+PTFaA9xb0BZUF+kuWe9C6+d/8KBMv6Fcz944Ogo=
 github.com/giantswarm/cluster-standup-teardown v1.35.0 h1:a0RSDEFTP0jl8Itb7VTXk3rLDlRL73PNQzdCpp4arpo=
 github.com/giantswarm/cluster-standup-teardown v1.35.0/go.mod h1:WFQWMuMUTWf1RNJju/HXApCKHGdonlWgGhUTuKbcOek=
 github.com/giantswarm/clustertest v1.39.0 h1:dBqLwHZ+jBMfQA9QtDVw3o47Lb7JfL0GtM3pr1vWnhY=
