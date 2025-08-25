@@ -1,11 +1,11 @@
 module e2e
 
-go 1.24.5
+go 1.24.6
 
 require (
 	github.com/giantswarm/apiextensions-application v0.6.2
-	github.com/giantswarm/apptest-framework v1.15.1
-	github.com/giantswarm/clustertest v1.39.0
+	github.com/giantswarm/apptest-framework v1.15.2
+	github.com/giantswarm/clustertest v1.39.2
 	github.com/onsi/ginkgo/v2 v2.25.1
 	github.com/onsi/gomega v1.38.1
 	k8s.io/api v0.33.4
@@ -45,7 +45,7 @@ require (
 	github.com/fluxcd/pkg/apis/meta v1.18.0 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.0 // indirect
-	github.com/giantswarm/cluster-standup-teardown v1.35.0 // indirect
+	github.com/giantswarm/cluster-standup-teardown v1.35.2 // indirect
 	github.com/giantswarm/k8smetadata v0.25.0 // indirect
 	github.com/giantswarm/kubectl-gs/v2 v2.57.0 // indirect
 	github.com/giantswarm/microerror v0.4.1 // indirect
@@ -138,13 +138,13 @@ require (
 	golang.org/x/time v0.12.0 // indirect
 	golang.org/x/tools v0.36.0 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.5.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20250811230008-5f3141c8851a // indirect
-	google.golang.org/grpc v1.74.2 // indirect
-	google.golang.org/protobuf v1.36.7 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250818200422-3122310a409c // indirect
+	google.golang.org/grpc v1.75.0 // indirect
+	google.golang.org/protobuf v1.36.8 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.13.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	helm.sh/helm/v3 v3.18.5 // indirect
+	helm.sh/helm/v3 v3.18.6 // indirect
 	k8s.io/apiextensions-apiserver v0.33.4 // indirect
 	k8s.io/apiserver v0.33.4 // indirect
 	k8s.io/cli-runtime v0.33.4 // indirect
@@ -154,9 +154,9 @@ require (
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20250610211856-8b98d1ed966a // indirect
 	k8s.io/kubectl v0.33.4 // indirect
-	k8s.io/utils v0.0.0-20250604170112-4c0f3b243397 // indirect
+	k8s.io/utils v0.0.0-20250820121507-0af2bda4dd1d // indirect
 	oras.land/oras-go/v2 v2.6.0 // indirect
-	sigs.k8s.io/cluster-api v1.10.4 // indirect
+	sigs.k8s.io/cluster-api v1.10.5 // indirect
 	sigs.k8s.io/e2e-framework v0.6.0 // indirect
 	sigs.k8s.io/gateway-api v1.3.0 // indirect
 	sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730 // indirect
