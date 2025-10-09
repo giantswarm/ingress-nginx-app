@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Go: Update dependencies. ([#887](https://github.com/giantswarm/ingress-nginx-app/pull/887))
+
 ## [4.1.3] - 2025-10-02
 
 ### Changed
