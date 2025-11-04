@@ -30,3 +30,15 @@ tests:
       - equal:
           path: spec.type
           value: NodePort
+
+  - it: should create a Service with `trafficDistribution` if `controller.service.trafficDistribution` is set
+    capabilities:
+      majorVersion: 1
+      minorVersion: 31
+    set:
+      controller.service.external.enabled: true
+      controller.service.trafficDistribution: PreferClose
+    asserts:
+      - equal:
+          path: spec.trafficDistribution
+          value: PreferClose

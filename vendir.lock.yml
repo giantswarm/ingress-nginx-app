@@ -2,8 +2,8 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: 'Chart: Implement Giant Swarm changes.'
-      sha: d1942871ef3de805de33df4c1a072392e75c8393
+      commitTitle: 'Chart: Add `controller.service.trafficDistribution`. (#12571)'
+      sha: 5c6c93d45d2ec59660448bf29b67d8ae648f386a
     path: ingress-nginx
   path: helm
 kind: LockConfig
