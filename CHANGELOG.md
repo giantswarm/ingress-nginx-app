@@ -51,6 +51,20 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 - Chart: Sync to upstream. ([#833](https://github.com/giantswarm/ingress-nginx-app/pull/833))
   - Controller: Update image to [v1.13.0](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.13.0.md).
 
+## [4.0.7] - 2025-11-04
+
+### Added
+
+- Chart: Sync to upstream. ([#899](https://github.com/giantswarm/ingress-nginx-app/pull/899))
+  - Chart: Add `controller.service.trafficDistribution`.
+
+### Changed
+
+- Chart: Sync to upstream. ([#899](https://github.com/giantswarm/ingress-nginx-app/pull/899))
+  - Controller: Update image to [v1.12.8](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.12.8.md).
+  - Kube Webhook CertGen: Update image to v1.6.4.
+  - Chart: Make `service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled` overridable.
+
 ## [4.0.6] - 2025-10-02
 
 ### Changed
@@ -1595,7 +1609,8 @@ Previous versions changelog can be found [here](https://github.com/giantswarm/ku
 [4.1.3]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.2...v4.1.3
 [4.1.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.1...v4.1.2
 [4.1.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.0...v4.1.1
-[4.1.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.6...v4.1.0
+[4.1.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.7...v4.1.0
+[4.0.7]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.6...v4.0.7
 [4.0.6]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.5...v4.0.6
 [4.0.5]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.4...v4.0.5
 [4.0.4]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.0.3...v4.0.4
