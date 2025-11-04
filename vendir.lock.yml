@@ -3,7 +3,7 @@ directories:
 - contents:
   - git:
       commitTitle: 'Chart: Implement Giant Swarm changes.'
-      sha: 162f08ed5b87d32aab2d8923c74f676fe5f3c66c
+      sha: e7e4af525a21271c0f09688ea2baf4b275c22b47
     path: ingress-nginx
   path: helm
 kind: LockConfig

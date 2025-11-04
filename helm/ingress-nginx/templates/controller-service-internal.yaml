@@ -18,7 +18,9 @@ metadata:
     {{- if ne (index .Values.controller.config "use-proxy-protocol") "false" }}
     service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
     {{- end }}
+    {{- if not (hasKey .Values.controller.service.internal.annotations "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled") }}
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+    {{- end }}
   {{- else if or (eq .Values.provider "azure") (eq .Values.provider "capz") }}
     service.beta.kubernetes.io/azure-load-balancer-internal: "true"
   {{- else if eq .Values.provider "cloud-director" }}
