@@ -7,6 +7,13 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Chart: Sync to upstream. ([#901](https://github.com/giantswarm/ingress-nginx-app/pull/901))
+  - Controller: Update image to [v1.13.4](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.13.4.md).
+  - Kube Webhook CertGen: Update image to v1.6.4.
+  - Chart: Make `service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled` overridable.
+
 ## [4.1.3] - 2025-10-02
 
 ### Changed
