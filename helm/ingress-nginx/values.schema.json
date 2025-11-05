@@ -101,6 +101,12 @@
                                             "type": "object"
                                         }
                                     }
+                                },
+                                "volumeMounts": {
+                                    "type": "array"
+                                },
+                                "volumes": {
+                                    "type": "array"
                                 }
                             }
                         },
@@ -245,6 +251,12 @@
                                             "type": "object"
                                         }
                                     }
+                                },
+                                "volumeMounts": {
+                                    "type": "array"
+                                },
+                                "volumes": {
+                                    "type": "array"
                                 }
                             }
                         },
@@ -706,6 +718,9 @@
                                 "scrapeInterval": {
                                     "type": "string"
                                 },
+                                "scrapeTimeout": {
+                                    "type": "string"
+                                },
                                 "targetLabels": {
                                     "type": "array"
                                 },
@@ -773,6 +788,9 @@
                 },
                 "reportNodeInternalIp": {
                     "type": "boolean"
+                },
+                "resizePolicy": {
+                    "type": "array"
                 },
                 "resources": {
                     "type": "object",
