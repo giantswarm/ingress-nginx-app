@@ -30,9 +30,9 @@ controller:
     ## for backwards compatibility consider setting the full image url via the repository value below
     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
     ## repository:
-    tag: "v1.13.4"
-    digest: sha256:4042ae3c512c5d7bcf9682b0fdff96cd7b46a23dcbe15a762349094cd8087be7
-    digestChroot: sha256:49fc51d0767efb4d5c871bcd9bd70684fdcbdd34f9e4164bdf9c9d890db19791
+    tag: "v1.14.0"
+    digest: sha256:e4127065d0317bd11dc64c4dd38dcf7fb1c3d72e468110b4086e636dbaac943d
+    digestChroot: sha256:d0158a50630981a945325c15a638e52c2d0691bc528caf5c04d2cf2051c5665f
     pullPolicy: IfNotPresent
     runAsNonRoot: true
     # -- This value must not be changed using the official image.
@@ -404,6 +404,13 @@ controller:
     requests:
       cpu: 250m
       memory: 500Mi
+  # -- Resize policy for controller containers.
+  # Ref: https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources
+  resizePolicy: []
+  # - resourceName: cpu
+  #   restartPolicy: NotRequired
+  # - resourceName: memory
+  #   restartPolicy: RestartContainer
   # Mutually exclusive with keda autoscaling
   autoscaling:
     enabled: true
@@ -716,11 +723,17 @@ controller:
   #  - name: copy-portal-skins
   #    emptyDir: {}
 
-  # -- Containers, which are run before the app containers are started.
+  # -- Containers, which are run before the app containers are started. Values may contain Helm templates.
   extraInitContainers: []
   # - name: init-myservice
   #   image: busybox
   #   command: ['sh', '-c', 'until nslookup myservice; do echo waiting for myservice; sleep 2; done;']
+  # - name: init-dynamic
+  #   image: busybox
+  #   command:
+  #     - sh
+  #     - -c
+  #     - echo "Release={{ .Release.Name }} Namespace={{ .Release.Namespace }}"
 
   # -- Modules, which are mounted into the core nginx image.
   extraModules: []
@@ -809,6 +822,16 @@ controller:
       # requests:
       #   cpu: 10m
       #   memory: 20Mi
+      # -- Volume mounts for secret creation containers
+      volumeMounts: []
+      # - name: certs
+      #   mountPath: /etc/webhook/certs
+      #   readOnly: true
+      # -- Volumes for secret creation pod
+      volumes: []
+      # - name: certs
+      #   secret:
+      #     secretName: my-webhook-secret
     patchWebhookJob:
       name: patch
       # -- Deadline in seconds for the job to complete. Must be greater than 0 to enforce. If unset or 0, no deadline is enforced.
@@ -826,6 +849,16 @@ controller:
             - ALL
         readOnlyRootFilesystem: true
       resources: {}
+      # -- Volume mounts for webhook patch containers
+      volumeMounts: []
+      # - name: certs
+      #   mountPath: /etc/webhook/certs
+      #   readOnly: true
+      # -- Volumes for webhook patch pod
+      volumes: []
+      # - name: certs
+      #   secret:
+      #     secretName: my-webhook-secret
     patch:
       enabled: true
       image:
@@ -924,6 +957,8 @@ controller:
       ## namespaceSelector:
       ##   any: true
       scrapeInterval: 30s
+      # -- Timeout after which the scrape is ended. Not being set if empty and therefore defaults to the global Prometheus scrape timeout.
+      scrapeTimeout: ""
       # honorLabels: true
       targetLabels: []
       relabelings:

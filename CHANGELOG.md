@@ -7,6 +7,20 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Added
+
+- Chart: Sync to upstream. ([#903](https://github.com/giantswarm/ingress-nginx-app/pull/903))
+  - Chart: Add volumes for webhook patch job.
+  - Chart: Add resize policy.
+  - Chart: `Add controller.metrics.serviceMonitor.scrapeTimeout`.
+
+### Changed
+
+- Chart: Sync to upstream. ([#903](https://github.com/giantswarm/ingress-nginx-app/pull/903))
+  - Controller: Update image to [v1.14.0](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.14.0.md).
+  - Kube Webhook CertGen: Update image to v1.6.4.
+  - Chart: Make extra init containers templatable.
+
 ## [4.1.4] - 2025-11-04
 
 ### Changed
