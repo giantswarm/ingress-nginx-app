@@ -1,0 +1,38 @@
+diff --git a/vendor/ingress-nginx/templates/controller-service-internal.yaml b/helm/ingress-nginx/templates/controller-service-internal.yaml
+index 8d36952..002ca9e 100644
+--- a/vendor/ingress-nginx/templates/controller-service-internal.yaml
++++ b/helm/ingress-nginx/templates/controller-service-internal.yaml
+@@ -1,4 +1,4 @@
+-{{- if and .Values.controller.service.enabled .Values.controller.service.internal.enabled .Values.controller.service.internal.annotations -}}
++{{- if and .Values.controller.service.enabled .Values.controller.service.internal.enabled -}}
+ apiVersion: v1
+ kind: Service
+ metadata:
+@@ -6,6 +6,27 @@ metadata:
+   {{- range $key, $value := .Values.controller.service.internal.annotations }}
+     {{ $key }}: {{ tpl ($value | toString) $ | quote }}
+   {{- end }}
++  {{- if and .Values.controller.service.externalDNS.enabled .Values.baseDomain }}
++    external-dns.alpha.kubernetes.io/hostname: "{{ .Values.controller.service.internal.subdomain }}.{{ .Values.baseDomain }}"
++    {{- if .Values.controller.service.externalDNS.annotation }}
++    {{ .Values.controller.service.externalDNS.annotation }}
++    {{- end }}
++  {{- end }}
++  {{- if eq .Values.controller.service.type "LoadBalancer" }}
++  {{- if or (eq .Values.provider "aws") (eq .Values.provider "capa") }}
++    service.beta.kubernetes.io/aws-load-balancer-internal: "true"
++    {{- if ne (index .Values.controller.config "use-proxy-protocol") "false" }}
++    service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"
++    {{- end }}
++    {{- if not (hasKey .Values.controller.service.internal.annotations "service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled") }}
++    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
++    {{- end }}
++  {{- else if or (eq .Values.provider "azure") (eq .Values.provider "capz") }}
++    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
++  {{- else if eq .Values.provider "cloud-director" }}
++    service.beta.kubernetes.io/vcloud-avi-ssl-no-termination: "true"
++  {{- end }}
++  {{- end }}
+   labels:
+     {{- include "ingress-nginx.labels" . | nindent 4 }}
+     app.kubernetes.io/component: controller

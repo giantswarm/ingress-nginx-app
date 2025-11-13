@@ -1,18 +1,25 @@
 apiVersion: vendir.k14s.io/v1alpha1
 kind: Config
 directories:
-- path: helm
+- path: vendor
   contents:
   - path: ingress-nginx
     git:
-      url: https://github.com/giantswarm/ingress-nginx-upstream
-      ref: release-1.14
+      url: https://github.com/kubernetes/ingress-nginx
+      ref: helm-chart-4.14.0
       depth: 1
+    includePaths:
+    - charts/ingress-nginx/**/*
     excludePaths:
     - charts/ingress-nginx/OWNERS
     - charts/ingress-nginx/changelog/*
     newRootPath: charts/ingress-nginx
-    ignorePaths:
-    - .kube-linter.yaml
-    - Chart.yaml
-    - values.schema.json
+- path: helm/ingress-nginx
+  contents:
+    - path: .
+      directory:
+        path: vendor/ingress-nginx
+      ignorePaths:
+      - .kube-linter.yaml
+      - Chart.yaml
+      - values.schema.json

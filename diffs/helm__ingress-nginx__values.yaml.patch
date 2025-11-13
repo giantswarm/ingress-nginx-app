@@ -1,0 +1,261 @@
+diff --git a/vendor/ingress-nginx/values.yaml b/helm/ingress-nginx/values.yaml
+index 21fb0f4..70ff3bc 100644
+--- a/vendor/ingress-nginx/values.yaml
++++ b/helm/ingress-nginx/values.yaml
+@@ -5,7 +5,7 @@
+ global:
+   image:
+     # -- Registry host to pull images from.
+-    registry: registry.k8s.io
++    registry: gsoci.azurecr.io
+ ## Overrides for generated resource names
+ # See templates/_helpers.tpl
+ # nameOverride:
+@@ -26,7 +26,7 @@ controller:
+     ## Keep false as default for now!
+     chroot: false
+     # registry: registry.k8s.io
+-    image: ingress-nginx/controller
++    image: giantswarm/ingress-nginx-controller
+     ## for backwards compatibility consider setting the full image url via the repository value below
+     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+     ## repository:
+@@ -53,7 +53,10 @@ controller:
+     https: 443
+   # -- Global configuration passed to the ConfigMap consumed by the controller. Values may contain Helm templates.
+   # Ref.: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/
+-  config: {}
++  config:
++    # -- Enable HSTS or not. Disabled by default due to possible serious consequences.
++    # Ref: https://github.com/kubernetes/ingress-nginx/issues/549
++    hsts: "false"
+   # -- Annotations to be added to the controller config configuration configmap.
+   configAnnotations: {}
+   # -- Will add custom headers before sending traffic to backends according to https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/custom-headers
+@@ -118,7 +121,7 @@ controller:
+   # NetworkPolicy for controller component.
+   networkPolicy:
+     # -- Enable 'networkPolicy' or not
+-    enabled: false
++    enabled: true
+   # -- Election ID to use for status update, by default it uses the controller name combined with a suffix of 'leader'
+   electionID: ""
+   # -- This section refers to the creation of the IngressClass resource.
+@@ -304,27 +307,27 @@ controller:
+   # -- Topology spread constraints rely on node labels to identify the topology domain(s) that each Node is in.
+   ## Ref: https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/
+   ##
+-  topologySpreadConstraints: []
+-  # - labelSelector:
+-  #     matchLabels:
+-  #       app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+-  #       app.kubernetes.io/instance: '{{ .Release.Name }}'
+-  #       app.kubernetes.io/component: controller
+-  #   matchLabelKeys:
+-  #   - pod-template-hash
+-  #   topologyKey: topology.kubernetes.io/zone
+-  #   maxSkew: 1
+-  #   whenUnsatisfiable: ScheduleAnyway
+-  # - labelSelector:
+-  #     matchLabels:
+-  #       app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+-  #       app.kubernetes.io/instance: '{{ .Release.Name }}'
+-  #       app.kubernetes.io/component: controller
+-  #   matchLabelKeys:
+-  #   - pod-template-hash
+-  #   topologyKey: kubernetes.io/hostname
+-  #   maxSkew: 1
+-  #   whenUnsatisfiable: ScheduleAnyway
++  topologySpreadConstraints:
++    - labelSelector:
++        matchLabels:
++          app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
++          app.kubernetes.io/instance: '{{ .Release.Name }}'
++          app.kubernetes.io/component: controller
++      matchLabelKeys:
++        - pod-template-hash
++      topologyKey: topology.kubernetes.io/zone
++      maxSkew: 1
++      whenUnsatisfiable: ScheduleAnyway
++    - labelSelector:
++        matchLabels:
++          app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
++          app.kubernetes.io/instance: '{{ .Release.Name }}'
++          app.kubernetes.io/component: controller
++      matchLabelKeys:
++        - pod-template-hash
++      topologyKey: kubernetes.io/hostname
++      maxSkew: 1
++      whenUnsatisfiable: ScheduleAnyway
+ 
+   # -- `terminationGracePeriodSeconds` to avoid killing pods before we are ready
+   ## wait up to five minutes for the drain of connections
+@@ -381,12 +384,12 @@ controller:
+   # -- Annotations to be added to controller pods
+   ##
+   podAnnotations: {}
+-  replicaCount: 1
++  replicaCount: 2
+   # -- Minimum available pods set in PodDisruptionBudget.
+   # Define either 'minAvailable' or 'maxUnavailable', never both.
+-  minAvailable: 1
++  # minAvailable: 1
+   # -- Maximum unavailable pods set in PodDisruptionBudget. If set, 'minAvailable' is ignored.
+-  # maxUnavailable: 1
++  maxUnavailable: "25%"
+   # -- Eviction policy for unhealthy pods guarded by PodDisruptionBudget.
+   # Ref: https://kubernetes.io/blog/2023/01/06/unhealthy-pod-eviction-policy-for-pdbs/
+   unhealthyPodEvictionPolicy: ""
+@@ -399,8 +402,8 @@ controller:
+     ##    cpu: 100m
+     ##    memory: 90Mi
+     requests:
+-      cpu: 100m
+-      memory: 90Mi
++      cpu: 250m
++      memory: 500Mi
+   # -- Resize policy for controller containers.
+   # Ref: https://kubernetes.io/docs/tasks/configure-pod-container/resize-container-resources
+   resizePolicy: []
+@@ -410,12 +413,12 @@ controller:
+   #   restartPolicy: RestartContainer
+   # Mutually exclusive with keda autoscaling
+   autoscaling:
+-    enabled: false
++    enabled: true
+     annotations: {}
+-    minReplicas: 1
+-    maxReplicas: 11
+-    targetCPUUtilizationPercentage: 50
+-    targetMemoryUtilizationPercentage: 50
++    minReplicas: 2
++    maxReplicas: 20
++    targetCPUUtilizationPercentage: 80
++    targetMemoryUtilizationPercentage: 80
+     behavior: {}
+     # scaleDown:
+     #   stabilizationWindowSeconds: 300
+@@ -529,7 +532,7 @@ controller:
+ 
+     # -- External traffic policy of the external controller service. Set to "Local" to preserve source IP on providers supporting it.
+     # Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
+-    externalTrafficPolicy: ""
++    externalTrafficPolicy: "Local"
+     # -- Session affinity of the external controller service. Must be either "None" or "ClientIP" if set. Defaults to "None".
+     # Ref: https://kubernetes.io/docs/reference/networking/virtual-ips/#session-affinity
+     sessionAffinity: ""
+@@ -618,7 +621,7 @@ controller:
+ 
+       # -- External traffic policy of the internal controller service. Set to "Local" to preserve source IP on providers supporting it.
+       # Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
+-      externalTrafficPolicy: ""
++      externalTrafficPolicy: "Local"
+       # -- Session affinity of the internal controller service. Must be either "None" or "ClientIP" if set. Defaults to "None".
+       # Ref: https://kubernetes.io/docs/reference/networking/virtual-ips/#session-affinity
+       sessionAffinity: ""
+@@ -672,6 +675,17 @@ controller:
+         # udp:
+         #   53: 30053
+         udp: {}
++      # -- Defines the sub-domain prepended to the base domain in the FQDN of the internal controller service reconciled by ExternalDNS.
++      subdomain: ingress-internal
++    externalDNS:
++      # -- Add ExternalDNS annotations or not.
++      enabled: true
++      # -- Annotation used so assign the external controller service to a specific ExternalDNS instance.
++      annotation: "giantswarm.io/external-dns: managed"
++    # -- Defines the sub-domain prepended to the base domain in the FQDN of the external controller service reconciled by ExternalDNS.
++    subdomain: ingress
++    # -- Makes the external controller service public or not. Adds annotations for making it internal if disabled.
++    public: true
+   # shareProcessNamespace enables process namespace sharing within the pod.
+   # This can be used for example to signal log rotation using `kill -USR1` from a sidecar.
+   shareProcessNamespace: false
+@@ -849,7 +863,7 @@ controller:
+       enabled: true
+       image:
+         # registry: registry.k8s.io
+-        image: ingress-nginx/kube-webhook-certgen
++        image: giantswarm/ingress-nginx-kube-webhook-certgen
+         ## for backwards compatibility consider setting the full image url via the repository value below
+         ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+         ## repository:
+@@ -865,7 +879,7 @@ controller:
+       # NetworkPolicy for webhook patch
+       networkPolicy:
+         # -- Enable 'networkPolicy' or not
+-        enabled: false
++        enabled: true
+       nodeSelector:
+         kubernetes.io/os: linux
+       tolerations: []
+@@ -908,7 +922,7 @@ controller:
+     port: 10254
+     portName: metrics
+     # if this port is changed, change healthz-port: in extraArgs: accordingly
+-    enabled: false
++    enabled: true
+     service:
+       # -- Enable the metrics service or not.
+       enabled: true
+@@ -930,7 +944,7 @@ controller:
+       # externalTrafficPolicy: ""
+       # nodePort: ""
+     serviceMonitor:
+-      enabled: false
++      enabled: true
+       additionalLabels: {}
+       # -- Annotations to be added to the ServiceMonitor.
+       annotations: {}
+@@ -947,8 +961,20 @@ controller:
+       scrapeTimeout: ""
+       # honorLabels: true
+       targetLabels: []
+-      relabelings: []
+-      metricRelabelings: []
++      relabelings:
++        - sourceLabels:
++            - __meta_kubernetes_pod_label_app
++          action: replace
++          targetLabel: app
++        - sourceLabels:
++            - __meta_kubernetes_pod_node_name
++          action: replace
++          targetLabel: node
++      metricRelabelings:
++        - sourceLabels:
++            - __name__
++          regex: nginx_ingress_controller_(bytes_sent_bucket|request_size_bucket|response_duration_seconds_bucket|response_size_bucket|request_duration_seconds_count|connect_duration_seconds_bucket|header_duration_seconds_bucket|bytes_sent_count|request_duration_seconds_sum|bytes_sent_sum|request_size_count|response_size_count|response_duration_seconds_sum|response_duration_seconds_count|ingress_upstream_latency_seconds|ingress_upstream_latency_seconds_sum|ingress_upstream_latency_seconds_count)
++          action: drop
+       # -- Per-scrape limit on number of labels that will be accepted for a sample.
+       labelLimit: 0
+       # -- Per-scrape limit on length of labels name that will be accepted for a sample.
+@@ -1028,7 +1054,7 @@ defaultBackend:
+   name: defaultbackend
+   image:
+     # registry: registry.k8s.io
+-    image: defaultbackend-amd64
++    image: giantswarm/defaultbackend
+     ## for backwards compatibility consider setting the full image url via the repository value below
+     ## use *either* current default registry/image or repository format or installing chart by providing the values.yaml will fail
+     ## repository:
+@@ -1218,7 +1244,7 @@ defaultBackend:
+   # NetworkPolicy for default backend component.
+   networkPolicy:
+     # -- Enable 'networkPolicy' or not
+-    enabled: false
++    enabled: true
+   service:
+     annotations: {}
+     # clusterIP: ""
+@@ -1273,3 +1299,10 @@ portNamePrefix: ""
+ # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
+ ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
+ dhParam: ""
++# Below are configuration values that you should not overwrite or set yourself.
++# -- Domain of the service's FQDN.
++# This value is set automatically. Do not overwrite it.
++baseDomain: ""
++# -- Provider the cluster is running on.
++# This value is set automatically. Do not overwrite it.
++provider: aws

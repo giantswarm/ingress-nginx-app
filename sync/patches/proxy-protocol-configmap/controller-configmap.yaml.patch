@@ -1,0 +1,11 @@
+diff --git b/helm/ingress-nginx/templates/controller-configmap.yaml a/helm/ingress-nginx/templates/controller-configmap.yaml
+index b73cdc2..8b91e82 100644
+--- b/helm/ingress-nginx/templates/controller-configmap.yaml
++++ a/helm/ingress-nginx/templates/controller-configmap.yaml
+@@ -28,3 +28,6 @@ data:
+ {{- range $key, $value := .Values.controller.config }}
+   {{- $key | nindent 2 }}: {{ tpl (toString $value) $ | quote }}
+ {{- end }}
++{{- if and (or (eq .Values.provider "aws") (eq .Values.provider "capa")) (not (index .Values.controller.config "use-proxy-protocol")) }}
++  use-proxy-protocol: "true"
++{{- end }}
