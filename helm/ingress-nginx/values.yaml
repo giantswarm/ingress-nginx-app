@@ -314,7 +314,7 @@ controller:
           app.kubernetes.io/instance: '{{ .Release.Name }}'
           app.kubernetes.io/component: controller
       matchLabelKeys:
-      - pod-template-hash
+        - pod-template-hash
       topologyKey: topology.kubernetes.io/zone
       maxSkew: 1
       whenUnsatisfiable: ScheduleAnyway
@@ -324,7 +324,7 @@ controller:
           app.kubernetes.io/instance: '{{ .Release.Name }}'
           app.kubernetes.io/component: controller
       matchLabelKeys:
-      - pod-template-hash
+        - pod-template-hash
       topologyKey: kubernetes.io/hostname
       maxSkew: 1
       whenUnsatisfiable: ScheduleAnyway
@@ -504,15 +504,6 @@ controller:
     annotations: {}
     # -- Labels to be added to both controller services.
     labels: {}
-    externalDNS:
-      # -- Add ExternalDNS annotations or not.
-      enabled: true
-      # -- Annotation used so assign the external controller service to a specific ExternalDNS instance.
-      annotation: "giantswarm.io/external-dns: managed"
-    # -- Defines the sub-domain prepended to the base domain in the FQDN of the external controller service reconciled by ExternalDNS.
-    subdomain: ingress
-    # -- Makes the external controller service public or not. Adds annotations for making it internal if disabled.
-    public: true
     # -- Type of the external controller service.
     # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
     type: LoadBalancer
@@ -541,7 +532,7 @@ controller:
 
     # -- External traffic policy of the external controller service. Set to "Local" to preserve source IP on providers supporting it.
     # Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
-    externalTrafficPolicy: Local
+    externalTrafficPolicy: "Local"
     # -- Session affinity of the external controller service. Must be either "None" or "ClientIP" if set. Defaults to "None".
     # Ref: https://kubernetes.io/docs/reference/networking/virtual-ips/#session-affinity
     sessionAffinity: ""
@@ -601,8 +592,6 @@ controller:
       # -- Annotations to be added to the internal controller service. Mandatory for the internal controller service to be created. Varies with the cloud service.
       # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#internal-load-balancer
       annotations: {}
-      # -- Defines the sub-domain prepended to the base domain in the FQDN of the internal controller service reconciled by ExternalDNS.
-      subdomain: ingress-internal
       # -- Type of the internal controller service.
       # Defaults to the value of `controller.service.type`.
       # Ref: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
@@ -632,7 +621,7 @@ controller:
 
       # -- External traffic policy of the internal controller service. Set to "Local" to preserve source IP on providers supporting it.
       # Ref: https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip
-      externalTrafficPolicy: Local
+      externalTrafficPolicy: "Local"
       # -- Session affinity of the internal controller service. Must be either "None" or "ClientIP" if set. Defaults to "None".
       # Ref: https://kubernetes.io/docs/reference/networking/virtual-ips/#session-affinity
       sessionAffinity: ""
@@ -686,6 +675,17 @@ controller:
         # udp:
         #   53: 30053
         udp: {}
+      # -- Defines the sub-domain prepended to the base domain in the FQDN of the internal controller service reconciled by ExternalDNS.
+      subdomain: ingress-internal
+    externalDNS:
+      # -- Add ExternalDNS annotations or not.
+      enabled: true
+      # -- Annotation used so assign the external controller service to a specific ExternalDNS instance.
+      annotation: "giantswarm.io/external-dns: managed"
+    # -- Defines the sub-domain prepended to the base domain in the FQDN of the external controller service reconciled by ExternalDNS.
+    subdomain: ingress
+    # -- Makes the external controller service public or not. Adds annotations for making it internal if disabled.
+    public: true
   # shareProcessNamespace enables process namespace sharing within the pod.
   # This can be used for example to signal log rotation using `kill -USR1` from a sidecar.
   shareProcessNamespace: false
@@ -962,19 +962,19 @@ controller:
       # honorLabels: true
       targetLabels: []
       relabelings:
-      - sourceLabels:
-        - __meta_kubernetes_pod_label_app
-        action: replace
-        targetLabel: app
-      - sourceLabels:
-        - __meta_kubernetes_pod_node_name
-        action: replace
-        targetLabel: node
+        - sourceLabels:
+            - __meta_kubernetes_pod_label_app
+          action: replace
+          targetLabel: app
+        - sourceLabels:
+            - __meta_kubernetes_pod_node_name
+          action: replace
+          targetLabel: node
       metricRelabelings:
-      - sourceLabels:
-        - __name__
-        regex: nginx_ingress_controller_(bytes_sent_bucket|request_size_bucket|response_duration_seconds_bucket|response_size_bucket|request_duration_seconds_count|connect_duration_seconds_bucket|header_duration_seconds_bucket|bytes_sent_count|request_duration_seconds_sum|bytes_sent_sum|request_size_count|response_size_count|response_duration_seconds_sum|response_duration_seconds_count|ingress_upstream_latency_seconds|ingress_upstream_latency_seconds_sum|ingress_upstream_latency_seconds_count)
-        action: drop
+        - sourceLabels:
+            - __name__
+          regex: nginx_ingress_controller_(bytes_sent_bucket|request_size_bucket|response_duration_seconds_bucket|response_size_bucket|request_duration_seconds_count|connect_duration_seconds_bucket|header_duration_seconds_bucket|bytes_sent_count|request_duration_seconds_sum|bytes_sent_sum|request_size_count|response_size_count|response_duration_seconds_sum|response_duration_seconds_count|ingress_upstream_latency_seconds|ingress_upstream_latency_seconds_sum|ingress_upstream_latency_seconds_count)
+          action: drop
       # -- Per-scrape limit on number of labels that will be accepted for a sample.
       labelLimit: 0
       # -- Per-scrape limit on length of labels name that will be accepted for a sample.
@@ -1299,13 +1299,10 @@ portNamePrefix: ""
 # This can be generated with: `openssl dhparam 4096 2> /dev/null | base64`
 ## Ref: https://github.com/kubernetes/ingress-nginx/tree/main/docs/examples/customization/ssl-dh-param
 dhParam: ""
-
 # Below are configuration values that you should not overwrite or set yourself.
-
 # -- Domain of the service's FQDN.
 # This value is set automatically. Do not overwrite it.
 baseDomain: ""
-
 # -- Provider the cluster is running on.
 # This value is set automatically. Do not overwrite it.
 provider: aws
