@@ -1,0 +1,99 @@
+global:
+  image:
+    registry: gsoci.azurecr.io
+controller:
+  image:
+    image: giantswarm/ingress-nginx-controller
+  networkPolicy:
+    enabled: true
+  config:
+    # -- Enable HSTS or not. Disabled by default due to possible serious consequences.
+    # Ref: https://github.com/kubernetes/ingress-nginx/issues/549
+    hsts: "false"
+  topologySpreadConstraints:
+    - labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+          app.kubernetes.io/instance: '{{ .Release.Name }}'
+          app.kubernetes.io/component: controller
+      matchLabelKeys:
+        - pod-template-hash
+      topologyKey: topology.kubernetes.io/zone
+      maxSkew: 1
+      whenUnsatisfiable: ScheduleAnyway
+    - labelSelector:
+        matchLabels:
+          app.kubernetes.io/name: '{{ include "ingress-nginx.name" . }}'
+          app.kubernetes.io/instance: '{{ .Release.Name }}'
+          app.kubernetes.io/component: controller
+      matchLabelKeys:
+        - pod-template-hash
+      topologyKey: kubernetes.io/hostname
+      maxSkew: 1
+      whenUnsatisfiable: ScheduleAnyway
+  replicaCount: 2
+  maxUnavailable: "25%"
+  resources:
+    requests:
+      cpu: 250m
+      memory: 500Mi
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 20
+    targetCPUUtilizationPercentage: 80
+    targetMemoryUtilizationPercentage: 80
+  service:
+    externalDNS:
+      # -- Add ExternalDNS annotations or not.
+      enabled: true
+      # -- Annotation used so assign the external controller service to a specific ExternalDNS instance.
+      annotation: "giantswarm.io/external-dns: managed"
+    # -- Defines the sub-domain prepended to the base domain in the FQDN of the external controller service reconciled by ExternalDNS.
+    subdomain: ingress
+    # -- Makes the external controller service public or not. Adds annotations for making it internal if disabled.
+    public: true
+    externalTrafficPolicy: Local
+    internal:
+      # -- Defines the sub-domain prepended to the base domain in the FQDN of the internal controller service reconciled by ExternalDNS.
+      subdomain: ingress-internal
+      externalTrafficPolicy: Local
+  admissionWebhooks:
+    patch:
+      image:
+        image: giantswarm/ingress-nginx-kube-webhook-certgen
+      networkPolicy:
+        enabled: true
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      relabelings:
+      - sourceLabels:
+        - __meta_kubernetes_pod_label_app
+        action: replace
+        targetLabel: app
+      - sourceLabels:
+        - __meta_kubernetes_pod_node_name
+        action: replace
+        targetLabel: node
+      metricRelabelings:
+      - sourceLabels:
+        - __name__
+        regex: nginx_ingress_controller_(bytes_sent_bucket|request_size_bucket|response_duration_seconds_bucket|response_size_bucket|request_duration_seconds_count|connect_duration_seconds_bucket|header_duration_seconds_bucket|bytes_sent_count|request_duration_seconds_sum|bytes_sent_sum|request_size_count|response_size_count|response_duration_seconds_sum|response_duration_seconds_count|ingress_upstream_latency_seconds|ingress_upstream_latency_seconds_sum|ingress_upstream_latency_seconds_count)
+        action: drop
+defaultBackend:
+  image:
+    image: giantswarm/defaultbackend
+  networkPolicy:
+    enabled: true
+
+# Below are configuration values that you should not overwrite or set yourself.
+
+# -- Domain of the service's FQDN.
+# This value is set automatically. Do not overwrite it.
+baseDomain: ""
+
+# -- Provider the cluster is running on.
+# This value is set automatically. Do not overwrite it.
+provider: aws
