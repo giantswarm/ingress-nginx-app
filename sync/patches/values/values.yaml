@@ -4,9 +4,6 @@ global:
 controller:
   image:
     image: giantswarm/ingress-nginx-controller
-    tag: "v1.14.0"
-    digest: sha256:e4127065d0317bd11dc64c4dd38dcf7fb1c3d72e468110b4086e636dbaac943d
-    digestChroot: sha256:d0158a50630981a945325c15a638e52c2d0691bc528caf5c04d2cf2051c5665f
   networkPolicy:
     enabled: true
   config:
