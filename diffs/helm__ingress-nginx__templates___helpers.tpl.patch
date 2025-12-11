@@ -1,5 +1,5 @@
 diff --git a/vendor/ingress-nginx/templates/_helpers.tpl b/helm/ingress-nginx/templates/_helpers.tpl
-index 6cbda2d..53f3935 100644
+index 6cbda2d..d962b48 100644
 --- a/vendor/ingress-nginx/templates/_helpers.tpl
 +++ b/helm/ingress-nginx/templates/_helpers.tpl
 @@ -136,6 +136,8 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
@@ -7,7 +7,7 @@ index 6cbda2d..53f3935 100644
  app.kubernetes.io/part-of: {{ template "ingress-nginx.name" . }}
  app.kubernetes.io/managed-by: {{ .Release.Service }}
 +giantswarm.io/service-type: managed
-+application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
++application.giantswarm.io/team: {{ index .Chart.Annotations "io.giantswarm.application.team" | quote }}
  {{- if .Values.commonLabels}}
  {{ toYaml .Values.commonLabels }}
  {{- end }}
