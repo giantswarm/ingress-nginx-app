@@ -7,7 +7,7 @@ index 6cbda2d..53f3935 100644
  app.kubernetes.io/part-of: {{ template "ingress-nginx.name" . }}
  app.kubernetes.io/managed-by: {{ .Release.Service }}
 +giantswarm.io/service-type: managed
-+application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantswarm.io/team" | quote }}
++application.giantswarm.io/team: {{ index .Chart.Annotations "io.giantswarm.application.team" | quote }}
  {{- if .Values.commonLabels}}
  {{ toYaml .Values.commonLabels }}
  {{- end }}
