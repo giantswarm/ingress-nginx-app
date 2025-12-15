@@ -13,7 +13,7 @@ jobs:
           fetch-depth: 1
 
       - name: Download vendir
-        uses: giantswarm/install-binary-action@v3
+        uses: giantswarm/install-binary-action@v4
         with:
           binary: "vendir"
           version: "0.44.0"
@@ -21,7 +21,7 @@ jobs:
           smoke_test: "${binary} --version"
 
       - name: Download helm-docs
-        uses: giantswarm/install-binary-action@v3
+        uses: giantswarm/install-binary-action@v4
         with:
           binary: "helm-docs"
           version: "1.14.2"
