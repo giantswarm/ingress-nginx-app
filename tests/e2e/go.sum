@@ -114,6 +114,8 @@ github.com/giantswarm/cluster-standup-teardown/v4 v4.0.0 h1:6vnWEDpRWslmX1egJO1k
 github.com/giantswarm/cluster-standup-teardown/v4 v4.0.0/go.mod h1:as+YNq8OkoLwaqc7rEuzs1IZm6S9vmtEhXIJe+X0q8w=
 github.com/giantswarm/clustertest/v3 v3.1.0 h1:7y57NcLa3kSgviLnLFhya8sTTo0aTriqJnL8xIVmFlI=
 github.com/giantswarm/clustertest/v3 v3.1.0/go.mod h1:SyCi0yd7l68yRo3HdNCyUqh03Gu35U5fecXWyrvwIAk=
+github.com/giantswarm/clustertest/v3 v3.1.1 h1:W3tGhDgh7DwV4INVJ1DIIVdhPLDU7T1LjlyauDntWqM=
+github.com/giantswarm/clustertest/v3 v3.1.1/go.mod h1:+6J/ojjeqyFl8jvmN4BFPSp9zPOgV8jBG5Ai6P/25tM=
 github.com/giantswarm/k8smetadata v0.25.0 h1:6mKmmm4xHPuBvxDMAkIhU5oj6KJkJSaR2s5esIsnHs4=
 github.com/giantswarm/k8smetadata v0.25.0/go.mod h1:QiQAyaZnwco1U0lENLF0Kp4bSN4dIPwIlHWEvUo3ES8=
 github.com/giantswarm/kubectl-gs/v2 v2.57.0 h1:IMmho55Qq+WE+frJXcTBhx19+J54xwu/j4+pGU5YecA=
