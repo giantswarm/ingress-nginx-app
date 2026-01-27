@@ -37,6 +37,14 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
   - Kube Webhook CertGen: Update image to v1.6.4.
   - Chart: Make extra init containers templatable.
 
+## [4.1.6] - 2026-01-27
+
+### Changed
+
+- Chart: Sync to upstream. ([#930](https://github.com/giantswarm/ingress-nginx-app/pull/930))
+  - Controller: Update image to [v1.13.6](https://github.com/kubernetes/ingress-nginx/blob/main/changelog/controller-1.13.6.md).
+  - Kube Webhook CertGen: Update image to v1.6.6.
+
 ## [4.1.5] - 2025-12-15
 
 ### Changed
@@ -1654,7 +1662,8 @@ Previous versions changelog can be found [here](https://github.com/giantswarm/ku
 
 [Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.2.1...HEAD
 [4.2.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.2.0...v4.2.1
-[4.2.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.5...v4.2.0
+[4.2.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.6...v4.2.0
+[4.1.6]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.5...v4.1.6
 [4.1.5]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.4...v4.1.5
 [4.1.4]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.3...v4.1.4
 [4.1.3]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.1.2...v4.1.3
