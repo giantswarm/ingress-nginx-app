@@ -6,7 +6,7 @@ directories:
   - path: ingress-nginx
     git:
       url: https://github.com/kubernetes/ingress-nginx
-      ref: helm-chart-4.14.1
+      ref: helm-chart-4.14.2
       depth: 1
     includePaths:
     - charts/ingress-nginx/**/*
