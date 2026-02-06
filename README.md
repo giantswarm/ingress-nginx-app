@@ -20,6 +20,7 @@ Its job is to satisfy external requests to services running in the cluster. See 
 - [Migration from `nginx-ingress-controller-app`](#migration-from-nginx-ingress-controller-app)
 - [Development](#development)
   - [Local installation](#local-installation)
+  - [Sync chart changes from upstream](#sync-chart-changes-from-upstream)
   - [Release process](#release-process)
 
 ## Prerequisites
@@ -157,6 +158,30 @@ Provide a custom `values.yaml`:
 ```bash
 $ helm install helm/ingress-nginx --values values.yaml
 ```
+
+### Sync chart changes from upstream
+
+This chart is synced from the upstream [ingress-nginx](https://github.com/kubernetes/ingress-nginx) repository using [vendir](https://carvel.dev/vendir/). The sync process fetches the upstream chart and applies Giant Swarm specific patches.
+
+To update to a new upstream version, modify the `ref` field in `vendir.yml` to point to the desired upstream tag (e.g., `helm-chart-4.14.2`).
+
+Make sure the required container image tags are available in the Giant Swarm registry. ([Example retagger commit](https://github.com/giantswarm/retagger/commit/db16a4ef50180307205d07ea14d9d528d16ca44a)).
+
+To sync the chart (requires `vendir`, `yq` and `helm-docs`):
+
+```bash
+$ ./sync/sync.sh
+```
+
+Then: Update `CHANGELOG.md`, commit changes + push.
+
+This will:
+
+1. Fetch the upstream chart version specified in `vendir.yml`
+2. Apply all patches from `sync/patches/`
+3. Generate diff files in the `diffs/` directory
+
+Patches are stored in `sync/patches/` and are applied in the order specified in `sync/sync.sh`. Each patch directory contains a `patch.sh` script and the corresponding `.patch` files.
 
 ### Testing
 
