@@ -3,7 +3,7 @@ annotations:
   io.giantswarm.ui.logo: https://s.giantswarm.io/app-icons/ingress-nginx/2/logo_dark.svg
   io.giantswarm.application.audience: "all"
 apiVersion: v2
-appVersion: 1.13.6
+appVersion: 1.13.8
 description: Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
 home: https://github.com/giantswarm/ingress-nginx-app
 icon: https://s.giantswarm.io/app-icons/ingress-nginx/2/icon_dark.svg
