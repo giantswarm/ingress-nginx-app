@@ -2,10 +2,11 @@ apiVersion: vendir.k14s.io/v1alpha1
 directories:
 - contents:
   - git:
-      commitTitle: Release controller v1.14.4 & chart v4.14.4. (#14674)
-      sha: dfd0e62d63ecea42f4fbacf0b4aee14206b29264
+      commitTitle: Release controller v1.15.0/v1.14.4/v1.13.8 & chart v4.15.0/v4.14.4/v4.13.8.
+        (#14673)
+      sha: e3b7b0ec0f0ba7f1609e9f374a6bf68ae7bd27bb
       tags:
-      - controller-v1.14.4
+      - controller-v1.15.0
     path: ingress-nginx
   path: vendor
 - contents:
