@@ -4,8 +4,8 @@ go 1.25.7
 
 require (
 	github.com/giantswarm/apiextensions-application v0.6.2
-	github.com/giantswarm/apptest-framework/v3 v3.3.0
-	github.com/giantswarm/clustertest/v3 v3.3.0
+	github.com/giantswarm/apptest-framework/v4 v4.1.0
+	github.com/giantswarm/clustertest/v4 v4.0.1
 	github.com/onsi/ginkgo/v2 v2.28.1
 	github.com/onsi/gomega v1.39.1
 	k8s.io/api v0.35.2
