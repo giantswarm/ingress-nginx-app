@@ -30,7 +30,7 @@ func newHelloWorldApp(ingressHost string) (*application.Application, error) {
 	helloWorldApp := application.New(fmt.Sprintf("%s-hello-world", state.GetCluster().Name), "hello-world").
 		WithCatalog("giantswarm").
 		WithOrganization(*org).
-		WithVersion("latest").
+		WithVersion("v2.11.0").
 		WithClusterName(state.GetCluster().Name).
 		WithInCluster(false).
 		WithInstallNamespace("default").
