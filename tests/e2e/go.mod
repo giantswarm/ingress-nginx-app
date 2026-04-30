@@ -6,11 +6,11 @@ require (
 	github.com/giantswarm/apiextensions-application v0.6.2
 	github.com/giantswarm/apptest-framework/v4 v4.1.0
 	github.com/giantswarm/clustertest/v4 v4.2.0
-	github.com/onsi/ginkgo/v2 v2.28.1
-	github.com/onsi/gomega v1.39.1
-	k8s.io/api v0.35.4
-	k8s.io/apimachinery v0.35.4
-	sigs.k8s.io/controller-runtime v0.23.3
+	github.com/onsi/ginkgo/v2 v2.28.3
+	github.com/onsi/gomega v1.40.0
+	k8s.io/api v0.36.0
+	k8s.io/apimachinery v0.36.0
+	sigs.k8s.io/controller-runtime v0.24.0
 )
 
 require (
