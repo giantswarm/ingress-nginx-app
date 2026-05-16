@@ -9,9 +9,9 @@ repo_dir=$(git rev-parse --show-toplevel) ; readonly repo_dir
 cd "${repo_dir}"
 
 set -x
-APP_VERSION=$(yq '.appVersion' vendor/ingress-nginx/Chart.yaml)
+APP_VERSION=$(yq '.controller.image.tag' helm/ingress-nginx/values.yaml)
 
 export APP_VERSION
-yq -i e '.appVersion |= env(APP_VERSION)' helm/ingress-nginx/Chart.yaml
+yq -i e '.appVersion |= (env(APP_VERSION) | sub("v", ""))' helm/ingress-nginx/Chart.yaml
 
 { set +x; } 2>/dev/null
