@@ -20,6 +20,21 @@ sed -i '0,/  # maxUnavailable/s/^\  # maxUnavailable: 1/\  maxUnavailable: "25%"
 
 yq -i '. *= load("sync/patches/values/values.yaml")' "${chart_dir}/values.yaml"
 
+controller_tag="$(cat sync/patches/values/controller-tag)"
+acr_token="$(curl -fsSL "https://gsoci.azurecr.io/oauth2/token?service=gsoci.azurecr.io&scope=repository:giantswarm/ingress-nginx-controller:pull" | yq -r '.access_token')"
+controller_digest="$(curl -fsSL -D - -o /dev/null \
+  -H "Authorization: Bearer ${acr_token}" \
+  -H 'Accept: application/vnd.oci.image.index.v1+json' \
+  -H 'Accept: application/vnd.oci.image.manifest.v1+json' \
+  -H 'Accept: application/vnd.docker.distribution.manifest.list.v2+json' \
+  -H 'Accept: application/vnd.docker.distribution.manifest.v2+json' \
+  "https://gsoci.azurecr.io/v2/giantswarm/ingress-nginx-controller/manifests/${controller_tag}" \
+  | awk 'tolower($1) == "docker-content-digest:" { sub(/\r$/, "", $2); print $2 }')"
+TAG="${controller_tag}" DIGEST="${controller_digest}" yq -i '
+  .controller.image.tag = strenv(TAG) |
+  .controller.image.digest = strenv(DIGEST)
+' "${chart_dir}/values.yaml"
+
 # Restore blank lines
 # Keep placeholder "#BLANK_LINE#" lines as blanks, but delete other empty/whitespace-only lines:
 # 1) Make placeholder lines non-empty so they survive deletion

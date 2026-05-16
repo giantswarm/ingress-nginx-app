@@ -4,6 +4,7 @@ global:
 controller:
   image:
     image: giantswarm/ingress-nginx-controller
+    digestChroot: "not-available"
   networkPolicy:
     enabled: true
   config:
