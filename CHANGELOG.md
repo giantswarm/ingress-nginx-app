@@ -7,6 +7,8 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+## [4.3.2] - 2026-05-16
+
 ### Changed
 
 - Controller: Update image to [v1.15.5](https://github.com/chainguard-forks/ingress-nginx/releases/tag/controller-v1.15.5) fixing [CVE-2026-42945](https://github.com/advisories/GHSA-gcgv-v5gf-c543) (nginx-rift)
@@ -1713,7 +1715,8 @@ In recent platform releases (Azure v12.0.2, and AWS v12.1.4 and v11.5.4) we've i
 
 Previous versions changelog can be found [here](https://github.com/giantswarm/kubernetes-nginx-ingress-controller/blob/master/CHANGELOG.md)
 
-[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.3.1...HEAD
+[Unreleased]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.3.2...HEAD
+[4.3.2]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.3.1...v4.3.2
 [4.3.1]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.3.0...v4.3.1
 [4.3.0]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.2.4...v4.3.0
 [4.2.4]: https://github.com/giantswarm/ingress-nginx-app/compare/v4.2.3...v4.2.4
