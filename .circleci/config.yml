@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  architect: giantswarm/architect@9.2.0
+  architect: giantswarm/architect@9.3.0
 
 workflows:
   build:
@@ -13,6 +13,7 @@ workflows:
           chart: ingress-nginx
           app_catalog: giantswarm-catalog
           app_catalog_test: giantswarm-test-catalog
+          override_app_version: false
           persist_chart_archive: true
           filters:
             branches:
@@ -29,6 +30,7 @@ workflows:
           chart: ingress-nginx
           app_catalog: control-plane-catalog
           app_catalog_test: control-plane-test-catalog
+          override_app_version: false
           filters:
             branches:
               ignore:
