@@ -1,7 +1,16 @@
 diff --git a/vendor/ingress-nginx/templates/_helpers.tpl b/helm/ingress-nginx/templates/_helpers.tpl
-index 6cbda2d..d962b48 100644
+index 6cbda2d..d8f2e6e 100644
 --- a/vendor/ingress-nginx/templates/_helpers.tpl
 +++ b/helm/ingress-nginx/templates/_helpers.tpl
+@@ -10,7 +10,7 @@ Expand the name of the chart.
+ Create chart name and version as used by the chart label.
+ */}}
+ {{- define "ingress-nginx.chart" -}}
+-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
++{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" | trimSuffix "." -}}
+ {{- end -}}
+ 
+ {{/*
 @@ -136,6 +136,8 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
  {{- end }}
  app.kubernetes.io/part-of: {{ template "ingress-nginx.name" . }}
