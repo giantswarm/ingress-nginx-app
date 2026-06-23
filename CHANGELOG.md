@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Controller: Update image to [v1.15.8](https://github.com/chainguard-forks/ingress-nginx/releases/tag/controller-v1.15.8) fixing [CVE-2026-42055](https://github.com/advisories/GHSA-78jw-ww3g-9wp7) and [CVE-2026-48142](https://github.com/advisories/GHSA-2388-jp8v-fg9w)
+
 ## [4.3.4] - 2026-06-12
 
 ### Changed
