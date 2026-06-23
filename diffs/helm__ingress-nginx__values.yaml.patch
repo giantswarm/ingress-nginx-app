@@ -1,5 +1,5 @@
 diff --git a/vendor/ingress-nginx/values.yaml b/helm/ingress-nginx/values.yaml
-index 70679fe..e6571a3 100644
+index 70679fe..8deba1a 100644
 --- a/vendor/ingress-nginx/values.yaml
 +++ b/helm/ingress-nginx/values.yaml
 @@ -5,7 +5,7 @@
@@ -23,8 +23,8 @@ index 70679fe..e6571a3 100644
 -    tag: "v1.15.1"
 -    digest: sha256:594ceea76b01c592858f803f9ff4d2cb40542cae2060410b2c95f75907d659e1
 -    digestChroot: sha256:af31d00c9d82c612896b380a9003bd36843b7647b98e4588251c66325317bc72
-+    tag: "v1.15.7"
-+    digest: sha256:f978370ee9daa2b115d9ade97db1f3eff4c5a80f58dce8be102d09559474fa46
++    tag: "v1.15.8"
++    digest: sha256:6ca05859bdd650bf6dd650473d1470f3e29f0ca46954ab77a3c6c80cdd9e5258
 +    digestChroot: "not-available"
      pullPolicy: IfNotPresent
      runAsNonRoot: true
