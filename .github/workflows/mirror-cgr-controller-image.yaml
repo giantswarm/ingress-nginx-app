@@ -1,0 +1,164 @@
+name: "Mirror cgr ingress-nginx-controller"
+
+on:
+  push:
+    branches:
+      - main
+      - add-cgr-mirror-workflow
+    paths:
+      - sync/patches/values/controller-tag
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to mirror (defaults to sync/patches/values/controller-tag)"
+        required: false
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: mirror-cgr-controller-image
+  cancel-in-progress: false
+
+env:
+  SOURCE_IMAGE: "cgr.dev/adidas.com/ingress-nginx-controller"
+
+jobs:
+  mirror-acr:
+    name: "Mirror to Azure registry"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # required for keyless auth to cgr.dev via Chainguard OIDC
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Download crane
+        uses: giantswarm/install-binary-action@5bef88f65012037dd836117c8d344b21bb559854 # v4.1.0
+        with:
+          binary: "crane"
+          version: "0.21.7"
+          download_url: "https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_x86_64.tar.gz"
+          tarball_binary_path: "crane"
+          smoke_test: "${binary} version"
+
+      - name: Resolve tag
+        id: tag
+        env:
+          INPUT_TAG: ${{ inputs.tag }}
+        run: |
+          tag="${INPUT_TAG}"
+          if [ -z "${tag}" ]; then
+            tag="$(cat sync/patches/values/controller-tag)"
+          fi
+          if [ -z "${tag}" ]; then
+            echo "::error::Could not determine a tag to mirror."
+            exit 1
+          fi
+          echo "tag=${tag}" >> "${GITHUB_OUTPUT}"
+          echo "Mirroring tag: ${tag}"
+
+      - name: Authenticate to Chainguard registry (source)
+        uses: chainguard-dev/setup-chainctl@2cddd35a2f120d9973e58094dc6878c93cf58c28 # v0.5.1
+        with:
+          identity: ${{ secrets.CHAINGUARD_IDENTITY }}
+
+      - name: Configure 1Password service account
+        uses: 1password/load-secrets-action/configure@3a12b0ab99d9cd590a3e9b5a90ea017210ed9556 # v4.0.1
+        with:
+          service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+
+      - name: Load Azure registry credentials from 1Password
+        uses: 1password/load-secrets-action@3a12b0ab99d9cd590a3e9b5a90ea017210ed9556 # v4.0.1
+        with:
+          export-env: true
+          version: "2.34.1" # pin the 1Password CLI the action installs
+        env:
+          REGISTRY_USERNAME: "op://SA-private-push-chainguard/gsociprivate push token/username"
+          REGISTRY_PASSWORD: "op://SA-private-push-chainguard/gsociprivate push token/credential"
+
+      - name: Authenticate to Azure registry (destination)
+        run: |
+          crane auth login gsociprivate.azurecr.io \
+            --username "${REGISTRY_USERNAME}" \
+            --password-stdin <<<"${REGISTRY_PASSWORD}"
+
+      - name: Mirror image
+        env:
+          TAG: ${{ steps.tag.outputs.tag }}
+          DEST_IMAGE: "gsociprivate.azurecr.io/giantswarm/ingress-nginx-controller-cgr"
+        run: ./.github/scripts/mirror-image.sh
+
+# TODO fill in 1password secret path
+#  mirror-aliyun:
+#    name: "Mirror to Aliyun registry"
+#    runs-on: ubuntu-latest
+#    permissions:
+#      contents: read
+#      id-token: write # required for keyless auth to cgr.dev via Chainguard OIDC
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+#        with:
+#          fetch-depth: 1
+#          persist-credentials: false
+#
+#      - name: Download crane
+#        uses: giantswarm/install-binary-action@5bef88f65012037dd836117c8d344b21bb559854 # v4.1.0
+#        with:
+#          binary: "crane"
+#          version: "0.21.7"
+#          download_url: "https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_x86_64.tar.gz"
+#          tarball_binary_path: "crane"
+#          smoke_test: "${binary} version"
+#
+#      - name: Resolve tag
+#        id: tag
+#        env:
+#          INPUT_TAG: ${{ inputs.tag }}
+#        run: |
+#          tag="${INPUT_TAG}"
+#          if [ -z "${tag}" ]; then
+#            tag="$(cat sync/patches/values/controller-tag)"
+#          fi
+#          if [ -z "${tag}" ]; then
+#            echo "::error::Could not determine a tag to mirror."
+#            exit 1
+#          fi
+#          echo "tag=${tag}" >> "${GITHUB_OUTPUT}"
+#          echo "Mirroring tag: ${tag}"
+#
+#      - name: Authenticate to Chainguard registry (source)
+#        uses: chainguard-dev/setup-chainctl@2cddd35a2f120d9973e58094dc6878c93cf58c28 # v0.5.1
+#        with:
+#          identity: ${{ secrets.CHAINGUARD_IDENTITY }}
+#
+#      - name: Configure 1Password service account
+#        uses: 1password/load-secrets-action/configure@3a12b0ab99d9cd590a3e9b5a90ea017210ed9556 # v4.0.1
+#        with:
+#          service-account-token: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+#
+#      - name: Load Aliyun registry credentials from 1Password
+#        uses: 1password/load-secrets-action@3a12b0ab99d9cd590a3e9b5a90ea017210ed9556 # v4.0.1
+#        with:
+#          export-env: true
+#          version: "2.34.1" # pin the 1Password CLI the action installs
+#        env:
+#          REGISTRY_USERNAME: op://vault-name/item-name/[section-name/]field-name
+#          REGISTRY_PASSWORD: op://vault-name/item-name/[section-name/]field-name
+#
+#      - name: Authenticate to Aliyun registry (destination)
+#        run: |
+#          crane auth login giantswarm-registry.cn-shanghai.cr.aliyuncs.com \
+#            --username "${REGISTRY_USERNAME}" \
+#            --password-stdin <<<"${REGISTRY_PASSWORD}"
+#
+#      - name: Mirror image
+#        env:
+#          TAG: ${{ steps.tag.outputs.tag }}
+#          DEST_IMAGE: "giantswarm-registry.cn-shanghai.cr.aliyuncs.com/giantswarm/ingress-nginx-controller-cgr"
+#        run: ./.github/scripts/mirror-image.sh
