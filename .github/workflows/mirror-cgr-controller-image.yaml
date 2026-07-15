@@ -133,11 +133,6 @@ jobs:
           echo "tag=${tag}" >> "${GITHUB_OUTPUT}"
           echo "Mirroring tag: ${tag}"
 
-      - name: Authenticate to Chainguard registry (source)
-        uses: chainguard-dev/setup-chainctl@2cddd35a2f120d9973e58094dc6878c93cf58c28 # v0.5.1
-        with:
-          identity: ${{ secrets.CHAINGUARD_IDENTITY }}
-
       - name: Configure 1Password service account
         uses: 1password/load-secrets-action/configure@3a12b0ab99d9cd590a3e9b5a90ea017210ed9556 # v4.0.1
         with:
@@ -152,10 +147,12 @@ jobs:
           ALIYUN_ACCESS_KEY_ID: "op://SA-private-push-chainguard/aliyun access key/id"
           ALIYUN_ACCESS_KEY_SECRET: "op://SA-private-push-chainguard/aliyun access key/secret"
 
+      # NOTE: this step MUST run before the Chainguard (source) login. The action
+      # writes a fresh config.json containing only the Aliyun auth and repoints
+      # DOCKER_CONFIG at it for all later steps (it does not merge existing creds).
+      # Running it first lets the chainctl step below append the cgr.dev credential
+      # helper into that same DOCKER_CONFIG, so crane ends up with both logins.
       - name: Authenticate to Aliyun registry (destination)
-        # ACR Enterprise Edition does not accept the AccessKey as a docker password
-        # directly; this action exchanges it for a token and writes ~/.docker/config.json,
-        # which crane reads via the default keychain.
         uses: aliyun/acr-login@3efc58f96aaffceb553f93e74d7a79221a44ceed # v1
         with:
           login-server: "https://giantswarm-registry.cn-shanghai.cr.aliyuncs.com"
@@ -163,6 +160,11 @@ jobs:
           access-key-id: "${{ env.ALIYUN_ACCESS_KEY_ID }}"
           access-key-secret: "${{ env.ALIYUN_ACCESS_KEY_SECRET }}"
           instance-id: "${{ env.ACR_INSTANCE_ID }}"
+
+      - name: Authenticate to Chainguard registry (source)
+        uses: chainguard-dev/setup-chainctl@2cddd35a2f120d9973e58094dc6878c93cf58c28 # v0.5.1
+        with:
+          identity: ${{ secrets.CHAINGUARD_IDENTITY }}
 
       - name: Mirror image
         env:
