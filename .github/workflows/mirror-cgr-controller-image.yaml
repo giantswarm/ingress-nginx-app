@@ -153,7 +153,7 @@ jobs:
       # Running it first lets the chainctl step below append the cgr.dev credential
       # helper into that same DOCKER_CONFIG, so crane ends up with both logins.
       - name: Authenticate to Aliyun registry (destination)
-        uses: aliyun/acr-login@3efc58f96aaffceb553f93e74d7a79221a44ceed # v1
+        uses: aliyun/acr-login@3efc58f96aaffceb553f93e74d7a79221a44ceed # v1.0.6
         with:
           login-server: "https://giantswarm-registry.cn-shanghai.cr.aliyuncs.com"
           region-id: "cn-shanghai"
