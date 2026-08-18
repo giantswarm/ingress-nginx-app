@@ -1,0 +1,110 @@
+# Watches https://github.com/chainguard-forks/ingress-nginx for controller
+# releases and hands each one to the "Mirror cgr ingress-nginx-controller"
+# workflow, which copies the matching Chainguard-built image into the Giant
+# Swarm private registries.
+#
+# Every published, non-draft `controller-v1.15.x` release is dispatched on each
+# run, newest first - there is no bookkeeping of what was mirrored before.
+# That is safe because `.github/scripts/mirror-image.sh` treats destination tags
+# as immutable and exits early when the tag already exists, so re-dispatching an
+# already-mirrored tag is a cheap no-op and a previously failed mirror is
+# retried automatically on the next run.
+#
+# Release tags carry a `controller-` prefix that the image tags do not, so
+# `controller-v1.15.10` is dispatched as `v1.15.10`.
+
+name: "Check cgr ingress-nginx-controller releases"
+
+on:
+  schedule:
+    - cron: "17 */2 * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only list the tags that would be mirrored, do not dispatch"
+        required: false
+        default: false
+        type: boolean
+
+permissions: {}
+
+concurrency:
+  group: check-cgr-controller-releases
+  cancel-in-progress: false
+
+env:
+  # Repository whose releases are watched.
+  UPSTREAM_REPO: "chainguard-forks/ingress-nginx"
+  # Only releases matching this pattern are mirrored.
+  TAG_PATTERN: '^controller-v1\.15\.[0-9]+$'
+  # Workflow that performs the actual mirroring.
+  MIRROR_WORKFLOW: "mirror-cgr-controller-image.yaml"
+
+jobs:
+  dispatch:
+    name: "Dispatch mirror runs"
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write # required to dispatch the mirror workflow
+    steps:
+      - name: Find controller releases
+        id: releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+
+          released="$(gh api "repos/${UPSTREAM_REPO}/releases" --paginate \
+            -q '.[] | select(.draft == false and .prerelease == false) | .tag_name')"
+
+          # `|| true` keeps a non-matching grep from aborting the step under
+          # `pipefail`, so the empty result is reported below instead.
+          tags="$(printf '%s\n' "${released}" \
+            | { grep -E "${TAG_PATTERN}" || true; } \
+            | sed 's/^controller-//' \
+            | sort -Vr)"
+
+          if [ -z "${tags}" ]; then
+            echo "::error::No releases in ${UPSTREAM_REPO} matched ${TAG_PATTERN}."
+            exit 1
+          fi
+
+          echo "Found tags (newest first):"
+          echo "${tags}"
+
+          {
+            echo "tags<<EOF"
+            echo "${tags}"
+            echo "EOF"
+          } >> "${GITHUB_OUTPUT}"
+
+      - name: Dispatch mirror workflow per tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAGS: ${{ steps.releases.outputs.tags }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+
+          if [ "${DRY_RUN}" = "true" ]; then
+            echo "### Dry run - no mirror runs dispatched" >> "${GITHUB_STEP_SUMMARY}"
+          else
+            echo "### Dispatched mirror runs" >> "${GITHUB_STEP_SUMMARY}"
+          fi
+
+          # Newest tag first, so it wins the race for a runner when the batch
+          # queues behind other jobs.
+          while read -r tag; do
+            [ -n "${tag}" ] || continue
+
+            if [ "${DRY_RUN}" = "true" ]; then
+              echo "Would dispatch ${MIRROR_WORKFLOW} for ${tag}"
+              echo "- \`${tag}\`" >> "${GITHUB_STEP_SUMMARY}"
+              continue
+            fi
+
+            echo "Dispatching ${MIRROR_WORKFLOW} for ${tag}"
+            gh workflow run "${MIRROR_WORKFLOW}" --field "tag=${tag}"
+            echo "- \`${tag}\`" >> "${GITHUB_STEP_SUMMARY}"
+          done <<< "${TAGS}"

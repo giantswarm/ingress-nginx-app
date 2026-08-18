@@ -1,23 +1,20 @@
 name: "Mirror cgr ingress-nginx-controller"
 
 on:
-  push:
-    branches:
-      - main
-      - add-cgr-mirror-workflow
-    paths:
-      - sync/patches/values/controller-tag
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to mirror (defaults to sync/patches/values/controller-tag)"
-        required: false
+        description: "Tag to mirror, e.g. v1.15.10"
+        required: true
         type: string
 
 permissions: {}
 
 concurrency:
-  group: mirror-cgr-controller-image
+  # One group per tag: mirroring different tags may run in parallel, while a
+  # second dispatch for the same tag queues behind the first. A shared group
+  # would make GitHub drop all but the most recent pending run of a batch.
+  group: mirror-cgr-controller-image-${{ inputs.tag }}
   cancel-in-progress: false
 
 env:
@@ -46,22 +43,6 @@ jobs:
           tarball_binary_path: "crane"
           smoke_test: "${binary} version"
 
-      - name: Resolve tag
-        id: tag
-        env:
-          INPUT_TAG: ${{ inputs.tag }}
-        run: |
-          tag="${INPUT_TAG}"
-          if [ -z "${tag}" ]; then
-            tag="$(cat sync/patches/values/controller-tag)"
-          fi
-          if [ -z "${tag}" ]; then
-            echo "::error::Could not determine a tag to mirror."
-            exit 1
-          fi
-          echo "tag=${tag}" >> "${GITHUB_OUTPUT}"
-          echo "Mirroring tag: ${tag}"
-
       - name: Authenticate to Chainguard registry (source)
         uses: chainguard-dev/setup-chainctl@2cddd35a2f120d9973e58094dc6878c93cf58c28 # v0.5.1
         with:
@@ -89,7 +70,7 @@ jobs:
 
       - name: Mirror image
         env:
-          TAG: ${{ steps.tag.outputs.tag }}
+          TAG: ${{ inputs.tag }}
           DEST_IMAGE: "gsociprivate.azurecr.io/giantswarm/ingress-nginx-controller-cgr"
         run: ./.github/scripts/mirror-image.sh
 
@@ -116,22 +97,6 @@ jobs:
           download_url: "https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_x86_64.tar.gz"
           tarball_binary_path: "crane"
           smoke_test: "${binary} version"
-
-      - name: Resolve tag
-        id: tag
-        env:
-          INPUT_TAG: ${{ inputs.tag }}
-        run: |
-          tag="${INPUT_TAG}"
-          if [ -z "${tag}" ]; then
-            tag="$(cat sync/patches/values/controller-tag)"
-          fi
-          if [ -z "${tag}" ]; then
-            echo "::error::Could not determine a tag to mirror."
-            exit 1
-          fi
-          echo "tag=${tag}" >> "${GITHUB_OUTPUT}"
-          echo "Mirroring tag: ${tag}"
 
       - name: Configure 1Password service account
         uses: 1password/load-secrets-action/configure@e544b780808654ba8ceba5fb2fe2897103d92ff4 # v5.0.0
@@ -168,6 +133,6 @@ jobs:
 
       - name: Mirror image
         env:
-          TAG: ${{ steps.tag.outputs.tag }}
+          TAG: ${{ inputs.tag }}
           DEST_IMAGE: "giantswarm-registry.cn-shanghai.cr.aliyuncs.com/giantswarm/ingress-nginx-controller-cgr"
         run: ./.github/scripts/mirror-image.sh
