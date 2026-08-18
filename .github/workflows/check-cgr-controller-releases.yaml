@@ -3,12 +3,15 @@
 # workflow, which copies the matching Chainguard-built image into the Giant
 # Swarm private registries.
 #
-# Every published, non-draft `controller-v1.15.x` release is dispatched on each
-# run, newest first - there is no bookkeeping of what was mirrored before.
-# That is safe because `.github/scripts/mirror-image.sh` treats destination tags
-# as immutable and exits early when the tag already exists, so re-dispatching an
-# already-mirrored tag is a cheap no-op and a previously failed mirror is
-# retried automatically on the next run.
+# Every published, non-draft `controller-v1.15.x` release at or above `MIN_TAG`
+# is dispatched on each run, newest first - there is no bookkeeping of what was
+# mirrored before. That is safe because `.github/scripts/mirror-image.sh` treats
+# destination tags as immutable and exits early when the tag already exists, so
+# re-dispatching an already-mirrored tag is a cheap no-op and a previously
+# failed mirror is retried automatically on the next run.
+#
+# The floor exists because the source Chainguard registry only carries images
+# from v1.15.8 onwards; older releases would just produce failing mirror runs.
 #
 # Release tags carry a `controller-` prefix that the image tags do not, so
 # `controller-v1.15.10` is dispatched as `v1.15.10`.
@@ -37,6 +40,9 @@ env:
   UPSTREAM_REPO: "chainguard-forks/ingress-nginx"
   # Only releases matching this pattern are mirrored.
   TAG_PATTERN: '^controller-v1\.15\.[0-9]+$'
+  # Oldest tag the source registry carries an image for. Anything below this is
+  # skipped, comparison is inclusive.
+  MIN_TAG: "v1.15.8"
   # Workflow that performs the actual mirroring.
   MIRROR_WORKFLOW: "mirror-cgr-controller-image.yaml"
 
@@ -59,13 +65,24 @@ jobs:
 
           # `|| true` keeps a non-matching grep from aborting the step under
           # `pipefail`, so the empty result is reported below instead.
-          tags="$(printf '%s\n' "${released}" \
+          candidates="$(printf '%s\n' "${released}" \
             | { grep -E "${TAG_PATTERN}" || true; } \
-            | sed 's/^controller-//' \
-            | sort -Vr)"
+            | sed 's/^controller-//')"
+
+          # Keep a tag when MIN_TAG sorts first, i.e. tag >= MIN_TAG. Using
+          # `sort -V` rather than a regex keeps the bound readable and orders
+          # v1.15.10 above v1.15.9 correctly.
+          tags="$(while read -r tag; do
+            [ -n "${tag}" ] || continue
+            if [ "$(printf '%s\n%s\n' "${MIN_TAG}" "${tag}" | sort -V | head -n1)" = "${MIN_TAG}" ]; then
+              echo "${tag}"
+            else
+              echo "Skipping ${tag}: older than ${MIN_TAG}" >&2
+            fi
+          done <<< "${candidates}" | sort -Vr)"
 
           if [ -z "${tags}" ]; then
-            echo "::error::No releases in ${UPSTREAM_REPO} matched ${TAG_PATTERN}."
+            echo "::error::No releases in ${UPSTREAM_REPO} matched ${TAG_PATTERN} at or above ${MIN_TAG}."
             exit 1
           fi
 
