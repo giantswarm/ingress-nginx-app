@@ -13,8 +13,8 @@ import (
 	"github.com/giantswarm/apptest-framework/v5/pkg/state"
 	"github.com/giantswarm/apptest-framework/v5/pkg/suite"
 
+	"github.com/giantswarm/clustertest/v5/pkg/helmrelease"
 	"github.com/giantswarm/clustertest/v5/pkg/logger"
-	"github.com/giantswarm/clustertest/v5/pkg/wait"
 )
 
 const (
@@ -35,12 +35,12 @@ func TestBasic(t *testing.T) {
 				org := state.GetCluster().Organization
 
 				// Ingress-Nginx depends on external-dns for DNS resolution and cert-manager for certificates.
-				Eventually(wait.IsAppDeployed(state.GetContext(), state.GetFramework().MC(), fmt.Sprintf("%s-cert-manager", state.GetCluster().Name), org.GetNamespace())).
+				Eventually(helmrelease.IsHelmReleaseReady(state.GetContext(), state.GetFramework().MC(), fmt.Sprintf("%s-cert-manager", state.GetCluster().Name), org.GetNamespace())).
 					WithTimeout(appReadyTimeout).
 					WithPolling(appReadyInterval).
 					Should(BeTrue())
 
-				Eventually(wait.IsAppDeployed(state.GetContext(), state.GetFramework().MC(), fmt.Sprintf("%s-external-dns", state.GetCluster().Name), org.GetNamespace())).
+				Eventually(helmrelease.IsHelmReleaseReady(state.GetContext(), state.GetFramework().MC(), fmt.Sprintf("%s-external-dns", state.GetCluster().Name), org.GetNamespace())).
 					WithTimeout(appReadyTimeout).
 					WithPolling(appReadyInterval).
 					Should(BeTrue())
