@@ -63,6 +63,7 @@ jobs:
         uses: giantswarm/install-binary-action@5bef88f65012037dd836117c8d344b21bb559854 # v4.1.0
         with:
           binary: "crane"
+          # repo: google/go-containerregistry
           version: "0.22.1"
           download_url: "https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_x86_64.tar.gz"
           tarball_binary_path: "crane"
