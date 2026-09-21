@@ -1,20 +1,20 @@
-# Watches https://github.com/chainguard-forks/ingress-nginx for controller
-# releases and hands each one to the "Mirror cgr ingress-nginx-controller"
-# workflow, which copies the matching Chainguard-built image into the Giant
-# Swarm private registries.
+# Watches the Chainguard registry for ingress-nginx-controller tags and hands
+# each one to the "Mirror cgr ingress-nginx-controller" workflow, which copies
+# the image into the Giant Swarm private registries.
 #
-# Every published, non-draft `controller-v1.15.x` release at or above `MIN_TAG`
-# is dispatched on each run, newest first - there is no bookkeeping of what was
-# mirrored before. That is safe because `.github/scripts/mirror-image.sh` treats
-# destination tags as immutable and exits early when the tag already exists, so
-# re-dispatching an already-mirrored tag is a cheap no-op and a previously
-# failed mirror is retried automatically on the next run.
+# Every tag matching `TAG_PATTERN` at or above `MIN_TAG` is dispatched on each
+# run, newest first - there is no bookkeeping of what was mirrored before. That
+# is safe because `.github/scripts/mirror-image.sh` treats destination tags as
+# immutable and exits early when the tag already exists, so re-dispatching an
+# already-mirrored tag is a cheap no-op and a previously failed mirror is
+# retried automatically on the next run.
 #
-# The floor exists because the source Chainguard registry only carries images
-# from v1.15.8 onwards; older releases would just produce failing mirror runs.
-#
-# Release tags carry a `controller-` prefix that the image tags do not, so
-# `controller-v1.15.10` is dispatched as `v1.15.10`.
+# Note that bare release tags move at the source - `v1.15.10` is currently the
+# same digest as `v1.15.10-r5` and follows every rebuild - while the destination
+# is immutable. A bare tag is therefore pinned to whichever revision it pointed
+# at when it was first mirrored, and later rebuilds are reported as a digest
+# mismatch instead of being overwritten. Pin a revision tag in the chart to get
+# an exact image.
 
 name: "Check cgr ingress-nginx-controller releases"
 
@@ -36,13 +36,17 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # Repository whose releases are watched.
-  UPSTREAM_REPO: "chainguard-forks/ingress-nginx"
-  # Only releases matching this pattern are mirrored.
-  TAG_PATTERN: '^controller-v1\.15\.[0-9]+$'
-  # Oldest tag the source registry carries an image for. Anything below this is
-  # skipped, comparison is inclusive.
-  MIN_TAG: "v1.15.8"
+  # Registry the tags are discovered in. Must match SOURCE_IMAGE of the mirror
+  # workflow.
+  SOURCE_IMAGE: "cgr.dev/adidas.com/ingress-nginx-controller"
+  # Only tags matching this pattern are mirrored: a release (`v1.15.10`) or one
+  # of its revisions (`v1.15.10-r5`). The variant tags Chainguard publishes
+  # alongside them (`-slim`, `-dev`, `-nginx.1.27`, ...) are deliberately left
+  # out.
+  TAG_PATTERN: '^v1\.15\.[0-9]+(-r[0-9]+)?$'
+  # Oldest tag to mirror. Anything below this is skipped, comparison is
+  # inclusive.
+  MIN_TAG: "v1.15.10-r5"
   # Workflow that performs the actual mirroring.
   MIRROR_WORKFLOW: "mirror-cgr-controller-image.yaml"
 
@@ -52,26 +56,37 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       actions: write # required to dispatch the mirror workflow
+      contents: read
+      id-token: write # required for keyless auth to cgr.dev via Chainguard OIDC
     steps:
-      - name: Find controller releases
-        id: releases
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Download crane
+        uses: giantswarm/install-binary-action@5bef88f65012037dd836117c8d344b21bb559854 # v4.1.0
+        with:
+          binary: "crane"
+          version: "0.22.1"
+          download_url: "https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_x86_64.tar.gz"
+          tarball_binary_path: "crane"
+          smoke_test: "${binary} version"
+
+      - name: Authenticate to Chainguard registry
+        uses: chainguard-dev/setup-chainctl@2cddd35a2f120d9973e58094dc6878c93cf58c28 # v0.5.1
+        with:
+          identity: ${{ secrets.CHAINGUARD_IDENTITY }}
+
+      - name: Find controller tags
+        id: tags
         run: |
           set -euo pipefail
 
-          released="$(gh api "repos/${UPSTREAM_REPO}/releases" --paginate \
-            -q '.[] | select(.draft == false and .prerelease == false) | .tag_name')"
-
           # `|| true` keeps a non-matching grep from aborting the step under
           # `pipefail`, so the empty result is reported below instead.
-          candidates="$(printf '%s\n' "${released}" \
-            | { grep -E "${TAG_PATTERN}" || true; } \
-            | sed 's/^controller-//')"
+          candidates="$(crane ls "${SOURCE_IMAGE}" \
+            | { grep -E "${TAG_PATTERN}" || true; })"
 
           # Keep a tag when MIN_TAG sorts first, i.e. tag >= MIN_TAG. Using
           # `sort -V` rather than a regex keeps the bound readable and orders
-          # v1.15.10 above v1.15.9 correctly.
+          # both components numerically, so v1.15.10 lands above v1.15.9 and
+          # v1.15.10-r10 above v1.15.10-r5.
           tags="$(while read -r tag; do
             [ -n "${tag}" ] || continue
             if [ "$(printf '%s\n%s\n' "${MIN_TAG}" "${tag}" | sort -V | head -n1)" = "${MIN_TAG}" ]; then
@@ -81,8 +96,10 @@ jobs:
             fi
           done <<< "${candidates}" | sort -Vr)"
 
+          # MIN_TAG itself is published, so an empty result means discovery
+          # broke rather than that there is nothing to do.
           if [ -z "${tags}" ]; then
-            echo "::error::No releases in ${UPSTREAM_REPO} matched ${TAG_PATTERN} at or above ${MIN_TAG}."
+            echo "::error::No tags in ${SOURCE_IMAGE} matched ${TAG_PATTERN} at or above ${MIN_TAG}."
             exit 1
           fi
 
@@ -99,7 +116,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
-          TAGS: ${{ steps.releases.outputs.tags }}
+          TAGS: ${{ steps.tags.outputs.tags }}
           DRY_RUN: ${{ inputs.dry_run }}
         run: |
           set -euo pipefail
