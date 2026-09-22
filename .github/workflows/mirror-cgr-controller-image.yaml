@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: "Tag to mirror, e.g. v1.15.10"
+        description: "Tag to mirror, e.g. v1.15.10 or the revision v1.15.10-r5"
         required: true
         type: string
 
@@ -38,7 +38,8 @@ jobs:
         uses: giantswarm/install-binary-action@5bef88f65012037dd836117c8d344b21bb559854 # v4.1.0
         with:
           binary: "crane"
-          version: "0.21.7"
+          # repo: google/go-containerregistry
+          version: "0.22.1"
           download_url: "https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_x86_64.tar.gz"
           tarball_binary_path: "crane"
           smoke_test: "${binary} version"
@@ -57,7 +58,11 @@ jobs:
         uses: 1password/load-secrets-action@70062d7a876d3eb6334754fa26efd2fbd90c32f2 # v5.0.1
         with:
           export-env: true
-          version: "2.35.0" # pin the 1Password CLI the action installs
+          # Pins the 1Password CLI the action installs. Tracked through the
+          # official `1password/op` image, which is tagged with the same
+          # versions the action downloads from cache.agilebits.com.
+          # registry: 1password/op
+          version: "2.35.0"
         env:
           REGISTRY_USERNAME: "op://SA-private-push-chainguard/gsociprivate push token/username"
           REGISTRY_PASSWORD: "op://SA-private-push-chainguard/gsociprivate push token/credential"
@@ -93,7 +98,8 @@ jobs:
         uses: giantswarm/install-binary-action@5bef88f65012037dd836117c8d344b21bb559854 # v4.1.0
         with:
           binary: "crane"
-          version: "0.21.7"
+          # repo: google/go-containerregistry
+          version: "0.22.1"
           download_url: "https://github.com/google/go-containerregistry/releases/download/v${version}/go-containerregistry_Linux_x86_64.tar.gz"
           tarball_binary_path: "crane"
           smoke_test: "${binary} version"
@@ -107,7 +113,11 @@ jobs:
         uses: 1password/load-secrets-action@70062d7a876d3eb6334754fa26efd2fbd90c32f2 # v5.0.1
         with:
           export-env: true
-          version: "2.35.0" # pin the 1Password CLI the action installs
+          # Pins the 1Password CLI the action installs. Tracked through the
+          # official `1password/op` image, which is tagged with the same
+          # versions the action downloads from cache.agilebits.com.
+          # registry: 1password/op
+          version: "2.35.0"
         env:
           ALIYUN_ACCESS_KEY_ID: "op://SA-private-push-chainguard/aliyun access key/id"
           ALIYUN_ACCESS_KEY_SECRET: "op://SA-private-push-chainguard/aliyun access key/secret"
