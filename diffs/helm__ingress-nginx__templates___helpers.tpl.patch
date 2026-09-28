@@ -1,5 +1,5 @@
 diff --git a/vendor/ingress-nginx/templates/_helpers.tpl b/helm/ingress-nginx/templates/_helpers.tpl
-index 6cbda2d..d8f2e6e 100644
+index 6cbda2d..927c065 100644
 --- a/vendor/ingress-nginx/templates/_helpers.tpl
 +++ b/helm/ingress-nginx/templates/_helpers.tpl
 @@ -10,7 +10,7 @@ Expand the name of the chart.
@@ -7,7 +7,7 @@ index 6cbda2d..d8f2e6e 100644
  */}}
  {{- define "ingress-nginx.chart" -}}
 -{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
-+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" | trimSuffix "." -}}
++{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimAll "-._" -}}
  {{- end -}}
  
  {{/*
