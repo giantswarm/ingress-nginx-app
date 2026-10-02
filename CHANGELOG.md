@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update architect to v10.12.0 (giantswarm/ingress-nginx-app#1038)
+
 ## [4.3.5] - 2026-06-23
 
 ### Changed
