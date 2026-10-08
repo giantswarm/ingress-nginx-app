@@ -18,6 +18,7 @@ vendir sync
 ./sync/patches/services/patch.sh
 ./sync/patches/values/patch.sh
 ./sync/patches/chart_yaml/patch.sh
+./sync/patches/tests/patch.sh
 ./sync/patches/readme/patch.sh # should be always the last entry
 ./sync/patches/chart-label/patch.sh
 
