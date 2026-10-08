@@ -1,7 +1,7 @@
-diff --git 1/vendor/ingress-nginx/tests/default-backend-deployment_test.yaml 2/helm/ingress-nginx/tests/default-backend-deployment_test.yaml
+diff --git a/vendor/ingress-nginx/tests/default-backend-deployment_test.yaml b/helm/ingress-nginx/tests/default-backend-deployment_test.yaml
 index ed3bb87..a8c70e3 100644
---- 1/vendor/ingress-nginx/tests/default-backend-deployment_test.yaml
-+++ 2/helm/ingress-nginx/tests/default-backend-deployment_test.yaml
+--- a/vendor/ingress-nginx/tests/default-backend-deployment_test.yaml
++++ b/helm/ingress-nginx/tests/default-backend-deployment_test.yaml
 @@ -154,7 +154,7 @@ tests:
      asserts:
        - equal:

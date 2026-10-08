@@ -1,7 +1,7 @@
-diff --git 1/vendor/ingress-nginx/tests/controller-keda_test.yaml 2/helm/ingress-nginx/tests/controller-keda_test.yaml
+diff --git a/vendor/ingress-nginx/tests/controller-keda_test.yaml b/helm/ingress-nginx/tests/controller-keda_test.yaml
 index 8002834..6cdafb6 100644
---- 1/vendor/ingress-nginx/tests/controller-keda_test.yaml
-+++ 2/helm/ingress-nginx/tests/controller-keda_test.yaml
+--- a/vendor/ingress-nginx/tests/controller-keda_test.yaml
++++ b/helm/ingress-nginx/tests/controller-keda_test.yaml
 @@ -1,11 +1,11 @@
  suite: Controller > KEDA
  templates:
