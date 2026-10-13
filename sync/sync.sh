@@ -29,6 +29,9 @@ for f in $(git --no-pager diff --no-exit-code --no-color --no-index vendor/ingre
         [[ "$f" == "helm/ingress-nginx/README.md" ]] && continue
         [[ "$f" == "helm/ingress-nginx/values.schema.json" ]] && continue
         [[ "$f" == "helm/ingress-nginx/.kube-linter.yaml" ]] && continue
+        # sync/patches/tests/patch.sh rewrites the vendored unit tests. That script is
+        # the record of what we change, so the suites need no diff file of their own.
+        [[ "$f" == helm/ingress-nginx/tests/* ]] && continue
 
         base_file="vendor/ingress-nginx/${f#"helm/"}"
         [[ ! -e $base_file ]] && base_file="vendor/${f#"helm/"}"
