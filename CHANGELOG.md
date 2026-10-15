@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update architect to v10.12.1 (giantswarm/ingress-nginx-app#1038)
+
 ### Fixed
 
 - The vendored chart unit tests pass again (140/140). A new `sync/patches/tests/patch.sh` rewrites the
