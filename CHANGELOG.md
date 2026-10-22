@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Removed
+
+- The old inline `zz_generated.update_chart.yaml`: it pushed with the shared taylorbot token, align-files does not manage it (no `installUpdateChart` in the team-file entry) and it has not run in a long time. `make update-chart` stays for syncing by hand (giantswarm/giantswarm#2280).
+
 ### Fixed
 
 - The ATS smoke test pulls its hello-world image from `gsoci.azurecr.io` instead of `quay.io`, which no longer allows anonymous pulls of `giantswarm/helloworld`.
