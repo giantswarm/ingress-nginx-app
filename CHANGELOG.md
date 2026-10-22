@@ -9,6 +9,7 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Fixed
 
+- The ATS smoke test pulls its hello-world image from `gsoci.azurecr.io` instead of `quay.io`, which no longer allows anonymous pulls of `giantswarm/helloworld`.
 - The vendored chart unit tests pass again (140/140). A new `sync/patches/tests/patch.sh` rewrites the
   upstream image references and pins the two values we default differently from upstream
   (`controller.autoscaling.enabled`, `controller.replicaCount`), so the suite survives the next `vendir sync`.
