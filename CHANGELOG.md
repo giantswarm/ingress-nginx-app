@@ -9,10 +9,18 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ### Changed
 
-- Update architect to v10.12.1 (giantswarm/ingress-nginx-app#1038)
+- Update architect to v10.16.4, which pushes the chart to the git catalogs with the architect GitHub App instead of the `catalogbot` account (giantswarm/ingress-nginx-app#1038)
+
+### Removed
+
+- The old inline `zz_generated.update_chart.yaml`: it pushed with the shared taylorbot token, align-files does not manage it (no `installUpdateChart` in the team-file entry) and it has not run in a long time. `make update-chart` stays for syncing by hand (giantswarm/giantswarm#2280).
 
 ### Fixed
 
+- The ATS smoke test pulls its hello-world image from `gsoci.azurecr.io` instead of `quay.io`, which no longer allows anonymous pulls of `giantswarm/helloworld`.
+- The vendored chart unit tests pass again (140/140). A new `sync/patches/tests/patch.sh` rewrites the
+  upstream image references and pins the two values we default differently from upstream
+  (`controller.autoscaling.enabled`, `controller.replicaCount`), so the suite survives the next `vendir sync`.
 - The `helm.sh/chart` label is valid for long chart versions: the 63-character cut trims the whole trailing run of `-`, `.` and `_`.
 
 ## [4.3.5] - 2026-06-23
