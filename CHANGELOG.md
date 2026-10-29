@@ -7,6 +7,10 @@ and this project's packages adheres to [Semantic Versioning](http://semver.org/s
 
 ## [Unreleased]
 
+### Changed
+
+- Update architect to v10.16.4, which pushes the chart to the git catalogs with the architect GitHub App instead of the `catalogbot` account (giantswarm/ingress-nginx-app#1038)
+
 ### Removed
 
 - The old inline `zz_generated.update_chart.yaml`: it pushed with the shared taylorbot token, align-files does not manage it (no `installUpdateChart` in the team-file entry) and it has not run in a long time. `make update-chart` stays for syncing by hand (giantswarm/giantswarm#2280).

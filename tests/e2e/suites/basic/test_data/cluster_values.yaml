@@ -1,0 +1,8 @@
+global:
+  apps:
+    externalDns:
+      values:
+        # TODO: remove once platform releases with a fixed external-dns are used
+        # in the e2e test clusters.
+        image:
+          registry: gsoci.azurecr.io
